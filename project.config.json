@@ -1,25 +1,57 @@
 {
-  "miniprogramRoot": "dist/",
-  "projectname": "lottery-tool",
+  "miniprogramRoot": "dist/weapp/",
   "description": "抽签工具",
-  "appid": "touristappid",
   "setting": {
     "urlCheck": true,
     "es6": false,
     "enhance": false,
-    "compileHotReLoad": false,
     "postcss": false,
     "preloadBackgroundData": false,
     "minified": false,
     "newFeature": true,
-    "autoAudits": false,
     "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
     "showShadowRootInWxmlPanel": false,
     "scopeDataCheck": false,
-    "useCompilerModule": false
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "lazyloadPlaceholderEnable": false,
+    "useMultiFrameRuntime": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false,
+    "ignoreUploadUnusedFiles": true,
+    "condition": false
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "condition": {}
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "libVersion": "2.32.0",
+  "srcMiniprogramRoot": "dist/",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "appid": "wx5aff69070203c5c3",
+  "projectname": "lottery-tool"
 }

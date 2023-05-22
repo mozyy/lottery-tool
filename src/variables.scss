@@ -1,0 +1,53 @@
+// 移动端规范  file:///D:/work/ui/移动端规范.pdf
+// 主色
+$ttd-theme-color: #2967ea; // 视觉主色
+// $ttd-theme-color: #EF902D; // 视觉主色 (明世伙伴)
+$ttd-theme-relative-color: #ccc; // 相当于主色的颜色，目前用来显示新旧对比，新为主色，旧为灰色
+$ttd-theme-sub-color: #2c85ff; // 辅助色
+
+// 文字
+$ttd-text-color: #222222; // 正文
+$ttd-text-deep-color: #666; // 深色文字
+$ttd-text-sub-color: #999; // 辅助文字
+$ttd-text-disable-color: #ccc; // 无效文字
+
+// 辅助
+$ttd-divider-color: #e0e0e0; // 分隔线
+$ttd-background-color: #f5f5f5; // 背景色
+$ttd-white-color: #fff; // 纯白色
+
+// 色彩延展
+$ttd-primary-color: $ttd-theme-color;
+$ttd-primary-color-8: mix($ttd-primary-color, $ttd-white-color, 80%);
+$ttd-primary-color-6: mix($ttd-primary-color, $ttd-white-color, 60%);
+$ttd-primary-color-4: mix($ttd-primary-color, $ttd-white-color, 40%);
+$ttd-primary-color-2: mix($ttd-primary-color, $ttd-white-color, 20%);
+$ttd-primary-color-1: mix($ttd-primary-color, $ttd-white-color, 10%);
+
+$ttd-warning-color: #ff9800;
+$ttd-warning-color-8: mix($ttd-warning-color, $ttd-white-color, 80%);
+$ttd-warning-color-6: mix($ttd-warning-color, $ttd-white-color, 60%);
+$ttd-warning-color-4: mix($ttd-warning-color, $ttd-white-color, 40%);
+$ttd-warning-color-2: mix($ttd-warning-color, $ttd-white-color, 20%);
+$ttd-warning-color-1: mix($ttd-warning-color, $ttd-white-color, 10%);
+
+$ttd-error-color: #ff352f;
+$ttd-error-color-8: mix($ttd-error-color, $ttd-white-color, 80%);
+$ttd-error-color-6: mix($ttd-error-color, $ttd-white-color, 60%);
+$ttd-error-color-4: mix($ttd-error-color, $ttd-white-color, 40%);
+$ttd-error-color-2: mix($ttd-error-color, $ttd-white-color, 20%);
+$ttd-error-color-1: mix($ttd-error-color, $ttd-white-color, 10%);
+
+$ttd-success-color: #38c99c;
+$ttd-success-color-8: mix($ttd-success-color, $ttd-white-color, 80%);
+$ttd-success-color-6: mix($ttd-success-color, $ttd-white-color, 60%);
+$ttd-success-color-4: mix($ttd-success-color, $ttd-white-color, 40%);
+$ttd-success-color-2: mix($ttd-success-color, $ttd-white-color, 20%);
+$ttd-success-color-1: mix($ttd-success-color, $ttd-white-color, 10%);
+
+// 区域阴影背景色
+$ttd-card-shadow-color: #e8ecf6;
+
+// 单选按钮
+$ttd-uncheck-background-color: #cccccc; // 未被选中的背景色
+$ttd-uncheck-border-color: #e0e0e0; // 违背选中的边框色

@@ -1,7 +1,13 @@
 module.exports = {
-  extends: ['taro/react'],
+  extends: [
+    'airbnb-typescript',
+    'taro/react',
+  ],
   rules: {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
   },
+  parserOptions: {
+    project: './tsconfig.json'
+  }
 };

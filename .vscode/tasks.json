@@ -1,0 +1,31 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm start:weapp",
+      "type": "shell",
+      "command": "npm run dev:dev:weapp",
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      // "isBackground": true,
+      "runOptions": {
+        // "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "npm start:h5",
+      "type": "shell",
+      "command": "npm run dev:dev:h5",
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      // "isBackground": true,
+      "runOptions": {
+        // "runOn": "folderOpen"
+      }
+    }
+  ]
+}

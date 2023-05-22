@@ -7,7 +7,7 @@ import { AtButton } from 'taro-ui';
 import styles from './index.module.scss';
 
 const state = atom({
-  key: '1111',
+  key: '11112',
   default: 0,
 });
 

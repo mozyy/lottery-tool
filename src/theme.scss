@@ -1,0 +1,8 @@
+@import './variables.scss';
+
+/* Custom Theme */
+$color-brand: $ttd-theme-color;
+$color-brand-light: #5f8def;
+$color-brand-dark: #2152bb;
+
+@import "~taro-ui/dist/style/index.scss";
