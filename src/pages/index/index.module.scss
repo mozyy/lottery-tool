@@ -1,3 +1,10 @@
-.button {
-  width: 300px;
+.root {
+  .add {
+    margin: 0;
+    width: 100px;
+  }
+
+  .prevent {
+    pointer-events: none;
+  }
 }
