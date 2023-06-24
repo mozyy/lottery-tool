@@ -8,4 +8,4 @@ export const fetcher:WindowOrWorkerGlobalScope['fetch'] = async (url, params) =>
   return resp as any;
 };
 
-export const config = new Configuration({ fetchApi:fetcher, basePath: 'http://localhost:51051' });
+export const config = new Configuration({ fetchApi:fetcher });

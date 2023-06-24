@@ -1,34 +1,35 @@
-import { Picker, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 import { AtActionSheet, AtActionSheetItem, AtButton, AtForm, AtInput, AtSwitch } from 'taro-ui';
 
 import { useState } from 'react';
 import { useSetState } from '../../hooks/setState';
+import { LotteryItem, LotteryNewLottery, LotteryRemark, LotteryType } from '../../openapi/lottery/lottery';
 import styles from './index.module.scss';
 
-enum Type {
-  NUM,
-  PAR,
-}
 
-const getTypeDesc = (type:Type) =>{
-  return ['个数', '几率'][type];
+const getTypeDesc = (type:LotteryType) =>{
+  return {
+    [LotteryType.Number]:'个数',
+    [LotteryType.Percent]:'几率',
+  }[type];
 };
 
-const initState = {
+const initState:Required<Omit<LotteryNewLottery, 'userId' | 'items' | 'remarks'>> = {
   title: '',
-  type: Type.NUM,
+  type: LotteryType.Number,
   remark: false,
-  startDate: '2023/05/23',
-  startTime: '20:20',
+  // startDate: '2023/05/23',
+  // startTime: '20:20',
 };
 
-const initItem = {
+const initItem:LotteryItem = {
   name: '',
   value: 1,
 };
 
-const initRemark = {
-  title: '',
+const initRemark:LotteryRemark = {
+  name: '',
   require: true,
 };
 
@@ -37,15 +38,22 @@ const Index = () => {
   const [items, setItems] = useState([initItem]);
   const [remarks, setRemarks] = useState([initRemark]);
   const [open, setOpen] = useState(false);
-  const onSubmit = () => {
+  // TODO: add userInfo
+  const userId = 'userId';
+  const onSubmit = async () => {
     console.log(state, items, remarks);
+    const lottery:Required<LotteryNewLottery> = { ...state, items, remarks, userId };
+    // const resp = await lotteryServiceApi.lotteryServiceCreate({ body:{ lottery } });
+    await new Promise((resolve, reject) => {setTimeout(resolve, 1000);});
+
+    Taro.showShareMenu({});
   };
   const onReset = () => {
     setState(initState);
     setItems([initItem]);
     setRemarks([initRemark]);
   };
-  const setTypeHandler = (type: Type) => () => {
+  const setTypeHandler = (type: LotteryType) => () => {
     setState({ type });
     setOpen(false);
   };
@@ -62,16 +70,16 @@ const Index = () => {
         onSubmit={onSubmit}
         onReset={onReset}
       >
-        <AtInput 
+        <AtInput
           name='title'
           title='主题名称'
           type='text'
           placeholder='请输入主题名称'
           value={state.title}
-          onChange={setState('title')} 
+          onChange={setState('title')}
         />
         <View onClick={()=>setOpen(true)}>
-        <AtInput 
+        <AtInput
           name='title'
           title='抽取方式'
           type='text'
@@ -85,21 +93,17 @@ const Index = () => {
        <AtActionSheet isOpened={open} title='选择抽取方式' onCancel={()=>setOpen(false)}
          onClose={()=>setOpen(false)}
        >
-        {Object.values(Type)
-          .filter((v) => !Number.isNaN(Number(v)))
-          .map((type:Type) => <AtActionSheetItem key={type} onClick={setTypeHandler(type)}>
+        {Object.values(LotteryType)
+          .map((type) => <AtActionSheetItem key={type} onClick={setTypeHandler(type)}>
           {getTypeDesc(type)}
         </AtActionSheetItem>)}
-        <AtActionSheetItem onClick={setTypeHandler(Type.PAR)}>
-          几率
-        </AtActionSheetItem>
       </AtActionSheet>
         选项:
         {items.map((item, i) => (
           <View className='at-row  at-row__align--center' key={i}>
             <View className='at-col at-col-2'>{`选项${i + 1}`}</View>
             <View className='at-col at-col-5'>
-              <AtInput 
+              <AtInput
                 name='title'
                 type='text'
                 placeholder='请输入选项名称'
@@ -107,21 +111,21 @@ const Index = () => {
                 onChange={v => addArray(i, setItems)({ name:String(v) })}
               /></View>
             <View className='at-col at-col-4'>
-              <AtInput 
+              <AtInput
                 name='value'
                 type='digit'
                 placeholder='请输入数量'
                 value={String(item.value)}
-                onChange={v => addArray(i, setItems)({ value:Number(v) })} 
+                onChange={v => addArray(i, setItems)({ value:Number(v) })}
                 key={i}
               />
             </View>
             <View className='at-col at-col-2' onClick={delArray(i, setItems)}>X</View>
           </View>
         ))}
-        <AtButton 
+        <AtButton
           className={styles.add}
-          size='small' 
+          size='small'
           onClick={()=>setItems([...items, initItem ])}
         >添加</AtButton>
         <AtSwitch title='抽签备注' checked={state.remark} onChange={setState('remark')} />
@@ -129,12 +133,12 @@ const Index = () => {
           <View className='at-row  at-row__align--center' key={i}>
             <View className='at-col at-col-2'>{`备注${i + 1}`}</View>
             <View className='at-col at-col-5'>
-              <AtInput 
-                name='title'
+              <AtInput
+                name='name'
                 type='text'
                 placeholder='请输入选项名称'
-                value={remark.title}
-                onChange={v => addArray(i, setRemarks)({ title:String(v) })}
+                value={remark.name}
+                onChange={v => addArray(i, setRemarks)({ name:String(v) })}
               /></View>
             <View className='at-col at-col-4'>
             <AtSwitch title='必填' checked={remark.require}
@@ -144,25 +148,25 @@ const Index = () => {
             <View className='at-col at-col-2' onClick={delArray(i, setRemarks)}>X</View>
           </View>
         ))}
-        {state.remark && <AtButton 
+        {state.remark && <AtButton
           className={styles.add}
-          size='small' 
+          size='small'
           onClick={()=>setRemarks([...remarks, initRemark ])}
         >添加</AtButton>}
-        时间:
+        {/* 时间:
         <View className='at-row  at-row__align--center' >
             <View className='at-col at-col-4'>开始时间</View>
             <View className='at-col at-col-5'>
               <Picker mode='date' value={state.startDate} onChange={e=>setState({ startDate: e.detail.value })}>
               {state.startDate}
-              </Picker>  
+              </Picker>
             </View>
             <View className='at-col at-col-3'>
               <Picker mode='time' value={state.startTime} onChange={e=>setState({ startTime: e.detail.value })}>
               {state.startTime}
-              </Picker>  
+              </Picker>
             </View>
-          </View>
+          </View> */}
         <AtButton formType='submit'>提交</AtButton>
         <AtButton formType='reset'>重置</AtButton>
       </AtForm>
