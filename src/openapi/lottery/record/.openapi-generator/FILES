@@ -1,0 +1,16 @@
+.openapi-generator-ignore
+apis/RecordServiceApi.ts
+apis/index.ts
+index.ts
+models/ProtobufAny.ts
+models/RecordCreateRequest.ts
+models/RecordCreateResponse.ts
+models/RecordGetResponse.ts
+models/RecordListResponse.ts
+models/RecordNewRecord.ts
+models/RecordRecord.ts
+models/RecordServiceUpdateRequest.ts
+models/RecordUpdateResponse.ts
+models/RpcStatus.ts
+models/index.ts
+runtime.ts

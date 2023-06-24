@@ -1,0 +1,6 @@
+.openapi-generator-ignore
+index.ts
+models/ProtobufAny.ts
+models/RpcStatus.ts
+models/WxSnsJscode2sessionResponse.ts
+runtime.ts
