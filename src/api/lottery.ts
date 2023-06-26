@@ -1,4 +1,8 @@
-import { LotteryServiceApi } from '../openapi/lottery/lottery';
-import { config } from '../utils/request';
+import { config } from '../env';
+import { Configuration, LotteryServiceApi } from '../openapi/lottery/lottery';
+import { fetcher } from '../utils/request';
 
-export const lotteryServiceApi = new LotteryServiceApi(config);
+
+const conf = new Configuration({ fetchApi:fetcher, basePath: config.basePath });
+
+export const lotteryServiceApi = new LotteryServiceApi(conf);

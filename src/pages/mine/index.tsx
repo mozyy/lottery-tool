@@ -3,8 +3,7 @@ import Taro from '@tarojs/taro';
 import { atom, useRecoilState } from 'recoil';
 // import { useEnv, useModal, useNavigationBar, useToast } from 'taro-hooks';
 import { lotteryServiceApi } from '../../api/lottery';
-import { Configuration } from '../../openapi/lottery/lottery';
-import { UserServiceApi } from '../../openapi/lottery/user';
+import { userServiceApi } from '../../api/user';
 
 
 const state = atom({
@@ -19,16 +18,11 @@ const Index = () => {
     const { code } = await Taro.login();
     console.log(1111);
     console.log(code);
-    const config = new Configuration({ fetchApi:(url, params) => {
-      Taro.request({ ...params, url });
-    }, basePath: 'http://localhost:51051' });
-    const user = new UserServiceApi(config);
-    const res = user.userServiceLogin({ body:{ code } });
-    const resp = new Response();
+    const res = await userServiceApi.userServiceLogin({ body: { code } });
     console.log(res);
   };
   const get = () => {
-    lotteryServiceApi.lotteryServiceList({});
+    lotteryServiceApi.lotteryServiceList({}); 
   };
 
   return (
