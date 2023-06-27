@@ -1,29 +1,32 @@
 import { Button, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
-import { atom, useRecoilState } from 'recoil';
+import { atom, useRecoilValue } from 'recoil';
 // import { useEnv, useModal, useNavigationBar, useToast } from 'taro-hooks';
+import { useState } from 'react';
+import useSWR from 'swr';
 import { lotteryServiceApi } from '../../api/lottery';
-import { userServiceApi } from '../../api/user';
-
+import { useLogin } from '../../hooks/login';
+import { oauthTokenState } from '../../store/atom';
 
 const state = atom({
   key: '11112',
   default: 0,
 });
 
-const Index = () => {
-  const [v, st ] = useRecoilState(state);
-  const login =  async () => {
-    console.log(2222);
-    const { code } = await Taro.login();
-    console.log(1111);
-    console.log(code);
-    const res = await userServiceApi.userServiceLogin({ body: { code } });
-    console.log(res);
-  };
-  const get = () => {
-    lotteryServiceApi.lotteryServiceList({}); 
-  };
+const lotteryServiceList = lotteryServiceApi.lotteryServiceList.bind(lotteryServiceApi);
+
+function Index() {
+  const oauthInfo = useRecoilValue(oauthTokenState);
+  const login = useLogin();
+  const [v, sv] = useState(0);
+
+  const { data, mutate } = useSWR(
+    [lotteryServiceList, {}, oauthInfo],
+    ([api, params, token]) => {
+      console.log(111, token);
+      return api(params);
+    },
+  );
+  console.log(222222, data);
 
   return (
     <View className='wrapper'>
@@ -31,12 +34,14 @@ const Index = () => {
       <Button className='button' onClick={login}>
         登录
       </Button>
-      <Button className='button' onClick={get}>
+      <Button className='button' onClick={mutate}>
         get
       </Button>
-
+      <Button className='button' onClick={() => sv(v + 1)}>
+        +1
+      </Button>
     </View>
   );
-};
+}
 
 export default Index;

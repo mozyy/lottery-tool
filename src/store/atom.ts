@@ -1,18 +1,19 @@
-import { AtomEffect, atom } from 'recoil';
+import { AtomEffect, DefaultValue, atom } from 'recoil';
 import { OauthToken } from '../openapi/lottery/user';
+import { getStorage, removeStorage, setStorage } from '../utils/storage';
 
 const localStorageEffect:AtomEffect<OauthToken | null> = ({ setSelf, onSet }) => {
-  const savedValue = getStorage('USER_INFO', 'localStorage');
-  if (savedValue != null) {
-    const userInfo:UserInfo = JSON.parse(savedValue);
-    setSelf(userInfo);
+  const oauthInfo = getStorage<OauthToken>('OAUTH_INFO');
+  console.log(55555, oauthInfo);
+  if (oauthInfo) {
+    setSelf(oauthInfo);
   }
 
   onSet((newValue) => {
     if (newValue instanceof DefaultValue || !newValue) {
-      removeStorage('USER_INFO', 'localStorage');
+      removeStorage('OAUTH_INFO');
     } else {
-      setStorage('USER_INFO', JSON.stringify(newValue), 'localStorage');
+      setStorage('OAUTH_INFO', newValue);
     }
   });
 };

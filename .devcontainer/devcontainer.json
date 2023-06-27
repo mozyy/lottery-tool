@@ -24,6 +24,7 @@
         "esbenp.prettier-vscode",
         "eamodio.gitlens",
         "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
         "mutantdino.resourcemonitor"
       ]
     }

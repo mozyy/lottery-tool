@@ -1,11 +1,8 @@
 import CryptoJs from 'crypto-js';
+import { iv as ivStr, key as keyStr } from '../config/crypto';
 
-const a = 'ecb120cc';
-const b = 'c3881a54';
-const c = '87a5b728';
-const d = 'd235a50b';
-const key = CryptoJs.enc.Utf8.parse(`${a}${b}`);
-const iv = CryptoJs.enc.Utf8.parse(`${c}${d}`);
+const key = CryptoJs.enc.Utf8.parse(keyStr);
+const iv = CryptoJs.enc.Utf8.parse(ivStr);
 
 /**
  * AES加密

@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "dist/weapp/",
-  "description": "抽签工具",
+  "description": "Project configuration file, more information: https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "setting": {
     "urlCheck": true,
     "es6": false,
@@ -36,7 +36,8 @@
     "showES6CompileOption": false,
     "useCompilerPlugins": false,
     "ignoreUploadUnusedFiles": true,
-    "condition": false
+    "condition": false,
+    "useStaticServer": true
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",
@@ -52,6 +53,6 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx5aff69070203c5c3",
+  "appid": "wx59049041ecf71722",
   "projectname": "lottery-tool"
 }
