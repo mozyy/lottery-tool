@@ -1,7 +1,7 @@
 import { Component, PropsWithChildren } from 'react';
 import { RecoilRoot } from 'recoil';
-import './theme.scss';
 import './app.scss';
+import './theme.scss';
 
 class App extends Component<PropsWithChildren> {
   componentDidMount() {}
