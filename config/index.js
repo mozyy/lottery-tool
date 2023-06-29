@@ -1,7 +1,14 @@
 const config = {
   projectName: "lottery-tool",
   date: "2023-5-22",
-  designWidth: 750,
+  designWidth (input) {
+    // 配置 NutUI 375 尺寸
+    if (input?.file?.replace(/\\+/g, '/').indexOf('@nutui') > -1) {
+      return 375
+    }
+    // 全局使用 Taro 默认的 750 尺寸
+    return 750
+  },
   deviceRatio: {
     640: 2.34 / 2,
     750: 1,
@@ -9,27 +16,38 @@ const config = {
   },
   sourceRoot: "src",
   outputRoot: `dist/${process.env.TARO_ENV}`,
-  plugins: [],
   defineConstants: {},
   copy: {
     patterns: [],
     options: {},
   },
   framework: "react",
-  compiler: 'webpack5',
+  compiler:  {
+    type: "webpack5",
+    prebundle: {
+      enable: false,
+    },
+  },
   cache: {
     enable: false // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
   },
   plugins: [
     ['@dcasia/mini-program-tailwind-webpack-plugin/dist/taro', {
       enableWindiCSS: false,
-    }]
+    }],
+    '@tarojs/plugin-html',
   ],
+  sass:{
+    data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";`
+  },
   mini: {
     postcss: {
       pxtransform: {
         enable: true,
-        config: {},
+        config: {
+          // TODO: remove
+          selectorBlackList: ['nut-']
+        },
       },
       url: {
         enable: true,

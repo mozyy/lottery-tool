@@ -1,8 +1,11 @@
 @import "./variables.scss";
 
-/* Custom Theme */
-$color-brand: $ttd-theme-color;
-$color-brand-light: #5f8def;
-$color-brand-dark: #2152bb;
+:root,
+page {
+  --zy-primary-color: #0064d2;
+  --zy-second-color: #0064d2;
 
-// @import "~taro-ui/dist/style/index.scss";
+  --nutui-brand-color: var(--zy-primary-color);
+  --nutui-brand-color-start: var(--zy-second-color);
+  --nutui-brand-color-end: var(--zy-primary-color);
+}

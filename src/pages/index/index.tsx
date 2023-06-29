@@ -1,8 +1,9 @@
+import {
+  ActionSheet,
+  Button, Form, Input, Switch,
+} from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import {
-  AtActionSheet, AtActionSheetItem, AtButton, AtForm, AtInput, AtSwitch,
-} from 'taro-ui';
 
 import { useState } from 'react';
 import { useSetState } from '../../hooks/setState';
@@ -34,7 +35,7 @@ const initRemark:LotteryRemark = {
   require: true,
 };
 
-function Index() {
+const Index = () => {
   const [state, setState] = useSetState(initState);
   const [items, setItems] = useState([initItem]);
   const [remarks, setRemarks] = useState([initRemark]);
@@ -70,11 +71,11 @@ function Index() {
 
   return (
     <View className={styles.root}>
-      <AtForm
+      <Form
         onSubmit={onSubmit}
         onReset={onReset}
       >
-        <AtInput
+        <Input
           name='title'
           title='主题名称'
           type='text'
@@ -83,7 +84,7 @@ function Index() {
           onChange={setState('title')}
         />
         <View onClick={() => setOpen(true)}>
-          <AtInput
+          <Input
             name='title'
             title='抽取方式'
             type='text'
@@ -93,28 +94,26 @@ function Index() {
             onChange={() => setState({ type: state.type })}
           >
             &gt;
-          </AtInput>
+          </Input>
         </View>
         {open}
-        <AtActionSheet
-          isOpened={open}
+        <ActionSheet
+          visible={open}
           title='选择抽取方式'
           onCancel={() => setOpen(false)}
-          onClose={() => setOpen(false)}
-        >
-          {Object.values(LotteryType)
-            .map((type) => (
-              <AtActionSheetItem key={type} onClick={setTypeHandler(type)}>
-                {getTypeDesc(type)}
-              </AtActionSheetItem>
-            ))}
-        </AtActionSheet>
+          options={Object.values(LotteryType)
+            .map((type) => ({ name: getTypeDesc(type) }))}
+          onSelect={(item) => {
+            console.log(item);
+            // setTypeHandler(item)
+          }}
+        />
         选项:
         {items.map((item, i) => (
           <View className='at-row  at-row__align--center' key={i}>
             <View className='at-col at-col-2'>{`选项${i + 1}`}</View>
             <View className='at-col at-col-5'>
-              <AtInput
+              <Input
                 name='title'
                 type='text'
                 placeholder='请输入选项名称'
@@ -123,7 +122,7 @@ function Index() {
               />
             </View>
             <View className='at-col at-col-4'>
-              <AtInput
+              <Input
                 name='value'
                 type='digit'
                 placeholder='请输入数量'
@@ -135,19 +134,19 @@ function Index() {
             <View className='at-col at-col-2' onClick={delArray(i, setItems)}>X</View>
           </View>
         ))}
-        <AtButton
+        <Button
           className={styles.add}
           size='small'
           onClick={() => setItems([...items, initItem])}
         >
           添加
-        </AtButton>
-        <AtSwitch title='抽签备注' checked={state.remark} onChange={setState('remark')} />
+        </Button>
+        <Switch title='抽签备注' checked={state.remark} onChange={setState('remark')} />
         {state.remark && remarks.map((remark, i) => (
           <View className='at-row  at-row__align--center' key={i}>
             <View className='at-col at-col-2'>{`备注${i + 1}`}</View>
             <View className='at-col at-col-5'>
-              <AtInput
+              <Input
                 name='name'
                 type='text'
                 placeholder='请输入选项名称'
@@ -156,7 +155,7 @@ function Index() {
               />
             </View>
             <View className='at-col at-col-4'>
-              <AtSwitch
+              <Switch
                 title='必填'
                 checked={remark.require}
                 onChange={(v) => addArray(i, setRemarks)({ require: v })}
@@ -166,13 +165,13 @@ function Index() {
           </View>
         ))}
         {state.remark && (
-        <AtButton
+        <Button
           className={styles.add}
           size='small'
           onClick={() => setRemarks([...remarks, initRemark])}
         >
           添加
-        </AtButton>
+        </Button>
         )}
         {/* 时间:
         <View className='at-row  at-row__align--center' >
@@ -190,11 +189,11 @@ function Index() {
               </Picker>
             </View>
           </View> */}
-        <AtButton formType='submit'>提交</AtButton>
-        <AtButton formType='reset'>重置</AtButton>
-      </AtForm>
+        <Button formType='submit'>提交</Button>
+        <Button formType='reset'>重置</Button>
+      </Form>
     </View>
   );
-}
+};
 
 export default Index;
