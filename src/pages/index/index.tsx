@@ -76,18 +76,12 @@ const Index = () => {
         onReset={onReset}
       >
         <Input
-          name='title'
-          title='主题名称'
-          type='text'
           placeholder='请输入主题名称'
           value={state.title}
           onChange={setState('title')}
         />
         <View onClick={() => setOpen(true)}>
           <Input
-            name='title'
-            title='抽取方式'
-            type='text'
             placeholder='请输入主题名称'
             value={getTypeDesc(state.type)}
             className={styles.prevent}
@@ -114,8 +108,6 @@ const Index = () => {
             <View className='at-col at-col-2'>{`选项${i + 1}`}</View>
             <View className='at-col at-col-5'>
               <Input
-                name='title'
-                type='text'
                 placeholder='请输入选项名称'
                 value={item.name}
                 onChange={(v) => addArray(i, setItems)({ name: String(v) })}
@@ -123,12 +115,9 @@ const Index = () => {
             </View>
             <View className='at-col at-col-4'>
               <Input
-                name='value'
-                type='digit'
                 placeholder='请输入数量'
                 value={String(item.value)}
                 onChange={(v) => addArray(i, setItems)({ value: Number(v) })}
-                key={i}
               />
             </View>
             <View className='at-col at-col-2' onClick={delArray(i, setItems)}>X</View>
@@ -141,7 +130,7 @@ const Index = () => {
         >
           添加
         </Button>
-        <Switch title='抽签备注' checked={state.remark} onChange={setState('remark')} />
+        <Switch checked={state.remark} onChange={setState('remark')} />
         {state.remark && remarks.map((remark, i) => (
           <View className='at-row  at-row__align--center' key={i}>
             <View className='at-col at-col-2'>{`备注${i + 1}`}</View>
