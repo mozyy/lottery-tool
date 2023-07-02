@@ -4,7 +4,7 @@ import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
 import './app.scss';
 import './theme.scss';
-import { swrMiddleware } from './utils/request';
+import { swrFetcher, swrMiddleware } from './utils/request';
 
 const App = (props:PropsWithChildren) => {
   const { children } = props;
@@ -14,6 +14,7 @@ const App = (props:PropsWithChildren) => {
   return (
     <SWRConfig value={{
       use: [swrMiddleware],
+      fetcher: swrFetcher,
       provider: () => new Map(),
       isOnline() {
         return onlineRef.current;

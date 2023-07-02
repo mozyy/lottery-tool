@@ -26,6 +26,7 @@ const config = {
     type: "webpack5",
     prebundle: {
       enable: false,
+      force: true,
     },
   },
   cache: {
@@ -35,6 +36,7 @@ const config = {
     ['@dcasia/mini-program-tailwind-webpack-plugin/dist/taro', {
       enableWindiCSS: false,
     }],
+    '@tarojs/plugin-http',
     '@tarojs/plugin-html',
   ],
   sass:{

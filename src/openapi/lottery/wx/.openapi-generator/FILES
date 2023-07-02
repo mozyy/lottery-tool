@@ -1,6 +1,9 @@
+.gitignore
+.npmignore
 .openapi-generator-ignore
+api.ts
+base.ts
+common.ts
+configuration.ts
+git_push.sh
 index.ts
-models/ProtobufAny.ts
-models/RpcStatus.ts
-models/WxSnsJscode2sessionResponse.ts
-runtime.ts

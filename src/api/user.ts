@@ -1,8 +1,7 @@
-import { Configuration, UserServiceApi } from '../openapi/lottery/user';
-import { configParam } from '../utils/request';
+import { config } from '../env';
+import { Configuration, UserServiceApiFactory } from '../openapi/lottery/user';
+import { axiosInstance, configurationParameters } from '../utils/request';
 
+const conf = new Configuration(configurationParameters);
 
-const conf = new Configuration(configParam);
-
-export const userServiceApi = new UserServiceApi(conf);
-
+export const userServiceApi = UserServiceApiFactory(conf, config.basePath, axiosInstance);

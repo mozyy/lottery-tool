@@ -1,7 +1,7 @@
 import { config } from '../env';
-import { Configuration, LotteryServiceApi } from '../openapi/lottery/lottery';
-import { fetcher } from '../utils/request';
+import { Configuration, LotteryServiceApiFactory } from '../openapi/lottery/lottery';
+import { axiosInstance, configurationParameters } from '../utils/request';
 
-const conf = new Configuration({ fetchApi: fetcher, basePath: config.basePath });
+const conf = new Configuration(configurationParameters);
 
-export const lotteryServiceApi = new LotteryServiceApi(conf);
+export const lotteryServiceApi = LotteryServiceApiFactory(conf, config.basePath, axiosInstance);

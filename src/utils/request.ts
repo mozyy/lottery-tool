@@ -1,48 +1,18 @@
-import { request } from '@tarojs/taro';
+import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { Middleware, SWRHook } from 'swr';
-import { config } from '../env';
-import { type ConfigurationParameters } from '../openapi/lottery/lottery';
-import { oauthTokenState } from '../store/atom';
+import { ConfigurationParameters } from '../openapi/lottery/lottery';
+import { getAccessToken, oauthTokenState } from '../store/atom';
 
-export const fetcher:WindowOrWorkerGlobalScope['fetch'] = async (url, { body, ...params }) => {
-  const resp = await request({
-    ...params,
-    data: body,
-    url,
-    fail(e) {
-      console.log('onError3: ', params, e);
-    },
-  }).catch((err) => {
-    console.log('onError2: ', params, err);
-    return Promise.reject(err);
-  });
-  const res = {
-    json: () => resp.data,
-    text: () => resp.data,
-    status: resp.statusCode,
-    clone: () => ({ ...res }),
-  };
-  return res as any;
-};
-
-export const configParam: ConfigurationParameters = {
-  fetchApi: fetcher,
-  basePath: config.basePath,
-  middleware: [{
-    post: async (res) => {
-      console.log('request: ', res.url, res.response);
-      return res.response;
-    },
-    onError: async (res) => {
-      console.log('onError: ', res.url, res.response);
-      return res.response;
-    },
-  }],
+export const swrFetcher = async (key, extraArg = { arg: [] }) => {
+  // eslint-disable-next-line prefer-const
+  let [token, service, ...params] = key;
+  const res = await service(...params, ...extraArg.arg);
+  return res.data;
 };
 
 export const swrMiddleware: Middleware = (useSWRNext:
-SWRHook) => (swrKey, swrFetcher, swrConfig) => {
+SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
   const [oauthToken, setOauthToken] = useRecoilState(oauthTokenState);
   let key;
   if (typeof swrKey === 'function') {
@@ -51,12 +21,32 @@ SWRHook) => (swrKey, swrFetcher, swrConfig) => {
       if (!keyValue) {
         return keyValue;
       }
-      return [...keyValue, oauthToken];
+      return [oauthToken, ...keyValue];
     };
   } else if (Array.isArray(swrKey)) {
-    key = [...swrKey, oauthToken];
+    key = [oauthToken, ...swrKey];
+  } else {
+    throw Error('not support');
   }
-  const res = useSWRNext(key, swrFetcher, swrConfig);
+  const res = useSWRNext(key, swrFetcherd, swrConfig);
   // TODO: clear oauth Token or refresh Token
+  if (res.error) {
+    //
+    console.warn(res.error);
+  }
   return res;
 };
+
+export const configurationParameters:ConfigurationParameters = {
+  accessToken: getAccessToken,
+};
+
+export const axiosInstance = axios.create();
+
+axiosInstance.interceptors.response.use((response) => {
+  console.log('[API]:', response.config.url, response.request, response.data);
+  return response;
+}, (error) => {
+  console.log('[API]:', error);
+  return Promise.reject(error);
+});
