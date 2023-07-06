@@ -1,6 +1,6 @@
 import {
   ActionSheet,
-  Button, Form, Input, Switch,
+  Button, Col, Form, Input, Row, Switch,
 } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
@@ -10,7 +10,6 @@ import { useSetState } from '../../hooks/setState';
 import {
   LotteryItem, LotteryNewLottery, LotteryRemark, LotteryType,
 } from '../../openapi/lottery/lottery';
-import styles from './index.module.scss';
 
 const getTypeDesc = (type:LotteryType) => ({
   [LotteryType.Number]: '个数',
@@ -42,6 +41,7 @@ const Index = () => {
   const [open, setOpen] = useState(false);
   // TODO: add userInfo
   const userId = 'userId';
+  const [form] = Form.useForm();
   const onSubmit = async () => {
     console.log(state, items, remarks);
     const lottery:Required<LotteryNewLottery> = {
@@ -70,27 +70,27 @@ const Index = () => {
   };
 
   return (
-    <View className={styles.root}>
+    <View className='p-2 bg-gray-100 h-full box-border'>
       <Form
+        form={form}
+        onFinish={console.log}
+        footer={(
+          <Row>
+            <Col span={12}><Button formType='submit' >提交</Button></Col>
+            <Col span={12}><Button formType='reset'>重署</Button></Col>
+          </Row>
+      )}
         onSubmit={onSubmit}
         onReset={onReset}
       >
-        <Input
-          placeholder='请输入主题名称'
-          value={state.title}
-          onChange={setState('title')}
-        />
-        <View onClick={() => setOpen(true)}>
+        <Form.Item label='名称' name='title'>
           <Input
             placeholder='请输入主题名称'
-            value={getTypeDesc(state.type)}
-            className={styles.prevent}
-            onChange={() => setState({ type: state.type })}
-          >
-            &gt;
-          </Input>
-        </View>
-        {open}
+          />
+        </Form.Item>
+        <Form.Item label='抽取方式' name='type' onClick={() => setOpen(true)}>
+          <View>{getTypeDesc(state.type)}</View>
+        </Form.Item>
         <ActionSheet
           visible={open}
           title='选择抽取方式'
@@ -102,35 +102,40 @@ const Index = () => {
             // setTypeHandler(item)
           }}
         />
-        选项:
-        {items.map((item, i) => (
-          <View className='at-row  at-row__align--center' key={i}>
-            <View className='at-col at-col-2'>{`选项${i + 1}`}</View>
-            <View className='at-col at-col-5'>
-              <Input
-                placeholder='请输入选项名称'
-                value={item.name}
-                onChange={(v) => addArray(i, setItems)({ name: String(v) })}
-              />
-            </View>
-            <View className='at-col at-col-4'>
-              <Input
-                placeholder='请输入数量'
-                value={String(item.value)}
-                onChange={(v) => addArray(i, setItems)({ value: Number(v) })}
-              />
-            </View>
-            <View className='at-col at-col-2' onClick={delArray(i, setItems)}>X</View>
-          </View>
-        ))}
+        <Form.Item label='选项' name='items'>
+          {items.map((item, i) => (
+            <Form.Item label={`选项${i + 1}`} key={i} name='items'>
+              <Row>
+                <Col span={12}>
+                  <Input
+                    placeholder='选项名'
+                    value={item.name}
+                    onChange={(v) => addArray(i, setItems)({ name: String(v) })}
+                  />
+                </Col>
+                <Col span={8}>
+                  <Input
+                    placeholder='数量'
+                    value={String(item.value)}
+                    onChange={(v) => addArray(i, setItems)({ value: Number(v) })}
+                  />
+                </Col>
+                <Col span={4}>
+                  <View className='at-col at-col-2' onClick={delArray(i, setItems)}>X</View>
+                </Col>
+              </Row>
+            </Form.Item>
+          ))}
+        </Form.Item>
         <Button
-          className={styles.add}
           size='small'
           onClick={() => setItems([...items, initItem])}
         >
-          添加
+          添加选项
         </Button>
-        <Switch checked={state.remark} onChange={setState('remark')} />
+        <Form.Item label='备注'>
+          <Switch checked={state.remark} onChange={setState('remark')} />
+        </Form.Item>
         {state.remark && remarks.map((remark, i) => (
           <View className='at-row  at-row__align--center' key={i}>
             <View className='at-col at-col-2'>{`备注${i + 1}`}</View>
@@ -145,7 +150,6 @@ const Index = () => {
             </View>
             <View className='at-col at-col-4'>
               <Switch
-                title='必填'
                 checked={remark.require}
                 onChange={(v) => addArray(i, setRemarks)({ require: v })}
               />
@@ -155,7 +159,6 @@ const Index = () => {
         ))}
         {state.remark && (
         <Button
-          className={styles.add}
           size='small'
           onClick={() => setRemarks([...remarks, initRemark])}
         >
