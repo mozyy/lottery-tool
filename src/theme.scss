@@ -1,11 +1,15 @@
+/*postcss-pxtransform disable*/
 @import "./variables.scss";
+@import "@nutui/nutui-react-taro/dist/styles/theme-default.scss";
 
 :root,
 page {
   --zy-primary-color: #0064d2;
-  --zy-second-color: #1cb0f6;
+  --zy-second-color: #1cb0f1;
 
   --nutui-brand-color: var(--zy-primary-color);
   --nutui-brand-color-start: var(--zy-second-color);
   --nutui-brand-color-end: var(--zy-primary-color);
+
+  --nutui-form-item-error-message-color: #ff4d4f;
 }

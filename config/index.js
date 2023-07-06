@@ -48,7 +48,7 @@ const config = {
         enable: true,
         config: {
           // TODO: remove
-          selectorBlackList: ['nut-']
+          selectorBlackList: ['nut-', /^page$/]
         },
       },
       url: {

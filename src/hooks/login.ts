@@ -17,8 +17,9 @@ export const useLogin = () => {
     if (!res.token) {
       return Promise.reject(Error('no token!'));
     }
-    setOauthInfo(new OauthToken(res.token));
-    return res;
+    const token = new OauthToken(res.token);
+    setOauthInfo(token);
+    return token;
   }, [setOauthInfo, trigger]);
   return loginHandler;
 };
