@@ -3,7 +3,6 @@ import {
   Col,
   Input, Row,
 } from '@nutui/nutui-react-taro';
-import { View } from '@tarojs/components';
 import { LotteryItem } from '../../../../openapi/lottery/lottery';
 
 export interface ItemsProps {
@@ -11,7 +10,7 @@ export interface ItemsProps {
   onChange?:(value:LotteryItem[]) => void
 }
 
-const Items = ({ value = [], onChange = () => {} }:ItemsProps) => {
+export default function Items({ value = [], onChange = () => {} }:ItemsProps) {
   console.log(value);
 
   const addArray = (i:number, v: LotteryItem) => {
@@ -30,9 +29,9 @@ const Items = ({ value = [], onChange = () => {} }:ItemsProps) => {
     onChange(newArr);
   };
   return (
-    <View>
+    <div>
       {value.map((item, i) => (
-        <View key={i}>
+        <div key={i}>
           <Row>
             <Col span={12}>
               <Input
@@ -49,10 +48,10 @@ const Items = ({ value = [], onChange = () => {} }:ItemsProps) => {
               />
             </Col>
             <Col span={4}>
-              <View className='at-col at-col-2' onClick={delArray(i)}>X</View>
+              <div className='at-col at-col-2' onClick={delArray(i)}>X</div>
             </Col>
           </Row>
-        </View>
+        </div>
       ))}
       <Button
         size='small'
@@ -60,8 +59,6 @@ const Items = ({ value = [], onChange = () => {} }:ItemsProps) => {
       >
         添加选项
       </Button>
-    </View>
+    </div>
   );
-};
-
-export default Items;
+}

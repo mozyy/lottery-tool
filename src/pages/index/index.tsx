@@ -1,14 +1,15 @@
 import {
   Button, Col, Form, Input, Radio, Row, Switch,
 } from '@nutui/nutui-react-taro';
-import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import { useState } from 'react';
-import { useSetState } from '../../hooks/setState';
+import { lotteryServiceApi } from '../../api/lottery';
+import { useLogin } from '../../hooks/login';
+import { useSWRMutation } from '../../hooks/swrMutation';
 import {
   LotteryItem,
-  LotteryNewLottery, LotteryRemark, LotteryType,
+  LotteryNewLottery,
+  LotteryType,
 } from '../../openapi/lottery/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
@@ -23,13 +24,8 @@ const initItem:LotteryItem = {
   value: 1,
 };
 
-const initRemark:LotteryRemark = {
-  name: '',
-  require: true,
-};
-
-const initState:Required<Omit<LotteryNewLottery, 'userId'>> = {
-  title: '11111',
+const initState: LotteryNewLottery = {
+  title: '抽签',
   type: LotteryType.Number,
   items: [initItem],
   remark: false,
@@ -38,30 +34,23 @@ const initState:Required<Omit<LotteryNewLottery, 'userId'>> = {
   // startTime: '20:20',
 };
 
-const Index = () => {
-  const [state, setState] = useSetState(initState);
-  const [items, setItems] = useState([initItem]);
-  const [remarks, setRemarks] = useState([initRemark]);
-  const [open, setOpen] = useState(false);
-  // TODO: add userInfo
-  const userId = 'userId';
+export default function Index() {
   const [form] = Form.useForm();
-  const onSubmit = async (value) => {
-    console.log(value);
-    const lottery:Required<LotteryNewLottery> = {
-      ...state, items, remarks, userId,
-    };
-    // const resp = await lotteryServiceApi.lotteryServiceCreate({ body:{ lottery } });
-    await new Promise((resolve, reject) => { setTimeout(resolve, 1000); });
+  const login = useLogin();
+  const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
+  const onSubmit = async (lottery: LotteryNewLottery) => {
+    await login();
+    console.log(lottery);
+    await trigger([{ lottery }]);
 
     Taro.showShareMenu({});
   };
 
   return (
-    <View className='p-2 bg-gray-100 h-full box-border'>
+    <div className='p-2 bg-gray-100 h-full box-border'>
       <Form
         form={form}
-        onFinish={console.log}
+        onFinish={onSubmit}
         onFinishFailed={console.warn}
         initialValues={initState}
         footer={(
@@ -92,24 +81,22 @@ const Index = () => {
           <Remarks />
         </Form.Item>
         {/* 时间:
-        <View className='at-row  at-row__align--center' >
-            <View className='at-col at-col-4'>开始时间</View>
-            <View className='at-col at-col-5'>
+        <div className='at-row  at-row__align--center' >
+            <div className='at-col at-col-4'>开始时间</div>
+            <div className='at-col at-col-5'>
               <Picker mode='date' value={state.startDate}
               onChange={e=>setState({ startDate: e.detail.value })}>
               {state.startDate}
               </Picker>
-            </View>
-            <View className='at-col at-col-3'>
+            </div>
+            <div className='at-col at-col-3'>
               <Picker mode='time' value={state.startTime}
               onChange={e=>setState({ startTime: e.detail.value })}>
               {state.startTime}
               </Picker>
-            </View>
-          </View> */}
+            </div>
+          </div> */}
       </Form>
-    </View>
+    </div>
   );
-};
-
-export default Index;
+}

@@ -3,7 +3,6 @@ import {
   Col,
   Input, Row, Switch,
 } from '@nutui/nutui-react-taro';
-import { View } from '@tarojs/components';
 import { LotteryRemark } from '../../../../openapi/lottery/lottery';
 
 export interface RemarksProps {
@@ -11,7 +10,7 @@ export interface RemarksProps {
   onChange?:(value:LotteryRemark[]) => void
 }
 
-const Remarks = ({ value = [], onChange = () => {} }:RemarksProps) => {
+export default function Remarks({ value = [], onChange = () => {} }:RemarksProps) {
   console.log(value);
 
   const addArray = (i:number, v: LotteryRemark) => {
@@ -27,9 +26,9 @@ const Remarks = ({ value = [], onChange = () => {} }:RemarksProps) => {
     onChange(newArr);
   };
   return (
-    <View>
+    <div>
       {value.map((item, i) => (
-        <View key={i}>
+        <div key={i}>
           <Row>
             <Col span={12}>
               <Input
@@ -45,10 +44,10 @@ const Remarks = ({ value = [], onChange = () => {} }:RemarksProps) => {
               />
             </Col>
             <Col span={4}>
-              <View className='at-col at-col-2' onClick={delArray(i)}>X</View>
+              <div className='at-col at-col-2' onClick={delArray(i)}>X</div>
             </Col>
           </Row>
-        </View>
+        </div>
       ))}
       <Button
         size='small'
@@ -56,8 +55,6 @@ const Remarks = ({ value = [], onChange = () => {} }:RemarksProps) => {
       >
         添加选项
       </Button>
-    </View>
+    </div>
   );
-};
-
-export default Remarks;
+}

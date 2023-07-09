@@ -1,10 +1,10 @@
-import { Button, View } from '@tarojs/components';
+import { Button } from '@nutui/nutui-react-taro';
 import { useState } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
 import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
 
-const Index = () => {
+export default function Index() {
   const login = useLogin();
   const [v, sv] = useState(0);
 
@@ -12,7 +12,7 @@ const Index = () => {
   console.log(1111, me.data);
 
   return (
-    <View className='wrapper'>
+    <div className='wrapper'>
 
       <Button className='button' onClick={login}>
         登录
@@ -23,8 +23,6 @@ const Index = () => {
       <Button className='button' onClick={() => sv(v + 1)}>
         +1
       </Button>
-    </View>
+    </div>
   );
-};
-
-export default Index;
+}
