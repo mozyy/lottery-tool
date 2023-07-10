@@ -16,6 +16,9 @@ export class OauthToken {
 
 let auth:OauthToken | null = null;
 
+export const setOauthToken = (value:OauthToken | null) => {
+  auth = value;
+};
 export const getAccessToken = () => {
   if (!auth || OauthToken.expired(auth)) {
     return '';
@@ -26,15 +29,16 @@ export const getAccessToken = () => {
 const localStorageEffect:AtomEffect<OauthToken | null> = ({ setSelf, onSet }) => {
   const oauthInfo = getStorage<OauthToken>('OAUTH_INFO');
   if (oauthInfo) {
+    setOauthToken(oauthInfo);
     setSelf(oauthInfo);
   }
 
   onSet((newValue) => {
     if (newValue instanceof DefaultValue || !newValue) {
-      auth = null;
+      setOauthToken(null);
       removeStorage('OAUTH_INFO');
     } else {
-      auth = newValue;
+      setOauthToken(newValue);
       setStorage('OAUTH_INFO', newValue);
     }
   });
