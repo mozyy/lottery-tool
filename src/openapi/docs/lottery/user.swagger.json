@@ -214,8 +214,8 @@
             "schema": {
               "type": "object",
               "properties": {
-                "user": {
-                  "$ref": "#/definitions/userNewUser"
+                "wxUser": {
+                  "$ref": "#/definitions/userNewWxUser"
                 }
               }
             }
@@ -280,16 +280,16 @@
     "userCreateRequest": {
       "type": "object",
       "properties": {
-        "user": {
-          "$ref": "#/definitions/userNewUser"
+        "wxUser": {
+          "$ref": "#/definitions/userNewWxUser"
         }
       }
     },
     "userCreateResponse": {
       "type": "object",
       "properties": {
-        "user": {
-          "$ref": "#/definitions/userUser"
+        "wxUser": {
+          "$ref": "#/definitions/userWxUser"
         }
       }
     },
@@ -299,27 +299,27 @@
     "userGetResponse": {
       "type": "object",
       "properties": {
-        "user": {
-          "$ref": "#/definitions/userUser"
+        "wxUser": {
+          "$ref": "#/definitions/userWxUser"
         }
       }
     },
     "userInfoResponse": {
       "type": "object",
       "properties": {
-        "user": {
-          "$ref": "#/definitions/userUser"
+        "wxUser": {
+          "$ref": "#/definitions/userWxUser"
         }
       }
     },
     "userListResponse": {
       "type": "object",
       "properties": {
-        "users": {
+        "wxUsers": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/userUser"
+            "$ref": "#/definitions/userWxUser"
           }
         }
       }
@@ -340,10 +340,10 @@
         }
       }
     },
-    "userNewUser": {
+    "userNewWxUser": {
       "type": "object",
       "properties": {
-        "oauthUserId": {
+        "userId": {
           "type": "string",
           "title": "openid"
         },
@@ -373,19 +373,19 @@
     "userUpdateResponse": {
       "type": "object",
       "properties": {
-        "user": {
-          "$ref": "#/definitions/userUser"
+        "wxUser": {
+          "$ref": "#/definitions/userWxUser"
         }
       }
     },
-    "userUser": {
+    "userWxUser": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "title": "openid"
         },
-        "oauthUserId": {
+        "userId": {
           "type": "string",
           "title": "openid"
         },

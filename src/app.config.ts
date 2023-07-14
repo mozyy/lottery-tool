@@ -21,4 +21,5 @@ export default {
       },
     ],
   },
+  entryPagePath: 'pages/lottery/index',
 };

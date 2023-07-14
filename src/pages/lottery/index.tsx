@@ -2,6 +2,7 @@ import { Button, Form, Input } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
 import { lotteryServiceApi } from '../../api/lottery';
 import { recordServiceApi } from '../../api/record';
+import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
 import { useSWRMutation } from '../../hooks/swrMutation';
 import { RecordCreateRequest } from '../../openapi/lottery/record';
@@ -11,7 +12,8 @@ import { RecordCreateRequest } from '../../openapi/lottery/record';
  */
 export default function Lottery() {
   const router = useRouter();
-  const id = Number(router.params.id);
+  const id = Number(router.params.id || 1);
+  const login = useLogin();
   const { data } = useSWR([lotteryServiceApi.lotteryServiceGet, id]);
   const { trigger } = useSWRMutation([recordServiceApi.recordServiceCreate]);
   const [form] = Form.useForm();
@@ -29,6 +31,7 @@ export default function Lottery() {
       remarks.push(value);
     }
     const record: RecordCreateRequest = { record: { lotteryId: id } };
+    await login();
     const res = await trigger([record]);
   };
   return (

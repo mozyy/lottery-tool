@@ -178,13 +178,6 @@
         ],
         "tags": [
           "LotteryService"
-        ],
-        "security": [
-          {
-            "OAuth2": [
-              "read"
-            ]
-          }
         ]
       },
       "delete": {

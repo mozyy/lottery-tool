@@ -108,10 +108,10 @@ export interface RpcStatus {
 export interface UserCreateRequest {
     /**
      * 
-     * @type {UserNewUser}
+     * @type {UserNewWxUser}
      * @memberof UserCreateRequest
      */
-    'user'?: UserNewUser;
+    'wxUser'?: UserNewWxUser;
 }
 /**
  * 
@@ -121,10 +121,10 @@ export interface UserCreateRequest {
 export interface UserCreateResponse {
     /**
      * 
-     * @type {UserUser}
+     * @type {UserWxUser}
      * @memberof UserCreateResponse
      */
-    'user'?: UserUser;
+    'wxUser'?: UserWxUser;
 }
 /**
  * 
@@ -134,10 +134,10 @@ export interface UserCreateResponse {
 export interface UserGetResponse {
     /**
      * 
-     * @type {UserUser}
+     * @type {UserWxUser}
      * @memberof UserGetResponse
      */
-    'user'?: UserUser;
+    'wxUser'?: UserWxUser;
 }
 /**
  * 
@@ -147,10 +147,10 @@ export interface UserGetResponse {
 export interface UserInfoResponse {
     /**
      * 
-     * @type {UserUser}
+     * @type {UserWxUser}
      * @memberof UserInfoResponse
      */
-    'user'?: UserUser;
+    'wxUser'?: UserWxUser;
 }
 /**
  * 
@@ -160,10 +160,10 @@ export interface UserInfoResponse {
 export interface UserListResponse {
     /**
      * 
-     * @type {Array<UserUser>}
+     * @type {Array<UserWxUser>}
      * @memberof UserListResponse
      */
-    'users'?: Array<UserUser>;
+    'wxUsers'?: Array<UserWxUser>;
 }
 /**
  * 
@@ -194,49 +194,49 @@ export interface UserLoginResponse {
 /**
  * 
  * @export
- * @interface UserNewUser
+ * @interface UserNewWxUser
  */
-export interface UserNewUser {
+export interface UserNewWxUser {
     /**
      * 
      * @type {string}
-     * @memberof UserNewUser
+     * @memberof UserNewWxUser
      */
-    'oauthUserId'?: string;
+    'userId'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserNewUser
+     * @memberof UserNewWxUser
      */
     'openid'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserNewUser
+     * @memberof UserNewWxUser
      */
     'unionid'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserNewUser
+     * @memberof UserNewWxUser
      */
     'sessionKey'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserNewUser
+     * @memberof UserNewWxUser
      */
     'name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserNewUser
+     * @memberof UserNewWxUser
      */
     'avatar'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserNewUser
+     * @memberof UserNewWxUser
      */
     'mobile'?: string;
 }
@@ -248,10 +248,10 @@ export interface UserNewUser {
 export interface UserServiceUpdateRequest {
     /**
      * 
-     * @type {UserNewUser}
+     * @type {UserNewWxUser}
      * @memberof UserServiceUpdateRequest
      */
-    'user'?: UserNewUser;
+    'wxUser'?: UserNewWxUser;
 }
 /**
  * 
@@ -261,75 +261,75 @@ export interface UserServiceUpdateRequest {
 export interface UserUpdateResponse {
     /**
      * 
-     * @type {UserUser}
+     * @type {UserWxUser}
      * @memberof UserUpdateResponse
      */
-    'user'?: UserUser;
+    'wxUser'?: UserWxUser;
 }
 /**
  * 
  * @export
- * @interface UserUser
+ * @interface UserWxUser
  */
-export interface UserUser {
+export interface UserWxUser {
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
-    'oauthUserId'?: string;
+    'userId'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'openid'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'unionid'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'sessionKey'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'avatar'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'mobile'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'createdAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserWxUser
      */
     'updatedAt'?: string;
 }

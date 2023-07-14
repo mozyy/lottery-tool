@@ -47,6 +47,7 @@ axiosInstance.interceptors.response.use((response) => {
   console.log('[API]:', response.config.url, response.request, response.data);
   return response;
 }, (error) => {
-  console.log('[API]:', error);
+  const message = error?.response?.headers['grpc-message'];
+  console.warn('[API]:', decodeURIComponent(message), error);
   return Promise.reject(error);
 });

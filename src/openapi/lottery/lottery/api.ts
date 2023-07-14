@@ -458,10 +458,6 @@ export const LotteryServiceApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read"], configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);

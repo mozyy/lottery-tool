@@ -39,6 +39,120 @@ export interface OauthAuthorizeResponse {
 /**
  * 
  * @export
+ * @interface OauthClient
+ */
+export interface OauthClient {
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthClient
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthClient
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthClient
+     */
+    'redirectUri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthClient
+     */
+    'defaultScope'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthClient
+     */
+    'passdata'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface OauthClientCreateResponse
+ */
+export interface OauthClientCreateResponse {
+    /**
+     * 
+     * @type {OauthClient}
+     * @memberof OauthClientCreateResponse
+     */
+    'client'?: OauthClient;
+}
+/**
+ * 
+ * @export
+ * @interface OauthClientListResponse
+ */
+export interface OauthClientListResponse {
+    /**
+     * 
+     * @type {Array<OauthClient>}
+     * @memberof OauthClientListResponse
+     */
+    'clients'?: Array<OauthClient>;
+}
+/**
+ * 
+ * @export
+ * @interface OauthConfig
+ */
+export interface OauthConfig {
+    /**
+     * 
+     * @type {number}
+     * @memberof OauthConfig
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {OauthPattern}
+     * @memberof OauthConfig
+     */
+    'pattern'?: OauthPattern;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthConfig
+     */
+    'scope'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface OauthConfigCreateResponse
+ */
+export interface OauthConfigCreateResponse {
+    /**
+     * 
+     * @type {OauthConfig}
+     * @memberof OauthConfigCreateResponse
+     */
+    'config'?: OauthConfig;
+}
+/**
+ * 
+ * @export
+ * @interface OauthConfigListResponse
+ */
+export interface OauthConfigListResponse {
+    /**
+     * 
+     * @type {Array<OauthConfig>}
+     * @memberof OauthConfigListResponse
+     */
+    'configs'?: Array<OauthConfig>;
+}
+/**
+ * 
+ * @export
  * @interface OauthLoginResponse
  */
 export interface OauthLoginResponse {
@@ -54,6 +168,81 @@ export interface OauthLoginResponse {
      * @memberof OauthLoginResponse
      */
     'token'?: OauthToken;
+}
+/**
+ * 
+ * @export
+ * @interface OauthNewClient
+ */
+export interface OauthNewClient {
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthNewClient
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthNewClient
+     */
+    'redirectUri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthNewClient
+     */
+    'defaultScope'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthNewClient
+     */
+    'passdata'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface OauthNewConfig
+ */
+export interface OauthNewConfig {
+    /**
+     * 
+     * @type {OauthPattern}
+     * @memberof OauthNewConfig
+     */
+    'pattern'?: OauthPattern;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthNewConfig
+     */
+    'scope'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface OauthPattern
+ */
+export interface OauthPattern {
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthPattern
+     */
+    'equal'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthPattern
+     */
+    'prefix'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthPattern
+     */
+    'regex'?: string;
 }
 /**
  * 
