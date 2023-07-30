@@ -144,7 +144,7 @@
         "security": [
           {
             "OAuth2": [
-              "write"
+              "login"
             ]
           }
         ]
@@ -584,9 +584,7 @@
       "authorizationUrl": "https://example.com/oauth/authorize",
       "tokenUrl": "https://example.com/oauth/token",
       "scopes": {
-        "admin": "Grants read and write access to administrative information",
-        "read": "Grants read access",
-        "write": "Grants write access"
+        "login": ""
       }
     }
   }

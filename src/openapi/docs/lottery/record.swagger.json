@@ -108,6 +108,13 @@
         ],
         "tags": [
           "RecordService"
+        ],
+        "security": [
+          {
+            "OAuth2": [
+              "login"
+            ]
+          }
         ]
       }
     },
@@ -479,6 +486,17 @@
             "$ref": "#/definitions/protobufAny"
           }
         }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://example.com/oauth/authorize",
+      "tokenUrl": "https://example.com/oauth/token",
+      "scopes": {
+        "login": ""
       }
     }
   }
