@@ -26,6 +26,56 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  * 
  * @export
+ * @interface PaginatePaginate
+ */
+export interface PaginatePaginate {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaginatePaginate
+     */
+    'page'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaginatePaginate
+     */
+    'perPage'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface PaginatePaginated
+ */
+export interface PaginatePaginated {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaginatePaginated
+     */
+    'page'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaginatePaginated
+     */
+    'perPage'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaginatePaginated
+     */
+    'total'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaginatePaginated
+     */
+    'totalPages'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ProtobufAny
  */
 export interface ProtobufAny {
@@ -89,6 +139,12 @@ export interface RecordListResponse {
      * @memberof RecordListResponse
      */
     'records'?: Array<RecordRecord>;
+    /**
+     * 
+     * @type {PaginatePaginated}
+     * @memberof RecordListResponse
+     */
+    'paginated'?: PaginatePaginated;
 }
 /**
  * 
@@ -98,28 +154,66 @@ export interface RecordListResponse {
 export interface RecordNewRecord {
     /**
      * 
-     * @type {number}
+     * @type {RecordNewRecordInfo}
      * @memberof RecordNewRecord
+     */
+    'record'?: RecordNewRecordInfo;
+    /**
+     * 
+     * @type {Array<RecordNewRecordRemark>}
+     * @memberof RecordNewRecord
+     */
+    'recordRemarks'?: Array<RecordNewRecordRemark>;
+}
+/**
+ * 
+ * @export
+ * @interface RecordNewRecordInfo
+ */
+export interface RecordNewRecordInfo {
+    /**
+     * 
+     * @type {number}
+     * @memberof RecordNewRecordInfo
      */
     'lotteryId'?: number;
     /**
      * 
      * @type {string}
-     * @memberof RecordNewRecord
+     * @memberof RecordNewRecordInfo
      */
     'userId'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof RecordNewRecord
+     * @type {number}
+     * @memberof RecordNewRecordInfo
      */
-    'value'?: string;
+    'itemId'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface RecordNewRecordRemark
+ */
+export interface RecordNewRecordRemark {
     /**
      * 
-     * @type {Array<string>}
-     * @memberof RecordNewRecord
+     * @type {number}
+     * @memberof RecordNewRecordRemark
      */
-    'remarks'?: Array<string>;
+    'recordId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof RecordNewRecordRemark
+     */
+    'remarkId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RecordNewRecordRemark
+     */
+    'value'?: string;
 }
 /**
  * 
@@ -129,44 +223,125 @@ export interface RecordNewRecord {
 export interface RecordRecord {
     /**
      * 
-     * @type {number}
+     * @type {RecordRecordInfo}
      * @memberof RecordRecord
+     */
+    'record'?: RecordRecordInfo;
+    /**
+     * 
+     * @type {Array<RecordRecordRemark>}
+     * @memberof RecordRecord
+     */
+    'recordRemarks'?: Array<RecordRecordRemark>;
+}
+/**
+ * 
+ * @export
+ * @interface RecordRecordInfo
+ */
+export interface RecordRecordInfo {
+    /**
+     * 
+     * @type {number}
+     * @memberof RecordRecordInfo
      */
     'id'?: number;
     /**
      * 
      * @type {number}
-     * @memberof RecordRecord
+     * @memberof RecordRecordInfo
      */
     'lotteryId'?: number;
     /**
      * 
      * @type {string}
-     * @memberof RecordRecord
+     * @memberof RecordRecordInfo
      */
     'userId'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof RecordRecord
+     * @type {number}
+     * @memberof RecordRecordInfo
      */
-    'value'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof RecordRecord
-     */
-    'remarks'?: Array<string>;
+    'itemId'?: number;
     /**
      * 
      * @type {string}
-     * @memberof RecordRecord
+     * @memberof RecordRecordInfo
      */
     'createdAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof RecordRecord
+     * @memberof RecordRecordInfo
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RecordRecordQuery
+ */
+export interface RecordRecordQuery {
+    /**
+     * 
+     * @type {number}
+     * @memberof RecordRecordQuery
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof RecordRecordQuery
+     */
+    'lotteryId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RecordRecordQuery
+     */
+    'userId'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RecordRecordRemark
+ */
+export interface RecordRecordRemark {
+    /**
+     * 
+     * @type {number}
+     * @memberof RecordRecordRemark
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof RecordRecordRemark
+     */
+    'recordId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof RecordRecordRemark
+     */
+    'remarkId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RecordRecordRemark
+     */
+    'value'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RecordRecordRemark
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RecordRecordRemark
      */
     'updatedAt'?: string;
 }
@@ -334,14 +509,12 @@ export const RecordServiceApiAxiosParamCreator = function (configuration?: Confi
          * @param {number} [recordId] id
          * @param {number} [recordLotteryId] id
          * @param {string} [recordUserId] id
-         * @param {string} [recordValue] lottery image
-         * @param {Array<string>} [recordRemarks] 
-         * @param {string} [recordCreatedAt] 
-         * @param {string} [recordUpdatedAt] 
+         * @param {string} [paginatePage] 
+         * @param {string} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        recordServiceList: async (recordId?: number, recordLotteryId?: number, recordUserId?: string, recordValue?: string, recordRemarks?: Array<string>, recordCreatedAt?: string, recordUpdatedAt?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        recordServiceList: async (recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: string, paginatePerPage?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/record.RecordService/records`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -366,24 +539,12 @@ export const RecordServiceApiAxiosParamCreator = function (configuration?: Confi
                 localVarQueryParameter['record.userId'] = recordUserId;
             }
 
-            if (recordValue !== undefined) {
-                localVarQueryParameter['record.value'] = recordValue;
+            if (paginatePage !== undefined) {
+                localVarQueryParameter['paginate.page'] = paginatePage;
             }
 
-            if (recordRemarks) {
-                localVarQueryParameter['record.remarks'] = recordRemarks;
-            }
-
-            if (recordCreatedAt !== undefined) {
-                localVarQueryParameter['record.createdAt'] = (recordCreatedAt as any instanceof Date) ?
-                    (recordCreatedAt as any).toISOString() :
-                    recordCreatedAt;
-            }
-
-            if (recordUpdatedAt !== undefined) {
-                localVarQueryParameter['record.updatedAt'] = (recordUpdatedAt as any instanceof Date) ?
-                    (recordUpdatedAt as any).toISOString() :
-                    recordUpdatedAt;
+            if (paginatePerPage !== undefined) {
+                localVarQueryParameter['paginate.perPage'] = paginatePerPage;
             }
 
 
@@ -481,15 +642,13 @@ export const RecordServiceApiFp = function(configuration?: Configuration) {
          * @param {number} [recordId] id
          * @param {number} [recordLotteryId] id
          * @param {string} [recordUserId] id
-         * @param {string} [recordValue] lottery image
-         * @param {Array<string>} [recordRemarks] 
-         * @param {string} [recordCreatedAt] 
-         * @param {string} [recordUpdatedAt] 
+         * @param {string} [paginatePage] 
+         * @param {string} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, recordValue?: string, recordRemarks?: Array<string>, recordCreatedAt?: string, recordUpdatedAt?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecordListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.recordServiceList(recordId, recordLotteryId, recordUserId, recordValue, recordRemarks, recordCreatedAt, recordUpdatedAt, options);
+        async recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecordListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.recordServiceList(recordId, recordLotteryId, recordUserId, paginatePage, paginatePerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -545,15 +704,13 @@ export const RecordServiceApiFactory = function (configuration?: Configuration, 
          * @param {number} [recordId] id
          * @param {number} [recordLotteryId] id
          * @param {string} [recordUserId] id
-         * @param {string} [recordValue] lottery image
-         * @param {Array<string>} [recordRemarks] 
-         * @param {string} [recordCreatedAt] 
-         * @param {string} [recordUpdatedAt] 
+         * @param {string} [paginatePage] 
+         * @param {string} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, recordValue?: string, recordRemarks?: Array<string>, recordCreatedAt?: string, recordUpdatedAt?: string, options?: any): AxiosPromise<RecordListResponse> {
-            return localVarFp.recordServiceList(recordId, recordLotteryId, recordUserId, recordValue, recordRemarks, recordCreatedAt, recordUpdatedAt, options).then((request) => request(axios, basePath));
+        recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: string, paginatePerPage?: string, options?: any): AxiosPromise<RecordListResponse> {
+            return localVarFp.recordServiceList(recordId, recordLotteryId, recordUserId, paginatePage, paginatePerPage, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -613,16 +770,14 @@ export class RecordServiceApi extends BaseAPI {
      * @param {number} [recordId] id
      * @param {number} [recordLotteryId] id
      * @param {string} [recordUserId] id
-     * @param {string} [recordValue] lottery image
-     * @param {Array<string>} [recordRemarks] 
-     * @param {string} [recordCreatedAt] 
-     * @param {string} [recordUpdatedAt] 
+     * @param {string} [paginatePage] 
+     * @param {string} [paginatePerPage] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RecordServiceApi
      */
-    public recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, recordValue?: string, recordRemarks?: Array<string>, recordCreatedAt?: string, recordUpdatedAt?: string, options?: AxiosRequestConfig) {
-        return RecordServiceApiFp(this.configuration).recordServiceList(recordId, recordLotteryId, recordUserId, recordValue, recordRemarks, recordCreatedAt, recordUpdatedAt, options).then((request) => request(this.axios, this.basePath));
+    public recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig) {
+        return RecordServiceApiFp(this.configuration).recordServiceList(recordId, recordLotteryId, recordUserId, paginatePage, paginatePerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

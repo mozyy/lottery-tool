@@ -1,13 +1,13 @@
 import {
   Button,
   Col,
-  Input, Row, Switch,
+  Input, Row, Switch
 } from '@nutui/nutui-react-taro';
-import { LotteryRemark } from '../../../../openapi/lottery/lottery';
+import { LotteryNewRemark, LotteryRemark } from '../../../../openapi/lottery/lottery';
 
 export interface RemarksProps {
-  value?: LotteryRemark[],
-  onChange?:(value:LotteryRemark[]) => void
+  value?: LotteryNewRemark[],
+  onChange?:(value:LotteryNewRemark[]) => void
 }
 
 export default function Remarks({ value = [], onChange = () => {} }:RemarksProps) {

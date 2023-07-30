@@ -1,46 +1,58 @@
 import {
-  Button, Col, Form, Input, Radio, Row, Switch,
+  Button, Col, Form, Input, Radio, Row, Switch
 } from '@nutui/nutui-react-taro';
 import Taro from '@tarojs/taro';
-
+import { useState } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
 import { useLogin } from '../../hooks/login';
 import { useSWRMutation } from '../../hooks/swrMutation';
 import {
-  LotteryItem,
-  LotteryNewLottery,
-  LotteryType,
+  LotteryNewItem,
+
+  LotteryNewLotteryInfo,
+  LotteryNewRemark,
+  LotteryRemark,
+  LotteryType
 } from '../../openapi/lottery/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
+
 
 const getTypeDesc = (type:LotteryType) => ({
   [LotteryType.Number]: '个数',
   [LotteryType.Percent]: '几率',
 }[type]);
 
-const initItem:LotteryItem = {
-  name: '选项1',
-  value: 1,
-};
 
-const initState: LotteryNewLottery = {
+const initState: LotteryNewLotteryInfo = {
   title: '抽签',
   type: LotteryType.Number,
-  items: [initItem],
   remark: false,
-  remarks: [],
-  // startDate: '2023/05/23',
+  // startDate: '2023/05/23', 
   // startTime: '20:20',
 };
+const initItem :LotteryNewItem = { 
+  name: '选项一',
+  value: 1
+}
+const initRemark: LotteryNewRemark = {  
+  
+}
 
 export default function Index() {
   const [form] = Form.useForm();
   const login = useLogin();
+  const [items, setItems] =    useState([{...initItem}])
+  const [remarks, setRemarks] = useState<LotteryRemark[]>([])
   const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
-  const onSubmit = async (lottery: LotteryNewLottery) => {
+  const onSubmit = async (value: 
+    LotteryNewLotteryInfo & {    
+    items:LotteryNewItem[],  
+     remarks:LotteryNewRemark[]
+    }) => {
     await login();
-    console.log(lottery);
+    const {items, remarks, ...lotteryInfo} = value;
+    const lottery = {lottery: lotteryInfo, items, remarks};
     await trigger([{ lottery }]);
 
     Taro.showShareMenu({});

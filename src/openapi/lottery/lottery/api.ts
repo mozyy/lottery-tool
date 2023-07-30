@@ -70,6 +70,18 @@ export interface LotteryGetResponse {
 export interface LotteryItem {
     /**
      * 
+     * @type {number}
+     * @memberof LotteryItem
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryItem
+     */
+    'lotteryId'?: number;
+    /**
+     * 
      * @type {string}
      * @memberof LotteryItem
      */
@@ -80,6 +92,18 @@ export interface LotteryItem {
      * @memberof LotteryItem
      */
     'value'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryItem
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryItem
+     */
+    'updatedAt'?: string;
 }
 /**
  * 
@@ -108,28 +132,10 @@ export interface LotteryListResponse {
 export interface LotteryLottery {
     /**
      * 
-     * @type {number}
+     * @type {LotteryLotteryInfo}
      * @memberof LotteryLottery
      */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof LotteryLottery
-     */
-    'userId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LotteryLottery
-     */
-    'title'?: string;
-    /**
-     * 
-     * @type {LotteryType}
-     * @memberof LotteryLottery
-     */
-    'type'?: LotteryType;
+    'lottery'?: LotteryLotteryInfo;
     /**
      * 
      * @type {Array<LotteryItem>}
@@ -138,26 +144,57 @@ export interface LotteryLottery {
     'items'?: Array<LotteryItem>;
     /**
      * 
-     * @type {boolean}
-     * @memberof LotteryLottery
-     */
-    'remark'?: boolean;
-    /**
-     * 
      * @type {Array<LotteryRemark>}
      * @memberof LotteryLottery
      */
     'remarks'?: Array<LotteryRemark>;
+}
+/**
+ * 
+ * @export
+ * @interface LotteryLotteryInfo
+ */
+export interface LotteryLotteryInfo {
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryLotteryInfo
+     */
+    'id'?: number;
     /**
      * 
      * @type {string}
-     * @memberof LotteryLottery
+     * @memberof LotteryLotteryInfo
+     */
+    'userId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryLotteryInfo
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {LotteryType}
+     * @memberof LotteryLotteryInfo
+     */
+    'type'?: LotteryType;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof LotteryLotteryInfo
+     */
+    'remark'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryLotteryInfo
      */
     'createdAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof LotteryLottery
+     * @memberof LotteryLotteryInfo
      */
     'updatedAt'?: string;
 }
@@ -166,54 +203,129 @@ export interface LotteryLottery {
 /**
  * 
  * @export
+ * @interface LotteryNewItem
+ */
+export interface LotteryNewItem {
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryNewItem
+     */
+    'lotteryId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryNewItem
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryNewItem
+     */
+    'value'?: number;
+}
+/**
+ * 
+ * @export
  * @interface LotteryNewLottery
  */
 export interface LotteryNewLottery {
     /**
      * 
-     * @type {string}
+     * @type {LotteryNewLotteryInfo}
      * @memberof LotteryNewLottery
+     */
+    'lottery'?: LotteryNewLotteryInfo;
+    /**
+     * 
+     * @type {Array<LotteryNewItem>}
+     * @memberof LotteryNewLottery
+     */
+    'items'?: Array<LotteryNewItem>;
+    /**
+     * 
+     * @type {Array<LotteryNewRemark>}
+     * @memberof LotteryNewLottery
+     */
+    'remarks'?: Array<LotteryNewRemark>;
+}
+/**
+ * 
+ * @export
+ * @interface LotteryNewLotteryInfo
+ */
+export interface LotteryNewLotteryInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryNewLotteryInfo
      */
     'userId'?: string;
     /**
      * 
      * @type {string}
-     * @memberof LotteryNewLottery
+     * @memberof LotteryNewLotteryInfo
      */
     'title'?: string;
     /**
      * 
      * @type {LotteryType}
-     * @memberof LotteryNewLottery
+     * @memberof LotteryNewLotteryInfo
      */
     'type'?: LotteryType;
     /**
      * 
-     * @type {Array<LotteryItem>}
-     * @memberof LotteryNewLottery
-     */
-    'items'?: Array<LotteryItem>;
-    /**
-     * 
      * @type {boolean}
-     * @memberof LotteryNewLottery
+     * @memberof LotteryNewLotteryInfo
      */
     'remark'?: boolean;
-    /**
-     * 
-     * @type {Array<LotteryRemark>}
-     * @memberof LotteryNewLottery
-     */
-    'remarks'?: Array<LotteryRemark>;
 }
 
 
 /**
  * 
  * @export
+ * @interface LotteryNewRemark
+ */
+export interface LotteryNewRemark {
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryNewRemark
+     */
+    'lotteryId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryNewRemark
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof LotteryNewRemark
+     */
+    'require'?: boolean;
+}
+/**
+ * 
+ * @export
  * @interface LotteryRemark
  */
 export interface LotteryRemark {
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryRemark
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryRemark
+     */
+    'lotteryId'?: number;
     /**
      * 
      * @type {string}
@@ -226,6 +338,18 @@ export interface LotteryRemark {
      * @memberof LotteryRemark
      */
     'require'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryRemark
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryRemark
+     */
+    'updatedAt'?: string;
 }
 /**
  * 
@@ -471,19 +595,19 @@ export const LotteryServiceApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
-         * @param {number} [lotteryId] id
-         * @param {string} [lotteryUserId] id
-         * @param {string} [lotteryTitle] lottery title
-         * @param {'NUMBER' | 'PERCENT'} [lotteryType] lottery image   - NUMBER: 个数  - PERCENT: 几率
-         * @param {boolean} [lotteryRemark] lottery summary
-         * @param {string} [lotteryCreatedAt] 
-         * @param {string} [lotteryUpdatedAt] 
+         * @param {number} [lotteryLotteryId] id
+         * @param {string} [lotteryLotteryUserId] id
+         * @param {string} [lotteryLotteryTitle] lottery title
+         * @param {'NUMBER' | 'PERCENT'} [lotteryLotteryType] lottery image   - NUMBER: 个数  - PERCENT: 几率
+         * @param {boolean} [lotteryLotteryRemark] lottery summary
+         * @param {string} [lotteryLotteryCreatedAt] 
+         * @param {string} [lotteryLotteryUpdatedAt] 
          * @param {string} [paginatePage] 
          * @param {string} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lotteryServiceList: async (lotteryId?: number, lotteryUserId?: string, lotteryTitle?: string, lotteryType?: 'NUMBER' | 'PERCENT', lotteryRemark?: boolean, lotteryCreatedAt?: string, lotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lotteryServiceList: async (lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/lottery.LotteryService/lotterys`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -496,36 +620,36 @@ export const LotteryServiceApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (lotteryId !== undefined) {
-                localVarQueryParameter['lottery.id'] = lotteryId;
+            if (lotteryLotteryId !== undefined) {
+                localVarQueryParameter['lottery.lottery.id'] = lotteryLotteryId;
             }
 
-            if (lotteryUserId !== undefined) {
-                localVarQueryParameter['lottery.userId'] = lotteryUserId;
+            if (lotteryLotteryUserId !== undefined) {
+                localVarQueryParameter['lottery.lottery.userId'] = lotteryLotteryUserId;
             }
 
-            if (lotteryTitle !== undefined) {
-                localVarQueryParameter['lottery.title'] = lotteryTitle;
+            if (lotteryLotteryTitle !== undefined) {
+                localVarQueryParameter['lottery.lottery.title'] = lotteryLotteryTitle;
             }
 
-            if (lotteryType !== undefined) {
-                localVarQueryParameter['lottery.type'] = lotteryType;
+            if (lotteryLotteryType !== undefined) {
+                localVarQueryParameter['lottery.lottery.type'] = lotteryLotteryType;
             }
 
-            if (lotteryRemark !== undefined) {
-                localVarQueryParameter['lottery.remark'] = lotteryRemark;
+            if (lotteryLotteryRemark !== undefined) {
+                localVarQueryParameter['lottery.lottery.remark'] = lotteryLotteryRemark;
             }
 
-            if (lotteryCreatedAt !== undefined) {
-                localVarQueryParameter['lottery.createdAt'] = (lotteryCreatedAt as any instanceof Date) ?
-                    (lotteryCreatedAt as any).toISOString() :
-                    lotteryCreatedAt;
+            if (lotteryLotteryCreatedAt !== undefined) {
+                localVarQueryParameter['lottery.lottery.createdAt'] = (lotteryLotteryCreatedAt as any instanceof Date) ?
+                    (lotteryLotteryCreatedAt as any).toISOString() :
+                    lotteryLotteryCreatedAt;
             }
 
-            if (lotteryUpdatedAt !== undefined) {
-                localVarQueryParameter['lottery.updatedAt'] = (lotteryUpdatedAt as any instanceof Date) ?
-                    (lotteryUpdatedAt as any).toISOString() :
-                    lotteryUpdatedAt;
+            if (lotteryLotteryUpdatedAt !== undefined) {
+                localVarQueryParameter['lottery.lottery.updatedAt'] = (lotteryLotteryUpdatedAt as any instanceof Date) ?
+                    (lotteryLotteryUpdatedAt as any).toISOString() :
+                    lotteryLotteryUpdatedAt;
             }
 
             if (paginatePage !== undefined) {
@@ -628,20 +752,20 @@ export const LotteryServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} [lotteryId] id
-         * @param {string} [lotteryUserId] id
-         * @param {string} [lotteryTitle] lottery title
-         * @param {'NUMBER' | 'PERCENT'} [lotteryType] lottery image   - NUMBER: 个数  - PERCENT: 几率
-         * @param {boolean} [lotteryRemark] lottery summary
-         * @param {string} [lotteryCreatedAt] 
-         * @param {string} [lotteryUpdatedAt] 
+         * @param {number} [lotteryLotteryId] id
+         * @param {string} [lotteryLotteryUserId] id
+         * @param {string} [lotteryLotteryTitle] lottery title
+         * @param {'NUMBER' | 'PERCENT'} [lotteryLotteryType] lottery image   - NUMBER: 个数  - PERCENT: 几率
+         * @param {boolean} [lotteryLotteryRemark] lottery summary
+         * @param {string} [lotteryLotteryCreatedAt] 
+         * @param {string} [lotteryLotteryUpdatedAt] 
          * @param {string} [paginatePage] 
          * @param {string} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async lotteryServiceList(lotteryId?: number, lotteryUserId?: string, lotteryTitle?: string, lotteryType?: 'NUMBER' | 'PERCENT', lotteryRemark?: boolean, lotteryCreatedAt?: string, lotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LotteryListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lotteryServiceList(lotteryId, lotteryUserId, lotteryTitle, lotteryType, lotteryRemark, lotteryCreatedAt, lotteryUpdatedAt, paginatePage, paginatePerPage, options);
+        async lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LotteryListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lotteryServiceList(lotteryLotteryId, lotteryLotteryUserId, lotteryLotteryTitle, lotteryLotteryType, lotteryLotteryRemark, lotteryLotteryCreatedAt, lotteryLotteryUpdatedAt, paginatePage, paginatePerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -694,20 +818,20 @@ export const LotteryServiceApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
-         * @param {number} [lotteryId] id
-         * @param {string} [lotteryUserId] id
-         * @param {string} [lotteryTitle] lottery title
-         * @param {'NUMBER' | 'PERCENT'} [lotteryType] lottery image   - NUMBER: 个数  - PERCENT: 几率
-         * @param {boolean} [lotteryRemark] lottery summary
-         * @param {string} [lotteryCreatedAt] 
-         * @param {string} [lotteryUpdatedAt] 
+         * @param {number} [lotteryLotteryId] id
+         * @param {string} [lotteryLotteryUserId] id
+         * @param {string} [lotteryLotteryTitle] lottery title
+         * @param {'NUMBER' | 'PERCENT'} [lotteryLotteryType] lottery image   - NUMBER: 个数  - PERCENT: 几率
+         * @param {boolean} [lotteryLotteryRemark] lottery summary
+         * @param {string} [lotteryLotteryCreatedAt] 
+         * @param {string} [lotteryLotteryUpdatedAt] 
          * @param {string} [paginatePage] 
          * @param {string} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lotteryServiceList(lotteryId?: number, lotteryUserId?: string, lotteryTitle?: string, lotteryType?: 'NUMBER' | 'PERCENT', lotteryRemark?: boolean, lotteryCreatedAt?: string, lotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: any): AxiosPromise<LotteryListResponse> {
-            return localVarFp.lotteryServiceList(lotteryId, lotteryUserId, lotteryTitle, lotteryType, lotteryRemark, lotteryCreatedAt, lotteryUpdatedAt, paginatePage, paginatePerPage, options).then((request) => request(axios, basePath));
+        lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: any): AxiosPromise<LotteryListResponse> {
+            return localVarFp.lotteryServiceList(lotteryLotteryId, lotteryLotteryUserId, lotteryLotteryTitle, lotteryLotteryType, lotteryLotteryRemark, lotteryLotteryCreatedAt, lotteryLotteryUpdatedAt, paginatePage, paginatePerPage, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -764,21 +888,21 @@ export class LotteryServiceApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} [lotteryId] id
-     * @param {string} [lotteryUserId] id
-     * @param {string} [lotteryTitle] lottery title
-     * @param {'NUMBER' | 'PERCENT'} [lotteryType] lottery image   - NUMBER: 个数  - PERCENT: 几率
-     * @param {boolean} [lotteryRemark] lottery summary
-     * @param {string} [lotteryCreatedAt] 
-     * @param {string} [lotteryUpdatedAt] 
+     * @param {number} [lotteryLotteryId] id
+     * @param {string} [lotteryLotteryUserId] id
+     * @param {string} [lotteryLotteryTitle] lottery title
+     * @param {'NUMBER' | 'PERCENT'} [lotteryLotteryType] lottery image   - NUMBER: 个数  - PERCENT: 几率
+     * @param {boolean} [lotteryLotteryRemark] lottery summary
+     * @param {string} [lotteryLotteryCreatedAt] 
+     * @param {string} [lotteryLotteryUpdatedAt] 
      * @param {string} [paginatePage] 
      * @param {string} [paginatePerPage] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LotteryServiceApi
      */
-    public lotteryServiceList(lotteryId?: number, lotteryUserId?: string, lotteryTitle?: string, lotteryType?: 'NUMBER' | 'PERCENT', lotteryRemark?: boolean, lotteryCreatedAt?: string, lotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig) {
-        return LotteryServiceApiFp(this.configuration).lotteryServiceList(lotteryId, lotteryUserId, lotteryTitle, lotteryType, lotteryRemark, lotteryCreatedAt, lotteryUpdatedAt, paginatePage, paginatePerPage, options).then((request) => request(this.axios, this.basePath));
+    public lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig) {
+        return LotteryServiceApiFp(this.configuration).lotteryServiceList(lotteryLotteryId, lotteryLotteryUserId, lotteryLotteryTitle, lotteryLotteryType, lotteryLotteryRemark, lotteryLotteryCreatedAt, lotteryLotteryUpdatedAt, paginatePage, paginatePerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

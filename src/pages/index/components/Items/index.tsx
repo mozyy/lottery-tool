@@ -1,13 +1,13 @@
 import {
   Button,
   Col,
-  Input, Row,
+  Input, Row
 } from '@nutui/nutui-react-taro';
-import { LotteryItem } from '../../../../openapi/lottery/lottery';
+import { LotteryItem, LotteryNewItem } from '../../../../openapi/lottery/lottery';
 
 export interface ItemsProps {
-  value?: LotteryItem[],
-  onChange?:(value:LotteryItem[]) => void
+  value?: LotteryNewItem[],
+  onChange?:(value:LotteryNewItem[]) => void
 }
 
 export default function Items({ value = [], onChange = () => {} }:ItemsProps) {

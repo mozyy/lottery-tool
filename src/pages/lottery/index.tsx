@@ -5,6 +5,7 @@ import { recordServiceApi } from '../../api/record';
 import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
 import { useSWRMutation } from '../../hooks/swrMutation';
+import { LotteryLottery } from '../../openapi/lottery/lottery';
 import { RecordCreateRequest } from '../../openapi/lottery/record';
 
 /**
@@ -12,7 +13,7 @@ import { RecordCreateRequest } from '../../openapi/lottery/record';
  */
 export default function Lottery() {
   const router = useRouter();
-  const id = Number(router.params.id || 1);
+  const id = Number(router.params.id || 2);
   const login = useLogin();
   const { data } = useSWR([lotteryServiceApi.lotteryServiceGet, id]);
   const { trigger } = useSWRMutation([recordServiceApi.recordServiceCreate]);
@@ -21,7 +22,7 @@ export default function Lottery() {
   if (!data) {
     return null;
   }
-  const lottery = data.lottery!;
+  const {lottery,items, remarks} = data.lottery as Required<LotteryLottery>;
 
   const submit = async () => {
     const remarks:string[] = [];
@@ -30,7 +31,7 @@ export default function Lottery() {
       console.log(value);
       remarks.push(value);
     }
-    const record: RecordCreateRequest = { record: { lotteryId: id } };
+    const record: RecordCreateRequest = { record: {record:{ lotteryId: id }} };
     await login();
     const res = await trigger([record]);
   };
@@ -39,7 +40,7 @@ export default function Lottery() {
       <div>{lottery.title}</div>
       {lottery.remark && (
       <Form form={form}>
-        {lottery.remarks?.map((remark, i) => (
+        {remarks?.map((remark, i) => (
           <Form.Item
             label={remark.name}
             key={i}
