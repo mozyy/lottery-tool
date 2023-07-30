@@ -424,6 +424,10 @@ export const RecordServiceApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["login"], configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';

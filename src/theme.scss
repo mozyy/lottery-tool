@@ -7,9 +7,12 @@ page {
   --zy-primary-color: #0064d2;
   --zy-second-color: #1cb0f1;
 
+  --zy-error-color: #ff4d4f;
+
   --nutui-brand-color: var(--zy-primary-color);
   --nutui-brand-color-start: var(--zy-second-color);
   --nutui-brand-color-end: var(--zy-primary-color);
 
-  --nutui-form-item-error-message-color: #ff4d4f;
+  --nutui-form-item-error-message-color: var(--zy-error-color);
+  --nutui-form-item-required-color: var(--zy-error-color);
 }

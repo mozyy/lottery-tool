@@ -3,6 +3,7 @@ export default {
     'pages/index/index',
     'pages/mine/index',
     'pages/lottery/index',
+    'pages/record/index',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -22,5 +23,6 @@ export default {
     ],
   },
   // entryPagePath: 'pages/index/index',
-  entryPagePath: 'pages/lottery/index',
+  // entryPagePath: 'pages/lottery/index',
+  entryPagePath: 'pages/mine/index',
 };

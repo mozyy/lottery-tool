@@ -8,6 +8,9 @@ dependencies:
   '@babel/runtime':
     specifier: ^7.22.6
     version: 7.22.6
+  '@nutui/icons-react-taro':
+    specifier: ^0.0.1
+    version: 0.0.1
   '@nutui/nutui-react-taro':
     specifier: ^2.0.8
     version: 2.0.8(react-dom@18.2.0)(react@18.2.0)
@@ -1875,6 +1878,12 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@nutui/icons-react-taro@0.0.1:
+    resolution: {integrity: sha512-uHUaVnh9yfkUdbYLEfoxArFedP7pti+sOrnBTDknemsJKqK/jnQ9xnIKpO2l+1CgGWpbAkipQVBDUM7CXKuWaA==}
+    dependencies:
+      classnames: 2.3.2
+    dev: false
 
   /@nutui/icons-react-taro@0.0.1-beta.8:
     resolution: {integrity: sha512-6jFqdrnVkw0b4SOIYzWnYASuYk/vxim5w0X6tgYTr3NJyC+pRh217JWkTWUHpycaCmgP6gjpx1Ed0ql1EiFLiw==}

@@ -1,4 +1,6 @@
-import { Button } from '@nutui/nutui-react-taro';
+import { Right } from '@nutui/icons-react-taro';
+import { Button, Cell, CellGroup } from '@nutui/nutui-react-taro';
+import { navigateTo } from '@tarojs/taro';
 import { useState } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
 import { useLogin } from '../../hooks/login';
@@ -10,6 +12,10 @@ export default function Index() {
 
   const me = useSWR([lotteryServiceApi.lotteryServiceGet, 1]);
   console.log(1111, me.data);
+  const toPage = (url: string) => async() => {
+    await login();
+    navigateTo({url})
+  }
 
   return (
     <div className='wrapper'>
@@ -20,9 +26,12 @@ export default function Index() {
       <Button className='button'>
         get
       </Button>
-      <Button className='button' onClick={() => sv(v + 1)}>
-        +1
-      </Button>
+      <CellGroup>
+        <Cell 
+        title="记录"
+        onClick={toPage('/pages/record/index')} 
+        extra={<Right /> }></Cell>
+      </CellGroup>
     </div>
   );
 }

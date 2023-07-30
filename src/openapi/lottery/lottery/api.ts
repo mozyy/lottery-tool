@@ -511,7 +511,7 @@ export const LotteryServiceApiAxiosParamCreator = function (configuration?: Conf
 
             // authentication OAuth2 required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["write"], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["login"], configuration)
 
 
     

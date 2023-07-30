@@ -78,6 +78,13 @@
         ],
         "tags": [
           "RecordService"
+        ],
+        "security": [
+          {
+            "OAuth2": [
+              "login"
+            ]
+          }
         ]
       },
       "post": {
@@ -146,6 +153,13 @@
         ],
         "tags": [
           "RecordService"
+        ],
+        "security": [
+          {
+            "OAuth2": [
+              "login"
+            ]
+          }
         ]
       },
       "delete": {
@@ -175,6 +189,13 @@
         ],
         "tags": [
           "RecordService"
+        ],
+        "security": [
+          {
+            "OAuth2": [
+              "login"
+            ]
+          }
         ]
       },
       "patch": {
@@ -217,6 +238,13 @@
         ],
         "tags": [
           "RecordService"
+        ],
+        "security": [
+          {
+            "OAuth2": [
+              "login"
+            ]
+          }
         ]
       }
     }
