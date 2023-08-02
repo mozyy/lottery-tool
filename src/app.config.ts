@@ -3,6 +3,8 @@ export default {
     'pages/index/index',
     'pages/mine/index',
     'pages/lottery/index',
+    'pages/lotteryDetail/index', // ?id=
+    'pages/lotteryList/index',
     'pages/record/index',
   ],
   window: {
@@ -23,6 +25,6 @@ export default {
     ],
   },
   // entryPagePath: 'pages/index/index',
-  // entryPagePath: 'pages/lottery/index',
-  entryPagePath: 'pages/mine/index',
+  entryPagePath: 'pages/lottery/index',
+  // entryPagePath: 'pages/mine/index',
 };

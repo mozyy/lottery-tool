@@ -399,16 +399,16 @@ export interface LotteryUpdateResponse {
 export interface PaginatePaginate {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginate
      */
-    'page'?: string;
+    'page'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginate
      */
-    'perPage'?: string;
+    'perPage'?: number;
 }
 /**
  * 
@@ -418,28 +418,28 @@ export interface PaginatePaginate {
 export interface PaginatePaginated {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginated
      */
-    'page'?: string;
+    'page'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginated
      */
-    'perPage'?: string;
+    'perPage'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginated
      */
-    'total'?: string;
+    'total'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginated
      */
-    'totalPages'?: string;
+    'totalPages'?: number;
 }
 /**
  * 
@@ -602,12 +602,12 @@ export const LotteryServiceApiAxiosParamCreator = function (configuration?: Conf
          * @param {boolean} [lotteryLotteryRemark] lottery summary
          * @param {string} [lotteryLotteryCreatedAt] 
          * @param {string} [lotteryLotteryUpdatedAt] 
-         * @param {string} [paginatePage] 
-         * @param {string} [paginatePerPage] 
+         * @param {number} [paginatePage] 
+         * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lotteryServiceList: async (lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lotteryServiceList: async (lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: number, paginatePerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/lottery.LotteryService/lotterys`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -759,12 +759,12 @@ export const LotteryServiceApiFp = function(configuration?: Configuration) {
          * @param {boolean} [lotteryLotteryRemark] lottery summary
          * @param {string} [lotteryLotteryCreatedAt] 
          * @param {string} [lotteryLotteryUpdatedAt] 
-         * @param {string} [paginatePage] 
-         * @param {string} [paginatePerPage] 
+         * @param {number} [paginatePage] 
+         * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LotteryListResponse>> {
+        async lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: number, paginatePerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LotteryListResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.lotteryServiceList(lotteryLotteryId, lotteryLotteryUserId, lotteryLotteryTitle, lotteryLotteryType, lotteryLotteryRemark, lotteryLotteryCreatedAt, lotteryLotteryUpdatedAt, paginatePage, paginatePerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -825,12 +825,12 @@ export const LotteryServiceApiFactory = function (configuration?: Configuration,
          * @param {boolean} [lotteryLotteryRemark] lottery summary
          * @param {string} [lotteryLotteryCreatedAt] 
          * @param {string} [lotteryLotteryUpdatedAt] 
-         * @param {string} [paginatePage] 
-         * @param {string} [paginatePerPage] 
+         * @param {number} [paginatePage] 
+         * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: any): AxiosPromise<LotteryListResponse> {
+        lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: number, paginatePerPage?: number, options?: any): AxiosPromise<LotteryListResponse> {
             return localVarFp.lotteryServiceList(lotteryLotteryId, lotteryLotteryUserId, lotteryLotteryTitle, lotteryLotteryType, lotteryLotteryRemark, lotteryLotteryCreatedAt, lotteryLotteryUpdatedAt, paginatePage, paginatePerPage, options).then((request) => request(axios, basePath));
         },
         /**
@@ -895,13 +895,13 @@ export class LotteryServiceApi extends BaseAPI {
      * @param {boolean} [lotteryLotteryRemark] lottery summary
      * @param {string} [lotteryLotteryCreatedAt] 
      * @param {string} [lotteryLotteryUpdatedAt] 
-     * @param {string} [paginatePage] 
-     * @param {string} [paginatePerPage] 
+     * @param {number} [paginatePage] 
+     * @param {number} [paginatePerPage] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LotteryServiceApi
      */
-    public lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig) {
+    public lotteryServiceList(lotteryLotteryId?: number, lotteryLotteryUserId?: string, lotteryLotteryTitle?: string, lotteryLotteryType?: 'NUMBER' | 'PERCENT', lotteryLotteryRemark?: boolean, lotteryLotteryCreatedAt?: string, lotteryLotteryUpdatedAt?: string, paginatePage?: number, paginatePerPage?: number, options?: AxiosRequestConfig) {
         return LotteryServiceApiFp(this.configuration).lotteryServiceList(lotteryLotteryId, lotteryLotteryUserId, lotteryLotteryTitle, lotteryLotteryType, lotteryLotteryRemark, lotteryLotteryCreatedAt, lotteryLotteryUpdatedAt, paginatePage, paginatePerPage, options).then((request) => request(this.axios, this.basePath));
     }
 

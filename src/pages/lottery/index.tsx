@@ -14,7 +14,7 @@ import Remark from './components/Remark';
  */
 export default function Lottery() {
   const router = useRouter();
-  const id = Number(router.params.id || 2);
+  const id = Number(router.params.id || 3);
   const login = useLogin();
   const { data } = useSWR([lotteryServiceApi.lotteryServiceGet, id]);
   const { trigger } = useSWRMutation([recordServiceApi.recordServiceCreate]);
@@ -23,33 +23,37 @@ export default function Lottery() {
   if (!data) {
     return null;
   }
-  const {lottery,items, remarks} = data.lottery as Required<LotteryLottery>;
+  const { lottery, items, remarks } = data.lottery as Required<LotteryLottery>;
 
   const submit = async (value) => {
     const recordRemarks:RecordNewRecordRemark[] = Object.values(value);
-    const record: RecordCreateRequest = { record: {record:{ lotteryId: id }, recordRemarks} };
+    const record: RecordCreateRequest = { record: { record: { lotteryId: id }, recordRemarks } };
     await login();
     const res = await trigger([record]);
-    showToast({title: `抽中${res.record?.record?.itemId}`})
+    showToast({ title: `抽中${res.record?.record?.itemId}` });
   };
   return (
     <div className='p-2 bg-gray-100 h-full box-border'>
-    <Form form={form} onFinish={submit} footer={
-        <Button formType='submit'>提交</Button>
-      }>
-      <div>{lottery.title}</div>
-      {items.map(item=>(<div>{item.name}</div>))}
-      {remarks.map((remark, i) => (
-        <Form.Item
-          label={remark.name}
-          key={remark.id}
-          name={remark.name}
-          required={remark.require}
-          rules={[{ required: remark.require, message: `${remark.name}为必填` }]}
-        >
-         <Remark remark={remark} />
-        </Form.Item>
-      ))}
+      <Form
+        form={form}
+        onFinish={submit}
+        footer={
+          <Button formType='submit'>提交</Button>
+      }
+      >
+        <div>{lottery.title}</div>
+        {items.map((item) => (<div>{item.name}</div>))}
+        {remarks.map((remark, i) => (
+          <Form.Item
+            label={remark.name}
+            key={remark.id}
+            name={remark.name}
+            required={remark.require}
+            rules={[{ required: remark.require, message: `${remark.name}为必填` }]}
+          >
+            <Remark remark={remark} />
+          </Form.Item>
+        ))}
       </Form>
     </div>
   );

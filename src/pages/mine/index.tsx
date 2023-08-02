@@ -12,10 +12,10 @@ export default function Index() {
 
   const me = useSWR([lotteryServiceApi.lotteryServiceGet, 1]);
   console.log(1111, me.data);
-  const toPage = (url: string) => async() => {
+  const toPage = (url: string) => async () => {
     await login();
-    navigateTo({url})
-  }
+    navigateTo({ url });
+  };
 
   return (
     <div className='wrapper'>
@@ -27,10 +27,16 @@ export default function Index() {
         get
       </Button>
       <CellGroup>
-        <Cell 
-        title="记录"
-        onClick={toPage('/pages/record/index')} 
-        extra={<Right /> }></Cell>
+        <Cell
+          title='我的抽签'
+          onClick={toPage('/pages/lotteryList/index')}
+          extra={<Right />}
+        />
+        <Cell
+          title='我的记录'
+          onClick={toPage('/pages/record/index')}
+          extra={<Right />}
+        />
       </CellGroup>
     </div>
   );

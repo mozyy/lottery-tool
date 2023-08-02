@@ -8,18 +8,18 @@ export default function Record() {
   const login = useLogin();
   const [v, sv] = useState(0);
 
-  const {data} = useSWR([recordServiceApi.recordServiceList]);
-  if(!data) {
-    return <Empty />
+  const { data } = useSWR([recordServiceApi.recordServiceList]);
+  if (!data) {
+    return <Empty />;
   }
 
   return (
     <div className='wrapper'>
       <CellGroup>
-        {data.records!.map(record => (
-        <Cell key={record.record!.id} title={record.record!.itemId}/>
+        {data.records!.map((record) => (
+          <Cell key={record.record!.id} title={record.lottery?.lottery?.title} />
         ))}
-        </CellGroup>      
+      </CellGroup>
     </div>
   );
 }

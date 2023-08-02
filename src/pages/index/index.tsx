@@ -1,8 +1,7 @@
 import {
-  Button, Col, Form, Input, Radio, Row, Switch
+  Button, Col, Form, Input, Radio, Row, Switch,
 } from '@nutui/nutui-react-taro';
 import Taro from '@tarojs/taro';
-import { useState } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
 import { useLogin } from '../../hooks/login';
 import { useSWRMutation } from '../../hooks/swrMutation';
@@ -11,48 +10,44 @@ import {
 
   LotteryNewLotteryInfo,
   LotteryNewRemark,
-  LotteryRemark,
-  LotteryType
+  LotteryType,
 } from '../../openapi/lottery/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
-
 
 const getTypeDesc = (type:LotteryType) => ({
   [LotteryType.Number]: '个数',
   [LotteryType.Percent]: '几率',
 }[type]);
 
+interface Lottery extends LotteryNewLotteryInfo {
+  items: LotteryNewItem[],
+  remarks: LotteryNewRemark[]
+}
 
-const initState: LotteryNewLotteryInfo = {
+const initState: Lottery = {
   title: '抽签',
   type: LotteryType.Number,
   remark: false,
-  // startDate: '2023/05/23', 
-  // startTime: '20:20',
+  items: [{
+    name: '选项一',
+    value: 1,
+  }],
+  remarks: [],
 };
-const initItem :LotteryNewItem = { 
-  name: '选项一',
-  value: 1
-}
-const initRemark: LotteryNewRemark = {  
-  
-}
 
 export default function Index() {
   const [form] = Form.useForm();
   const login = useLogin();
-  const [items, setItems] =    useState([{...initItem}])
-  const [remarks, setRemarks] = useState<LotteryRemark[]>([])
   const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
-  const onSubmit = async (value: 
-    LotteryNewLotteryInfo & {    
-    items:LotteryNewItem[],  
-     remarks:LotteryNewRemark[]
-    }) => {
+  const onSubmit = async (value:
+  LotteryNewLotteryInfo & {
+    items:LotteryNewItem[],
+    remarks:LotteryNewRemark[]
+  }) => {
     await login();
-    const {items, remarks, ...lotteryInfo} = value;
-    const lottery = {lottery: lotteryInfo, items, remarks};
+    const { items, remarks, ...lotteryInfo } = value;
+    const lottery = { lottery: lotteryInfo, items, remarks };
     await trigger([{ lottery }]);
 
     Taro.showShareMenu({});

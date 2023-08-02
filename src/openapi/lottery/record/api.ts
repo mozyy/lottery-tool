@@ -26,21 +26,197 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  * 
  * @export
+ * @interface LotteryItem
+ */
+export interface LotteryItem {
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryItem
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryItem
+     */
+    'lotteryId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryItem
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryItem
+     */
+    'value'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryItem
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryItem
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface LotteryLottery
+ */
+export interface LotteryLottery {
+    /**
+     * 
+     * @type {LotteryLotteryInfo}
+     * @memberof LotteryLottery
+     */
+    'lottery'?: LotteryLotteryInfo;
+    /**
+     * 
+     * @type {Array<LotteryItem>}
+     * @memberof LotteryLottery
+     */
+    'items'?: Array<LotteryItem>;
+    /**
+     * 
+     * @type {Array<LotteryRemark>}
+     * @memberof LotteryLottery
+     */
+    'remarks'?: Array<LotteryRemark>;
+}
+/**
+ * 
+ * @export
+ * @interface LotteryLotteryInfo
+ */
+export interface LotteryLotteryInfo {
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryLotteryInfo
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryLotteryInfo
+     */
+    'userId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryLotteryInfo
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {LotteryType}
+     * @memberof LotteryLotteryInfo
+     */
+    'type'?: LotteryType;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof LotteryLotteryInfo
+     */
+    'remark'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryLotteryInfo
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryLotteryInfo
+     */
+    'updatedAt'?: string;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface LotteryRemark
+ */
+export interface LotteryRemark {
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryRemark
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LotteryRemark
+     */
+    'lotteryId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryRemark
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof LotteryRemark
+     */
+    'require'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryRemark
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LotteryRemark
+     */
+    'updatedAt'?: string;
+}
+/**
+ * - NUMBER: 个数  - PERCENT: 几率
+ * @export
+ * @enum {string}
+ */
+
+export const LotteryType = {
+    Number: 'NUMBER',
+    Percent: 'PERCENT'
+} as const;
+
+export type LotteryType = typeof LotteryType[keyof typeof LotteryType];
+
+
+/**
+ * 
+ * @export
  * @interface PaginatePaginate
  */
 export interface PaginatePaginate {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginate
      */
-    'page'?: string;
+    'page'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginate
      */
-    'perPage'?: string;
+    'perPage'?: number;
 }
 /**
  * 
@@ -50,28 +226,28 @@ export interface PaginatePaginate {
 export interface PaginatePaginated {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginated
      */
-    'page'?: string;
+    'page'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginated
      */
-    'perPage'?: string;
+    'perPage'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginated
      */
-    'total'?: string;
+    'total'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PaginatePaginated
      */
-    'totalPages'?: string;
+    'totalPages'?: number;
 }
 /**
  * 
@@ -227,6 +403,12 @@ export interface RecordRecord {
      * @memberof RecordRecord
      */
     'record'?: RecordRecordInfo;
+    /**
+     * 
+     * @type {LotteryLottery}
+     * @memberof RecordRecord
+     */
+    'lottery'?: LotteryLottery;
     /**
      * 
      * @type {Array<RecordRecordRemark>}
@@ -464,6 +646,10 @@ export const RecordServiceApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["login"], configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -497,6 +683,10 @@ export const RecordServiceApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["login"], configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -513,12 +703,12 @@ export const RecordServiceApiAxiosParamCreator = function (configuration?: Confi
          * @param {number} [recordId] id
          * @param {number} [recordLotteryId] id
          * @param {string} [recordUserId] id
-         * @param {string} [paginatePage] 
-         * @param {string} [paginatePerPage] 
+         * @param {number} [paginatePage] 
+         * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        recordServiceList: async (recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: string, paginatePerPage?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        recordServiceList: async (recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: number, paginatePerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/record.RecordService/records`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -530,6 +720,10 @@ export const RecordServiceApiAxiosParamCreator = function (configuration?: Confi
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["login"], configuration)
 
             if (recordId !== undefined) {
                 localVarQueryParameter['record.id'] = recordId;
@@ -586,6 +780,10 @@ export const RecordServiceApiAxiosParamCreator = function (configuration?: Confi
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["login"], configuration)
 
 
     
@@ -646,12 +844,12 @@ export const RecordServiceApiFp = function(configuration?: Configuration) {
          * @param {number} [recordId] id
          * @param {number} [recordLotteryId] id
          * @param {string} [recordUserId] id
-         * @param {string} [paginatePage] 
-         * @param {string} [paginatePerPage] 
+         * @param {number} [paginatePage] 
+         * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecordListResponse>> {
+        async recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecordListResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.recordServiceList(recordId, recordLotteryId, recordUserId, paginatePage, paginatePerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -708,12 +906,12 @@ export const RecordServiceApiFactory = function (configuration?: Configuration, 
          * @param {number} [recordId] id
          * @param {number} [recordLotteryId] id
          * @param {string} [recordUserId] id
-         * @param {string} [paginatePage] 
-         * @param {string} [paginatePerPage] 
+         * @param {number} [paginatePage] 
+         * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: string, paginatePerPage?: string, options?: any): AxiosPromise<RecordListResponse> {
+        recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: any): AxiosPromise<RecordListResponse> {
             return localVarFp.recordServiceList(recordId, recordLotteryId, recordUserId, paginatePage, paginatePerPage, options).then((request) => request(axios, basePath));
         },
         /**
@@ -774,13 +972,13 @@ export class RecordServiceApi extends BaseAPI {
      * @param {number} [recordId] id
      * @param {number} [recordLotteryId] id
      * @param {string} [recordUserId] id
-     * @param {string} [paginatePage] 
-     * @param {string} [paginatePerPage] 
+     * @param {number} [paginatePage] 
+     * @param {number} [paginatePerPage] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RecordServiceApi
      */
-    public recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: string, paginatePerPage?: string, options?: AxiosRequestConfig) {
+    public recordServiceList(recordId?: number, recordLotteryId?: number, recordUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: AxiosRequestConfig) {
         return RecordServiceApiFp(this.configuration).recordServiceList(recordId, recordLotteryId, recordUserId, paginatePage, paginatePerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
