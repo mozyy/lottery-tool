@@ -1,5 +1,5 @@
 import { Right } from '@nutui/icons-react-taro';
-import { Cell, CellGroup, Empty } from '@nutui/nutui-react-taro';
+import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
 import { useState } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
@@ -10,10 +10,10 @@ export default function LotteryList() {
   const login = useLogin();
   const [v, sv] = useState(0);
 
-  const { data } = useSWR([lotteryServiceApi.lotteryServiceList]);
+  const { data, result } = useSWR([lotteryServiceApi.lotteryServiceList]);
 
-  if (!data) {
-    return <Empty />;
+  if (result) {
+    return result;
   }
 
   return (

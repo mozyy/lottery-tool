@@ -6,6 +6,7 @@ export default {
     'pages/lotteryDetail/index', // ?id=
     'pages/lotteryList/index',
     'pages/record/index',
+    'pages/recordDetail/index', // ?id=
   ],
   window: {
     backgroundTextStyle: 'light',

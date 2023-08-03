@@ -1,11 +1,13 @@
 import {
   Button, Col, Form, Input, Radio, Row, Switch,
 } from '@nutui/nutui-react-taro';
-import Taro from '@tarojs/taro';
+import { useShareAppMessage } from '@tarojs/taro';
+import { useRef } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
 import { useLogin } from '../../hooks/login';
 import { useSWRMutation } from '../../hooks/swrMutation';
 import {
+  LotteryCreateResponse,
   LotteryNewItem,
 
   LotteryNewLotteryInfo,
@@ -40,29 +42,49 @@ export default function Index() {
   const [form] = Form.useForm();
   const login = useLogin();
   const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
+  const submitRef = useRef<Promise<LotteryCreateResponse>>(null);
   const onSubmit = async (value:
   LotteryNewLotteryInfo & {
     items:LotteryNewItem[],
     remarks:LotteryNewRemark[]
   }) => {
-    await login();
-    const { items, remarks, ...lotteryInfo } = value;
-    const lottery = { lottery: lotteryInfo, items, remarks };
-    await trigger([{ lottery }]);
-
-    Taro.showShareMenu({});
+    submitRef.current = (async () => {
+      await login();
+      const { items, remarks, ...lotteryInfo } = value;
+      const lottery = { lottery: lotteryInfo, items, remarks };
+      return trigger([{ lottery }]);
+    })();
   };
+  const onFinishFailed = () => {
+    submitRef.current = null
+  }
+
+  useShareAppMessage(async (res) => {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      await new Promise(r=>setTimeout(r, 100))
+      if (!submitRef.current) {
+        return Promise.reject('cancel')
+      }
+      const resp = await submitRef.current
+      return {
+        title: resp?.lottery?.lottery?.title,
+        path: `/pages/lottery/index?id=${resp?.lottery?.lottery?.id}`
+      }
+    }
+    return {};
+  });
 
   return (
     <div className='p-2 bg-gray-100 h-full box-border'>
       <Form
         form={form}
         onFinish={onSubmit}
-        onFinishFailed={console.warn}
+        onFinishFailed={onFinishFailed}
         initialValues={initState}
         footer={(
           <Row>
-            <Col span={12}><Button formType='submit'>提交</Button></Col>
+            <Col span={12}><Button openType='share' formType='submit'>提交</Button></Col>
             <Col span={12}><Button formType='reset'>重署</Button></Col>
           </Row>
       )}

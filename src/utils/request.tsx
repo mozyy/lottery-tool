@@ -1,3 +1,4 @@
+import { Empty } from '@nutui/nutui-react-taro';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { Middleware, SWRHook } from 'swr';
@@ -29,12 +30,28 @@ SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
     throw Error('not support');
   }
   const res = useSWRNext(key, swrFetcherd, swrConfig);
-  // TODO: clear oauth Token or refresh Token
+  let result;
   if (res.error) {
     //
-    console.warn(res.error);
+    switch (res.error.response.status){
+      case 401:
+        setOauthToken(null);
+        break;
+      default:
+    }
+    let message = res.error?.response?.headers['grpc-message'];
+    if (message) {
+      message = decodeURIComponent(message)
+      result = <Empty status='error' description={message} />
+    } else {
+      result = <Empty status='network' />
+    }
   }
-  return res;
+  if (!res.data) {
+    result = <Empty />
+  }
+
+  return Object.assign({}, res, {result});
 };
 
 export const configurationParameters:ConfigurationParameters = {
@@ -43,6 +60,13 @@ export const configurationParameters:ConfigurationParameters = {
 
 export const axiosInstance = axios.create();
 
+axiosInstance.interceptors.request.use((config) => {
+  let accessToken = getAccessToken()
+  if (!config.headers.Authorization && accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`
+  }
+  return config;
+});
 axiosInstance.interceptors.response.use((response) => {
   console.log('[API]:', response.config.url, response.request, response.data);
   return response;

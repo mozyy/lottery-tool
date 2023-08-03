@@ -16,13 +16,14 @@ export default function Lottery() {
   const router = useRouter();
   const id = Number(router.params.id || 3);
   const login = useLogin();
-  const { data } = useSWR([lotteryServiceApi.lotteryServiceGet, id]);
+  const { data, result } = useSWR([lotteryServiceApi.lotteryServiceGet, id]);
   const { trigger } = useSWRMutation([recordServiceApi.recordServiceCreate]);
   const [form] = Form.useForm();
 
-  if (!data) {
-    return null;
+  if (result) {
+    return result;
   }
+
   const { lottery, items, remarks } = data.lottery as Required<LotteryLottery>;
 
   const submit = async (value) => {

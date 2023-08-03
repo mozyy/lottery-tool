@@ -6,7 +6,7 @@ import './app.scss';
 import './theme.scss';
 import { swrFetcher, swrMiddleware } from './utils/request';
 
-const App = (props:PropsWithChildren) => {
+function App(props:PropsWithChildren) {
   const { children } = props;
   const onlineRef = useRef(true);
   const visibleRef = useRef(true);
@@ -59,6 +59,6 @@ const App = (props:PropsWithChildren) => {
       </RecoilRoot>
     </SWRConfig>
   );
-};
+}
 
 export default App;
