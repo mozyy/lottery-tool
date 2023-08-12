@@ -1,5 +1,5 @@
 import { config } from '../env';
-import { Configuration, UserServiceApiFactory } from '../openapi/lottery/user';
+import { Configuration, UserServiceApiFactory } from '../openapi/wx/user';
 import { axiosInstance, configurationParameters } from '../utils/request';
 
 const conf = new Configuration(configurationParameters);

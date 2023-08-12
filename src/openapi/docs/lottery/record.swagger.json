@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "record.proto",
+    "title": "lottery/record.proto",
     "version": "version not set"
   },
   "tags": [
@@ -9,7 +9,7 @@
       "name": "RecordService"
     }
   ],
-  "host": "yyuck.com",
+  "host": "api.zuoyinyun.com",
   "schemes": [
     "https"
   ],
@@ -20,14 +20,14 @@
     "application/json"
   ],
   "paths": {
-    "/record.RecordService/records": {
+    "/lottery.record.RecordService/records": {
       "get": {
         "operationId": "RecordService_List",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/recordListResponse"
+              "$ref": "#/definitions/lotteryrecordListResponse"
             }
           },
           "default": {
@@ -93,7 +93,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/recordCreateResponse"
+              "$ref": "#/definitions/lotteryrecordCreateResponse"
             }
           },
           "default": {
@@ -109,7 +109,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/recordCreateRequest"
+              "$ref": "#/definitions/lotteryrecordCreateRequest"
             }
           }
         ],
@@ -125,14 +125,14 @@
         ]
       }
     },
-    "/record.RecordService/records/{id}": {
+    "/lottery.record.RecordService/records/{id}": {
       "get": {
         "operationId": "RecordService_Get",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/recordGetResponse"
+              "$ref": "#/definitions/lotteryrecordGetResponse"
             }
           },
           "default": {
@@ -168,7 +168,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/recordDeleteResponse"
+              "$ref": "#/definitions/lotteryrecordDeleteResponse"
             }
           },
           "default": {
@@ -204,7 +204,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/recordUpdateResponse"
+              "$ref": "#/definitions/lotteryrecordUpdateResponse"
             }
           },
           "default": {
@@ -320,7 +320,7 @@
           "title": "lottery title"
         },
         "type": {
-          "$ref": "#/definitions/lotteryType",
+          "$ref": "#/definitions/lotterylotteryType",
           "title": "lottery image"
         },
         "remark": {
@@ -368,7 +368,7 @@
       },
       "title": "Lottery item"
     },
-    "lotteryType": {
+    "lotterylotteryType": {
       "type": "string",
       "enum": [
         "NUMBER",
@@ -377,6 +377,56 @@
       "default": "NUMBER",
       "description": "- NUMBER: 个数\n - PERCENT: 几率",
       "title": "抽签类型"
+    },
+    "lotteryrecordCreateRequest": {
+      "type": "object",
+      "properties": {
+        "record": {
+          "$ref": "#/definitions/recordNewRecord"
+        }
+      }
+    },
+    "lotteryrecordCreateResponse": {
+      "type": "object",
+      "properties": {
+        "record": {
+          "$ref": "#/definitions/recordRecord"
+        }
+      }
+    },
+    "lotteryrecordDeleteResponse": {
+      "type": "object"
+    },
+    "lotteryrecordGetResponse": {
+      "type": "object",
+      "properties": {
+        "record": {
+          "$ref": "#/definitions/recordRecord"
+        }
+      }
+    },
+    "lotteryrecordListResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/recordRecord"
+          }
+        },
+        "paginated": {
+          "$ref": "#/definitions/paginatePaginated"
+        }
+      }
+    },
+    "lotteryrecordUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "record": {
+          "$ref": "#/definitions/recordRecord"
+        }
+      }
     },
     "paginatePaginate": {
       "type": "object",
@@ -421,48 +471,6 @@
         }
       },
       "additionalProperties": {}
-    },
-    "recordCreateRequest": {
-      "type": "object",
-      "properties": {
-        "record": {
-          "$ref": "#/definitions/recordNewRecord"
-        }
-      }
-    },
-    "recordCreateResponse": {
-      "type": "object",
-      "properties": {
-        "record": {
-          "$ref": "#/definitions/recordRecord"
-        }
-      }
-    },
-    "recordDeleteResponse": {
-      "type": "object"
-    },
-    "recordGetResponse": {
-      "type": "object",
-      "properties": {
-        "record": {
-          "$ref": "#/definitions/recordRecord"
-        }
-      }
-    },
-    "recordListResponse": {
-      "type": "object",
-      "properties": {
-        "records": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/recordRecord"
-          }
-        },
-        "paginated": {
-          "$ref": "#/definitions/paginatePaginated"
-        }
-      }
     },
     "recordNewRecord": {
       "type": "object",
@@ -619,14 +627,6 @@
         }
       },
       "title": "Lottery item"
-    },
-    "recordUpdateResponse": {
-      "type": "object",
-      "properties": {
-        "record": {
-          "$ref": "#/definitions/recordRecord"
-        }
-      }
     },
     "rpcStatus": {
       "type": "object",

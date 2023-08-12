@@ -6,7 +6,7 @@ import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
 import { useSWRMutation } from '../../hooks/swrMutation';
 import { LotteryLottery } from '../../openapi/lottery/lottery';
-import { RecordCreateRequest, RecordNewRecordRemark } from '../../openapi/lottery/record';
+import { LotteryrecordCreateRequest, RecordNewRecordRemark } from '../../openapi/lottery/record';
 import Remark from './components/Remark';
 
 /**
@@ -28,7 +28,12 @@ export default function Lottery() {
 
   const submit = async (value) => {
     const recordRemarks:RecordNewRecordRemark[] = Object.values(value);
-    const record: RecordCreateRequest = { record: { record: { lotteryId: id }, recordRemarks } };
+    const record: LotteryrecordCreateRequest = {
+      record: {
+        record: { lotteryId: id },
+        recordRemarks,
+      },
+    };
     await login();
     const res = await trigger([record]);
     showToast({ title: `抽中${res.record?.record?.itemId}` });

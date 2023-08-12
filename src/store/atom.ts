@@ -1,5 +1,5 @@
 import { AtomEffect, DefaultValue, atom } from 'recoil';
-import { OauthToken as OauthTokenModel } from '../openapi/lottery/user';
+import { OauthToken as OauthTokenModel } from '../openapi/wx/user';
 import { getStorage, removeStorage, setStorage } from '../utils/storage';
 
 export class OauthToken {

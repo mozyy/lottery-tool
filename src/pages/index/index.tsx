@@ -7,19 +7,19 @@ import { lotteryServiceApi } from '../../api/lottery';
 import { useLogin } from '../../hooks/login';
 import { useSWRMutation } from '../../hooks/swrMutation';
 import {
-  LotteryCreateResponse,
   LotteryNewItem,
 
   LotteryNewLotteryInfo,
   LotteryNewRemark,
-  LotteryType,
+  LotterylotteryCreateResponse,
+  LotterylotteryType,
 } from '../../openapi/lottery/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
 
-const getTypeDesc = (type:LotteryType) => ({
-  [LotteryType.Number]: '个数',
-  [LotteryType.Percent]: '几率',
+const getTypeDesc = (type:LotterylotteryType) => ({
+  [LotterylotteryType.Number]: '个数',
+  [LotterylotteryType.Percent]: '几率',
 }[type]);
 
 interface Lottery extends LotteryNewLotteryInfo {
@@ -29,7 +29,7 @@ interface Lottery extends LotteryNewLotteryInfo {
 
 const initState: Lottery = {
   title: '抽签',
-  type: LotteryType.Number,
+  type: LotterylotteryType.Number,
   remark: false,
   items: [{
     name: '选项一',
@@ -42,7 +42,7 @@ export default function Index() {
   const [form] = Form.useForm();
   const login = useLogin();
   const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
-  const submitRef = useRef<Promise<LotteryCreateResponse>>(null);
+  const submitRef = useRef<Promise<LotterylotteryCreateResponse>>(null);
   const onSubmit = async (value:
   LotteryNewLotteryInfo & {
     items:LotteryNewItem[],
@@ -96,7 +96,7 @@ export default function Index() {
         </Form.Item>
         <Form.Item label='抽取方式' name='type' rules={[{ required: true }]}>
           <Radio.Group>
-            {Object.values(LotteryType).map((type) => (
+            {Object.values(LotterylotteryType).map((type) => (
               <Radio value={type} key={type}>{getTypeDesc(type)}</Radio>))}
           </Radio.Group>
         </Form.Item>

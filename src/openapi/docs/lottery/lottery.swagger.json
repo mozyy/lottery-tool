@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "lottery.proto",
+    "title": "lottery/lottery.proto",
     "version": "version not set"
   },
   "tags": [
@@ -9,7 +9,7 @@
       "name": "LotteryService"
     }
   ],
-  "host": "yyuck.com",
+  "host": "api.zuoyinyun.com",
   "schemes": [
     "https"
   ],
@@ -20,14 +20,14 @@
     "application/json"
   ],
   "paths": {
-    "/lottery.LotteryService/lotterys": {
+    "/lottery.lottery.LotteryService/lotterys": {
       "get": {
         "operationId": "LotteryService_List",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotteryListResponse"
+              "$ref": "#/definitions/lotterylotteryListResponse"
             }
           },
           "default": {
@@ -39,7 +39,7 @@
         },
         "parameters": [
           {
-            "name": "lottery.lottery.id",
+            "name": "lottery.id",
             "description": "id",
             "in": "query",
             "required": false,
@@ -47,51 +47,11 @@
             "format": "int32"
           },
           {
-            "name": "lottery.lottery.userId",
+            "name": "lottery.userId",
             "description": "id",
             "in": "query",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "lottery.lottery.title",
-            "description": "lottery title",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "lottery.lottery.type",
-            "description": "lottery image\n\n - NUMBER: 个数\n - PERCENT: 几率",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "NUMBER",
-              "PERCENT"
-            ],
-            "default": "NUMBER"
-          },
-          {
-            "name": "lottery.lottery.remark",
-            "description": "lottery summary",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "lottery.lottery.createdAt",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "lottery.lottery.updatedAt",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           },
           {
             "name": "paginate.page",
@@ -118,7 +78,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotteryCreateResponse"
+              "$ref": "#/definitions/lotterylotteryCreateResponse"
             }
           },
           "default": {
@@ -134,30 +94,23 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/lotteryCreateRequest"
+              "$ref": "#/definitions/lotterylotteryCreateRequest"
             }
           }
         ],
         "tags": [
           "LotteryService"
-        ],
-        "security": [
-          {
-            "OAuth2": [
-              "login"
-            ]
-          }
         ]
       }
     },
-    "/lottery.LotteryService/lotterys/{id}": {
+    "/lottery.lottery.LotteryService/lotterys/{id}": {
       "get": {
         "operationId": "LotteryService_Get",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotteryGetResponse"
+              "$ref": "#/definitions/lotterylotteryGetResponse"
             }
           },
           "default": {
@@ -186,7 +139,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotteryDeleteResponse"
+              "$ref": "#/definitions/lotterylotteryDeleteResponse"
             }
           },
           "default": {
@@ -215,7 +168,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotteryUpdateResponse"
+              "$ref": "#/definitions/lotterylotteryUpdateResponse"
             }
           },
           "default": {
@@ -254,33 +207,6 @@
     }
   },
   "definitions": {
-    "lotteryCreateRequest": {
-      "type": "object",
-      "properties": {
-        "lottery": {
-          "$ref": "#/definitions/lotteryNewLottery"
-        }
-      }
-    },
-    "lotteryCreateResponse": {
-      "type": "object",
-      "properties": {
-        "lottery": {
-          "$ref": "#/definitions/lotteryLottery"
-        }
-      }
-    },
-    "lotteryDeleteResponse": {
-      "type": "object"
-    },
-    "lotteryGetResponse": {
-      "type": "object",
-      "properties": {
-        "lottery": {
-          "$ref": "#/definitions/lotteryLottery"
-        }
-      }
-    },
     "lotteryItem": {
       "type": "object",
       "properties": {
@@ -311,21 +237,6 @@
         }
       },
       "title": "Lottery item"
-    },
-    "lotteryListResponse": {
-      "type": "object",
-      "properties": {
-        "lotterys": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/lotteryLottery"
-          }
-        },
-        "paginated": {
-          "$ref": "#/definitions/paginatePaginated"
-        }
-      }
     },
     "lotteryLottery": {
       "type": "object",
@@ -366,7 +277,7 @@
           "title": "lottery title"
         },
         "type": {
-          "$ref": "#/definitions/lotteryType",
+          "$ref": "#/definitions/lotterylotteryType",
           "title": "lottery image"
         },
         "remark": {
@@ -383,6 +294,20 @@
         }
       },
       "title": "Lottery item"
+    },
+    "lotteryLotteryQuery": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "id"
+        },
+        "userId": {
+          "type": "string",
+          "title": "id"
+        }
+      }
     },
     "lotteryNewItem": {
       "type": "object",
@@ -439,7 +364,7 @@
           "title": "lottery title"
         },
         "type": {
-          "$ref": "#/definitions/lotteryType",
+          "$ref": "#/definitions/lotterylotteryType",
           "title": "lottery image"
         },
         "remark": {
@@ -495,7 +420,49 @@
       },
       "title": "Lottery item"
     },
-    "lotteryType": {
+    "lotterylotteryCreateRequest": {
+      "type": "object",
+      "properties": {
+        "lottery": {
+          "$ref": "#/definitions/lotteryNewLottery"
+        }
+      }
+    },
+    "lotterylotteryCreateResponse": {
+      "type": "object",
+      "properties": {
+        "lottery": {
+          "$ref": "#/definitions/lotteryLottery"
+        }
+      }
+    },
+    "lotterylotteryDeleteResponse": {
+      "type": "object"
+    },
+    "lotterylotteryGetResponse": {
+      "type": "object",
+      "properties": {
+        "lottery": {
+          "$ref": "#/definitions/lotteryLottery"
+        }
+      }
+    },
+    "lotterylotteryListResponse": {
+      "type": "object",
+      "properties": {
+        "lotterys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/lotteryLottery"
+          }
+        },
+        "paginated": {
+          "$ref": "#/definitions/paginatePaginated"
+        }
+      }
+    },
+    "lotterylotteryType": {
       "type": "string",
       "enum": [
         "NUMBER",
@@ -505,7 +472,7 @@
       "description": "- NUMBER: 个数\n - PERCENT: 几率",
       "title": "抽签类型"
     },
-    "lotteryUpdateResponse": {
+    "lotterylotteryUpdateResponse": {
       "type": "object",
       "properties": {
         "lottery": {

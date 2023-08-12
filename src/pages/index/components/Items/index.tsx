@@ -1,7 +1,7 @@
 import {
   Button,
   Col,
-  Input, Row
+  Input, Row,
 } from '@nutui/nutui-react-taro';
 import { LotteryItem, LotteryNewItem } from '../../../../openapi/lottery/lottery';
 
