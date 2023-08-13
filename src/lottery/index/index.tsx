@@ -1,5 +1,5 @@
 import {
-  Button, Col, Form, Input, Radio, Row, Switch,
+    Button, Col, Form, Input, Radio, Row, Switch,
 } from '@nutui/nutui-react-taro';
 import { useShareAppMessage } from '@tarojs/taro';
 import { useRef } from 'react';
@@ -7,12 +7,12 @@ import { lotteryServiceApi } from '../../api/lottery';
 import { useLogin } from '../../hooks/login';
 import { useSWRMutation } from '../../hooks/swrMutation';
 import {
-  LotteryNewItem,
+    LotteryNewItem,
 
-  LotteryNewLotteryInfo,
-  LotteryNewRemark,
-  LotterylotteryCreateResponse,
-  LotterylotteryType,
+    LotteryNewLotteryInfo,
+    LotteryNewRemark,
+    LotterylotteryCreateResponse,
+    LotterylotteryType,
 } from '../../openapi/lottery/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
@@ -69,7 +69,7 @@ export default function Index() {
       const resp = await submitRef.current
       return {
         title: resp?.lottery?.lottery?.title,
-        path: `/pages/lottery/index?id=${resp?.lottery?.lottery?.id}`
+        path: `/lottery/lottery/index?id=${resp?.lottery?.lottery?.id}`
       }
     }
     return {};

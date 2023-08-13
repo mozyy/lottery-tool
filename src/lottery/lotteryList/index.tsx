@@ -23,7 +23,7 @@ export default function LotteryList() {
           <Cell
             key={lottery.lottery?.id}
             title={lottery.lottery?.title}
-            onClick={() => navigateTo({ url: `/pages/lotteryDetail/index?id=${lottery.lottery?.id}` })}
+            onClick={() => navigateTo({ url: `/lottery/lotteryDetail/index?id=${lottery.lottery?.id}` })}
             extra={<Right />}
           />
         ))}

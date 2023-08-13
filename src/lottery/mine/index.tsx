@@ -29,12 +29,12 @@ export default function Index() {
       <CellGroup>
         <Cell
           title='我的抽签'
-          onClick={toPage('/pages/lotteryList/index')}
+          onClick={toPage('/lottery/lotteryList/index')}
           extra={<Right />}
         />
         <Cell
           title='我的记录'
-          onClick={toPage('/pages/record/index')}
+          onClick={toPage('/lottery/record/index')}
           extra={<Right />}
         />
       </CellGroup>
