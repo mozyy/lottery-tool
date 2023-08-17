@@ -1,18 +1,19 @@
 import {
-    Button, Col, Form, Input, Radio, Row, Switch,
+  Button, Col, Form, FormItem, Input, Radio, Row, Switch,
 } from '@nutui/nutui-react-taro';
+import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
 import { useShareAppMessage } from '@tarojs/taro';
 import { useRef } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
 import { useLogin } from '../../hooks/login';
 import { useSWRMutation } from '../../hooks/swrMutation';
 import {
-    LotteryNewItem,
+  LotteryNewItem,
 
-    LotteryNewLotteryInfo,
-    LotteryNewRemark,
-    LotterylotteryCreateResponse,
-    LotterylotteryType,
+  LotteryNewLotteryInfo,
+  LotteryNewRemark,
+  LotterylotteryCreateResponse,
+  LotterylotteryType,
 } from '../../openapi/lottery/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
@@ -39,10 +40,11 @@ const initState: Lottery = {
 };
 
 export default function Index() {
-  const [form] = Form.useForm();
+  const [form]: FormInstance[] = Form.useForm();
   const login = useLogin();
   const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
-  const submitRef = useRef<Promise<LotterylotteryCreateResponse>>(null);
+  const submitRef = useRef<Promise<LotterylotteryCreateResponse>|null>(null);
+  const itemsRef = useRef<FormItem>(null);
   const onSubmit = async (value:
   LotteryNewLotteryInfo & {
     items:LotteryNewItem[],
@@ -95,13 +97,13 @@ export default function Index() {
           />
         </Form.Item>
         <Form.Item label='抽取方式' name='type' rules={[{ required: true }]}>
-          <Radio.Group>
+          <Radio.Group direction="horizontal" onChange={()=>itemsRef.current?.onStoreChange('update')}>
             {Object.values(LotterylotteryType).map((type) => (
               <Radio value={type} key={type}>{getTypeDesc(type)}</Radio>))}
           </Radio.Group>
         </Form.Item>
-        <Form.Item label='选项' name='items'>
-          <Items />
+        <Form.Item label='选项' name='items' ref={itemsRef}>
+          <Items form={form}/>
         </Form.Item>
         <Form.Item label='填写备注' name='remark'>
           <Switch />

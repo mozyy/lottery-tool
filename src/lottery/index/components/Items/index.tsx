@@ -1,18 +1,24 @@
+import { Close } from '@nutui/icons-react-taro';
 import {
   Button,
   Col,
   Input, Row,
 } from '@nutui/nutui-react-taro';
-import { LotteryItem, LotteryNewItem } from '../../../../openapi/lottery/lottery';
+import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
+import { LotteryItem, LotteryNewItem, LotterylotteryType } from '../../../../openapi/lottery/lottery';
 
 export interface ItemsProps {
   value?: LotteryNewItem[],
   onChange?:(value:LotteryNewItem[]) => void
+  form: FormInstance
 }
 
-export default function Items({ value = [], onChange = () => {} }:ItemsProps) {
-  console.log(value);
+const typeUnitMap = {
+  [LotterylotteryType.Number]: '个',
+  [LotterylotteryType.Percent]: '%',
+};
 
+export default function Items({ value = [], onChange = () => {}, form }:ItemsProps) {
   const addArray = (i:number, v: LotteryItem) => {
     const newArr = ([...value.slice(0, i), { ...value[i], ...v }, ...value.slice(i + 1)]);
     onChange(newArr);
@@ -21,9 +27,7 @@ export default function Items({ value = [], onChange = () => {} }:ItemsProps) {
     const newArr = ([...value.slice(0, i), ...value.slice(i + 1)]);
     onChange(newArr);
   };
-  const changeHandler = () => {
 
-  };
   const addItem = () => {
     const newArr = ([...value, { name: `选项${value.length + 1}`, value: 1 }]);
     onChange(newArr);
@@ -40,15 +44,16 @@ export default function Items({ value = [], onChange = () => {} }:ItemsProps) {
                 onChange={(v) => addArray(i, { name: String(v) })}
               />
             </Col>
-            <Col span={8}>
+            <Col span={8} className='flex'>
               <Input
                 placeholder='数量'
                 value={String(item.value)}
                 onChange={(v) => addArray(i, { value: Number(v) })}
               />
+              <span className='text-gray-400'>{typeUnitMap[form.getFieldValue('type')]}</span>
             </Col>
-            <Col span={4}>
-              <div className='at-col at-col-2' onClick={delArray(i)}>X</div>
+            <Col span={4} className='text-center'>
+              <Close onClick={delArray(i)} />
             </Col>
           </Row>
         </div>

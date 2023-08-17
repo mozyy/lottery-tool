@@ -1,7 +1,8 @@
+import { Close } from '@nutui/icons-react-taro';
 import {
   Button,
   Col,
-  Input, Row, Switch
+  Input, Row, Switch,
 } from '@nutui/nutui-react-taro';
 import { LotteryNewRemark, LotteryRemark } from '../../../../openapi/lottery/lottery';
 
@@ -43,8 +44,8 @@ export default function Remarks({ value = [], onChange = () => {} }:RemarksProps
                 onChange={(v) => addArray(i, { require: v })}
               />
             </Col>
-            <Col span={4}>
-              <div className='at-col at-col-2' onClick={delArray(i)}>X</div>
+            <Col span={4} className='text-center'>
+              <Close onClick={delArray(i)} />
             </Col>
           </Row>
         </div>
