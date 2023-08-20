@@ -2,7 +2,7 @@ import Taro, { useError, useUnhandledRejection } from '@tarojs/taro';
 import { PropsWithChildren, useRef } from 'react';
 import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
-import './app.nutui';
+import './appnutui';
 // import './app.nutui.scss';
 import './app.scss';
 import './tailwind';

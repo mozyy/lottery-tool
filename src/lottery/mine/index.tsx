@@ -1,32 +1,18 @@
 import { Right } from '@nutui/icons-react-taro';
-import { Button, Cell, CellGroup } from '@nutui/nutui-react-taro';
+import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
-import { useState } from 'react';
-import { lotteryServiceApi } from '../../api/lottery';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useLogin } from '../../hooks/login';
-import { useSWR } from '../../hooks/swr';
 
 function Mine() {
   const login = useLogin();
-  const [v, sv] = useState(0);
-
-  const me = useSWR([lotteryServiceApi.lotteryServiceGet, 1]);
-  console.log(1111, me.data);
   const toPage = (url: string) => async () => {
     await login();
     navigateTo({ url });
   };
 
   return (
-    <div className='wrapper'>
-
-      <Button className='button' onClick={login}>
-        登录
-      </Button>
-      <Button className='button'>
-        get
-      </Button>
+    <div className='p-2 bg-gray-100 h-full box-border'>
       <CellGroup>
         <Cell
           title='我的抽签'

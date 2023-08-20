@@ -16,13 +16,10 @@ import {
   LotterylotteryCreateResponse,
   LotterylotteryType,
 } from '../../openapi/lottery/lottery';
+import { getLotteryTypeDesc } from '../../status/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
 
-const getTypeDesc = (type:LotterylotteryType) => ({
-  [LotterylotteryType.Number]: '个数',
-  [LotterylotteryType.Percent]: '几率',
-}[type]);
 
 interface Lottery extends LotteryNewLotteryInfo {
   items: LotteryNewItem[],
@@ -100,7 +97,7 @@ function Index() {
         <Form.Item label='抽取方式' name='type' rules={[{ required: true }]}>
           <Radio.Group direction="horizontal" onChange={()=>itemsRef.current?.onStoreChange('update')}>
             {Object.values(LotterylotteryType).map((type) => (
-              <Radio value={type} key={type}>{getTypeDesc(type)}</Radio>))}
+              <Radio value={type} key={type}>{getLotteryTypeDesc(type)}</Radio>))}
           </Radio.Group>
         </Form.Item>
         <Form.Item label='选项' name='items' ref={itemsRef}>

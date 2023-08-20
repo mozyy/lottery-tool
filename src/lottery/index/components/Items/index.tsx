@@ -5,18 +5,14 @@ import {
   Input, Row,
 } from '@nutui/nutui-react-taro';
 import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
-import { LotteryItem, LotteryNewItem, LotterylotteryType } from '../../../../openapi/lottery/lottery';
+import { LotteryItem, LotteryNewItem } from '../../../../openapi/lottery/lottery';
+import { getLotteryTypeUnit } from '../../../../status/lottery';
 
 export interface ItemsProps {
   value?: LotteryNewItem[],
   onChange?:(value:LotteryNewItem[]) => void
   form: FormInstance
 }
-
-const typeUnitMap = {
-  [LotterylotteryType.Number]: '个',
-  [LotterylotteryType.Percent]: '%',
-};
 
 export default function Items({ value = [], onChange = () => {}, form }:ItemsProps) {
   const addArray = (i:number, v: LotteryItem) => {
@@ -50,7 +46,7 @@ export default function Items({ value = [], onChange = () => {}, form }:ItemsPro
                 value={String(item.value)}
                 onChange={(v) => addArray(i, { value: Number(v) })}
               />
-              <span className='text-gray-400'>{typeUnitMap[form.getFieldValue('type')]}</span>
+              <span className='text-gray-400'>{getLotteryTypeUnit(form.getFieldValue('type'))}</span>
             </Col>
             <Col span={4} className='text-center'>
               <Close onClick={delArray(i)} className='text-[22px] align-middle' />

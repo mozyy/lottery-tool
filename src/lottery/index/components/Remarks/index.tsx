@@ -45,7 +45,7 @@ export default function Remarks({ value = [], onChange = () => {} }:RemarksProps
               />
             </Col>
             <Col span={4} className='text-center'>
-              <Close onClick={delArray(i)} />
+              <Close onClick={delArray(i)} className='text-[22px] align-middle' />
             </Col>
           </Row>
         </div>

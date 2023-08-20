@@ -33,7 +33,7 @@ const config = defineConfig({
     },
   },
   cache: {
-    enable: false // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
+    // enable: false // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
   },
   plugins: [
     ['@dcasia/mini-program-tailwind-webpack-plugin/dist/taro', {
@@ -41,6 +41,7 @@ const config = defineConfig({
     }],
     '@tarojs/plugin-http',
     '@tarojs/plugin-html',
+    'taro-plugin-compiler-optimization',
   ],
   sass:{
     data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";`
@@ -67,7 +68,7 @@ const config = defineConfig({
         },
       },
     },
-    // commonChunks: ['runtime', 'vendors', 'taro', 'common', 'nutui'],
+    // commonChunks: ['runtime', 'vendors', 'taro', 'common', 'appnutui'],
     // miniCssExtractPluginOption: {
     //   filename: '[name].css',
     //   chunkFilename: '[name].css',
@@ -77,12 +78,12 @@ const config = defineConfig({
     //     optimization:{
     //       splitChunks:{
     //         cacheGroups: {
-    //           nutui: {
-    //             name: config.isBuildPlugin ? 'plugin/nutui' : 'nutui',
+    //           appnutui: {
+    //             name: config.isBuildPlugin ? 'plugin/appnutui' : 'appnutui',
     //             test: module => {
     //               return module.resource && (
-    //                 module.resource.includes('app.nutui')
-    //                 || /@nutui.*\.css$/.test(module.resource)
+    //                 module.resource.includes('appnutui')
+    //                 || module.resource.includes('@nutui')
     //               )
     //             },
     //             priority: 1000

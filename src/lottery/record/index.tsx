@@ -1,5 +1,5 @@
 import { Right } from '@nutui/icons-react-taro';
-import { Cell, CellGroup } from '@nutui/nutui-react-taro';
+import { Cell, CellGroup, Empty } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
 import { useState } from 'react';
 import { recordServiceApi } from '../../api/record';
@@ -15,11 +15,14 @@ function Record() {
   if (result) {
     return result;
   }
+  if (!data.records?.length) {
+    return <Empty />;
+  }
 
   return (
-    <div className='wrapper'>
+    <div>
       <CellGroup>
-        {data.records!.map((record) => {
+        {data.records.map((record) => {
           const item = record.lottery?.items?.find((i) => i.id === record.record?.itemId);
           return (
             <Cell
