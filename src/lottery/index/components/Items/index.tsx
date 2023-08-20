@@ -53,7 +53,7 @@ export default function Items({ value = [], onChange = () => {}, form }:ItemsPro
               <span className='text-gray-400'>{typeUnitMap[form.getFieldValue('type')]}</span>
             </Col>
             <Col span={4} className='text-center'>
-              <Close onClick={delArray(i)} />
+              <Close onClick={delArray(i)} className='text-[22px] align-middle' />
             </Col>
           </Row>
         </div>

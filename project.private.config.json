@@ -3,6 +3,7 @@
   "projectname": "lottery-tool",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": false
+    "urlCheck": false,
+    "preloadBackgroundData": true
   }
 }

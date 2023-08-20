@@ -5,6 +5,7 @@ import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/t
 import { useShareAppMessage } from '@tarojs/taro';
 import { useRef } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
+import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useLogin } from '../../hooks/login';
 import { useSWRMutation } from '../../hooks/swrMutation';
 import {
@@ -39,7 +40,7 @@ const initState: Lottery = {
   remarks: [],
 };
 
-export default function Index() {
+function Index() {
   const [form]: FormInstance[] = Form.useForm();
   const login = useLogin();
   const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
@@ -131,3 +132,4 @@ export default function Index() {
     </div>
   );
 }
+export default createErrorBoundary(Index)

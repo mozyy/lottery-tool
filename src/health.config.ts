@@ -1,4 +1,4 @@
-export default {
+export default defineAppConfig({
   pages: [
     'health/index/index',
     'health/mine/index',
@@ -28,4 +28,4 @@ export default {
   // entryPagePath: 'pages/index/index',
   entryPagePath: 'pages/lottery/index',
   // entryPagePath: 'pages/mine/index',
-};
+});

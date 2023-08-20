@@ -2,6 +2,7 @@ import { Button, Form } from '@nutui/nutui-react-taro';
 import { showToast, useRouter } from '@tarojs/taro';
 import { lotteryServiceApi } from '../../api/lottery';
 import { recordServiceApi } from '../../api/record';
+import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
 import { useSWRMutation } from '../../hooks/swrMutation';
@@ -12,7 +13,7 @@ import Remark from './components/Remark';
 /**
  * @route ?id=
  */
-export default function Lottery() {
+function Lottery() {
   const router = useRouter();
   const id = Number(router.params.id || 3);
   const login = useLogin();
@@ -64,3 +65,5 @@ export default function Lottery() {
     </div>
   );
 }
+
+export default createErrorBoundary(Lottery);

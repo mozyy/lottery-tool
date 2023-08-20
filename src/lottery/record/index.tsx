@@ -3,10 +3,11 @@ import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
 import { useState } from 'react';
 import { recordServiceApi } from '../../api/record';
+import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
 
-export default function Record() {
+function Record() {
   const login = useLogin();
   const [v, sv] = useState(0);
 
@@ -34,3 +35,5 @@ export default function Record() {
     </div>
   );
 }
+
+export default createErrorBoundary(Record);

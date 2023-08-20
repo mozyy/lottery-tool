@@ -1,8 +1,9 @@
 import { useRouter } from '@tarojs/taro';
 import { lotteryServiceApi } from '../../api/lottery';
+import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useSWR } from '../../hooks/swr';
 
-export default function LotteryDetail() {
+function LotteryDetail() {
   const { id } = useRouter().params;
 
   const { data, result } = useSWR([lotteryServiceApi.lotteryServiceGet, Number(id)]);
@@ -17,3 +18,5 @@ export default function LotteryDetail() {
     </div>
   );
 }
+
+export default createErrorBoundary(LotteryDetail);

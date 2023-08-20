@@ -1,10 +1,11 @@
 import { CellGroup } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
 import { recordServiceApi } from '../../api/record';
+import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useSWR } from '../../hooks/swr';
 
 // ?id=
-export default function RecordDetail() {
+function RecordDetail() {
   const { id } = useRouter().params;
   const { data, result } = useSWR([recordServiceApi.recordServiceGet, Number(id)]);
   if (result) {
@@ -19,3 +20,5 @@ export default function RecordDetail() {
     </div>
   );
 }
+
+export default createErrorBoundary(RecordDetail);

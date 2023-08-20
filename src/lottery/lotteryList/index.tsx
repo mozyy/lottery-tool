@@ -3,10 +3,11 @@ import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
 import { useState } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
+import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
 
-export default function LotteryList() {
+function LotteryList() {
   const login = useLogin();
   const [v, sv] = useState(0);
 
@@ -31,3 +32,5 @@ export default function LotteryList() {
     </div>
   );
 }
+
+export default createErrorBoundary(LotteryList);

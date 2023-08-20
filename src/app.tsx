@@ -1,15 +1,24 @@
-import Taro from '@tarojs/taro';
+import Taro, { useError, useUnhandledRejection } from '@tarojs/taro';
 import { PropsWithChildren, useRef } from 'react';
 import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
+import './app.nutui';
+// import './app.nutui.scss';
 import './app.scss';
-import './theme.scss';
+import './tailwind';
 import { swrFetcher, swrMiddleware } from './utils/request';
 
 function App(props:PropsWithChildren) {
   const { children } = props;
   const onlineRef = useRef(true);
   const visibleRef = useRef(true);
+
+  useError((error) => {
+    console.log(123, error);
+  });
+  useUnhandledRejection((res) => {
+    console.log(res.reason, res.promise);
+  });
 
   return (
     <SWRConfig value={{

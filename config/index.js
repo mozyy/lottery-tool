@@ -1,15 +1,18 @@
-const config = {
+import { defineConfig } from '@tarojs/cli';
+
+const config = defineConfig({
   projectName: "lottery-tool",
   date: "2023-5-22",
   designWidth (input) {
     // 配置 NutUI 375 尺寸
-    if (input?.file?.replace(/\\+/g, '/').indexOf('@nutui') > -1) {
+    if (input?.file?.includes('nutui')) {
       return 375
     }
     // 全局使用 Taro 默认的 750 尺寸
     return 750
   },
   deviceRatio: {
+    375: 2 / 1,
     640: 2.34 / 2,
     750: 1,
     828: 1.81 / 2,
@@ -47,8 +50,7 @@ const config = {
       pxtransform: {
         enable: true,
         config: {
-          // TODO: remove
-          selectorBlackList: ['nut-', /^page$/]
+          // selectorBlackList: ['nut-']
         },
       },
       url: {
@@ -65,6 +67,31 @@ const config = {
         },
       },
     },
+    // commonChunks: ['runtime', 'vendors', 'taro', 'common', 'nutui'],
+    // miniCssExtractPluginOption: {
+    //   filename: '[name].css',
+    //   chunkFilename: '[name].css',
+    // },
+    // webpackChain(chain, webpack) {
+    //   chain.merge({
+    //     optimization:{
+    //       splitChunks:{
+    //         cacheGroups: {
+    //           nutui: {
+    //             name: config.isBuildPlugin ? 'plugin/nutui' : 'nutui',
+    //             test: module => {
+    //               return module.resource && (
+    //                 module.resource.includes('app.nutui')
+    //                 || /@nutui.*\.css$/.test(module.resource)
+    //               )
+    //             },
+    //             priority: 1000
+    //           },
+    //         }
+    //       }
+    //     }
+    //   })
+    // },
   },
   h5: {
     publicPath: "/",
@@ -86,7 +113,7 @@ const config = {
       },
     },
   },
-};
+});
 
 module.exports = function (merge) {
   if (process.env.NODE_ENV === "development") {
