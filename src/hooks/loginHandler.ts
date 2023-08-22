@@ -12,10 +12,10 @@ export const useLoginHandler = () => {
   const loginHandler = useCallback(async () => {
     const { code } = await login();
     const res = await trigger([{ code }]);
-    if (!res.token) {
+    if (!res.token || !res.user) {
       return Promise.reject(Error('no token!'));
     }
-    const token = new OauthToken(res.token);
+    const token = new OauthToken(res.token, res.user);
     setOauthTokenHandler(token);
     setOauthToken(token);
     return token;

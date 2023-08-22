@@ -249,6 +249,23 @@
         }
       }
     },
+    "oauthoauthUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "id11"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -367,6 +384,9 @@
       "properties": {
         "token": {
           "$ref": "#/definitions/oauthToken"
+        },
+        "user": {
+          "$ref": "#/definitions/oauthoauthUser"
         }
       }
     },

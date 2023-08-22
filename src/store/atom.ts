@@ -1,16 +1,24 @@
 import { AtomEffect, DefaultValue, atom } from 'recoil';
-import { OauthToken as OauthTokenModel } from '../openapi/wx/user';
+import { OauthToken as OauthTokenModel, OauthoauthUser } from '../openapi/wx/user';
 import { getStorage, removeStorage, setStorage } from '../utils/storage';
 
 export class OauthToken {
   private expires: number;
 
-  constructor(public model: OauthTokenModel) {
+  constructor(public model: OauthTokenModel, private user: OauthoauthUser) {
     this.expires = Date.now() + this.model.expiresIn! * 1000;
   }
 
   static expired(token: OauthToken) {
     return Date.now() > token.expires;
+  }
+  static restore(token: OauthToken) {
+    const newToken = new OauthToken(token.model, token.user)
+    newToken.expires = token.expires
+    return newToken;
+  }
+  get userId () {
+    return this.user.id
   }
 }
 
@@ -29,8 +37,9 @@ export const getAccessToken = () => {
 const localStorageEffect:AtomEffect<OauthToken | null> = ({ setSelf, onSet }) => {
   const oauthInfo = getStorage<OauthToken>('OAUTH_INFO');
   if (oauthInfo) {
-    setOauthToken(oauthInfo);
-    setSelf(oauthInfo);
+    const oauth = OauthToken.restore(oauthInfo)
+    setOauthToken(oauth);
+    setSelf(oauth);
   }
 
   onSet((newValue) => {

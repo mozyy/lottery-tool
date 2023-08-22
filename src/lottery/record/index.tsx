@@ -1,17 +1,16 @@
 import { Right } from '@nutui/icons-react-taro';
 import { Cell, CellGroup, Empty } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
-import { useState } from 'react';
 import { recordServiceApi } from '../../api/record';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
+import { useUserId } from '../../hooks/userId';
 
 function Record() {
-  const login = useLogin();
-  const [v, sv] = useState(0);
+  const userId = useUserId();
 
-  const { data, result } = useSWR([recordServiceApi.recordServiceList]);
+  const { data, result } = useSWR([recordServiceApi.recordServiceList,
+    undefined, undefined, userId]);
   if (result) {
     return result;
   }

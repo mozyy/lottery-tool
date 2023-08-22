@@ -29,13 +29,14 @@ function Lottery() {
 
   const submit = async (value) => {
     const recordRemarks:RecordNewRecordRemark[] = Object.values(value);
+
+    const token = await login();
     const record: LotteryrecordCreateRequest = {
       record: {
-        record: { lotteryId: id },
+        record: { lotteryId: id, userId: token.userId },
         recordRemarks,
       },
     };
-    await login();
     const res = await trigger([record]);
     showToast({ title: `抽中${res.record?.record?.itemId}` });
   };

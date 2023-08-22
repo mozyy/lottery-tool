@@ -49,9 +49,9 @@ function Index() {
     remarks:LotteryNewRemark[]
   }) => {
     submitRef.current = (async () => {
-      await login();
+      const token = await login();
       const { items, remarks, ...lotteryInfo } = value;
-      const lottery = { lottery: lotteryInfo, items, remarks };
+      const lottery = { lottery: {...lotteryInfo, userId: token.userId }, items, remarks };
       return trigger([{ lottery }]);
     })();
   };

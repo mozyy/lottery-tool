@@ -13,7 +13,6 @@ type Key = keyof typeof storageKeys;
 export function getStorage<T>(key: Key) {
   const keyValue = encryptAES(`${storagePrefix}${key}`);
   const value = getStorageSync(keyValue);
-  console.log(1111, value, keyValue);
   if (!value) {
     return null;
   }

@@ -63,6 +63,31 @@ export interface OauthToken {
 /**
  * 
  * @export
+ * @interface OauthoauthUser
+ */
+export interface OauthoauthUser {
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthoauthUser
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthoauthUser
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OauthoauthUser
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ProtobufAny
  */
 export interface ProtobufAny {
@@ -252,6 +277,12 @@ export interface WxuserLoginResponse {
      * @memberof WxuserLoginResponse
      */
     'token'?: OauthToken;
+    /**
+     * 
+     * @type {OauthoauthUser}
+     * @memberof WxuserLoginResponse
+     */
+    'user'?: OauthoauthUser;
 }
 /**
  * 

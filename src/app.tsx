@@ -1,12 +1,22 @@
-import Taro, { useError, useUnhandledRejection } from '@tarojs/taro';
+import Taro, {
+  useError, useLaunch,
+  useUnhandledRejection,
+} from '@tarojs/taro';
 import { PropsWithChildren, useRef } from 'react';
 import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
 import './appnutui';
 // import './app.nutui.scss';
 import './app.scss';
+import { useLogin } from './hooks/login';
 import './tailwind';
 import { swrFetcher, swrMiddleware } from './utils/request';
+
+function Login() {
+  const login = useLogin();
+  useLaunch(login);
+  return null;
+}
 
 function App(props:PropsWithChildren) {
   const { children } = props;
@@ -64,6 +74,7 @@ function App(props:PropsWithChildren) {
     }}
     >
       <RecoilRoot>
+        <Login />
         {children}
       </RecoilRoot>
     </SWRConfig>

@@ -39,28 +39,14 @@
         },
         "parameters": [
           {
-            "name": "paginated.page",
+            "name": "paginate.page",
             "in": "query",
             "required": false,
             "type": "integer",
             "format": "int32"
           },
           {
-            "name": "paginated.perPage",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "paginated.total",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "paginated.totalPages",
+            "name": "paginate.perPage",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -320,6 +306,20 @@
           "$ref": "#/definitions/blogBlog"
         }
       }
+    },
+    "paginatePaginate": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Paginate item"
     },
     "paginatePaginated": {
       "type": "object",

@@ -33,7 +33,7 @@ SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
   let result;
   if (res.error) {
     //
-    switch (res.error.response.status){
+    switch (res.error.response?.status){
       case 401:
         setOauthToken(null);
         break;
@@ -68,7 +68,7 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 axiosInstance.interceptors.response.use((response) => {
-  console.log('[API]:', response.config.url, response.request, response.data);
+  console.log('[API]:', response.config.url, response.config.data, response.data);
   return response;
 }, (error) => {
   const message = error?.response?.headers['grpc-message'];
