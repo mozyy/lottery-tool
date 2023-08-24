@@ -1,0 +1,8 @@
+
+before_script:
+  - docker info
+build:
+  stage: build
+  script:
+    - echo "$ENV_VAR" > ".env"
+    - docker build -t mozyy/empty-compose-frontend .
