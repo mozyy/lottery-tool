@@ -1,0 +1,8 @@
+apis/WxServiceApi.ts
+apis/index.ts
+index.ts
+models/ProtobufAny.ts
+models/RpcStatus.ts
+models/WxSnsJscode2sessionResponse.ts
+models/index.ts
+runtime.ts

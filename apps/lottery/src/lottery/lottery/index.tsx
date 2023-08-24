@@ -1,7 +1,7 @@
 import { Button, Form } from '@nutui/nutui-react-taro';
 import { showToast, useRouter } from '@tarojs/taro';
-import { LotteryLottery } from 'openapi/axios/lottery/lottery';
-import { LotteryrecordCreateRequest, RecordNewRecordRemark } from 'openapi/axios/lottery/record';
+import { LotteryLottery } from 'openapi/dist/axios/lottery/lottery';
+import { LotteryrecordCreateRequest, RecordNewRecordRemark } from 'openapi/dist/axios/lottery/record';
 import { lotteryServiceApi } from '../../api/lottery';
 import { recordServiceApi } from '../../api/record';
 import createErrorBoundary from '../../components/common/createErrorBoundary';

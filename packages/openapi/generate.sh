@@ -6,6 +6,7 @@ types=(
 )
 
 docs=(
+  blog/blog
   health/department
   health/hospital
   health/nurse
@@ -20,7 +21,7 @@ for type in "${types[@]}"; do
   for doc in "${docs[@]}"; do
     pnpm exec openapi-generator-cli generate -g typescript-$type \
     -i ./openapi/$doc.swagger.json \
-    -o ./$type/$doc
+    -o ./src/$type/$doc
   done
 done
 

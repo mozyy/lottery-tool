@@ -1,11 +1,9 @@
-import Link from 'next/link';
-import { BlogServiceApi } from '../../../openapi/blog/blog';
-import BlogCard from './BlogCard';
-import {
-  Box, Button, Unstable_Grid2 as Grid, Typography,
-} from '@/mui/material';
-import FeauterCard from '@/component/FeauterCard';
 import { blogApi } from '@/api/blog';
+import {
+    Button, Unstable_Grid2 as Grid, Typography
+} from '@/mui/material';
+import Link from 'next/link';
+import BlogCard from './BlogCard';
 
 export default async function Blog() {
   const res = await blogApi.blogServiceList({ cache: 'no-cache' });

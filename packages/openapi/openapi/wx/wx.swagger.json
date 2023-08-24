@@ -19,7 +19,60 @@
   "produces": [
     "application/json"
   ],
-  "paths": {},
+  "paths": {
+    "/wx.wx.WxService/sns": {
+      "post": {
+        "operationId": "WxService_SnsJscode2session",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wxSnsJscode2sessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "appid",
+            "description": "小程序 appId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "secret",
+            "description": "小程序 appSecret",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "jsCode",
+            "description": "登录时获取的 code，可通过[wx.login](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html)获取",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "grantType",
+            "description": "授权类型，此处只需填写 authorization_code",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WxService"
+        ]
+      }
+    }
+  },
   "definitions": {
     "protobufAny": {
       "type": "object",

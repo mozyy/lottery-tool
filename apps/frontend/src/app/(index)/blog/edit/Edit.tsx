@@ -1,22 +1,18 @@
 'use client';
 
-import Image from 'next/image';
-import { marked } from 'marked';
+import Gallery from '@/component/Gallery';
+import { SetState } from '@/hooks/setState';
 import {
-  ChangeEvent, Suspense, lazy, useState,
+    Box, Button, Unstable_Grid2 as Grid, TextField, Typography
+} from '@/mui/material';
+import {
+    BlogNewBlog
+} from 'openapi/dist/fetch/blog/blog';
+import {
+    ChangeEvent,
+    useState
 } from 'react';
 import BlogComponent from '../BlogComponent';
-import {
-  BlogNewBlog,
-  BlogNewBlogFromJSON, BlogNewBlogToJSON,
-} from '@/openapi/blog/blog';
-import { TextareaAutosize } from '@/mui/base';
-import {
-  Box, Button, Unstable_Grid2 as Grid, TextField, Typography, Paper,
-  FormControl, Input, OutlinedInput,
-} from '@/mui/material';
-import { SetState } from '@/hooks/setState';
-import Gallery from '@/component/Gallery';
 
 interface EditProps {
   blog:BlogNewBlog

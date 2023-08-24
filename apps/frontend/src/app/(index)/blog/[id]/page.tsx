@@ -1,9 +1,7 @@
 // import { MDXRemote } from 'next-mdx-remote/rsc';
-import Image from 'next/image';
 import { marked } from 'marked';
-import { BlogServiceApi } from '../../../../openapi/blog/blog';
+import { BlogServiceApi } from 'openapi/dist/fetch/blog/blog';
 import BlogComponent from '../BlogComponent';
-import { Box, Unstable_Grid2 as Grid, Typography } from '@/mui/material';
 
 export default async function Detail({ params: { id } }:{ params: { id:string } }) {
   const blogApi = new BlogServiceApi();

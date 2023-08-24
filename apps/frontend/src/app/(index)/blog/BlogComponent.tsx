@@ -1,7 +1,7 @@
 // import { MDXRemote } from 'next-mdx-remote/rsc';
-import Image from 'next/image';
-import { BlogBlog } from '../../../openapi/blog/blog';
 import { Box, Unstable_Grid2 as Grid, Typography } from '@/mui/material';
+import Image from 'next/image';
+import { BlogBlog } from 'openapi/dist/fetch/blog/blog';
 
 export default function BlogComponent({ blog }:{ blog: BlogBlog }) {
   return (

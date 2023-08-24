@@ -1,13 +1,5 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { BlogBlog } from '../../../openapi/blog/blog';
+import { BlogBlog } from 'openapi/dist/fetch/blog/blog';
 import FeauterCard from '../../../component/FeauterCard';
-import {
-  ArrowForwardIos, Favorite, Share,
-} from '@/mui/icons-material';
-import {
-  Box, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography,
-} from '@/mui/material';
 
 interface BlogCardProps {
   blog: BlogBlog

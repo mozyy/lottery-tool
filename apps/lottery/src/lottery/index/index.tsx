@@ -1,16 +1,16 @@
 import {
-  Button, Col, Form, FormItem, Input, Radio, Row, Switch,
+    Button, Col, Form, FormItem, Input, Radio, Row, Switch,
 } from '@nutui/nutui-react-taro';
 import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
 import { useShareAppMessage } from '@tarojs/taro';
 import {
-  LotteryNewItem,
+    LotteryNewItem,
 
-  LotteryNewLotteryInfo,
-  LotteryNewRemark,
-  LotterylotteryCreateResponse,
-  LotterylotteryType,
-} from 'openapi/axios/lottery/lottery';
+    LotteryNewLotteryInfo,
+    LotteryNewRemark,
+    LotterylotteryCreateResponse,
+    LotterylotteryType,
+} from 'openapi/dist/axios/lottery/lottery';
 import { useRef } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
 import createErrorBoundary from '../../components/common/createErrorBoundary';

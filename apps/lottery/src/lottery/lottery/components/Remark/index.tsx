@@ -1,8 +1,8 @@
 import {
     Input,
 } from '@nutui/nutui-react-taro';
-import { LotteryRemark } from 'openapi/axios/lottery/lottery';
-import { RecordNewRecordRemark } from 'openapi/axios/lottery/record';
+import { LotteryRemark } from 'openapi/dist/axios/lottery/lottery';
+import { RecordNewRecordRemark } from 'openapi/dist/axios/lottery/record';
 
 export interface RemarksProps {
   remark: LotteryRemark,

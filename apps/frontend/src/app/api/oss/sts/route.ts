@@ -1,11 +1,11 @@
-import 'server-only';
 import Sts20150401, { AssumeRoleRequest, AssumeRoleResponseBody } from '@alicloud/sts20150401';
+import 'server-only';
 // 依赖的模块可通过下载工程中的模块依赖文件或右上角的获取 SDK 依赖信息查看
+import { envBrowser } from '@/env.browser';
+import { envServer } from '@/env.server';
 import { Config } from '@alicloud/openapi-client';
 import { RuntimeOptions } from '@alicloud/tea-util';
 import { NextResponse } from 'next/server';
-import { envServer } from '@/env.server';
-import { envBrowser } from '@/env.browser';
 
 let sts:AssumeRoleResponseBody;
 

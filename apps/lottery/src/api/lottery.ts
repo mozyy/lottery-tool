@@ -1,4 +1,4 @@
-import { Configuration, LotteryServiceApiFactory } from 'openapi/axios/lottery/lottery';
+import { Configuration, LotteryServiceApiFactory } from 'openapi/dist/axios/lottery/lottery';
 import { config } from '../env';
 import { axiosInstance, configurationParameters } from '../utils/request';
 

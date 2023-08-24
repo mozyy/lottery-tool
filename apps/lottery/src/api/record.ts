@@ -1,4 +1,4 @@
-import { Configuration, RecordServiceApiFactory } from 'openapi/axios/lottery/record';
+import { Configuration, RecordServiceApiFactory } from 'openapi/dist/axios/lottery/record';
 import { config } from '../env';
 import { axiosInstance, configurationParameters } from '../utils/request';
 
