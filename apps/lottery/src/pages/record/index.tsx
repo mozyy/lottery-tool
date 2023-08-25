@@ -26,7 +26,7 @@ function Record() {
           return (
             <Cell
               key={record.record!.id}
-              onClick={() => navigateTo({ url: `/lottery/recordDetail/index?id=${record.record!.id}` })}
+              onClick={() => navigateTo({ url: `/pages/recordDetail/index?id=${record.record!.id}` })}
               title={record.lottery?.lottery?.title}
               description={item?.name}
               extra={<Right />}

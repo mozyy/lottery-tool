@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
-    'airbnb',
-    'airbnb-typescript',
+    '../../.eslintrc.js',
+    'taro/react',
   ],
   rules: {
     'react/jsx-uses-react': 'off',

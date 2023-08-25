@@ -1,19 +1,31 @@
-import merge from 'lodash/merge';
-
-import health from './health.config';
-import lottery from './lottery.config';
-
-const app = process.env.TARO_APP_APP as keyof typeof apps;
-
-const apps = {
-  health,
-  lottery,
-};
-const appConfig = apps[app];
-
-const commonConfig = defineAppConfig({
-  // renderer: 'skyline',
-  // lazyCodeLoading: 'requiredComponents',
+export default defineAppConfig({
+  pages: [
+    'pages/index/index',
+    'pages/mine/index',
+    'pages/lottery/index',
+    'pages/lotteryDetail/index', // ?id=
+    'pages/lotteryList/index',
+    'pages/record/index',
+    'pages/recordDetail/index', // ?id=
+  ],
+  window: {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: 'WeChat',
+    navigationBarTextStyle: 'black',
+  },
+  tabBar: {
+    list: [
+      {
+        pagePath: 'pages/index/index',
+        text: '首页',
+      }, {
+        pagePath: 'pages/mine/index',
+        text: '我的',
+      },
+    ],
+  },
+  // entryPagePath: 'pages/index/index',
+  // entryPagePath: 'pages/lottery/index',
+  // entryPagePath: 'pages/mine/index',
 });
-const config = merge(commonConfig, appConfig);
-export default config;

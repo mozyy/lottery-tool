@@ -1,5 +1,5 @@
 {
-  "name": "lottery",
+  "name": "@zyy/lottery",
   "version": "1.0.0",
   "private": true,
   "description": "抽签工具",
@@ -9,19 +9,11 @@
     "css": "sass"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production npm run dev:lottery:weapp",
-    "dev:health:weapp": "npm run health npm run dev:weapp",
-    "build:health:weapp": "npm run health npm run build:weapp",
-    "dev:lottery:weapp": "npm run lottery npm run dev:weapp",
-    "dev:lottery:h5": "npm run lottery npm run dev:h5",
-    "build:lottery:weapp": "npm run lottery npm run build:weapp",
-    "build:weapp": "taro build --type weapp",
-    "build:h5": "taro build --type h5",
+    "start": "cross-env NODE_ENV=production npm run dev:weapp",
     "dev:weapp": "npm run build:weapp -- --watch",
     "dev:h5": "npm run build:h5 -- --watch",
-    "lottery": "cross-env TARO_APP_APP=lottery",
-    "health": "cross-env TARO_APP_APP=health",
-    "openapi": "./scripts/openapi.sh"
+    "build:weapp": "taro build --type weapp",
+    "build:h5": "taro build --type h5"
   },
   "browserslist": [
     "last 3 versions",

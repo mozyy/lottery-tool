@@ -47,15 +47,15 @@ function App(props:PropsWithChildren) {
           visibleRef.current = true;
           callback();
         };
-        Taro.onAppShow(appShow);
+        Taro?.onAppShow(appShow);
 
         const appHide = (res: Taro.onAppShow.CallbackResult) => {
           visibleRef.current = false;
         };
-        Taro.onAppHide(appHide);
+        Taro?.onAppHide(appHide);
         return () => {
-          Taro.onAppShow(appShow);
-          Taro.onAppHide(appHide);
+          Taro?.onAppShow(appShow);
+          Taro?.onAppHide(appHide);
         };
       },
       initReconnect(callback) {

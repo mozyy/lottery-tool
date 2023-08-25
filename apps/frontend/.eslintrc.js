@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["plugin:import/recommended","airbnb", "airbnb-typescript", "next"],
+  extends: ["../../.eslintrc.js","plugin:import/recommended","next"],
   rules: {
     // 'linebreak-style': 0,
     // // '@typescript-eslint/dot-notation': 0,

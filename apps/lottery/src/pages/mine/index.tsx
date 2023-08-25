@@ -16,12 +16,12 @@ function Mine() {
       <CellGroup>
         <Cell
           title='我的抽签'
-          onClick={toPage('/lottery/lotteryList/index')}
+          onClick={toPage('/pages/lotteryList/index')}
           extra={<Right />}
         />
         <Cell
           title='我的记录'
-          onClick={toPage('/lottery/record/index')}
+          onClick={toPage('/pages/record/index')}
           extra={<Right />}
         />
       </CellGroup>

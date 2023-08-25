@@ -28,7 +28,7 @@ function Lottery() {
   const { lottery, items, remarks } = data.lottery as Required<LotteryLottery>;
 
   const submit = async (value) => {
-    const recordRemarks:RecordNewRecordRemark[] = Object.values(value);
+    const recordRemarks:RecordNewRecordRemark[] = Object.values(value || {});
 
     const token = await login();
     const record: LotteryrecordCreateRequest = {
