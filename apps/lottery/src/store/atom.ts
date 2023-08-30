@@ -1,4 +1,4 @@
-import { OauthToken as OauthTokenModel, OauthoauthUser } from 'openapi/dist/axios/wx/user';
+import { OauthToken as OauthTokenModel, OauthoauthUser } from '@zyy/openapi/dist/axios/wx/user';
 import { AtomEffect, DefaultValue, atom } from 'recoil';
 import { getStorage, removeStorage, setStorage } from '../utils/storage';
 

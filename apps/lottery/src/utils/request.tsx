@@ -1,6 +1,6 @@
 import { Empty } from '@nutui/nutui-react-taro';
+import { ConfigurationParameters } from '@zyy/openapi/dist/axios/lottery/lottery';
 import axios from 'axios';
-import { ConfigurationParameters } from 'openapi/dist/axios/lottery/lottery';
 import { useRecoilState } from 'recoil';
 import { Middleware, SWRHook } from 'swr';
 import { getAccessToken, oauthTokenState } from '../store/atom';

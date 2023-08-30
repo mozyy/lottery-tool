@@ -25,7 +25,7 @@ var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/time
 goog.object.extend(proto, google_protobuf_timestamp_pb);
 var google_api_annotations_pb = require('../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
-var protoc$gen$openapiv2_options_annotations_pb = require('openapi/dist/fetchv2/options/annotations_pb.js');
+var protoc$gen$openapiv2_options_annotations_pb = require('@zyy/openapi/dist/fetchv2/options/annotations_pb.js');
 goog.object.extend(proto, protoc$gen$openapiv2_options_annotations_pb);
 goog.exportSymbol('proto.blog.v1.Blog', null, global);
 goog.exportSymbol('proto.blog.v1.CreateRequest', null, global);

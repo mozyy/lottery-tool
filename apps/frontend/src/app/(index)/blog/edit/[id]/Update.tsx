@@ -1,8 +1,8 @@
 'use client';
 
-import { useSetState } from '@/hooks/setState';
-import { BlogNewBlog, BlogNewBlogFromJSON } from 'openapi/dist/fetch/blog/blog';
+import { BlogNewBlog, BlogNewBlogFromJSON } from '@zyy/openapi/dist/fetch/blog/blog';
 import Edit from '../Edit';
+import { useSetState } from '@/hooks/setState';
 
 export default function Update({ id }:{ id:string }) {
   const [blog, setBlog] = useSetState(BlogNewBlogFromJSON({}));

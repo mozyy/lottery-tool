@@ -1,6 +1,6 @@
 // import { MDXRemote } from 'next-mdx-remote/rsc';
+import { BlogServiceApi } from '@zyy/openapi/dist/fetch/blog/blog';
 import { marked } from 'marked';
-import { BlogServiceApi } from 'openapi/dist/fetch/blog/blog';
 import BlogComponent from '../BlogComponent';
 
 export default async function Detail({ params: { id } }:{ params: { id:string } }) {

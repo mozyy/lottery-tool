@@ -1,18 +1,18 @@
 'use client';
 
+import {
+  BlogNewBlog,
+} from '@zyy/openapi/dist/fetch/blog/blog';
+import {
+  ChangeEvent,
+  useState,
+} from 'react';
+import BlogComponent from '../BlogComponent';
 import Gallery from '@/component/Gallery';
 import { SetState } from '@/hooks/setState';
 import {
-    Box, Button, Unstable_Grid2 as Grid, TextField, Typography
+  Box, Button, Unstable_Grid2 as Grid, TextField, Typography,
 } from '@/mui/material';
-import {
-    BlogNewBlog
-} from 'openapi/dist/fetch/blog/blog';
-import {
-    ChangeEvent,
-    useState
-} from 'react';
-import BlogComponent from '../BlogComponent';
 
 interface EditProps {
   blog:BlogNewBlog

@@ -5,7 +5,7 @@ export interface PageProps {
 }
 export default function Page({ full, children }:PropsWithChildren<PageProps>) {
   return (
-    <div className={`bg-gray-100 h-full box-border ${full ? '' : 'p-2'}`}>
+    <div className={`h-full box-border ${full ? '' : 'p-2'}`}>
       {children}
     </div>
   );

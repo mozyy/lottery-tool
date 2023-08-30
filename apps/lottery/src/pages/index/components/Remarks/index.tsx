@@ -1,10 +1,10 @@
 import { Close } from '@nutui/icons-react-taro';
 import {
-    Button,
-    Col,
-    Input, Row, Switch,
+  Button,
+  Col,
+  Input, Row, Switch,
 } from '@nutui/nutui-react-taro';
-import { LotteryNewRemark, LotteryRemark } from 'openapi/dist/axios/lottery/lottery';
+import { LotteryNewRemark, LotteryRemark } from '@zyy/openapi/dist/axios/lottery/lottery';
 
 export interface RemarksProps {
   value?: LotteryNewRemark[],

@@ -1,7 +1,7 @@
 import { login } from '@tarojs/taro';
 import { useCallback } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { userServiceApi } from '../api/user';
+import { userServiceApi } from '../api/wx';
 import { OauthToken, oauthTokenState, setOauthToken } from '../store/atom';
 import { useSWRMutation } from './swrMutation';
 

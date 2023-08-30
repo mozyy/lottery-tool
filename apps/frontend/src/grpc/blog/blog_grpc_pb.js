@@ -5,7 +5,7 @@ var grpc = require('@grpc/grpc-js');
 var blog_blog_pb = require('../blog/blog_pb.js');
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 var google_api_annotations_pb = require('../google/api/annotations_pb.js');
-var protoc$gen$openapiv2_options_annotations_pb = require('openapi/dist/fetchv2/options/annotations_pb.js');
+var protoc$gen$openapiv2_options_annotations_pb = require('@zyy/openapi/dist/fetchv2/options/annotations_pb.js');
 
 function serialize_blog_v1_CreateRequest(arg) {
   if (!(arg instanceof blog_blog_pb.CreateRequest)) {

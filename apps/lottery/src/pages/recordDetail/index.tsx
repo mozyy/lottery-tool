@@ -1,6 +1,6 @@
 import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
-import { recordServiceApi } from '../../api/record';
+import { recordServiceApi } from '../../api/lottery';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useSWR } from '../../hooks/swr';
 import { getLotteryTypeDesc } from '../../status/lottery';

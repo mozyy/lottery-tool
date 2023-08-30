@@ -1,9 +1,8 @@
 import { Button, Form } from '@nutui/nutui-react-taro';
 import { showToast, useRouter } from '@tarojs/taro';
-import { LotteryLottery } from 'openapi/dist/axios/lottery/lottery';
-import { LotteryrecordCreateRequest, RecordNewRecordRemark } from 'openapi/dist/axios/lottery/record';
-import { lotteryServiceApi } from '../../api/lottery';
-import { recordServiceApi } from '../../api/record';
+import { LotteryLottery } from '@zyy/openapi/dist/axios/lottery/lottery';
+import { LotteryrecordCreateRequest, RecordNewRecordRemark } from '@zyy/openapi/dist/axios/lottery/record';
+import { lotteryServiceApi, recordServiceApi } from '../../api/lottery';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useLogin } from '../../hooks/login';
 import { useSWR } from '../../hooks/swr';
@@ -41,7 +40,7 @@ function Lottery() {
     showToast({ title: `抽中${res.record?.record?.itemId}` });
   };
   return (
-    <div className='p-2 bg-gray-100 h-full box-border'>
+    <div className='p-2'>
       <Form
         form={form}
         onFinish={submit}

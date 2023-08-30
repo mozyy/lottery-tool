@@ -10,7 +10,7 @@ import {
   LotteryNewRemark,
   LotterylotteryCreateResponse,
   LotterylotteryType,
-} from 'openapi/dist/axios/lottery/lottery';
+} from '@zyy/openapi/dist/axios/lottery/lottery';
 import { useRef } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
@@ -76,7 +76,7 @@ function Index() {
   });
 
   return (
-    <div className='p-2 bg-gray-100 h-full box-border'>
+    <div className='p-2'>
       <Form
         form={form}
         onFinish={onSubmit}

@@ -1,4 +1,8 @@
-import Taro, {
+import {
+  offNetworkStatusChange,
+  onAppHide,
+  onAppShow,
+  onNetworkStatusChange,
   useError, useLaunch,
   useUnhandledRejection,
 } from '@tarojs/taro';
@@ -47,15 +51,15 @@ function App(props:PropsWithChildren) {
           visibleRef.current = true;
           callback();
         };
-        Taro?.onAppShow(appShow);
+        onAppShow(appShow);
 
         const appHide = (res: Taro.onAppShow.CallbackResult) => {
           visibleRef.current = false;
         };
-        Taro?.onAppHide(appHide);
+        onAppHide(appHide);
         return () => {
-          Taro?.onAppShow(appShow);
-          Taro?.onAppHide(appHide);
+          onAppShow(appShow);
+          onAppHide(appHide);
         };
       },
       initReconnect(callback) {
@@ -66,9 +70,9 @@ function App(props:PropsWithChildren) {
             callback();
           }
         };
-        Taro.onNetworkStatusChange(networkStatusChange);
+        onNetworkStatusChange(networkStatusChange);
         return () => {
-          Taro.offNetworkStatusChange(networkStatusChange);
+          offNetworkStatusChange(networkStatusChange);
         };
       },
     }}

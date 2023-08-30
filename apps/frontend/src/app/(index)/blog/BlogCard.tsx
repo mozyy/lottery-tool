@@ -1,4 +1,4 @@
-import { BlogBlog } from 'openapi/dist/fetch/blog/blog';
+import { BlogBlog } from '@zyy/openapi/dist/fetch/blog/blog';
 import FeauterCard from '../../../component/FeauterCard';
 
 interface BlogCardProps {

@@ -1,7 +1,7 @@
 import { Right } from '@nutui/icons-react-taro';
 import { Cell, CellGroup, Empty } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
-import { recordServiceApi } from '../../api/record';
+import { recordServiceApi } from '../../api/lottery';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useSWR } from '../../hooks/swr';
 import { useUserId } from '../../hooks/userId';
