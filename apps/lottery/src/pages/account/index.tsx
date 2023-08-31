@@ -8,18 +8,19 @@ import { navigateTo } from '@tarojs/taro';
 import { userServiceApi } from '../../api/wx';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useSWR } from '../../hooks/swr';
+import { useUploadOss } from '../../hooks/uploadOss';
 import { useUserId } from '../../hooks/userId';
 
 function Account() {
   const userId = useUserId();
   const { data } = useSWR([userServiceApi.userServiceGet, userId!]);
-
+  const uploadOss = useUploadOss();
   const toPage = (url: string) => () => {
     navigateTo({ url });
   };
   const onChooseAvatar = async (e: BaseEventOrig) => {
     const url = e.detail.avatarUrl;
-    console.log(e, url);
+    const resp = await uploadOss(url);
   };
 
   return (

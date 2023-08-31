@@ -1,5 +1,5 @@
 import CryptoJs from 'crypto-js';
-import { iv as ivStr, key as keyStr } from '../config/crypto';
+import { iv as ivStr, key as keyStr } from '../env';
 
 const key = CryptoJs.enc.Utf8.parse(keyStr);
 const iv = CryptoJs.enc.Utf8.parse(ivStr);
