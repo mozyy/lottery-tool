@@ -13,12 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { LotteryLottery } from './LotteryLottery';
-import {
-    LotteryLotteryFromJSON,
-    LotteryLotteryFromJSONTyped,
-    LotteryLotteryToJSON,
-} from './LotteryLottery';
 import type { RecordRecordInfo } from './RecordRecordInfo';
 import {
     RecordRecordInfoFromJSON,
@@ -44,12 +38,6 @@ export interface RecordRecord {
      * @memberof RecordRecord
      */
     record?: RecordRecordInfo;
-    /**
-     * 
-     * @type {LotteryLottery}
-     * @memberof RecordRecord
-     */
-    lottery?: LotteryLottery;
     /**
      * 
      * @type {Array<RecordRecordRemark>}
@@ -78,7 +66,6 @@ export function RecordRecordFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return {
         
         'record': !exists(json, 'record') ? undefined : RecordRecordInfoFromJSON(json['record']),
-        'lottery': !exists(json, 'lottery') ? undefined : LotteryLotteryFromJSON(json['lottery']),
         'recordRemarks': !exists(json, 'recordRemarks') ? undefined : ((json['recordRemarks'] as Array<any>).map(RecordRecordRemarkFromJSON)),
     };
 }
@@ -93,7 +80,6 @@ export function RecordRecordToJSON(value?: RecordRecord | null): any {
     return {
         
         'record': RecordRecordInfoToJSON(value.record),
-        'lottery': LotteryLotteryToJSON(value.lottery),
         'recordRemarks': value.recordRemarks === undefined ? undefined : ((value.recordRemarks as Array<any>).map(RecordRecordRemarkToJSON)),
     };
 }

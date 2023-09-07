@@ -16,6 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   RpcStatus,
+  UserGetByUserIdResponse,
   UserInfoResponse,
   UserServiceUpdateRequest,
   WxuserCreateRequest,
@@ -29,6 +30,8 @@ import type {
 import {
     RpcStatusFromJSON,
     RpcStatusToJSON,
+    UserGetByUserIdResponseFromJSON,
+    UserGetByUserIdResponseToJSON,
     UserInfoResponseFromJSON,
     UserInfoResponseToJSON,
     UserServiceUpdateRequestFromJSON,
@@ -59,6 +62,10 @@ export interface UserServiceDeleteRequest {
 
 export interface UserServiceGetRequest {
     id: string;
+}
+
+export interface UserServiceGetByUserIdRequest {
+    userId: string;
 }
 
 export interface UserServiceLoginRequest {
@@ -159,6 +166,34 @@ export class UserServiceApi extends runtime.BaseAPI {
      */
     async userServiceGet(requestParameters: UserServiceGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WxuserGetResponse> {
         const response = await this.userServiceGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async userServiceGetByUserIdRaw(requestParameters: UserServiceGetByUserIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserGetByUserIdResponse>> {
+        if (requestParameters.userId === null || requestParameters.userId === undefined) {
+            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling userServiceGetByUserId.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/wx.user.UserService/users/userId/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserGetByUserIdResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async userServiceGetByUserId(requestParameters: UserServiceGetByUserIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserGetByUserIdResponse> {
+        const response = await this.userServiceGetByUserIdRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

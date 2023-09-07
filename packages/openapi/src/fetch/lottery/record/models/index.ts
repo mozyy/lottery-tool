@@ -1,10 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export * from './LotteryItem';
-export * from './LotteryLottery';
-export * from './LotteryLotteryInfo';
-export * from './LotteryRemark';
-export * from './LotterylotteryType';
 export * from './LotteryrecordCreateRequest';
 export * from './LotteryrecordCreateResponse';
 export * from './LotteryrecordGetResponse';

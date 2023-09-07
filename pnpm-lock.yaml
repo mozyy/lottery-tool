@@ -400,9 +400,15 @@ importers:
       '@zyy/openapi':
         specifier: workspace:*
         version: link:../../packages/openapi
+      '@zyy/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       axios:
         specifier: ^1.4.0
         version: 1.4.0
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
       crypto-js:
         specifier: ^4.1.1
         version: 4.1.1
@@ -534,9 +540,17 @@ importers:
         specifier: ^5.1.6
         version: 5.1.6
 
-  packages/utils: {}
+  packages/utils:
+    dependencies:
+      '@zyy/openapi':
+        specifier: workspace:*
+        version: link:../openapi
 
-  packages/weapp: {}
+  packages/weapp:
+    dependencies:
+      '@tarojs/taro':
+        specifier: '>=3.6.13'
+        version: 3.6.13(@types/react@18.2.21)(postcss@8.4.28)
 
 packages:
 

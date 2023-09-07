@@ -57,10 +57,10 @@ export interface WxuserUser {
     name?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof WxuserUser
      */
-    avatar?: string;
+    avatar?: number;
     /**
      * 
      * @type {string}

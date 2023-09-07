@@ -14,6 +14,7 @@ docs=(
   lottery/lottery
   lottery/record
   oauth/oauth
+  oss/oss
   wx/wx
   wx/user
 )

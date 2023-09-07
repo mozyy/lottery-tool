@@ -1,11 +1,6 @@
 apis/RecordServiceApi.ts
 apis/index.ts
 index.ts
-models/LotteryItem.ts
-models/LotteryLottery.ts
-models/LotteryLotteryInfo.ts
-models/LotteryRemark.ts
-models/LotterylotteryType.ts
 models/LotteryrecordCreateRequest.ts
 models/LotteryrecordCreateResponse.ts
 models/LotteryrecordGetResponse.ts

@@ -3,10 +3,11 @@ export default defineAppConfig({
     'pages/index/index',
     'pages/mine/index',
     'pages/account/index',
+    'pages/accountName/index',
     'pages/lottery/index',
     'pages/lotteryDetail/index', // ?id=
     'pages/lotteryList/index',
-    'pages/record/index',
+    'pages/recordList/index',
     'pages/recordDetail/index', // ?id=
   ],
   window: {

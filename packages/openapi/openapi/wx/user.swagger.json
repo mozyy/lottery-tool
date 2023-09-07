@@ -127,6 +127,36 @@
         ]
       }
     },
+    "/wx.user.UserService/users/userId/{userId}": {
+      "get": {
+        "operationId": "UserService_GetByUserId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userGetByUserIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/wx.user.UserService/users/{id}": {
       "get": {
         "operationId": "UserService_Get",
@@ -294,6 +324,14 @@
         }
       }
     },
+    "userGetByUserIdResponse": {
+      "type": "object",
+      "properties": {
+        "wxUser": {
+          "$ref": "#/definitions/wxuserUser"
+        }
+      }
+    },
     "userInfoResponse": {
       "type": "object",
       "properties": {
@@ -325,7 +363,8 @@
           "type": "string"
         },
         "avatar": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "mobile": {
           "type": "string"
@@ -425,7 +464,8 @@
           "type": "string"
         },
         "avatar": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "mobile": {
           "type": "string"

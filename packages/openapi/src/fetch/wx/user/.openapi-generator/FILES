@@ -5,6 +5,7 @@ models/OauthToken.ts
 models/OauthoauthUser.ts
 models/ProtobufAny.ts
 models/RpcStatus.ts
+models/UserGetByUserIdResponse.ts
 models/UserInfoResponse.ts
 models/UserNewUser.ts
 models/UserServiceUpdateRequest.ts

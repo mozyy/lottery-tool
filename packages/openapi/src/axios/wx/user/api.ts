@@ -128,6 +128,19 @@ export interface RpcStatus {
 /**
  * 
  * @export
+ * @interface UserGetByUserIdResponse
+ */
+export interface UserGetByUserIdResponse {
+    /**
+     * 
+     * @type {WxuserUser}
+     * @memberof UserGetByUserIdResponse
+     */
+    'wxUser'?: WxuserUser;
+}
+/**
+ * 
+ * @export
  * @interface UserInfoResponse
  */
 export interface UserInfoResponse {
@@ -176,10 +189,10 @@ export interface UserNewUser {
     'name'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof UserNewUser
      */
-    'avatar'?: string;
+    'avatar'?: number;
     /**
      * 
      * @type {string}
@@ -341,10 +354,10 @@ export interface WxuserUser {
     'name'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof WxuserUser
      */
-    'avatar'?: string;
+    'avatar'?: number;
     /**
      * 
      * @type {string}
@@ -450,6 +463,39 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
             assertParamExists('userServiceGet', 'id', id)
             const localVarPath = `/wx.user.UserService/users/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceGetByUserId: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('userServiceGetByUserId', 'userId', userId)
+            const localVarPath = `/wx.user.UserService/users/userId/{userId}`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -647,6 +693,16 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userServiceGetByUserId(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserGetByUserIdResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceGetByUserId(userId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -721,6 +777,15 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
          */
         userServiceGet(id: string, options?: any): AxiosPromise<WxuserGetResponse> {
             return localVarFp.userServiceGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceGetByUserId(userId: string, options?: any): AxiosPromise<UserGetByUserIdResponse> {
+            return localVarFp.userServiceGetByUserId(userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -799,6 +864,17 @@ export class UserServiceApi extends BaseAPI {
      */
     public userServiceGet(id: string, options?: AxiosRequestConfig) {
         return UserServiceApiFp(this.configuration).userServiceGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} userId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserServiceApi
+     */
+    public userServiceGetByUserId(userId: string, options?: AxiosRequestConfig) {
+        return UserServiceApiFp(this.configuration).userServiceGetByUserId(userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -51,10 +51,10 @@ export interface UserNewUser {
     name?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof UserNewUser
      */
-    avatar?: string;
+    avatar?: number;
     /**
      * 
      * @type {string}

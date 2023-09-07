@@ -5,6 +5,7 @@ import { lotteryServiceApi } from '../../api/lottery';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
 import { useSWR } from '../../hooks/swr';
 import { useUserId } from '../../hooks/userId';
+import { formatDate } from '../../utils/date';
 
 function LotteryList() {
   const userId = useUserId();
@@ -27,6 +28,7 @@ function LotteryList() {
           <Cell
             key={lottery.lottery?.id}
             title={lottery.lottery?.title}
+            description={formatDate(lottery.lottery?.createdAt, 'YYYY-MM-DD HH:mm 创建')}
             onClick={() => navigateTo({ url: `/pages/lotteryDetail/index?id=${lottery.lottery?.id}` })}
             extra={<Right />}
           />

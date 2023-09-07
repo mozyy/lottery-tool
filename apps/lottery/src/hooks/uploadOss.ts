@@ -1,9 +1,13 @@
 import { getFileSystemManager, uploadFile } from '@tarojs/taro';
+import { OssBucketName } from '@zyy/openapi/dist/axios/oss/oss';
+import { getBaseUrl } from '@zyy/utils/oss';
 import axios from 'axios';
 import crypto from 'crypto-js';
 import { useCallback } from 'react';
 import useSWRMutationHook from 'swr/mutation';
-import { ossBucket, ossLocation, ossStsPath } from '../env';
+import { ossServiceApi } from '../api/oss';
+import { ossStsPath } from '../env';
+import { useSWRMutation } from './swrMutation';
 
 const fetcherSts = ([token, url]) => axios.post(url);
 
@@ -14,7 +18,7 @@ const getPolicy = () => {
     expiration: date.toISOString(), // 设置policy过期时间。
     conditions: [
       // 限制上传大小。
-      ['content-length-range', 0, 1024 * 1024 * 1024],
+      ['content-length-range', 0, 50 * 1024 * 1024],
     ],
   };
   const policy = crypto.enc.Base64.stringify(
@@ -27,10 +31,10 @@ const computeSignature = (accessKeySecret, canonicalString) => crypto
   .enc.Base64.stringify(crypto.HmacSHA1(canonicalString, accessKeySecret));
 
 export const useUploadOss = () => {
-  // TODO: add env var
-  const { trigger } = useSWRMutationHook([ossStsPath, ''], fetcherSts);
+  const { trigger: uploadTrigger } = useSWRMutationHook([ossStsPath, ''], fetcherSts);
+  const { trigger: createTrigger } = useSWRMutation([ossServiceApi.ossServiceCreate]);
   const uploadOss = useCallback(async (filePath: string) => {
-    const { data: { credentials } } = await trigger();
+    const { data: { credentials } } = await uploadTrigger();
     const policy = getPolicy(); // policy必须为base64的string。
     const signature = computeSignature(credentials.accessKeySecret, policy);
 
@@ -44,9 +48,8 @@ export const useUploadOss = () => {
     const fileName = fileInfo?.digest ? `${fileInfo.digest}.${fileExt || 'jpeg'}` : filePath.split('/').pop();
     const key = `weixin/${fileName}`;
 
-    const resp = await uploadFile({
-      // TODO: add env var
-      url: `https://${ossBucket}.oss-${ossLocation}.aliyuncs.com`, // 开发者服务器的URL。
+    const respOss = await uploadFile({
+      url: getBaseUrl(OssBucketName.Image), // 开发者服务器的URL。
       filePath,
       name: 'file', // 必须填file。
       formData: {
@@ -61,13 +64,15 @@ export const useUploadOss = () => {
         'x-oss-forbid-overwrite': 'true',
       },
     });
-    if (resp.statusCode === 204) {
-      console.log('上传成功');
-    } else {
-      console.warn('上传失败', resp, key);
+
+    if (respOss.statusCode !== 204) {
+      console.warn('上传失败', respOss, key);
+      return Promise.reject(Error('上传失败'));
     }
-    return key;
-  }, [trigger]);
+    console.log('上传成功');
+    const resp = await createTrigger([{ oss: { bucketName: OssBucketName.Image } }]);
+    return resp.oss!;
+  }, [createTrigger, uploadTrigger]);
 
   return uploadOss;
 };

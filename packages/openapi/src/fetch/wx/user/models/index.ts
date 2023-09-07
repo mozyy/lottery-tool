@@ -4,6 +4,7 @@ export * from './OauthToken';
 export * from './OauthoauthUser';
 export * from './ProtobufAny';
 export * from './RpcStatus';
+export * from './UserGetByUserIdResponse';
 export * from './UserInfoResponse';
 export * from './UserNewUser';
 export * from './UserServiceUpdateRequest';
