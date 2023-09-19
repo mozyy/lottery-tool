@@ -1,11 +1,9 @@
-@tailwind base;
-@tailwind components;
 page {
   height: 100%;
   @apply bg-gray-100;
-
-  @tailwind utilities;
 }
+
+/*postcss-pxtransform disable*/
 
 /* material icons */
 @font-face {
@@ -128,7 +126,6 @@ page {
 }
 
 // theme
-/*postcss-pxtransform disable*/
 @import "@nutui/nutui-react-taro/dist/styles/theme-default.scss";
 :root,
 page {

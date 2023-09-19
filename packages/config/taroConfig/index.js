@@ -1,8 +1,8 @@
 /** @type {import('@tarojs/cli').UserConfigExport} */
 const config = {
-  designWidth: (input) => {
+  designWidth: function designWidth(input) {
     // 配置 NutUI 375 尺寸
-    if (input?.file?.includes('nutui')) {
+    if (input && input.file && input.file.includes('nutui')) {
       return 375;
     }
     // 全局使用 Taro 默认的 750 尺寸
@@ -65,31 +65,30 @@ const config = {
         },
       },
     },
-    // commonChunks: ['runtime', 'vendors', 'taro', 'common', 'appnutui'],
+    commonChunks: ['runtime', 'vendors', 'taro', 'common', 'app-tailwind'],
     // miniCssExtractPluginOption: {
     //   filename: '[name].css',
     //   chunkFilename: '[name].css',
     // },
-    // webpackChain(chain, webpack) {
-    //   chain.merge({
-    //     optimization:{
-    //       splitChunks:{
-    //         cacheGroups: {
-    //           appnutui: {
-    //             name: config.isBuildPlugin ? 'plugin/appnutui' : 'appnutui',
-    //             test: module => {
-    //               return module.resource && (
-    //                 module.resource.includes('appnutui')
-    //                 || module.resource.includes('@nutui')
-    //               )
-    //             },
-    //             priority: 1000
-    //           },
-    //         }
-    //       }
-    //     }
-    //   })
-    // },
+    webpackChain(chain, webpack) {
+      chain.merge({
+        optimization: {
+          splitChunks: {
+            chunks: 'all',
+            maxInitialRequests: Infinity,
+            minSize: 0,
+            cacheGroups: {
+              appnutui: {
+                name: config.isBuildPlugin ? 'plugin/app-tailwind' : 'app-tailwind',
+                test: /app\.tailwind/,
+                chunks: 'all',
+                priority: -1,
+              },
+            },
+          },
+        },
+      });
+    },
   },
   h5: {
     publicPath: '/',
