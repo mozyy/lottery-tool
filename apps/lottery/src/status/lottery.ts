@@ -1,4 +1,4 @@
-import { LotterylotteryType } from '@zyy/openapi/dist/axios/lottery/lottery';
+import { LotterylotteryType } from '@zyy/openapi/src/axios/lottery/lottery';
 
 const typeDescMap = {
   [LotterylotteryType.Number]: '个数',

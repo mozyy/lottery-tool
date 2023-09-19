@@ -1,12 +1,12 @@
-import { Right } from '@nutui/icons-react-taro';
+import { Right } from '@nutui/icons-react';
 import { Cell } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
-import { RecordRecord } from '@zyy/openapi/dist/axios/lottery/record';
+import { RecordRecord } from '@zyy/openapi/src/axios/lottery/record';
+import { userServiceApi } from '@zyy/weapp/src/api/wx';
+import Avatar from '@zyy/weapp/src/components/Avatar';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { formatDate } from '@zyy/weapp/src/utils/date';
 import { lotteryServiceApi } from '../../api/lottery';
-import { userServiceApi } from '../../api/wx';
-import { useSWR } from '../../hooks/swr';
-import { formatDate } from '../../utils/date';
-import Avatar from '../Avatar';
 
 export interface RecordItemProps {
   record: RecordRecord,

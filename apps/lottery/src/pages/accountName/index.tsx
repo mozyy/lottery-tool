@@ -3,11 +3,11 @@ import {
   Form, Input,
 } from '@nutui/nutui-react-taro';
 import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
-import { userServiceApi } from '../../api/wx';
-import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useSWR } from '../../hooks/swr';
-import { useSWRMutation } from '../../hooks/swrMutation';
-import { useUserId } from '../../hooks/userId';
+import { userServiceApi } from '@zyy/weapp/src/api/wx';
+import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { useSWRMutation } from '@zyy/weapp/src/hooks/swrMutation';
+import { useUserId } from '@zyy/weapp/src/hooks/userId';
 
 function AccountName() {
   const userId = useUserId();

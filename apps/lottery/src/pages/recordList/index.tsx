@@ -1,9 +1,9 @@
 import { CellGroup, Empty } from '@nutui/nutui-react-taro';
+import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { useUserId } from '@zyy/weapp/src/hooks/userId';
 import { recordServiceApi } from '../../api/lottery';
 import RecordItem from '../../components/RecordItem';
-import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useSWR } from '../../hooks/swr';
-import { useUserId } from '../../hooks/userId';
 
 function RecordList() {
   const userId = useUserId();

@@ -1,12 +1,12 @@
-import { Right } from '@nutui/icons-react-taro';
+import { Right } from '@nutui/icons-react';
 import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
-import { userServiceApi } from '../../api/wx';
-import Avatar from '../../components/Avatar';
-import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useLogin } from '../../hooks/login';
-import { useSWR } from '../../hooks/swr';
-import { useUserId } from '../../hooks/userId';
+import { userServiceApi } from '@zyy/weapp/src/api/wx';
+import Avatar from '@zyy/weapp/src/components/Avatar';
+import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useLogin } from '@zyy/weapp/src/hooks/login';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { useUserId } from '@zyy/weapp/src/hooks/userId';
 
 function Mine() {
   const login = useLogin();

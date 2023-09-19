@@ -1,11 +1,11 @@
-import { Close } from '@nutui/icons-react-taro';
+import { Close } from '@nutui/icons-react';
 import {
   Button,
   Col,
   Input, Row,
 } from '@nutui/nutui-react-taro';
 import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
-import { LotteryItem, LotteryNewItem } from '@zyy/openapi/dist/axios/lottery/lottery';
+import { LotteryItem, LotteryNewItem } from '@zyy/openapi/src/axios/lottery/lottery';
 import { getLotteryTypeUnit } from '../../../../status/lottery';
 
 export interface ItemsProps {

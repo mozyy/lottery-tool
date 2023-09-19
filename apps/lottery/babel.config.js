@@ -12,32 +12,24 @@ module.exports = {
   ],
   plugins: [
     [
-      'import',
+      "import",
       {
-        libraryName: 'taro-hooks',
-        camel2DashComponentName: false
+        "libraryName": "@nutui/nutui-react-taro",
+        "libraryDirectory": "dist/esm",
+        "style": 'css',
+        "camel2DashComponentName": false
       },
-      'taro-hooks',
+      'nutui-react-taro'
     ],
     // [
     //   "import",
     //   {
-    //     "libraryName": "@nutui/nutui-react-taro",
-    //     "libraryDirectory": "dist/esm",
-    //     // "style": 'css',
+    //     "libraryName": "@nutui/icons-react-taro",
+    //     "libraryDirectory": "dist/es/icons",
+    //     "style": 'css',
     //     "camel2DashComponentName": false
     //   },
-    //   'nutui-react-taro'
+    //   'icons-react-taro'
     // ]
-    [
-      "import",
-      {
-        "libraryName": "@nutui/icons-react-taro",
-        "libraryDirectory": "dist/es/icons",
-        // "style": 'css',
-        "camel2DashComponentName": false
-      },
-      'nutui-react-taro'
-    ]
   ],
 };

@@ -1,12 +1,12 @@
 import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
+import { userServiceApi } from '@zyy/weapp/src/api/wx';
+import Avatar from '@zyy/weapp/src/components/Avatar';
+import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { formatDate } from '@zyy/weapp/src/utils/date';
 import { lotteryServiceApi, recordServiceApi } from '../../api/lottery';
-import { userServiceApi } from '../../api/wx';
-import Avatar from '../../components/Avatar';
-import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useSWR } from '../../hooks/swr';
 import { getLotteryTypeDesc } from '../../status/lottery';
-import { formatDate } from '../../utils/date';
 
 // ?id=
 function RecordDetail() {
@@ -16,7 +16,7 @@ function RecordDetail() {
     if (!dataReocrd?.record?.record?.lotteryId) {
       return false;
     }
-    return [lotteryServiceApi.lotteryServiceGet, record?.lotteryId!];
+    return [lotteryServiceApi.lotteryServiceGet, dataReocrd.record.record.lotteryId];
   });
   const { data: dataUser } = useSWR(() => {
     if (!dataReocrd?.record?.record?.userId) {
@@ -24,7 +24,6 @@ function RecordDetail() {
     }
     return [userServiceApi.userServiceGetByUserId, dataReocrd.record.record.userId];
   });
-
   if (result) {
     return result;
   }

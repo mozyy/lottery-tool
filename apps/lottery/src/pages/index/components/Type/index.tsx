@@ -3,7 +3,7 @@ import {
   Col,
   Input, Row,
 } from '@nutui/nutui-react-taro';
-import { LotteryItem } from '@zyy/openapi/dist/axios/lottery/lottery';
+import { LotteryItem } from '@zyy/openapi/src/axios/lottery/lottery';
 
 export interface TypeProps {
   value?: LotteryItem[],

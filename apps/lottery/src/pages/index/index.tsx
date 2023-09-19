@@ -10,12 +10,12 @@ import {
   LotteryNewRemark,
   LotterylotteryCreateResponse,
   LotterylotteryType,
-} from '@zyy/openapi/dist/axios/lottery/lottery';
+} from '@zyy/openapi/src/axios/lottery/lottery';
+import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useLogin } from '@zyy/weapp/src/hooks/login';
+import { useSWRMutation } from '@zyy/weapp/src/hooks/swrMutation';
 import { useRef } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
-import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useLogin } from '../../hooks/login';
-import { useSWRMutation } from '../../hooks/swrMutation';
 import { getLotteryTypeDesc } from '../../status/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';

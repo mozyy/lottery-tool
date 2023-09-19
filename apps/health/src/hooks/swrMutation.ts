@@ -9,9 +9,9 @@ export function useSWRMutation<
   R extends H extends (...body: any)=> AxiosPromise<infer U> ? U : never,
 >(
   key: [H] | (()=>[H] | false)):SWRMutationResponse<R, any, any, B> {
-  const { trigger: originTrigger, ...res } = useSWRMutationHook(key, undefined as any);
-  console.log(3333, originTrigger, res);
-  const trigger = useCallback((...args) => originTrigger(...args).then((resp) => {
+  const res = useSWRMutationHook(key, undefined as any);
+  console.log(3333, key[0], res);
+  const trigger = useCallback((...args) => res.trigger(...args).then((resp) => {
     console.log(4444, resp);
     return resp;
   }).catch((err) => {
@@ -24,6 +24,6 @@ export function useSWRMutation<
     showToast({ icon: 'error', title: message });
     return Promise.reject(err);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [originTrigger]);
-  return { ...res, trigger } as any;
+  }), [res.trigger]);
+  return { ...res, trigger };
 }

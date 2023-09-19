@@ -1,12 +1,12 @@
 import { Button, Form } from '@nutui/nutui-react-taro';
 import { showToast, useRouter } from '@tarojs/taro';
-import { LotteryLottery } from '@zyy/openapi/dist/axios/lottery/lottery';
-import { LotteryrecordCreateRequest, RecordNewRecordRemark } from '@zyy/openapi/dist/axios/lottery/record';
+import { LotteryLottery } from '@zyy/openapi/src/axios/lottery/lottery';
+import { LotteryrecordCreateRequest, RecordNewRecordRemark } from '@zyy/openapi/src/axios/lottery/record';
+import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useLogin } from '@zyy/weapp/src/hooks/login';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { useSWRMutation } from '@zyy/weapp/src/hooks/swrMutation';
 import { lotteryServiceApi, recordServiceApi } from '../../api/lottery';
-import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useLogin } from '../../hooks/login';
-import { useSWR } from '../../hooks/swr';
-import { useSWRMutation } from '../../hooks/swrMutation';
 import Remark from './components/Remark';
 
 /**

@@ -1,12 +1,12 @@
 import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { useRouter, useShareAppMessage } from '@tarojs/taro';
+import BottomButton from '@zyy/weapp/src/components/BottomButton';
+import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { formatDate } from '@zyy/weapp/src/utils/date';
 import { lotteryServiceApi, recordServiceApi } from '../../api/lottery';
-import BottomButton from '../../components/BottomButton';
 import RecordItem from '../../components/RecordItem';
-import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useSWR } from '../../hooks/swr';
 import { getLotteryTypeDesc, getLotteryTypeUnit } from '../../status/lottery';
-import { formatDate } from '../../utils/date';
 
 function LotteryDetail() {
   const { id } = useRouter().params;

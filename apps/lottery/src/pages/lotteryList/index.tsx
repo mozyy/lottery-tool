@@ -1,11 +1,11 @@
-import { Right } from '@nutui/icons-react-taro';
+import { Right } from '@nutui/icons-react';
 import { Cell, CellGroup, Empty } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
+import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { useUserId } from '@zyy/weapp/src/hooks/userId';
+import { formatDate } from '@zyy/weapp/src/utils/date';
 import { lotteryServiceApi } from '../../api/lottery';
-import createErrorBoundary from '../../components/common/createErrorBoundary';
-import { useSWR } from '../../hooks/swr';
-import { useUserId } from '../../hooks/userId';
-import { formatDate } from '../../utils/date';
 
 function LotteryList() {
   const userId = useUserId();
