@@ -35,27 +35,27 @@ export default function Items({ value = [], onChange = () => {}, form }:ItemsPro
           <Row>
             <Col span={12}>
               <Input
-                placeholder='选项名'
+                placeholder="选项名"
                 value={item.name}
                 onChange={(v) => addArray(i, { name: String(v) })}
               />
             </Col>
-            <Col span={8} className='flex'>
+            <Col span={8} className="flex">
               <Input
-                placeholder='数量'
+                placeholder="数量"
                 value={String(item.value)}
                 onChange={(v) => addArray(i, { value: Number(v) })}
               />
-              <span className='text-gray-400'>{getLotteryTypeUnit(form.getFieldValue('type'))}</span>
+              <span className="text-gray-400">{getLotteryTypeUnit(form.getFieldValue('type'))}</span>
             </Col>
-            <Col span={4} className='text-center'>
-              <Close onClick={delArray(i)} className='text-[22px] align-middle' />
+            <Col span={4} className="text-center">
+              <Close onClick={delArray(i)} className="text-[22px] align-middle" />
             </Col>
           </Row>
         </div>
       ))}
       <Button
-        size='small'
+        size="small"
         onClick={addItem}
       >
         添加选项

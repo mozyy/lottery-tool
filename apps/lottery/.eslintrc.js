@@ -1,7 +1,7 @@
 
 module.exports = {
   extends: [
-    '@zyy/weapp/.eslintrc.js',
+    '../../packages/weapp/.eslintrc.js',
   ],
   rules: {
   },

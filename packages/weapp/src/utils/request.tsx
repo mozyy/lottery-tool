@@ -7,7 +7,7 @@ import { getAccessToken, oauthTokenState } from '../store/atom';
 
 export const swrFetcher = async (key, extraArg = { arg: [] }) => {
   // eslint-disable-next-line prefer-const
-  let [token, service, ...params] = key;
+  let [, service, ...params] = key;
   const res = await service(...params, ...extraArg.arg);
   return res.data;
 };
@@ -63,15 +63,18 @@ export const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((config) => {
   const accessToken = getAccessToken();
   if (!config.headers.Authorization && accessToken) {
+    // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
   return config;
 });
 axiosInstance.interceptors.response.use((response) => {
+  // eslint-disable-next-line no-console
   console.log('[API]:', response.config.url, response.config.data, response.data);
   return response;
 }, (error) => {
   const message = error?.response?.headers['grpc-message'];
+  // eslint-disable-next-line no-console
   console.warn('[API]:', decodeURIComponent(message), error);
   return Promise.reject(error);
 });

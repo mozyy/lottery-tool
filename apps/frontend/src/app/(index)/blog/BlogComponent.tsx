@@ -1,5 +1,5 @@
 // import { MDXRemote } from 'next-mdx-remote/rsc';
-import { BlogBlog } from '@zyy/openapi/dist/fetch/blog/blog';
+import { BlogBlog } from '@zyy/openapi/src/fetch/blog/blog';
 import Image from 'next/image';
 import { Box, Unstable_Grid2 as Grid, Typography } from '@/mui/material';
 

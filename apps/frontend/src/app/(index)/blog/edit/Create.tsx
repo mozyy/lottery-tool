@@ -1,6 +1,6 @@
 'use client';
 
-import { BlogNewBlogFromJSON } from '@zyy/openapi/dist/fetch/blog/blog';
+import { BlogNewBlogFromJSON } from '@zyy/openapi/src/fetch/blog/blog';
 import Edit from './Edit';
 import { useSetState } from '@/hooks/setState';
 import { useSnackbar } from '@/hooks/snackbar';

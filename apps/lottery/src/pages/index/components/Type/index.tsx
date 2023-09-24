@@ -31,30 +31,30 @@ export default function Type({ value = [], onChange = () => {} }:TypeProps) {
   return (
     <div>
       {value.map((item, i) => (
-        <div key={i}>
+        <div key={item.id}>
           <Row>
             <Col span={12}>
               <Input
-                placeholder='选项名'
+                placeholder="选项名"
                 value={item.name}
                 onChange={(v) => addArray(i, { name: String(v) })}
               />
             </Col>
             <Col span={8}>
               <Input
-                placeholder='数量'
+                placeholder="数量"
                 value={String(item.value)}
                 onChange={(v) => addArray(i, { value: Number(v) })}
               />
             </Col>
             <Col span={4}>
-              <div className='at-col at-col-2' onClick={delArray(i)}>X</div>
+              <div className="at-col at-col-2" onClick={delArray(i)}>X</div>
             </Col>
           </Row>
         </div>
       ))}
       <Button
-        size='small'
+        size="small"
         onClick={addItem}
       >
         添加选项

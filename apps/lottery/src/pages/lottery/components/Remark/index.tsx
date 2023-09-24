@@ -18,6 +18,6 @@ export default function Remark({
   console.log(value);
 
   return (
-    <Input placeholder='请输入' value={value.value} onChange={(e) => onChange(e ? { ...value, value: e } : undefined)} />
+    <Input placeholder="请输入" value={value.value} onChange={(e) => onChange(e ? { ...value, value: e } : undefined)} />
   );
 }

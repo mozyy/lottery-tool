@@ -7,6 +7,7 @@ import { Component } from 'react';
  */
 export default function createErrorBoundary(Page: JSX.ElementType) {
   return class ErrorBoundary extends Component {
+    // eslint-disable-next-line react/state-in-constructor
     state = {
       hasError: null,
     };
@@ -18,14 +19,17 @@ export default function createErrorBoundary(Page: JSX.ElementType) {
     }
 
     componentDidCatch(error, errorInfo) {
-      console.log(error, errorInfo)
+      console.log(error, errorInfo);
     }
+
+    // eslint-disable-next-line class-methods-use-this
     onError(error) {
-      console.log(error)
+      console.log(error);
     }
 
     render() {
-      return this.state.hasError ? <div>Something went wrong.</div> : <Page />;
+      const { hasError } = this.state;
+      return hasError ? <div>Something went wrong.</div> : <Page />;
     }
   };
 }

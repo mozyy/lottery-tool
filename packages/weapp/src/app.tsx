@@ -43,13 +43,13 @@ function App(props:PropsWithChildren) {
       },
       initFocus(callback) {
         /* 向状态 provider 注册侦听器 */
-        const appShow = (res: Taro.onAppShow.CallbackResult) => {
+        const appShow = () => {
           visibleRef.current = true;
           callback();
         };
         onAppShow(appShow);
 
-        const appHide = (res: Taro.onAppShow.CallbackResult) => {
+        const appHide = () => {
           visibleRef.current = false;
         };
         onAppHide(appHide);

@@ -32,28 +32,28 @@ function LotteryDetail() {
   const { lottery, items, remarks } = data.lottery!;
 
   return (
-    <div className='overflow-auto flex flex-col'>
-      <div className='flex-auto'>
-        <Cell title='标题' extra={lottery?.title} />
-        <Cell title='类型' extra={getLotteryTypeDesc(lottery?.type)} />
-        <Cell title='创建日期' extra={formatDate(lottery?.createdAt)} />
-        <CellGroup title='选项'>
+    <div className="overflow-auto flex flex-col">
+      <div className="flex-auto">
+        <Cell title="标题" extra={lottery?.title} />
+        <Cell title="类型" extra={getLotteryTypeDesc(lottery?.type)} />
+        <Cell title="创建日期" extra={formatDate(lottery?.createdAt)} />
+        <CellGroup title="选项">
           {items?.map((item) => <Cell title={item.name} extra={`${item.value}${getLotteryTypeUnit(lottery?.type)}`} key={item.id} />)}
         </CellGroup>
         {lottery?.remark && (
-        <CellGroup title='备注'>
+        <CellGroup title="备注">
           {remarks?.map((remark) => <Cell title={remark.name} extra={remark.require && '*'} key={remark.id} />)}
         </CellGroup>
         )}
         {!!dataRecord?.records?.length && (
-        <CellGroup title='抽取列表'>
+        <CellGroup title="抽取列表">
           {dataRecord.records.map((record) => (
             <RecordItem record={record} key={record.record?.id} />
           ))}
         </CellGroup>
         )}
       </div>
-      <BottomButton openType='share'>分享</BottomButton>
+      <BottomButton openType="share">分享</BottomButton>
     </div>
   );
 }

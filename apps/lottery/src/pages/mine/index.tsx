@@ -21,27 +21,27 @@ function Mine() {
   return (
     <div>
       <Cell
-        className='m-0'
-        align='center'
+        className="m-0"
+        align="center"
         title={(
-          <div className='flex items-center'>
-            <Avatar ossId={data?.wxUser?.avatar} size='large' />
-            <span className='ml-2'>{data?.wxUser?.name || '用户名'}</span>
+          <div className="flex items-center">
+            <Avatar ossId={data?.wxUser?.avatar} size="large" />
+            <span className="ml-2">{data?.wxUser?.name || '用户名'}</span>
           </div>
         )}
         onClick={toPage('/pages/account/index')}
         radius={0}
         extra={<Right />}
       />
-      <div className='p-2'>
+      <div className="p-2">
         <CellGroup>
           <Cell
-            title='我的抽签'
+            title="我的抽签"
             onClick={toPage('/pages/lotteryList/index')}
             extra={<Right />}
           />
           <Cell
-            title='我的记录'
+            title="我的记录"
             onClick={toPage('/pages/recordList/index')}
             extra={<Right />}
           />

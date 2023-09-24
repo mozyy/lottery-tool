@@ -28,36 +28,36 @@ function Account() {
     const user:UserNewUser = {
       userId: wxUser?.userId,
       openid: wxUser?.openid,
-      unionid: wxUser?.unionid||'uni',
+      unionid: wxUser?.unionid || 'uni',
       sessionKey: wxUser?.sessionKey,
-      name: wxUser?.name, 
-       avatar: resp.id ,
-       mobile: wxUser?.mobile||"18381335182",
-      };
+      name: wxUser?.name,
+      avatar: resp.id,
+      mobile: wxUser?.mobile || '18381335182',
+    };
     console.log(1111, [data?.wxUser?.id!, { wxUser: user }]);
-    await new Promise(r => setTimeout(r, 1000))
+    await new Promise((r) => setTimeout(r, 1000));
     await trigger([data?.wxUser?.id!, { wxUser: user }]);
     console.log(222);
     mutate();
   };
 
   return (
-    <div className='p-2'>
+    <div className="p-2">
       <CellGroup>
-        <Button className='after:content-none' openType='chooseAvatar' onChooseAvatar={onChooseAvatar}>
+        <Button className="after:content-none" openType="chooseAvatar" onChooseAvatar={onChooseAvatar}>
           <Cell
-            title='头像'
-            align='center'
+            title={<span className="text-left">头像</span>}
+            align="center"
             extra={(
-              <div className='flex items-center'>
-                <Avatar ossId={data?.wxUser?.avatar} size='large' />
+              <div className="flex items-center">
+                <Avatar ossId={data?.wxUser?.avatar} size="large" />
                 <Right />
               </div>
           )}
           />
         </Button>
         <Cell
-          title='名字'
+          title="名字"
           onClick={toPage('/pages/accountName/index')}
           extra={<Right />}
         />

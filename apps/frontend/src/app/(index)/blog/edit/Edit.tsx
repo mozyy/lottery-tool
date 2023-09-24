@@ -2,7 +2,7 @@
 
 import {
   BlogNewBlog,
-} from '@zyy/openapi/dist/fetch/blog/blog';
+} from '@zyy/openapi/src/fetch/blog/blog';
 import {
   ChangeEvent,
   useState,

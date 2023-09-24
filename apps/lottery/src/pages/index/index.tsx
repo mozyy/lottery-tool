@@ -20,7 +20,6 @@ import { getLotteryTypeDesc } from '../../status/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
 
-
 interface Lottery extends LotteryNewLotteryInfo {
   items: LotteryNewItem[],
   remarks: LotteryNewRemark[]
@@ -41,7 +40,7 @@ function Index() {
   const [form]: FormInstance[] = Form.useForm();
   const login = useLogin();
   const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
-  const submitRef = useRef<Promise<LotterylotteryCreateResponse>|null>(null);
+  const submitRef = useRef<Promise<LotterylotteryCreateResponse> | null>(null);
   const itemsRef = useRef<FormItem>(null);
   const onSubmit = async (value:
   LotteryNewLotteryInfo & {
@@ -51,32 +50,32 @@ function Index() {
     submitRef.current = (async () => {
       const token = await login();
       const { items, remarks, ...lotteryInfo } = value;
-      const lottery = { lottery: {...lotteryInfo, userId: token.userId }, items, remarks };
+      const lottery = { lottery: { ...lotteryInfo, userId: token.userId }, items, remarks };
       return trigger([{ lottery }]);
     })();
   };
   const onFinishFailed = () => {
-    submitRef.current = null
-  }
+    submitRef.current = null;
+  };
 
   useShareAppMessage(async (res) => {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      await new Promise(r=>setTimeout(r, 100))
+      await new Promise((r) => setTimeout(r, 100));
       if (!submitRef.current) {
-        return Promise.reject('cancel')
+        return Promise.reject('cancel');
       }
-      const resp = await submitRef.current
+      const resp = await submitRef.current;
       return {
         title: resp?.lottery?.lottery?.title,
-        path: `/pages/lottery/index?id=${resp?.lottery?.lottery?.id}`
-      }
+        path: `/pages/lottery/index?id=${resp?.lottery?.lottery?.id}`,
+      };
     }
     return {};
   });
 
   return (
-    <div className='p-2'>
+    <div className="p-2">
       <Form
         form={form}
         onFinish={onSubmit}
@@ -84,29 +83,29 @@ function Index() {
         initialValues={initState}
         footer={(
           <Row>
-            <Col span={12}><Button openType='share' formType='submit'>提交</Button></Col>
-            <Col span={12}><Button formType='reset'>重署</Button></Col>
+            <Col span={12}><Button openType="share" formType="submit">提交</Button></Col>
+            <Col span={12}><Button formType="reset">重署</Button></Col>
           </Row>
       )}
       >
-        <Form.Item label='名称' name='title' rules={[{ required: true }]}>
+        <Form.Item label="名称" name="title" rules={[{ required: true }]}>
           <Input
-            placeholder='请输入主题名称'
+            placeholder="请输入主题名称"
           />
         </Form.Item>
-        <Form.Item label='抽取方式' name='type' rules={[{ required: true }]}>
-          <Radio.Group direction="horizontal" onChange={()=>itemsRef.current?.onStoreChange('update')}>
+        <Form.Item label="抽取方式" name="type" rules={[{ required: true }]}>
+          <Radio.Group direction="horizontal" onChange={() => itemsRef.current?.onStoreChange('update')}>
             {Object.values(LotterylotteryType).map((type) => (
               <Radio value={type} key={type}>{getLotteryTypeDesc(type)}</Radio>))}
           </Radio.Group>
         </Form.Item>
-        <Form.Item label='选项' name='items' ref={itemsRef}>
-          <Items form={form}/>
+        <Form.Item label="选项" name="items" ref={itemsRef}>
+          <Items form={form} />
         </Form.Item>
-        <Form.Item label='填写备注' name='remark'>
+        <Form.Item label="填写备注" name="remark">
           <Switch />
         </Form.Item>
-        <Form.Item label='备注项' name='remarks'>
+        <Form.Item label="备注项" name="remarks">
           <Remarks />
         </Form.Item>
         {/* 时间:
@@ -129,4 +128,4 @@ function Index() {
     </div>
   );
 }
-export default createErrorBoundary(Index)
+export default createErrorBoundary(Index);

@@ -40,14 +40,14 @@ function RecordDetail() {
   }).filter(Boolean);
 
   return (
-    <div className='overflow-auto'>
-      <Cell title='标题' extra={lottery?.title} />
-      <Cell title='类型' extra={getLotteryTypeDesc(lottery?.type)} />
-      <Cell title='结果' extra={item?.name} />
-      <Cell title='用户名' extra={dataUser?.wxUser?.name} />
-      <Cell title='用户头像' extra={<Avatar ossId={dataUser?.wxUser?.avatar} />} />
+    <div className="overflow-auto">
+      <Cell title="标题" extra={lottery?.title} />
+      <Cell title="类型" extra={getLotteryTypeDesc(lottery?.type)} />
+      <Cell title="结果" extra={item?.name} />
+      <Cell title="用户名" extra={dataUser?.wxUser?.name} />
+      <Cell title="用户头像" extra={<Avatar ossId={dataUser?.wxUser?.avatar} />} />
       {!!remarkInfos?.length && (
-      <CellGroup title='备注'>
+      <CellGroup title="备注">
         {remarkInfos?.map((remarkInfo) => (
           <Cell
             title={remarkInfo?.remark.name}
@@ -57,7 +57,7 @@ function RecordDetail() {
         ))}
       </CellGroup>
       )}
-      <Cell title='创建日期' extra={formatDate(record?.createdAt)} />
+      <Cell title="创建日期" extra={formatDate(record?.createdAt)} />
     </div>
   );
 }

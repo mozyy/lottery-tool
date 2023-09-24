@@ -20,15 +20,15 @@ function AccountName() {
   };
 
   return (
-    <div className='p-2'>
+    <div className="p-2">
       <Form
         form={form}
         onFinish={onSubmit}
         initialValues={{ name: data?.wxUser?.name }}
-        footer={<Button formType='submit'>提交</Button>}
+        footer={<Button formType="submit">提交</Button>}
       >
-        <Form.Item label='昵称' name='name' rules={[{ required: true }]}>
-          <Input type='nickname' placeholder='请输入昵称' />
+        <Form.Item label="昵称" name="name" rules={[{ required: true }]}>
+          <Input type="nickname" placeholder="请输入昵称" />
         </Form.Item>
       </Form>
     </div>

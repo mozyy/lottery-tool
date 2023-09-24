@@ -9,7 +9,7 @@ import { ossServiceApi } from '../api/oss';
 import { ossStsPath } from '../env';
 import { useSWRMutation } from './swrMutation';
 
-const fetcherSts = ([token, url]) => axios.post(url);
+const fetcherSts = ([, url]) => axios.post(url);
 
 const getPolicy = () => {
   const date = new Date();

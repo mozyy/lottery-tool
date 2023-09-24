@@ -2,6 +2,7 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb-typescript',
+    "plugin:react-hooks/recommended",
   ],
   rules: {
     'react/jsx-uses-react': 'off',
@@ -13,6 +14,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
   },
   parserOptions: {
-    project: './tsconfig.json'
-  }
+    project: './tsconfig.json',
+  },
 };

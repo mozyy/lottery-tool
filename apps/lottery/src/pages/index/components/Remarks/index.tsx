@@ -33,7 +33,7 @@ export default function Remarks({ value = [], onChange = () => {} }:RemarksProps
           <Row>
             <Col span={12}>
               <Input
-                placeholder='备注名'
+                placeholder="备注名"
                 value={item.name}
                 onChange={(v) => addArray(i, { name: String(v) })}
               />
@@ -44,14 +44,14 @@ export default function Remarks({ value = [], onChange = () => {} }:RemarksProps
                 onChange={(v) => addArray(i, { require: v })}
               />
             </Col>
-            <Col span={4} className='text-center'>
-              <Close onClick={delArray(i)} className='text-[22px] align-middle' />
+            <Col span={4} className="text-center">
+              <Close onClick={delArray(i)} className="text-[22px] align-middle" />
             </Col>
           </Row>
         </div>
       ))}
       <Button
-        size='small'
+        size="small"
         onClick={addItem}
       >
         添加选项

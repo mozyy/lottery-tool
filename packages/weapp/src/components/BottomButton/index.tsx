@@ -8,7 +8,7 @@ interface BottomButtonProps extends Omit<Partial<ButtonProps>, 'ref'>, BottomBar
 export default function BottomButton({ fixed, className, ...buttonProps }: BottomButtonProps) {
   return (
     <BottomBar fixed={fixed} className={className}>
-      <Button className='flex-auto' {...buttonProps} />
+      <Button className="flex-auto" {...buttonProps} />
     </BottomBar>
   );
 }

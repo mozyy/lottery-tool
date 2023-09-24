@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
-    '../../.eslintrc.js',
     'taro/react',
+    '../../.eslintrc.js',
   ],
   rules: {
   },

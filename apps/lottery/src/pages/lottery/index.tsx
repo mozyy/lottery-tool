@@ -40,17 +40,17 @@ function Lottery() {
     showToast({ title: `抽中${res.record?.record?.itemId}` });
   };
   return (
-    <div className='p-2'>
+    <div className="p-2">
       <Form
         form={form}
         onFinish={submit}
         footer={
-          <Button formType='submit'>提交</Button>
+          <Button formType="submit">提交</Button>
       }
       >
         <div>{lottery.title}</div>
         {items.map((item) => (<div>{item.name}</div>))}
-        {remarks.map((remark, i) => (
+        {remarks.map((remark) => (
           <Form.Item
             label={remark.name}
             key={remark.id}

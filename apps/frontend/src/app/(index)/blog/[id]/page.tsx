@@ -1,5 +1,5 @@
 // import { MDXRemote } from 'next-mdx-remote/rsc';
-import { BlogServiceApi } from '@zyy/openapi/dist/fetch/blog/blog';
+import { BlogServiceApi } from '@zyy/openapi/src/fetch/blog/blog';
 import { marked } from 'marked';
 import BlogComponent from '../BlogComponent';
 
