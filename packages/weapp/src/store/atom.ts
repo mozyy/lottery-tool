@@ -20,7 +20,7 @@ export class OauthToken {
   }
 
   get userId() {
-    return this.user.id;
+    return this.user?.id;
   }
 }
 
