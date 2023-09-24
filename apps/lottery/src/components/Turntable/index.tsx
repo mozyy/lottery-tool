@@ -1,10 +1,14 @@
+import { Button } from '@nutui/nutui-react-taro';
 import { Canvas } from '@tarojs/components';
 import {
   Canvas as CanvasType, createSelectorQuery, getSystemInfoSync, showToast,
 } from '@tarojs/taro';
 import { LotteryItem } from '@zyy/openapi/src/axios/lottery/lottery';
 import { getRandomString } from '@zyy/utils/src/random';
-import { useEffect, useRef, useState } from 'react';
+import {
+  CSSProperties, useEffect, useMemo, useRef, useState,
+} from 'react';
+import styles from './index.module.scss';
 
 export interface TurntableProps {
   items: Required<Pick<LotteryItem, 'name' | 'value'>>[],
@@ -12,8 +16,9 @@ export interface TurntableProps {
 
 export default function Turntable(props:TurntableProps) {
   const { items } = props;
-  const canvasRef = useRef<any>(null);
   const [id] = useState(() => getRandomString('canvas'));
+
+  const [style, setStyle] = useState<CSSProperties>({});
 
   const canvasInfoRef = useRef();
   const ctxPromiseRef = useRef<Promise<CanvasRenderingContext2D>>();
@@ -27,8 +32,9 @@ export default function Turntable(props:TurntableProps) {
         .exec((reses) => {
           const res = reses[0];
           if (!res) {
-            console.log(`没有canvas node ${i}`);
-            if (i++ < 3) {
+            console.warn(`没有canvas node ${i}`);
+            if (i < 3) {
+              i += 1;
               setTimeout(handler, 100);
             } else {
               showToast({ title: 'no canvas', icon: 'error' });
@@ -47,116 +53,98 @@ export default function Turntable(props:TurntableProps) {
         });
       handler();
     });
-  }, []);
+  }, [id]);
+
+  const turns = useMemo(() => {
+    const sum = items.reduce((a, b) => a + b.value, 0);
+    return items.map((item) => ({ ...item, angle: item.value * ((2 * Math.PI) / sum) }));
+  }, [items]);
 
   useEffect(() => {
     ctxPromiseRef.current!.then((ctx) => {
       const { width, height } = canvasInfoRef.current!;
-      ctx.clearRect(0, 0, width, height);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = 'black';
-      ctx.beginPath();
+
       const radius = width / 2 - 1;
       const centerX = width / 2;
       const centerY = height / 2;
-      const sum = items.reduce((a, b) => a + b.value, 0);
-      const itemAngle = (2 * Math.PI) / sum;
-      console.log(2222, items, sum, itemAngle);
-      const angle = 0;
+      const prizeBgColors = [
+        'rgb(255, 231, 149)',
+        'rgb(255, 247, 223)',
+        'rgb(251, 219, 216)',
+        'rgba(246, 142, 46, 0.5)',
+      ];
       ctx.translate(centerX, centerY);
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        const angle = item.value * itemAngle;
+      // ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = '#ff9800';
+      ctx.lineWidth = 1;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      for (let i = 0; i < turns.length; i += 1) {
+        const item = turns[i];
+        const angle = item.angle / 2;
+        if (i > 0) {
+          ctx.rotate(angle);
+        }
 
-        ctx.fillStyle = i % 2 === 0 ? 'red' : 'green'; // 奇偶奖项颜色不同
+        ctx.fillStyle = prizeBgColors[i % prizeBgColors.length]; // 奇偶奖项颜色不同
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.arc(0, 0, radius, 2 * Math.PI - angle, angle);
-        console.log(222, 0, angle);
-        ctx.lineTo(0, 0);
+        ctx.arc(0, 0, radius, 1.5 * Math.PI - angle, angle - 0.5 * Math.PI);
+        ctx.closePath();
         ctx.fill();
         ctx.stroke();
-        ctx.translate;
-        // ctx.fillText(item.name, 0, radius - 10);
+        ctx.fillStyle = 'black';
+
+        ctx.fillText(item.name, 0, -radius + 10, 2 * Math.sin(angle) * radius - 15);
+        // 奖品图片
+        // const image = new Image();
+        // image.src = items[i].imageSrc;
+        // const imageWidth = 50;
+        // const imageHeight = 50;
+        // const imageRadius = wheelRadius + 75;
+        // const imageAngle = i * angle + angle / 2;
+        // ctx.rotate(-textAngle);
+        // ctx.translate(0, -imageRadius);
+        // ctx.drawImage(image, -imageWidth / 2, -imageHeight / 2, imageWidth, imageHeight);
+        ctx.rotate(angle);
       }
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+      ctx.stroke();
     });
-  }, []);
-
-  // useEffect(() => {
-  //   const canvas = canvasRef.current;
-  //   if (!canvas) {
-  //     return
-  //   }
-  //   console.log(123, canvas)
-  //   const ctx = canvas.getContext('2d');
-  //   const numSegments = items.length;
-  //   const wheelRadius = 200;
-  //   const centerX = canvas.width / 2;
-  //   const centerY = canvas.height / 2;
-  //   const angle = (2 * Math.PI) / numSegments;
-
-  //   // 绘制转盘
-  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //   ctx.lineWidth = 2;
-  //   ctx.strokeStyle = 'black';
-  //   ctx.beginPath();
-
-  //   for (let i = 0; i < numSegments; i++) {
-  //     const startAngle = i * angle;
-  //     const endAngle = (i + 1) * angle;
-
-  //     ctx.fillStyle = i % 2 === 0 ? '#FF5733' : '#FF6347'; // 奇偶奖项颜色不同
-  //     ctx.moveTo(centerX, centerY);
-  //     ctx.arc(centerX, centerY, wheelRadius, startAngle, endAngle);
-  //     ctx.lineTo(centerX, centerY);
-  //     ctx.fill();
-  //     ctx.stroke();
-  //   }
-
-  //   // 绘制奖品名和奖品图片
-  //   ctx.fillStyle = 'white';
-  //   ctx.font = '16px Arial';
-  //   ctx.textAlign = 'center';
-
-  //   for (let i = 0; i < numSegments; i++) {
-  //     const text = items[i].name;
-  //     const textRadius = wheelRadius + 30;
-  //     const textAngle = i * angle + angle / 2;
-
-  //     ctx.save();
-
-  //     // 奖品名
-  //     ctx.translate(centerX, centerY);
-  //     ctx.rotate(textAngle);
-  //     ctx.fillText(text, 0, -textRadius);
-
-  //     // 奖品图片
-  //     // const image = new Image();
-  //     // image.src = items[i].imageSrc;
-  //     // const imageWidth = 50;
-  //     // const imageHeight = 50;
-  //     // const imageRadius = wheelRadius + 75;
-  //     // const imageAngle = i * angle + angle / 2;
-  //     // ctx.rotate(-textAngle);
-  //     // ctx.translate(0, -imageRadius);
-  //     // ctx.drawImage(image, -imageWidth / 2, -imageHeight / 2, imageWidth, imageHeight);
-
-  //     ctx.restore();
-  //   }
-  // }, [items]);
+  }, [turns]);
 
   const spinWheel = () => {
     // 在这里添加旋转转盘的逻辑
     // 可以使用动画来实现旋转效果
+    if (style.transform) {
+      setStyle({});
+      return;
+    }
+    const turnsNumber = Math.floor(Math.random() * 3) + 5;
+    const prize = Math.floor(Math.random() * turns.length);
+    let rotate = 0;
+    for (let i = 0; i < prize; i += 1) {
+      rotate -= turns[i].angle / 2 + turns[i + 1].angle / 2;
+    }
+    const turnsTime = Math.floor(Math.random() * 5) + 3;
+    rotate -= turnsNumber * 2 * Math.PI;
+    setStyle({
+      transform: `rotate(${rotate}rad)`,
+      transition: `transform ${turnsTime}s cubic-bezier(0.250, 0.460, 0.455, 0.995)`,
+    });
   };
 
   return (
-    <div>
+    <div className="relative h-[700px] w-[700px] mx-auto">
       <Canvas
-        className="h-48 w-48"
+        className="h-full w-full"
         type="2d"
+        style={style}
         id={id}
       />
+      <Button className={styles.pointer} onClick={spinWheel}>开始</Button>
     </div>
   );
 }

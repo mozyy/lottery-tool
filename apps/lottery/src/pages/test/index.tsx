@@ -3,13 +3,20 @@ import Turntable from '../../components/Turntable';
 
 function Test() {
   const items = [
-    {name: '奖品一', value: 1},
-    {name: '奖品二', value: 2},
-    {name: '奖品三', value: 3},
-  ]
+    { name: '奖品一', value: 1 },
+    { name: '奖品一', value: 1 },
+    { name: '奖品一', value: 1 },
+    { name: '奖品一', value: 1 },
+    { name: '奖品一', value: 1 },
+    { name: '奖品一', value: 1 },
+    { name: '奖品一', value: 1 },
+    { name: '奖品二', value: 2 },
+    { name: '奖品三', value: 3 },
+    // { name: '奖品四', value: 1 },
+  ];
   return (
     <div>
-      <Turntable items={items}/>
+      <Turntable items={items} />
     </div>
   );
 }
