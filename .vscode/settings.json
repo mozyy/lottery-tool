@@ -13,5 +13,6 @@
   "editor.formatOnSave": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  },
+  "DevChat.DevChatPath": "C:\\Users\\yy727\\.chat\\mamba\\envs\\devchat\\Scripts\\devchat"
 }

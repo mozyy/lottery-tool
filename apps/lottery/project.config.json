@@ -47,12 +47,11 @@
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "libVersion": "2.32.0",
   "srcMiniprogramRoot": "dist/",
+  "libVersion": "2.32.0",
   "packOptions": {
     "ignore": [],
     "include": []
   },
-  "appid": "wx59049041ecf71722",
-  "projectname": "lottery-tool"
+  "appid": "wx59049041ecf71722"
 }
