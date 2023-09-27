@@ -13,7 +13,7 @@ docs=(
   health/patient
   lottery/lottery
   lottery/record
-  oauth/oauth
+  auth/auth
   oss/oss
   wx/wx
   wx/user

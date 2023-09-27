@@ -258,10 +258,16 @@
     }
   },
   "definitions": {
-    "oauthToken": {
+    "authToken": {
       "type": "object",
       "properties": {
         "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        },
+        "scope": {
           "type": "string"
         },
         "tokenType": {
@@ -270,16 +276,10 @@
         "expiresIn": {
           "type": "integer",
           "format": "int32"
-        },
-        "refreshToken": {
-          "type": "string"
-        },
-        "scope": {
-          "type": "string"
         }
       }
     },
-    "oauthoauthUser": {
+    "authauthUser": {
       "type": "object",
       "properties": {
         "id": {
@@ -422,10 +422,10 @@
       "type": "object",
       "properties": {
         "token": {
-          "$ref": "#/definitions/oauthToken"
+          "$ref": "#/definitions/authToken"
         },
         "user": {
-          "$ref": "#/definitions/oauthoauthUser"
+          "$ref": "#/definitions/authauthUser"
         }
       }
     },
