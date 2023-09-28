@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["../../.eslintrc.js","plugin:import/recommended","next"],
+  extends: ["../../.eslintrc.js","plugin:import/recommended","next/core-web-vitals"],
   rules: {
     // 'linebreak-style': 0,
     // // '@typescript-eslint/dot-notation': 0,
