@@ -70,7 +70,9 @@ export const useUploadOss = () => {
       return Promise.reject(Error('上传失败'));
     }
     console.log('上传成功');
-    const resp = await createTrigger([{ oss: { bucketName: OssBucketName.Image } }]);
+    const resp = await createTrigger([{
+      oss: { bucketName: OssBucketName.Image, objectKey: key, name: fileName },
+    }]);
     return resp.oss!;
   }, [createTrigger, uploadTrigger]);
 

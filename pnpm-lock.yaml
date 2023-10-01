@@ -765,9 +765,6 @@ importers:
       '@tarojs/taro':
         specifier: 3.6.16
         version: 3.6.16(@types/react@18.2.22)(postcss@8.4.30)
-      '@zyy/config':
-        specifier: workspace:*
-        version: link:../config
       '@zyy/openapi':
         specifier: workspace:*
         version: link:../openapi

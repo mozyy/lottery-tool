@@ -4,6 +4,7 @@
   "setting": {
     "compileHotReLoad": true,
     "urlCheck": false,
-    "preloadBackgroundData": true
+    "preloadBackgroundData": true,
+    "bigPackageSizeSupport": true
   }
 }

@@ -10,11 +10,7 @@ export function useSWRMutation<
 >(
   key: [H] | (()=>[H] | false)):SWRMutationResponse<R, any, any, B> {
   const res = useSWRMutationHook(key, undefined as any);
-  console.log(3333, key[0], res);
-  const trigger = useCallback((...args) => res.trigger(...args).then((resp) => {
-    console.log(4444, resp);
-    return resp;
-  }).catch((err) => {
+  const trigger = useCallback((...args) => res.trigger(...args).catch((err) => {
     let message = err.response?.headers['grpc-message'];
     if (message) {
       message = decodeURIComponent(message);
