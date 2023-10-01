@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-export * from './OauthToken';
-export * from './OauthoauthUser';
+export * from './AuthToken';
+export * from './AuthauthUser';
 export * from './ProtobufAny';
 export * from './RpcStatus';
 export * from './UserGetByUserIdResponse';

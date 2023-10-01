@@ -205,7 +205,7 @@ export class PatientServiceApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/health.patient.PatientService/patients/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PATCH',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: PatientServiceUpdateRequestToJSON(requestParameters.body),

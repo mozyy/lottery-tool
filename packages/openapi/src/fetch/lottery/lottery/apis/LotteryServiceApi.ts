@@ -215,7 +215,7 @@ export class LotteryServiceApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/lottery.lottery.LotteryService/lotterys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PATCH',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: LotteryServiceUpdateRequestToJSON(requestParameters.body),

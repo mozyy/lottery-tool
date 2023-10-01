@@ -205,7 +205,7 @@ export class BlogServiceApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/blog.blog.BlogService/blogs/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PATCH',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: BlogServiceUpdateRequestToJSON(requestParameters.body),

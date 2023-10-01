@@ -205,7 +205,7 @@ export class NurseServiceApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/health.nurse.NurseService/nurses/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PATCH',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: NurseServiceUpdateRequestToJSON(requestParameters.body),

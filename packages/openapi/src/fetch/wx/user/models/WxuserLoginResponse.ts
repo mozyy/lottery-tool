@@ -13,18 +13,18 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { OauthToken } from './OauthToken';
+import type { AuthToken } from './AuthToken';
 import {
-    OauthTokenFromJSON,
-    OauthTokenFromJSONTyped,
-    OauthTokenToJSON,
-} from './OauthToken';
-import type { OauthoauthUser } from './OauthoauthUser';
+    AuthTokenFromJSON,
+    AuthTokenFromJSONTyped,
+    AuthTokenToJSON,
+} from './AuthToken';
+import type { AuthauthUser } from './AuthauthUser';
 import {
-    OauthoauthUserFromJSON,
-    OauthoauthUserFromJSONTyped,
-    OauthoauthUserToJSON,
-} from './OauthoauthUser';
+    AuthauthUserFromJSON,
+    AuthauthUserFromJSONTyped,
+    AuthauthUserToJSON,
+} from './AuthauthUser';
 
 /**
  * 
@@ -34,16 +34,16 @@ import {
 export interface WxuserLoginResponse {
     /**
      * 
-     * @type {OauthToken}
+     * @type {AuthToken}
      * @memberof WxuserLoginResponse
      */
-    token?: OauthToken;
+    token?: AuthToken;
     /**
      * 
-     * @type {OauthoauthUser}
+     * @type {AuthauthUser}
      * @memberof WxuserLoginResponse
      */
-    user?: OauthoauthUser;
+    user?: AuthauthUser;
 }
 
 /**
@@ -65,8 +65,8 @@ export function WxuserLoginResponseFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'token': !exists(json, 'token') ? undefined : OauthTokenFromJSON(json['token']),
-        'user': !exists(json, 'user') ? undefined : OauthoauthUserFromJSON(json['user']),
+        'token': !exists(json, 'token') ? undefined : AuthTokenFromJSON(json['token']),
+        'user': !exists(json, 'user') ? undefined : AuthauthUserFromJSON(json['user']),
     };
 }
 
@@ -79,8 +79,8 @@ export function WxuserLoginResponseToJSON(value?: WxuserLoginResponse | null): a
     }
     return {
         
-        'token': OauthTokenToJSON(value.token),
-        'user': OauthoauthUserToJSON(value.user),
+        'token': AuthTokenToJSON(value.token),
+        'user': AuthauthUserToJSON(value.user),
     };
 }
 

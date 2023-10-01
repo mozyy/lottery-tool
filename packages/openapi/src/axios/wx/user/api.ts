@@ -26,62 +26,62 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  * 
  * @export
- * @interface OauthToken
+ * @interface AuthToken
  */
-export interface OauthToken {
+export interface AuthToken {
     /**
      * 
      * @type {string}
-     * @memberof OauthToken
+     * @memberof AuthToken
      */
     'accessToken'?: string;
     /**
      * 
      * @type {string}
-     * @memberof OauthToken
-     */
-    'tokenType'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof OauthToken
-     */
-    'expiresIn'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof OauthToken
+     * @memberof AuthToken
      */
     'refreshToken'?: string;
     /**
      * 
      * @type {string}
-     * @memberof OauthToken
+     * @memberof AuthToken
      */
     'scope'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthToken
+     */
+    'tokenType'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AuthToken
+     */
+    'expiresIn'?: number;
 }
 /**
  * 
  * @export
- * @interface OauthoauthUser
+ * @interface AuthauthUser
  */
-export interface OauthoauthUser {
+export interface AuthauthUser {
     /**
      * 
      * @type {string}
-     * @memberof OauthoauthUser
+     * @memberof AuthauthUser
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof OauthoauthUser
+     * @memberof AuthauthUser
      */
     'createdAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof OauthoauthUser
+     * @memberof AuthauthUser
      */
     'updatedAt'?: string;
 }
@@ -286,16 +286,16 @@ export interface WxuserLoginRequest {
 export interface WxuserLoginResponse {
     /**
      * 
-     * @type {OauthToken}
+     * @type {AuthToken}
      * @memberof WxuserLoginResponse
      */
-    'token'?: OauthToken;
+    'token'?: AuthToken;
     /**
      * 
-     * @type {OauthoauthUser}
+     * @type {AuthauthUser}
      * @memberof WxuserLoginResponse
      */
-    'user'?: OauthoauthUser;
+    'user'?: AuthauthUser;
 }
 /**
  * 
@@ -633,7 +633,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 

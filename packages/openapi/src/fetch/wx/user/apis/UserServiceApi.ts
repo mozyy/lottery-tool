@@ -297,7 +297,7 @@ export class UserServiceApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/wx.user.UserService/users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PATCH',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: UserServiceUpdateRequestToJSON(requestParameters.body),

@@ -205,7 +205,7 @@ export class HospitalServiceApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/health.hospital.HospitalService/hospitals/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PATCH',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: HospitalServiceUpdateRequestToJSON(requestParameters.body),

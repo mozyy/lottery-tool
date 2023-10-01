@@ -245,7 +245,7 @@ export class RecordServiceApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/lottery.record.RecordService/records/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PATCH',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: RecordServiceUpdateRequestToJSON(requestParameters.body),

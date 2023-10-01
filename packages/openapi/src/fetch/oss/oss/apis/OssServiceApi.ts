@@ -210,7 +210,7 @@ export class OssServiceApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/oss.oss.OssService/oss/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PATCH',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: OssServiceUpdateRequestToJSON(requestParameters.body),

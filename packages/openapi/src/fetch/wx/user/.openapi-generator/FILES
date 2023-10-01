@@ -1,8 +1,8 @@
 apis/UserServiceApi.ts
 apis/index.ts
 index.ts
-models/OauthToken.ts
-models/OauthoauthUser.ts
+models/AuthToken.ts
+models/AuthauthUser.ts
 models/ProtobufAny.ts
 models/RpcStatus.ts
 models/UserGetByUserIdResponse.ts
