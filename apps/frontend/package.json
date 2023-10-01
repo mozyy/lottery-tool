@@ -7,7 +7,8 @@
     "build": "next build",
     "serve": "next start",
     "start": "npm run build && npm run serve",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint2": "eslint src"
   },
   "sideEffects": false,
   "dependencies": {

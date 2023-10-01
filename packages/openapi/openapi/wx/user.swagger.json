@@ -214,7 +214,7 @@
           "UserService"
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "UserService_Update",
         "responses": {
           "200": {

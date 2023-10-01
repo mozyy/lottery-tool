@@ -158,7 +158,7 @@
           "OssService"
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "OssService_Update",
         "responses": {
           "200": {

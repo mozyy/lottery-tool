@@ -147,7 +147,7 @@
           "HepartmentService"
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "HepartmentService_Update",
         "responses": {
           "200": {

@@ -198,7 +198,7 @@
           }
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "RecordService_Update",
         "responses": {
           "200": {

@@ -147,7 +147,7 @@
           "HospitalService"
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "HospitalService_Update",
         "responses": {
           "200": {

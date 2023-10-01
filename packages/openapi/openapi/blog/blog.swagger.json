@@ -147,7 +147,7 @@
           "BlogService"
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "BlogService_Update",
         "responses": {
           "200": {

@@ -147,7 +147,7 @@
           "NurseService"
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "NurseService_Update",
         "responses": {
           "200": {

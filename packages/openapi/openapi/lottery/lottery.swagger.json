@@ -162,7 +162,7 @@
           "LotteryService"
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "LotteryService_Update",
         "responses": {
           "200": {

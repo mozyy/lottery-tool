@@ -147,7 +147,7 @@
           "PatientService"
         ]
       },
-      "patch": {
+      "put": {
         "operationId": "PatientService_Update",
         "responses": {
           "200": {
