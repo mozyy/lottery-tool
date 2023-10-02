@@ -2,7 +2,7 @@ import { Right } from '@nutui/icons-react';
 import {
   Cell, CellGroup,
 } from '@nutui/nutui-react-taro';
-import { BaseEventOrig, Button } from '@tarojs/components';
+import { BaseEventOrig, Button, Navigator } from '@tarojs/components';
 import { navigateTo } from '@tarojs/taro';
 import { UserNewUser } from '@zyy/openapi/src/axios/wx/user';
 import { userServiceApi } from '@zyy/weapp/src/api/wx';
@@ -53,16 +53,17 @@ function Account() {
           )}
           />
         </Button>
-        <Cell
-          title="名字"
-          onClick={toPage('/pages/accountName/index')}
-          extra={(
-            <div className="flex items-center">
-              {data?.wxUser?.name}
-              <Right />
-            </div>
-          )}
-        />
+        <Navigator url="/pages/accountName/index">
+          <Cell
+            title="名字"
+            extra={(
+              <div className="flex items-center">
+                {data?.wxUser?.name}
+                <Right />
+              </div>
+            )}
+          />
+        </Navigator>
       </CellGroup>
     </div>
   );

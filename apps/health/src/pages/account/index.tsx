@@ -2,9 +2,9 @@ import { Right } from '@nutui/icons-react-taro';
 import {
   Cell, CellGroup,
 } from '@nutui/nutui-react-taro';
-import { BaseEventOrig, Button } from '@tarojs/components';
+import { BaseEventOrig, Button, Navigator } from '@tarojs/components';
 import { navigateTo } from '@tarojs/taro';
-import { UserNewUser } from '@zyy/openapi/dist/axios/wx/user';
+import { UserNewUser } from '@zyy/openapi/src/axios/wx/user';
 import { userServiceApi } from '../../api/wx';
 import Avatar from '../../components/Avatar';
 import createErrorBoundary from '../../components/common/createErrorBoundary';
@@ -30,7 +30,7 @@ function Account() {
       openid: wxUser?.openid,
       unionid: wxUser?.unionid||'uni',
       sessionKey: wxUser?.sessionKey,
-      name: wxUser?.name, 
+      name: wxUser?.name,
        avatar: resp.id ,
        mobile: wxUser?.mobile||"18381335182",
       };
@@ -56,11 +56,12 @@ function Account() {
           )}
           />
         </Button>
-        <Cell
-          title='名字'
-          onClick={toPage('/pages/accountName/index')}
-          extra={<Right />}
-        />
+        <Navigator url='/pages/accountName/index'>
+          <Cell
+            title='名字'
+            extra={<Right />}
+          />
+        </Navigator>
       </CellGroup>
     </div>
   );

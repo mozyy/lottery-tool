@@ -36,13 +36,13 @@ export default function RecordItem(props:RecordItemProps) {
             {remarkValue}
             <div>{formatDate(record?.createdAt, 'YYYY-MM-DD HH:mm 创建')}</div>
           </div>
-      )}
+        )}
         extra={(
           <div>
             <Avatar ossId={dataUser?.wxUser?.avatar} />
             <Right />
           </div>
-    )}
+        )}
       />
     </Navigator>
   );

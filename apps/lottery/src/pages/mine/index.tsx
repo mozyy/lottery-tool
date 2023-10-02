@@ -1,5 +1,6 @@
 import { Right } from '@nutui/icons-react';
 import { Cell, CellGroup } from '@nutui/nutui-react-taro';
+import { Navigator } from '@tarojs/components';
 import { navigateTo } from '@tarojs/taro';
 import { userServiceApi } from '@zyy/weapp/src/api/wx';
 import Avatar from '@zyy/weapp/src/components/Avatar';
@@ -32,23 +33,25 @@ function Mine() {
             />
             <span className="ml-2">{data?.wxUser?.name || '用户名'}</span>
           </div>
-        )}
+          )}
         onClick={toPage('/pages/account/index')}
         radius={0}
         extra={<Right />}
       />
       <div className="p-2">
         <CellGroup>
-          <Cell
-            title="我的抽签"
-            onClick={toPage('/pages/lotteryList/index')}
-            extra={<Right />}
-          />
-          <Cell
-            title="我的记录"
-            onClick={toPage('/pages/recordList/index')}
-            extra={<Right />}
-          />
+          <Navigator url="/pages/lotteryList/index">
+            <Cell
+              title="我的抽签"
+              extra={<Right />}
+            />
+          </Navigator>
+          <Navigator url="/pages/recordList/index">
+            <Cell
+              title="我的记录"
+              extra={<Right />}
+            />
+          </Navigator>
         </CellGroup>
       </div>
     </div>

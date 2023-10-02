@@ -34,9 +34,11 @@ function LotteryDetail() {
   return (
     <div className='overflow-auto flex flex-col'>
       <div className='flex-auto'>
-        <Cell title='标题' extra={lottery?.title} />
-        <Cell title='类型' extra={getLotteryTypeDesc(lottery?.type)} />
-        <Cell title='创建日期' extra={formatDate(lottery?.createdAt)} />
+        <CellGroup>
+          <Cell title='标题' extra={lottery?.title} />
+          <Cell title='类型' extra={getLotteryTypeDesc(lottery?.type)} />
+          <Cell title='创建日期' extra={formatDate(lottery?.createdAt)} />
+        </CellGroup>
         <CellGroup title='选项'>
           {items?.map((item) => <Cell title={item.name} extra={`${item.value}${getLotteryTypeUnit(lottery?.type)}`} key={item.id} />)}
         </CellGroup>

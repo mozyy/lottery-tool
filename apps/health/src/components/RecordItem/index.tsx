@@ -1,6 +1,6 @@
 import { Right } from '@nutui/icons-react-taro';
 import { Cell } from '@nutui/nutui-react-taro';
-import { navigateTo } from '@tarojs/taro';
+import { Navigator } from '@tarojs/components';
 import { RecordRecord } from '@zyy/openapi/dist/axios/lottery/record';
 import { lotteryServiceApi } from '../../api/lottery';
 import { userServiceApi } from '../../api/wx';
@@ -28,21 +28,22 @@ export default function RecordItem(props:RecordItemProps) {
   })();
 
   return (
-    <Cell
-      title={item?.name}
-      description={(
-        <div>
-          {remarkValue}
-          <div>{formatDate(record?.createdAt, 'YYYY-MM-DD HH:mm 创建')}</div>
-        </div>
-      )}
-      onClick={() => navigateTo({ url: `/pages/recordDetail/index?id=${record?.id}` })}
-      extra={(
-        <div>
-          <Avatar ossId={dataUser?.wxUser?.avatar} />
-          <Right />
-        </div>
-    )}
-    />
+    <Navigator url={`/pages/recordDetail/index?id=${record?.id}`}>
+      <Cell
+        title={item?.name}
+        description={(
+          <div>
+            {remarkValue}
+            <div>{formatDate(record?.createdAt, 'YYYY-MM-DD HH:mm 创建')}</div>
+          </div>
+        )}
+        extra={(
+          <div className='flex items-center'>
+            <Avatar ossId={dataUser?.wxUser?.avatar} />
+            <Right />
+          </div>
+        )}
+      />
+    </Navigator>
   );
 }
