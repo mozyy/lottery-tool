@@ -28,16 +28,13 @@ function Account() {
     const user:UserNewUser = {
       userId: wxUser?.userId,
       openid: wxUser?.openid,
-      unionid: wxUser?.unionid || 'uni',
+      unionid: wxUser?.unionid,
       sessionKey: wxUser?.sessionKey,
       name: wxUser?.name,
       avatar: resp.id,
-      mobile: wxUser?.mobile || '18381335182',
+      mobile: wxUser?.mobile,
     };
-    console.log(1111, [data?.wxUser?.id!, { wxUser: user }]);
-    await new Promise((r) => setTimeout(r, 1000));
     await trigger([data?.wxUser?.id!, { wxUser: user }]);
-    console.log(222);
     mutate();
   };
 
@@ -59,7 +56,12 @@ function Account() {
         <Cell
           title="名字"
           onClick={toPage('/pages/accountName/index')}
-          extra={<Right />}
+          extra={(
+            <div className="flex items-center">
+              {data?.wxUser?.name}
+              <Right />
+            </div>
+          )}
         />
       </CellGroup>
     </div>

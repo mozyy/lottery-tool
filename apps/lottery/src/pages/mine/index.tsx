@@ -25,7 +25,11 @@ function Mine() {
         align="center"
         title={(
           <div className="flex items-center">
-            <Avatar ossId={data?.wxUser?.avatar} size="large" />
+            <Avatar
+              ossId={data?.wxUser?.avatar}
+              size="large"
+              preview
+            />
             <span className="ml-2">{data?.wxUser?.name || '用户名'}</span>
           </div>
         )}

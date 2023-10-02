@@ -3,6 +3,8 @@ import {
   Form, Input,
 } from '@nutui/nutui-react-taro';
 import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
+import { navigateBack } from '@tarojs/taro';
+import { UserNewUser } from '@zyy/openapi/src/axios/wx/user';
 import { userServiceApi } from '@zyy/weapp/src/api/wx';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
 import { useSWR } from '@zyy/weapp/src/hooks/swr';
@@ -15,8 +17,19 @@ function AccountName() {
   const { data, mutate } = useSWR([userServiceApi.userServiceGetByUserId, userId]);
   const { trigger } = useSWRMutation([userServiceApi.userServiceUpdate]);
   const onSubmit = async (value: { name: string }) => {
-    await trigger([userId, { wxUser: { ...data?.wxUser, ...value } }]);
+    const wxUser = data?.wxUser;
+    const user:UserNewUser = {
+      userId: wxUser?.userId,
+      openid: wxUser?.openid,
+      unionid: wxUser?.unionid,
+      sessionKey: wxUser?.sessionKey,
+      name: value.name,
+      avatar: wxUser?.avatar,
+      mobile: wxUser?.mobile,
+    };
+    await trigger([data?.wxUser?.id!, { wxUser: user }]);
     mutate();
+    navigateBack();
   };
 
   return (
