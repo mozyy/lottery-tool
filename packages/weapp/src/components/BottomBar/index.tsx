@@ -12,7 +12,7 @@ export default function BottomBar({
 }: PropsWithChildren<BottomBarProps>) {
   return (
     <div className={classNames(
-      'p-[24px 30px] border-t border-gray-300 bg-white w-full box-border flex justify-between',
+      'px-4 py-3 border-t border-gray-300 bg-white w-full box-border flex justify-between',
       fixed && 'fixed bottom-0',
       className,
     )}
