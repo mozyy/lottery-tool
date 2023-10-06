@@ -1,4 +1,4 @@
-import { Close } from '@nutui/icons-react';
+import { Close } from '@nutui/icons-react-taro';
 import {
   Button,
   Col,

@@ -1,4 +1,4 @@
-import { Right } from '@nutui/icons-react';
+import { Right } from '@nutui/icons-react-taro';
 import { Cell } from '@nutui/nutui-react-taro';
 import { Navigator } from '@tarojs/components';
 import { RecordRecord } from '@zyy/openapi/src/axios/lottery/record';

@@ -61,9 +61,9 @@ function Index() {
   useShareAppMessage(async (res) => {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      await new Promise((r) => setTimeout(r, 100));
+      await new Promise((r) => { setTimeout(r, 100); });
       if (!submitRef.current) {
-        return Promise.reject('cancel');
+        return Promise.reject(Error('cancel'));
       }
       const resp = await submitRef.current;
       return {
@@ -73,6 +73,18 @@ function Index() {
     }
     return {};
   });
+  const validatorItems = async (rule, value: LotteryNewItem[]) => {
+    for (let i = 0; i < value.length; i += 1) {
+      const item = value[i];
+      if (!item.name) {
+        return Promise.reject(Error(`选项${i + 1}名称不能为空`));
+      }
+      if (!item.value) {
+        return Promise.reject(Error(`选项${i + 1}值不能为空`));
+      }
+    }
+    return true;
+  };
 
   return (
     <div className="p-2">
@@ -99,7 +111,7 @@ function Index() {
               <Radio value={type} key={type}>{getLotteryTypeDesc(type)}</Radio>))}
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="选项" name="items" ref={itemsRef}>
+        <Form.Item label="选项" name="items" ref={itemsRef} rules={[{ required: true, validator: validatorItems }]}>
           <Items form={form} />
         </Form.Item>
         <Form.Item label="填写备注" name="remark">

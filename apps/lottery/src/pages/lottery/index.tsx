@@ -1,6 +1,5 @@
 import { Button, Form } from '@nutui/nutui-react-taro';
 import { showToast, useRouter } from '@tarojs/taro';
-import { LotteryLottery } from '@zyy/openapi/src/axios/lottery/lottery';
 import { LotteryrecordCreateRequest, RecordNewRecordRemark } from '@zyy/openapi/src/axios/lottery/record';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
 import { useLogin } from '@zyy/weapp/src/hooks/login';
@@ -29,7 +28,7 @@ function Lottery() {
     return result;
   }
 
-  const { lottery, items, remarks } = data.lottery as Required<LotteryLottery>;
+  const { lottery, items, remarks } = data.lottery!;
 
   const submit = async (value) => {
     const turntable = turntableRef.current;
@@ -47,9 +46,9 @@ function Lottery() {
       },
     };
     const res = await trigger([record]);
-    const index = items.findIndex((item) => item.id === res.record?.record?.itemId);
+    const index = items!.findIndex((item) => item.id === res.record?.record?.itemId);
     await turntable.turn(index);
-    showToast({ title: `抽中: ${items[index].name}` });
+    showToast({ title: `抽中: ${items![index].name}` });
   };
   return (
     <div className="p-2">
@@ -60,9 +59,9 @@ function Lottery() {
           <Button formType="submit">提交</Button>
       }
       >
-        <div>{lottery.title}</div>
+        <div>{lottery?.title}</div>
         <Turntable items={items as TurntableItem[]} ref={turntableRef} />
-        {remarks.map((remark) => (
+        {remarks?.map((remark) => (
           <Form.Item
             label={remark.name}
             key={remark.id}

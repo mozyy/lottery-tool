@@ -1,4 +1,4 @@
-import { Right } from '@nutui/icons-react';
+import { Right } from '@nutui/icons-react-taro';
 import { Cell, CellGroup, Empty } from '@nutui/nutui-react-taro';
 import { Navigator } from '@tarojs/components';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
