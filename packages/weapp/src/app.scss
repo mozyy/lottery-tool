@@ -1,5 +1,8 @@
+@tailwind base;
+
 page {
   height: 100%;
+  font-size: 32px;
   @apply bg-gray-100;
 }
 
@@ -146,4 +149,15 @@ page {
   --nutui-form-item-error-message-color: var(--zy-error-color);
   --nutui-form-item-required-color: var(--zy-error-color);
   --nutui-form-item-label-width: 66px;
+
+  // 字体
+  --nutui-font-size-0: 12px; // xs
+  --nutui-font-size-1: 14px; // sm
+  --nutui-font-size-2: 16px; // base
+  --nutui-font-size-3: 18px; // lg
+  --nutui-font-size-4: 20px; // xl
+
+  // --nut-icon-width: var(--nutui-font-size-2);
+  // --nut-icon-line-height: 1;
+  // --nutui-button-default-padding: 0 36px;
 }

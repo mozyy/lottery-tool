@@ -3,7 +3,7 @@
 import { rejects } from 'assert';
 import { useMemo, useState } from 'react';
 import {
-  Button, FormControl, InputLabel, MenuItem, Select, TextField,
+  Box, Button, FormControl, InputLabel, MenuItem, Select, TextField,
 } from '@/mui/material';
 
 const getBlob = (

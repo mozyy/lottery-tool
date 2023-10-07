@@ -38,14 +38,15 @@ export default function Remarks({ value = [], onChange = () => {} }:RemarksProps
                 onChange={(v) => addArray(i, { name: String(v) })}
               />
             </Col>
-            <Col span={8}>
+            <Col span={8} className="flex items-center">
+              <div className="text-sm mr-1">必填</div>
               <Switch
                 checked={item.require}
                 onChange={(v) => addArray(i, { require: v })}
               />
             </Col>
             <Col span={4} className="text-center">
-              <Close onClick={delArray(i)} className="text-[22px] align-middle" />
+              <Close onClick={delArray(i)} className="text-gray-400 text-sm align-middle" />
             </Col>
           </Row>
         </div>

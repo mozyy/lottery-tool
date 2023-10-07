@@ -41,7 +41,7 @@ const config = {
     'taro-plugin-compiler-optimization',
   ],
   sass: {
-    data: '@import "@nutui/nutui-react-taro/dist/styles/variables.scss";',
+    // data: '@import "@nutui/nutui-react-taro/dist/styles/variables.scss";',
   },
   mini: {
     postcss: {
@@ -65,7 +65,7 @@ const config = {
         },
       },
     },
-    commonChunks: ['runtime', 'vendors', 'taro', 'common', 'app-tailwind'],
+    commonChunks: ['runtime', 'vendors', 'taro', 'common', 'app-suffix'],
     // miniCssExtractPluginOption: {
     //   filename: '[name].css',
     //   chunkFilename: '[name].css',
@@ -79,8 +79,8 @@ const config = {
             minSize: 0,
             cacheGroups: {
               appnutui: {
-                name: config.isBuildPlugin ? 'plugin/app-tailwind' : 'app-tailwind',
-                test: /app\.tailwind/,
+                name: config.isBuildPlugin ? 'plugin/app-suffix' : 'app-suffix',
+                test: /app\.suffix/,
                 chunks: 'all',
                 priority: -1,
               },

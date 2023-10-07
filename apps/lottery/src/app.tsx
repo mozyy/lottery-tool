@@ -1,7 +1,7 @@
 import AppComponent from '@zyy/weapp/src/app';
 import { PropsWithChildren } from 'react';
 import './app.scss';
-import './app.tailwind.scss';
+import './app.suffix.scss';
 
 function App(props:PropsWithChildren) {
   const { children } = props;

@@ -46,10 +46,10 @@ export default function Items({ value = [], onChange = () => {}, form }:ItemsPro
                 value={String(item.value)}
                 onChange={(v) => addArray(i, { value: Number(v) })}
               />
-              <span className="text-gray-400">{getLotteryTypeUnit(form.getFieldValue('type'))}</span>
+              <span className="text-gray-500 flex items-center">{getLotteryTypeUnit(form.getFieldValue('type'))}</span>
             </Col>
             <Col span={4} className="text-center">
-              <Close onClick={delArray(i)} className="text-[22px] align-middle" />
+              <Close onClick={delArray(i)} className="text-gray-400 text-sm align-middle" />
             </Col>
           </Row>
         </div>

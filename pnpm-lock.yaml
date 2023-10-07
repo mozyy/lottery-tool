@@ -542,9 +542,6 @@ importers:
       '@babel/runtime':
         specifier: ^7.23.1
         version: 7.23.1
-      '@nutui/icons-react':
-        specifier: ^0.0.1
-        version: 0.0.1
       '@nutui/icons-react-taro':
         specifier: ^0.0.1
         version: 0.0.1
@@ -768,6 +765,9 @@ importers:
       '@tarojs/taro':
         specifier: 3.6.17
         version: 3.6.17(@types/react@18.2.25)(postcss@8.4.31)
+      '@zyy/config':
+        specifier: workspace:*
+        version: link:../config
       '@zyy/openapi':
         specifier: workspace:*
         version: link:../openapi
@@ -5155,12 +5155,6 @@ packages:
 
   /@nutui/icons-react-taro@0.0.1:
     resolution: {integrity: sha512-uHUaVnh9yfkUdbYLEfoxArFedP7pti+sOrnBTDknemsJKqK/jnQ9xnIKpO2l+1CgGWpbAkipQVBDUM7CXKuWaA==}
-    dependencies:
-      classnames: 2.3.2
-    dev: false
-
-  /@nutui/icons-react@0.0.1:
-    resolution: {integrity: sha512-MB0M8rvfqVC50GZGT20Y8bAs9Yi+aIpDk+PcEwLQ55oevHlnUtYhytNjVUXFhRLrTQDt3BYDuH7nHOQW//ShGg==}
     dependencies:
       classnames: 2.3.2
     dev: false

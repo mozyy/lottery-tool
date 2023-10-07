@@ -89,6 +89,7 @@ function Index() {
   return (
     <div className="p-2">
       <Form
+        divider
         form={form}
         onFinish={onSubmit}
         onFinishFailed={onFinishFailed}

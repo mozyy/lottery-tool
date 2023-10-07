@@ -1,1 +1,1 @@
-module.exports = require("@zyy/config/tailwind.config")
+module.exports = require('@zyy/weapp/tailwind.config');
