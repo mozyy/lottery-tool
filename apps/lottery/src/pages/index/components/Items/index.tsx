@@ -25,7 +25,7 @@ export default function Items({ value = [], onChange = () => {}, form }:ItemsPro
   };
 
   const addItem = () => {
-    const newArr = ([...value, { name: `选项${value.length + 1}`, value: 1 }]);
+    const newArr = ([...value, { name: '', value: 1 }]);
     onChange(newArr);
   };
   return (
@@ -58,7 +58,7 @@ export default function Items({ value = [], onChange = () => {}, form }:ItemsPro
         size="small"
         onClick={addItem}
       >
-        添加选项
+        添加
       </Button>
     </div>
   );

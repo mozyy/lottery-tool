@@ -1,4 +1,5 @@
 import { Button } from '@nutui/nutui-react-taro';
+import classNames from 'classnames';
 import {
   CSSProperties, ForwardedRef, forwardRef,
   useImperativeHandle, useMemo,
@@ -9,6 +10,7 @@ import styles from './index.module.scss';
 import { TurntableItem, TurntableTurn } from './types';
 
 export interface TurntableProps {
+  className?: string
   items: TurntableItem[],
 }
 export interface TurntableRef {
@@ -16,7 +18,7 @@ export interface TurntableRef {
 }
 
 export default forwardRef((props:TurntableProps, ref:ForwardedRef<TurntableRef>) => {
-  const { items } = props;
+  const { className, items } = props;
   const [style, setStyle] = useState<CSSProperties>({});
 
   const turns:TurntableTurn[] = useMemo(() => {
@@ -47,11 +49,11 @@ export default forwardRef((props:TurntableProps, ref:ForwardedRef<TurntableRef>)
   }), [turns]);
 
   return (
-    <div className="relative h-[700px] w-[700px] mx-auto">
+    <div className={classNames(className, 'relative mx-auto')}>
       <div className="h-full w-full" style={style}>
         <TurntableCanvas turns={turns} />
       </div>
-      <Button className={styles.pointer} formType="submit">开始</Button>
+      <Button className={styles.pointer} formType="submit" />
     </div>
   );
 });

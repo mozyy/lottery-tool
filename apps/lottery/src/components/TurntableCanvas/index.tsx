@@ -69,6 +69,7 @@ export default forwardRef((props:TurntableProps, ref:ForwardedRef<TurntableRef>)
         'rgb(251, 219, 216)',
         'rgba(246, 142, 46, 0.5)',
       ];
+      ctx.clearRect(0, 0, width, height);
       ctx.translate(centerX, centerY);
       // ctx.clearRect(0, 0, width, height);
       ctx.strokeStyle = '#ff9800';
@@ -108,6 +109,7 @@ export default forwardRef((props:TurntableProps, ref:ForwardedRef<TurntableRef>)
       ctx.lineWidth = 2;
       ctx.arc(0, 0, radius, 0, 2 * Math.PI);
       ctx.stroke();
+      ctx.translate(-centerX, -centerY);
     });
   }, [turns]);
 
