@@ -1,6 +1,8 @@
 import { Canvas } from '@tarojs/components';
 import {
-  Canvas as CanvasType, createSelectorQuery, getSystemInfoSync, showToast,
+  Canvas as CanvasType,
+  canvasToTempFilePath,
+  createSelectorQuery, getSystemInfoSync, showToast,
 } from '@tarojs/taro';
 import { getRandomString } from '@zyy/utils/src/random';
 import {
@@ -14,7 +16,7 @@ export interface TurntableProps {
   turns: TurntableTurn[],
 }
 export interface TurntableRef {
-  getImage:() =>Promise<string>
+  getImagePath:() =>Promise<string>
 }
 
 export default forwardRef((props:TurntableProps, ref:ForwardedRef<TurntableRef>) => {
@@ -60,7 +62,7 @@ export default forwardRef((props:TurntableProps, ref:ForwardedRef<TurntableRef>)
     ctxPromiseRef.current!.then((ctx) => {
       const { width, height } = canvasInfoRef.current!;
 
-      const radius = width / 2 - 1;
+      const radius = Math.min(width, height) / 2 - 1;
       const centerX = width / 2;
       const centerY = height / 2;
       const prizeBgColors = [
@@ -114,10 +116,11 @@ export default forwardRef((props:TurntableProps, ref:ForwardedRef<TurntableRef>)
   }, [turns]);
 
   useImperativeHandle(ref, () => ({
-    getImage: async () => {
+    getImagePath: async () => {
       await ctxPromiseRef.current!;
       const canvas = canvasInfoRef.current!.node;
-      return canvas.toDataURL('image/png', 0.92);
+      const res = await canvasToTempFilePath({ canvas });
+      return res.tempFilePath;
     },
   }), []);
 

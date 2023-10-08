@@ -15,7 +15,7 @@ export default forwardRef<TurntableRef, TurntableProps >(({ value = [] }, ref) =
   }, [value]);
 
   return (
-    <div className="w-[500px] h-[500px]">
+    <div className="w-[368px] h-[294px] mx-auto">
       <TurntableCanvas turns={turns} ref={ref} />
     </div>
   );

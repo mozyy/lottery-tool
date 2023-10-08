@@ -45,11 +45,11 @@ function Index() {
     let state;
     if (!data?.lottery) {
       state = {
-        title: '抽签',
+        title: '抽奖',
         type: LotterylotteryType.Number,
         remark: false,
         items: [{
-          name: '选项一',
+          name: '',
           value: 1,
         }],
         remarks: [],
@@ -93,10 +93,15 @@ function Index() {
         return Promise.reject(Error('cancel'));
       }
       const resp = await submitRef.current;
+      let imageUrl;
+      if (turntableRef.current) {
+        const url = await turntableRef.current.getImagePath();
+        imageUrl = url;
+      }
       return {
         title: resp?.lottery?.lottery?.title,
         path: `/pages/lottery/index?id=${resp?.lottery?.lottery?.id}`,
-        imageUrl: turntableRef.current ? await turntableRef.current.getImage() : undefined,
+        imageUrl,
       };
     }
     return {};
@@ -165,7 +170,7 @@ function Index() {
               </Picker>
             </div>
           </div> */}
-        <Form.Item name="items">
+        <Form.Item label="预览" name="items">
           <Turntable ref={turntableRef} />
         </Form.Item>
       </Form>
