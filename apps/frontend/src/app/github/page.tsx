@@ -1,14 +1,21 @@
-import Link from 'next/link';
-import qs from 'qs';
+import {
+  Avatar,
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  Unstable_Grid2 as Grid,
+  Tab,
+  Tabs,
+  Typography,
+} from '@/mui/material';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
-import {
-  Unstable_Grid2 as Grid,
-  Box, Typography, AppBar, IconButton, Tabs, Toolbar, Tab, Badge, Card,
-  CardHeader, Avatar, CardContent, CardActions, Button, CardActionArea,
-} from '@/mui/material';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import Link from 'next/link';
+import qs from 'qs';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(relativeTime);
@@ -20,8 +27,8 @@ const labels = [
 export default async function Index({ searchParams }:{ searchParams:{ label: string } }) {
   const { label = '' } = searchParams;
   const value = labels.indexOf(label);
-  const repos = await fetch(`https://api.github.com/search/repositories?q=stars:>1000${label ? ` language:${label}` : ''}&sort=stars&per_page=42&page=1`, {
-    next: { revalidate: 24 * 60 * 60 },
+  const repos = await fetch(`https://api.github.com/search/repositories?q=stars:>1000${label ? ` language:${encodeURIComponent(label)}` : ''}&sort=stars&per_page=42&page=1`, {
+    next: { revalidate: 60 * 60 },
   })
     .then((resp) => resp.json());
   return (
@@ -39,7 +46,15 @@ export default async function Index({ searchParams }:{ searchParams:{ label: str
             scrollButtons="auto"
             aria-label="nav tabs example"
           >
-            {labels.map((item) => (<Tab LinkComponent={Link} key={item} label={item || 'ALL'} href={`/github${qs.stringify({ label: item }, { addQueryPrefix: true })}`} />))}
+            {labels.map((item) => (
+              <Tab
+                LinkComponent={Link}
+                key={item}
+                label={item || 'ALL'}
+                href={`/github${qs.stringify({ label: item }, { addQueryPrefix: true })}`}
+                {...{ replace: true }}
+              />
+            ))}
           </Tabs>
         </Grid>
         <Grid xs={12} lg={10} spacing={2} container>

@@ -21,6 +21,13 @@ export default function Tool() {
             </Card>
           </Link>
         </Grid>
+        <Grid xs={12}>
+          <Link href="/tool/tts">
+            <Card>
+              <CardHeader title="TTS" />
+            </Card>
+          </Link>
+        </Grid>
       </Grid>
     </Box>
   );
