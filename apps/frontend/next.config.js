@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    typedRoutes: true
+    typedRoutes: true,
+    externalDir: true
   },
   images: {
     remotePatterns: [
@@ -14,12 +15,14 @@ const nextConfig = {
       },
     ],
   },
-  // webpack(config) {
-  //   // console.log(config)
-  //   config.optimization.sideEffects = true;
-  //   config.optimization.usedExports = true;
-  //   return config
-  // }
+  webpack(config) {
+    // console.log(config.module.rules)
+    // config.optimization.sideEffects = true;
+    // config.optimization.usedExports = true;
+    // config.resolve.symlinks = true
+    // config.module.rules.push({ test: /openapi\/.*\.ts/, loader: 'ts-loader' })
+    return config
+  },
   assetPrefix: process.env.NODE_ENV === 'production' ? 'https://zyy-frontend.oss-cn-chengdu.aliyuncs.com' : undefined,
   output: 'standalone',
 }

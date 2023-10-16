@@ -49,7 +49,8 @@ const getBlob = (
 });
 
 function downloadBlob(blob:Blob, name = 'file.mp3') {
-  // Convert your blob into a Blob URL (a special url that points to an object in the browser's memory)
+  // Convert your blob into a Blob URL (a special
+  // url that points to an object in the browser's memory)
   const blobUrl = URL.createObjectURL(blob);
 
   // Create a link element
