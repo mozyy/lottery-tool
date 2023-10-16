@@ -26,7 +26,7 @@ COPY --from=frontend-builder /app/apps/frontend/public ./public
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=frontend-builder /app/apps/frontend/.next/standalone ./
+COPY --from=frontend-builder /app/apps/frontend/.next/standalone/apps/frontend ./
 COPY --from=frontend-builder /app/apps/frontend/.next/static ./.next/static
 
 EXPOSE 3000
