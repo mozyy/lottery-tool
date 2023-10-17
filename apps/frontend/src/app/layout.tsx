@@ -1,9 +1,8 @@
 import { PropsWithChildren } from 'react';
 import Provider from './Provider';
-import './globals.css';
-import Footer from './Footer';
-import { CssBaseline, Box, Typography } from '@/mui/material';
 import Snackbar from '@/component/Snackbar';
+import { Box, CssBaseline } from '@/mui/material';
+import './globals.css';
 
 // export const runtime = 'edge';
 
@@ -22,7 +21,7 @@ export default function RootLayout({ children }:PropsWithChildren) {
             <Box sx={{ flex: 'auto' }}>
               {children}
             </Box>
-            <Footer />
+            {/* <Footer /> */}
           </Box>
           <Snackbar />
         </Provider>

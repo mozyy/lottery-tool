@@ -13,5 +13,6 @@
   "editor.formatOnSave": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  },
+  "devchat.defaultModel": "gpt-4"
 }

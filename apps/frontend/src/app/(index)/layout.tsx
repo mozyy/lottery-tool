@@ -1,6 +1,4 @@
-import { getServerSession } from 'next-auth/next';
 import { PropsWithChildren } from 'react';
-import Bar from './Bar';
 // import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Box } from '@/mui/material';
 
@@ -19,7 +17,7 @@ export default async function RootLayout({ children }:PropsWithChildren) {
     <Box sx={{ display: 'flex', height: '100%', flexDirection: 'column' }} component="main">
       {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
       {/* <AppBar /> */}
-      <Bar />
+      {/* <Bar /> */}
       <Box sx={{
         p: 3, flex: 'auto', display: 'flex', flexDirection: 'column',
       }}

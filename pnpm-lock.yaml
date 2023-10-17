@@ -237,6 +237,9 @@ importers:
       '@mui/x-date-pickers':
         specifier: ^6.16.1
         version: 6.16.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/material@5.14.12)(@mui/system@5.14.12)(@types/react@18.2.25)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
+      '@techstark/opencv-js':
+        specifier: 4.8.0-release.6
+        version: 4.8.0-release.6
       '@zyy/openapi':
         specifier: workspace:*
         version: link:../../packages/openapi
@@ -264,6 +267,9 @@ importers:
       next-auth:
         specifier: ^4.23.2
         version: 4.23.2(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
+      onnxruntime-web:
+        specifier: ^1.16.0
+        version: 1.16.0
       qs:
         specifier: ^6.11.2
         version: 6.11.2
@@ -6784,6 +6790,10 @@ packages:
       - whiskers
     dev: true
 
+  /@techstark/opencv-js@4.8.0-release.6:
+    resolution: {integrity: sha512-qaB5sOBSEtFa7tOBBboYuMBwIrgPcAQO980RsVBgtIr3tULWqjkw13wAdWXtz9IFYOGPhv8GeZ5ZmiRuSr43yw==}
+    dev: false
+
   /@tokenizer/token@0.3.0:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: true
@@ -12387,6 +12397,10 @@ packages:
       keyv: 4.5.3
       rimraf: 3.0.2
 
+  /flatbuffers@1.12.0:
+    resolution: {integrity: sha512-c7CZADjRcl6j0PlvFy0ZqXQ67qSEZfrVPynmnL+2zPc+NtMvrF8Y0QceMo7QqnSPc7+uWjUIAbvCQ5WIKlMVdQ==}
+    dev: false
+
   /flatted@3.2.9:
     resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
 
@@ -12892,6 +12906,10 @@ packages:
 
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
+
+  /guid-typescript@1.0.9:
+    resolution: {integrity: sha512-Y8T4vYhEfwJOTbouREvG+3XDsjr8E3kIr7uf+JZ0BYloFsttiHU0WfvANVsR7TxNUJa/WpCnw/Ino/p+DeBhBQ==}
+    dev: false
 
   /gzip-size@6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
@@ -15594,6 +15612,21 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       mimic-fn: 2.1.0
+
+  /onnxruntime-common@1.16.0:
+    resolution: {integrity: sha512-nyJsNryXceNoI3pynHn1ml8d6VaGug7loOKDRHkgu2fAhKIT6HL5zQasEh4/87IelfqcvnvleNRdMqEDh4RHBg==}
+    dev: false
+
+  /onnxruntime-web@1.16.0:
+    resolution: {integrity: sha512-ksNCyrmLqhMM4jP9Bb7yYluTWqpJHBOIouRp42bycH8oPchxcThxUp8QYmZZbdvniZ0gejc0ejlgrRSROJIeiA==}
+    dependencies:
+      flatbuffers: 1.12.0
+      guid-typescript: 1.0.9
+      long: 5.2.3
+      onnxruntime-common: 1.16.0
+      platform: 1.3.6
+      protobufjs: 7.2.5
+    dev: false
 
   /open@7.4.2:
     resolution: {integrity: sha512-MVHddDVweXZF3awtlAS+6pgKLlm/JgxZ90+/NBurBoQctVOOB/zDdVjcyPzQ+0laDGbsWgrRkflI65sQeOgT9Q==}

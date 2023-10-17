@@ -14,12 +14,17 @@ const nextConfig = {
       },
     ],
   },
-  // webpack(config) {
-  //   // console.log(config)
-  //   config.optimization.sideEffects = true;
-  //   config.optimization.usedExports = true;
-  //   return config
-  // }
+  webpack(config) {
+    // console.log(config)
+    config.resolve.fallback = {
+      fs: false,
+      path: false,
+      crypto: false,
+    };
+    // config.optimization.sideEffects = true;
+    // config.optimization.usedExports = true;
+    return config
+  },
   assetPrefix: process.env.NODE_ENV === 'production' ? 'https://zyy-frontend.oss-cn-chengdu.aliyuncs.com' : undefined,
   output: 'standalone',
 }
