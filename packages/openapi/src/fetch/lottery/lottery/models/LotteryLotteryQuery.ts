@@ -21,10 +21,10 @@ import { exists, mapValues } from '../runtime';
 export interface LotteryLotteryQuery {
     /**
      * 
-     * @type {number}
+     * @type {Array<number>}
      * @memberof LotteryLotteryQuery
      */
-    id?: number;
+    ids?: Array<number>;
     /**
      * 
      * @type {string}
@@ -52,7 +52,7 @@ export function LotteryLotteryQueryFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
+        'ids': !exists(json, 'ids') ? undefined : json['ids'],
         'userId': !exists(json, 'userId') ? undefined : json['userId'],
     };
 }
@@ -66,7 +66,7 @@ export function LotteryLotteryQueryToJSON(value?: LotteryLotteryQuery | null): a
     }
     return {
         
-        'id': value.id,
+        'ids': value.ids,
         'userId': value.userId,
     };
 }

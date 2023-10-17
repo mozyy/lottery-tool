@@ -1,7 +1,6 @@
+import { getOpenapi } from '@zyy/openapi/src/docs';
 import 'swagger-ui-react/swagger-ui.css';
 import { SwaggerUI } from './SwaggerUI';
-
-const getOpenapi = (module:string, name: string) => ({}) as any;
 
 interface AppProps {
   params: { module:string, name: string }

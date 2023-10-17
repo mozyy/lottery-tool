@@ -1,15 +1,14 @@
 'use client';
 
-import { rejects } from 'assert';
-import { useMemo, useState } from 'react';
 import {
   Box, Button, FormControl, InputLabel, MenuItem, Select, TextField,
 } from '@/mui/material';
+import { useEffect, useRef, useState } from 'react';
 
 const getBlob = (
   text:string,
   voice: SpeechSynthesisVoice,
-) => new Promise((resolve, reject) => {
+) => new Promise<Blob>((resolve, reject) => {
   console.log('picking system audio');
   navigator.mediaDevices.getDisplayMedia({ video: true, audio: true }).then((stream) => {
     const track = stream.getAudioTracks()[0];
@@ -44,12 +43,13 @@ const getBlob = (
     window.speechSynthesis.speak(utterance);
     console.log('speaking...');
   }, (err) => {
-    rejects(err);
+    reject(err);
   });
 });
 
 function downloadBlob(blob:Blob, name = 'file.mp3') {
-  // Convert your blob into a Blob URL (a special url that points to an object in the browser's memory)
+  // Convert your blob into a Blob URL (a special
+  // url that points to an object in the browser's memory)
   const blobUrl = URL.createObjectURL(blob);
 
   // Create a link element
@@ -79,10 +79,11 @@ function downloadBlob(blob:Blob, name = 'file.mp3') {
 export default function Tts() {
   const [text, setText] = useState('');
   const [voiceIndex, setVoiceIndex] = useState(0);
-  const voices = useMemo(() => speechSynthesis.getVoices().filter((i) => /cn/i.test(i.lang)), []);
+  const voicesRef = useRef(false);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
   const start = async () => {
-    const opener = window.open('');
+    const opener = window.open(`./tts-preview?text=${text}`, 'voice');
     const [voice] = voices;
     const blob = await getBlob(text, voice).finally(() => {
       opener?.close();
@@ -90,6 +91,25 @@ export default function Tts() {
 
     downloadBlob(blob);
   };
+
+  useEffect(() => {
+    const getVoices = () => {
+      if (voicesRef.current) {
+        return;
+      }
+      const v = speechSynthesis.getVoices().filter((i) => /cn/i.test(i.lang));
+      if (v.length === 0) {
+        setTimeout(getVoices, 100);
+        return;
+      }
+      voicesRef.current = true;
+      setVoices(v);
+    };
+    setTimeout(getVoices, 100);
+    setTimeout(() => {
+      voicesRef.current = true;
+    }, 1000);
+  }, []);
 
   return (
     <Box>
@@ -102,7 +122,7 @@ export default function Tts() {
         onChange={(e) => setText(e.target.value)}
       />
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-label">voices</InputLabel>
         <Select value={voiceIndex} onChange={(e) => setVoiceIndex(Number(e.target.value))}>
           {voices.map((voice, i) => (
             <MenuItem

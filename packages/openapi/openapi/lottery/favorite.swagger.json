@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "lottery/lottery.proto",
+    "title": "lottery/favorite.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "LotteryService"
+      "name": "FavoriteService"
     }
   ],
   "host": "api.zuoyinyun.com",
@@ -20,14 +20,14 @@
     "application/json"
   ],
   "paths": {
-    "/lottery.lottery.LotteryService/lotterys": {
+    "/lottery.favorite.FavoriteService/favorites": {
       "get": {
-        "operationId": "LotteryService_List",
+        "operationId": "FavoriteService_List",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotterylotteryListResponse"
+              "$ref": "#/definitions/lotteryfavoriteListResponse"
             }
           },
           "default": {
@@ -38,25 +38,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "lottery.ids",
-            "description": "id",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "lottery.userId",
-            "description": "id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
           {
             "name": "paginate.page",
             "in": "query",
@@ -73,16 +54,16 @@
           }
         ],
         "tags": [
-          "LotteryService"
+          "FavoriteService"
         ]
       },
       "post": {
-        "operationId": "LotteryService_Create",
+        "operationId": "FavoriteService_Create",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotterylotteryCreateResponse"
+              "$ref": "#/definitions/lotteryfavoriteCreateResponse"
             }
           },
           "default": {
@@ -98,23 +79,23 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/lotterylotteryCreateRequest"
+              "$ref": "#/definitions/lotteryfavoriteCreateRequest"
             }
           }
         ],
         "tags": [
-          "LotteryService"
+          "FavoriteService"
         ]
       }
     },
-    "/lottery.lottery.LotteryService/lotterys/{id}": {
+    "/lottery.favorite.FavoriteService/favorites/{id}": {
       "get": {
-        "operationId": "LotteryService_Get",
+        "operationId": "FavoriteService_Get",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotterylotteryGetResponse"
+              "$ref": "#/definitions/lotteryfavoriteGetResponse"
             }
           },
           "default": {
@@ -134,16 +115,16 @@
           }
         ],
         "tags": [
-          "LotteryService"
+          "FavoriteService"
         ]
       },
       "delete": {
-        "operationId": "LotteryService_Delete",
+        "operationId": "FavoriteService_Delete",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotterylotteryDeleteResponse"
+              "$ref": "#/definitions/lotteryfavoriteDeleteResponse"
             }
           },
           "default": {
@@ -163,16 +144,16 @@
           }
         ],
         "tags": [
-          "LotteryService"
+          "FavoriteService"
         ]
       },
       "put": {
-        "operationId": "LotteryService_Update",
+        "operationId": "FavoriteService_Update",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/lotterylotteryUpdateResponse"
+              "$ref": "#/definitions/lotteryfavoriteUpdateResponse"
             }
           },
           "default": {
@@ -197,15 +178,15 @@
             "schema": {
               "type": "object",
               "properties": {
-                "lottery": {
-                  "$ref": "#/definitions/lotteryNewLottery"
+                "favorite": {
+                  "$ref": "#/definitions/lotteryfavoriteNewFavorite"
                 }
               }
             }
           }
         ],
         "tags": [
-          "LotteryService"
+          "FavoriteService"
         ]
       }
     }
@@ -299,104 +280,6 @@
       },
       "title": "Lottery item"
     },
-    "lotteryLotteryQuery": {
-      "type": "object",
-      "properties": {
-        "ids": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "title": "id"
-        },
-        "userId": {
-          "type": "string",
-          "title": "id"
-        }
-      }
-    },
-    "lotteryNewItem": {
-      "type": "object",
-      "properties": {
-        "lotteryId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "name": {
-          "type": "string",
-          "title": "lottery title"
-        },
-        "value": {
-          "type": "integer",
-          "format": "int32",
-          "title": "lottery summary"
-        }
-      }
-    },
-    "lotteryNewLottery": {
-      "type": "object",
-      "properties": {
-        "lottery": {
-          "$ref": "#/definitions/lotteryNewLotteryInfo",
-          "title": "lottery title"
-        },
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/lotteryNewItem"
-          },
-          "title": "lottery image"
-        },
-        "remarks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/lotteryNewRemark"
-          },
-          "title": "lottery summary"
-        }
-      }
-    },
-    "lotteryNewLotteryInfo": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "title": "id"
-        },
-        "title": {
-          "type": "string",
-          "title": "lottery title"
-        },
-        "type": {
-          "$ref": "#/definitions/lotterylotteryType",
-          "title": "lottery image"
-        },
-        "remark": {
-          "type": "boolean",
-          "title": "lottery summary"
-        }
-      }
-    },
-    "lotteryNewRemark": {
-      "type": "object",
-      "properties": {
-        "lotteryId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "name": {
-          "type": "string",
-          "title": "lottery title"
-        },
-        "require": {
-          "type": "boolean",
-          "title": "lottery summary"
-        }
-      }
-    },
     "lotteryRemark": {
       "type": "object",
       "properties": {
@@ -427,45 +310,100 @@
       },
       "title": "Lottery item"
     },
-    "lotterylotteryCreateRequest": {
+    "lotteryfavoriteCreateRequest": {
       "type": "object",
       "properties": {
-        "lottery": {
-          "$ref": "#/definitions/lotteryNewLottery"
+        "favorite": {
+          "$ref": "#/definitions/lotteryfavoriteNewFavorite"
         }
       }
     },
-    "lotterylotteryCreateResponse": {
+    "lotteryfavoriteCreateResponse": {
       "type": "object",
       "properties": {
-        "lottery": {
-          "$ref": "#/definitions/lotteryLottery"
+        "favorite": {
+          "$ref": "#/definitions/lotteryfavoriteFavoriteWithLottery"
         }
       }
     },
-    "lotterylotteryDeleteResponse": {
+    "lotteryfavoriteDeleteResponse": {
       "type": "object"
     },
-    "lotterylotteryGetResponse": {
+    "lotteryfavoriteFavorite": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "lotteryId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "lotteryfavoriteFavoriteWithLottery": {
+      "type": "object",
+      "properties": {
+        "favorite": {
+          "$ref": "#/definitions/lotteryfavoriteFavorite"
+        },
         "lottery": {
           "$ref": "#/definitions/lotteryLottery"
         }
       }
     },
-    "lotterylotteryListResponse": {
+    "lotteryfavoriteGetResponse": {
       "type": "object",
       "properties": {
-        "lotterys": {
+        "favorite": {
+          "$ref": "#/definitions/lotteryfavoriteFavoriteWithLottery"
+        }
+      }
+    },
+    "lotteryfavoriteListResponse": {
+      "type": "object",
+      "properties": {
+        "favorites": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/lotteryLottery"
+            "$ref": "#/definitions/lotteryfavoriteFavoriteWithLottery"
           }
         },
         "paginated": {
           "$ref": "#/definitions/paginatePaginated"
+        }
+      }
+    },
+    "lotteryfavoriteNewFavorite": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "lotteryId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "lotteryfavoriteUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "favorite": {
+          "$ref": "#/definitions/lotteryfavoriteFavoriteWithLottery"
         }
       }
     },
@@ -478,14 +416,6 @@
       "default": "NUMBER",
       "description": "- NUMBER: 个数\n - PERCENT: 几率",
       "title": "抽签类型"
-    },
-    "lotterylotteryUpdateResponse": {
-      "type": "object",
-      "properties": {
-        "lottery": {
-          "$ref": "#/definitions/lotteryLottery"
-        }
-      }
     },
     "paginatePaginate": {
       "type": "object",

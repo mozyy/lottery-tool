@@ -60,7 +60,7 @@ function Lottery() {
       }
       >
         <div>{lottery?.title}</div>
-        <Turntable items={items as TurntableItem[]} ref={turntableRef} />
+        <Turntable className="h-[700px] w-[700px]" items={items as TurntableItem[]} ref={turntableRef} />
         {remarks?.map((remark) => (
           <Form.Item
             label={remark.name}

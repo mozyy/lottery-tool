@@ -1,12 +1,12 @@
 import { blogApi } from '@/api/blog';
 import {
-    Button, Unstable_Grid2 as Grid, Typography
+  Button, Unstable_Grid2 as Grid, Typography,
 } from '@/mui/material';
 import Link from 'next/link';
 import BlogCard from './BlogCard';
 
 export default async function Blog() {
-  const res = await blogApi.blogServiceList({ cache: 'no-cache' });
+  const res = await blogApi.blogServiceList({ cache: 'no-store' } as any);
   const [first, ...blogs] = res.blogs || [];
   return (
     <Grid container spacing={{ xs: 2, lg: 4 }}>

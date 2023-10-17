@@ -53,7 +53,7 @@ export interface LotteryServiceGetRequest {
 }
 
 export interface LotteryServiceListRequest {
-    lotteryId?: number;
+    lotteryIds?: Array<number>;
     lotteryUserId?: string;
     paginatePage?: number;
     paginatePerPage?: number;
@@ -161,8 +161,8 @@ export class LotteryServiceApi extends runtime.BaseAPI {
     async lotteryServiceListRaw(requestParameters: LotteryServiceListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LotterylotteryListResponse>> {
         const queryParameters: any = {};
 
-        if (requestParameters.lotteryId !== undefined) {
-            queryParameters['lottery.id'] = requestParameters.lotteryId;
+        if (requestParameters.lotteryIds) {
+            queryParameters['lottery.ids'] = requestParameters.lotteryIds;
         }
 
         if (requestParameters.lotteryUserId !== undefined) {

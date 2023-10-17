@@ -2,7 +2,7 @@ import {
   Button, Col, Form, FormItem, Input, Radio, Row, Switch,
 } from '@nutui/nutui-react-taro';
 import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
-import { useShareAppMessage } from '@tarojs/taro';
+import { useRouter, useShareAppMessage } from '@tarojs/taro';
 import {
   LotteryNewItem,
 
@@ -13,35 +13,62 @@ import {
 } from '@zyy/openapi/src/axios/lottery/lottery';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
 import { useLogin } from '@zyy/weapp/src/hooks/login';
+import { useSWR } from '@zyy/weapp/src/hooks/swr';
 import { useSWRMutation } from '@zyy/weapp/src/hooks/swrMutation';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { lotteryServiceApi } from '../../api/lottery';
+import { TurntableRef } from '../../components/TurntableCanvas';
 import { getLotteryTypeDesc } from '../../status/lottery';
 import Items from './components/Items';
 import Remarks from './components/Remarks';
+import Turntable from './components/Turntable';
 
 interface Lottery extends LotteryNewLotteryInfo {
   items: LotteryNewItem[],
   remarks: LotteryNewRemark[]
 }
 
-const initState: Lottery = {
-  title: '抽签',
-  type: LotterylotteryType.Number,
-  remark: false,
-  items: [{
-    name: '选项一',
-    value: 1,
-  }],
-  remarks: [],
-};
-
+/**
+ * 创建抽签
+ * @route id?=
+ */
 function Index() {
   const [form]: FormInstance[] = Form.useForm();
   const login = useLogin();
+  const { id } = useRouter().params;
+  const { data } = useSWR(() => !!id && [lotteryServiceApi.lotteryServiceGet, Number(id)]);
   const { trigger } = useSWRMutation([lotteryServiceApi.lotteryServiceCreate]);
   const submitRef = useRef<Promise<LotterylotteryCreateResponse> | null>(null);
   const itemsRef = useRef<FormItem>(null);
+  const turntableRef = useRef<TurntableRef>(null);
+  const initState: Lottery = useMemo(() => {
+    let state;
+    if (!data?.lottery) {
+      state = {
+        title: '抽奖',
+        type: LotterylotteryType.Number,
+        remark: false,
+        items: [{
+          name: '',
+          value: 1,
+        }],
+        remarks: [],
+      };
+    } else {
+      const { lottery, items, remarks } = data.lottery;
+      state = {
+        title: lottery?.title,
+        type: lottery?.type || LotterylotteryType.Number,
+        remark: lottery?.remark,
+        items: items?.map((i) => ({ name: i.name, value: i.value })) || [],
+        remarks: remarks?.map((i) => ({ name: i.name, require: i.require })) || [],
+      };
+    }
+    // TODO: 不应使用getInternal 来hack
+    const { setInitialValues } = form.getInternal('NUT_FORM_INTERNAL');
+    setInitialValues(state, true);
+    return state;
+  }, [data, form]);
   const onSubmit = async (value:
   LotteryNewLotteryInfo & {
     items:LotteryNewItem[],
@@ -66,14 +93,20 @@ function Index() {
         return Promise.reject(Error('cancel'));
       }
       const resp = await submitRef.current;
+      let imageUrl;
+      if (turntableRef.current) {
+        const url = await turntableRef.current.getImagePath();
+        imageUrl = url;
+      }
       return {
         title: resp?.lottery?.lottery?.title,
         path: `/pages/lottery/index?id=${resp?.lottery?.lottery?.id}`,
+        imageUrl,
       };
     }
     return {};
   });
-  const validatorItems = async (rule, value: LotteryNewItem[]) => {
+  const validatorItems: any = async (rule, value: LotteryNewItem[]) => {
     for (let i = 0; i < value.length; i += 1) {
       const item = value[i];
       if (!item.name) {
@@ -95,9 +128,9 @@ function Index() {
         onFinishFailed={onFinishFailed}
         initialValues={initState}
         footer={(
-          <Row>
-            <Col span={12}><Button openType="share" formType="submit">提交</Button></Col>
-            <Col span={12}><Button formType="reset">重署</Button></Col>
+          <Row gutter={8}>
+            <Col span={12}><Button block formType="reset">重署</Button></Col>
+            <Col span={12}><Button block type="primary" openType="share" formType="submit">提交</Button></Col>
           </Row>
       )}
       >
@@ -137,6 +170,9 @@ function Index() {
               </Picker>
             </div>
           </div> */}
+        <Form.Item label="预览" name="items">
+          <Turntable ref={turntableRef} />
+        </Form.Item>
       </Form>
     </div>
   );

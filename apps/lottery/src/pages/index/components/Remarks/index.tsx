@@ -12,8 +12,6 @@ export interface RemarksProps {
 }
 
 export default function Remarks({ value = [], onChange = () => {} }:RemarksProps) {
-  console.log(value);
-
   const addArray = (i:number, v: LotteryRemark) => {
     const newArr = ([...value.slice(0, i), { ...value[i], ...v }, ...value.slice(i + 1)]);
     onChange(newArr);
@@ -23,7 +21,7 @@ export default function Remarks({ value = [], onChange = () => {} }:RemarksProps
     onChange(newArr);
   };
   const addItem = () => {
-    const newArr = ([...value, { name: `备注${value.length + 1}`, require: true }]);
+    const newArr = ([...value, { name: '', require: true }]);
     onChange(newArr);
   };
   return (
@@ -55,7 +53,7 @@ export default function Remarks({ value = [], onChange = () => {} }:RemarksProps
         size="small"
         onClick={addItem}
       >
-        添加选项
+        添加
       </Button>
     </div>
   );

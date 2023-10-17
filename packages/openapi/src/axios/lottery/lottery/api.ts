@@ -150,10 +150,10 @@ export interface LotteryLotteryInfo {
 export interface LotteryLotteryQuery {
     /**
      * 
-     * @type {number}
+     * @type {Array<number>}
      * @memberof LotteryLotteryQuery
      */
-    'id'?: number;
+    'ids'?: Array<number>;
     /**
      * 
      * @type {string}
@@ -610,14 +610,14 @@ export const LotteryServiceApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
-         * @param {number} [lotteryId] id
+         * @param {Array<number>} [lotteryIds] id
          * @param {string} [lotteryUserId] id
          * @param {number} [paginatePage] 
          * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lotteryServiceList: async (lotteryId?: number, lotteryUserId?: string, paginatePage?: number, paginatePerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lotteryServiceList: async (lotteryIds?: Array<number>, lotteryUserId?: string, paginatePage?: number, paginatePerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/lottery.lottery.LotteryService/lotterys`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -630,8 +630,8 @@ export const LotteryServiceApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (lotteryId !== undefined) {
-                localVarQueryParameter['lottery.id'] = lotteryId;
+            if (lotteryIds) {
+                localVarQueryParameter['lottery.ids'] = lotteryIds;
             }
 
             if (lotteryUserId !== undefined) {
@@ -738,15 +738,15 @@ export const LotteryServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} [lotteryId] id
+         * @param {Array<number>} [lotteryIds] id
          * @param {string} [lotteryUserId] id
          * @param {number} [paginatePage] 
          * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async lotteryServiceList(lotteryId?: number, lotteryUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LotterylotteryListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lotteryServiceList(lotteryId, lotteryUserId, paginatePage, paginatePerPage, options);
+        async lotteryServiceList(lotteryIds?: Array<number>, lotteryUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LotterylotteryListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lotteryServiceList(lotteryIds, lotteryUserId, paginatePage, paginatePerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -799,15 +799,15 @@ export const LotteryServiceApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
-         * @param {number} [lotteryId] id
+         * @param {Array<number>} [lotteryIds] id
          * @param {string} [lotteryUserId] id
          * @param {number} [paginatePage] 
          * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lotteryServiceList(lotteryId?: number, lotteryUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: any): AxiosPromise<LotterylotteryListResponse> {
-            return localVarFp.lotteryServiceList(lotteryId, lotteryUserId, paginatePage, paginatePerPage, options).then((request) => request(axios, basePath));
+        lotteryServiceList(lotteryIds?: Array<number>, lotteryUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: any): AxiosPromise<LotterylotteryListResponse> {
+            return localVarFp.lotteryServiceList(lotteryIds, lotteryUserId, paginatePage, paginatePerPage, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -864,7 +864,7 @@ export class LotteryServiceApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} [lotteryId] id
+     * @param {Array<number>} [lotteryIds] id
      * @param {string} [lotteryUserId] id
      * @param {number} [paginatePage] 
      * @param {number} [paginatePerPage] 
@@ -872,8 +872,8 @@ export class LotteryServiceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LotteryServiceApi
      */
-    public lotteryServiceList(lotteryId?: number, lotteryUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: AxiosRequestConfig) {
-        return LotteryServiceApiFp(this.configuration).lotteryServiceList(lotteryId, lotteryUserId, paginatePage, paginatePerPage, options).then((request) => request(this.axios, this.basePath));
+    public lotteryServiceList(lotteryIds?: Array<number>, lotteryUserId?: string, paginatePage?: number, paginatePerPage?: number, options?: AxiosRequestConfig) {
+        return LotteryServiceApiFp(this.configuration).lotteryServiceList(lotteryIds, lotteryUserId, paginatePage, paginatePerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
