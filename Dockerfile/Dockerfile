@@ -1,5 +1,5 @@
-FROM node:20-slim AS slim
-FROM slim AS base
+FROM node:18-alpine AS alpine
+FROM alpine AS base
 ARG OSSUTIL_E
 ARG OSSUTIL_I
 ARG OSSUTIL_K
@@ -23,7 +23,7 @@ RUN ossutil64 \
     -k $OSSUTIL_K \
     cp -ru apps/frontend/.next/static oss://zyy-frontend/_next/static
 
-FROM slim AS frontend-runner
+FROM alpine AS frontend-runner
 WORKDIR /app
 
 ENV NODE_ENV production
@@ -39,10 +39,10 @@ COPY --from=frontend-builder /app/apps/frontend/public ./public
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=frontend-builder /app/apps/frontend/.next/standalone/apps/frontend ./
+COPY --from=frontend-builder /app/apps/frontend/.next/standalone ./
 
 EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "server.js"]
+CMD ["node", "apps/frontend/server.js"]
