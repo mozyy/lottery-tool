@@ -8,7 +8,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable
-RUN apt-get -y update; apt-get -y install curl unzip
+RUN apt -y update; apt -y install curl unzip
 RUN curl https://gosspublic.alicdn.com/ossutil/install.sh | bash
 COPY . /app
 WORKDIR /app
