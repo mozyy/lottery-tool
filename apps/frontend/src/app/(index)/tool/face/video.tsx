@@ -29,6 +29,7 @@ export default function Video() {
 
   return (
     <Box>
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <video ref={videoRef} hidden />
       <canvas ref={canvasRef} width={300} height={300} />
     </Box>

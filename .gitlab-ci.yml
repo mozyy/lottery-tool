@@ -1,8 +1,13 @@
 
 before_script:
   - docker info
-build:
+frontend:
   stage: build
+  when: manual
   script:
     - echo "$ENV_VAR" > "apps/frontend/.env"
-    - docker build -t mozyy/empty-compose-frontend:latest --target frontend-runner -f Dockerfile/Dockerfile .
+    - docker build -t mozyy/empty-compose-frontend:latest
+      --build-arg OSSUTIL_E=$OSSUTIL_E
+      --build-arg OSSUTIL_I=$OSSUTIL_I
+      --build-arg OSSUTIL_K=$OSSUTIL_K
+      --target frontend-runner -f Dockerfile/Dockerfile .

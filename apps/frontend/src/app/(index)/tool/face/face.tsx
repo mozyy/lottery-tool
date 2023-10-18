@@ -128,7 +128,8 @@ export default function Face() {
         //   ctx.fillText(`${label} - ${(score * 100).toFixed(1)}%`, x + 1, y + 1);
         // }
         // const time5 = Date.now();
-        // console.log(`preprocessImage: ${time2 - time1} yolo: ${time3 - time2} nms: ${time4 - time3} box: ${time5 - time4} all: ${Date.now() - time1}
+        // console.log(`preprocessImage: ${time2 - time1} yolo: ${time3 - time2}
+        // nms: ${time4 - time3} box: ${time5 - time4} all: ${Date.now() - time1}
         // `, selected);
       }
       requestAnimationFrame(render);
@@ -142,7 +143,7 @@ export default function Face() {
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <video ref={videoRef} hidden />
       <canvas ref={canvasRef} style={{ width: 320, height: 320 }} width={640} height={640} />
-      <button onClick={() => statusRef.current = !statusRef.current}>切换</button>
+      <button type="button" onClick={() => { statusRef.current = !statusRef.current; }}>切换</button>
     </Box>
   );
 }

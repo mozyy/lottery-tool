@@ -1,14 +1,27 @@
 FROM node:20-slim AS slim
 FROM slim AS base
+ARG OSSUTIL_E
+ARG OSSUTIL_I
+ARG OSSUTIL_K
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+
 RUN corepack enable
+RUN apt-get -y update; apt-get -y install curl unzip
+RUN curl https://gosspublic.alicdn.com/ossutil/install.sh | bash
 COPY . /app
 WORKDIR /app
 
 FROM base AS frontend-builder
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm -F @zyy/frontend run build
+
+RUN ossutil64 \
+    -e $OSSUTIL_E \
+    -i $OSSUTIL_I \
+    -k $OSSUTIL_K \
+    cp -ru apps/frontend/.next/static oss://zyy-frontend/_next/static
 
 FROM slim AS frontend-runner
 WORKDIR /app
@@ -27,7 +40,6 @@ COPY --from=frontend-builder /app/apps/frontend/public ./public
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=frontend-builder /app/apps/frontend/.next/standalone/apps/frontend ./
-COPY --from=frontend-builder /app/apps/frontend/.next/static ./.next/static
 
 EXPOSE 3000
 
