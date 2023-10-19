@@ -28,6 +28,13 @@ export default function Tool() {
             </Card>
           </Link>
         </Grid>
+        <Grid xs={12}>
+          <Link href="/tool/face">
+            <Card>
+              <CardHeader title="FACE" />
+            </Card>
+          </Link>
+        </Grid>
       </Grid>
     </Box>
   );

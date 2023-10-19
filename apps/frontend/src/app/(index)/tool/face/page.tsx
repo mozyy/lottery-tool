@@ -1,4 +1,4 @@
-import Face from './face';
+import Video from './video';
 import { Box } from '@/mui/material';
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 export default function Json() {
   return (
     <Box>
-      <Face />
+      <Video />
     </Box>
   );
 }

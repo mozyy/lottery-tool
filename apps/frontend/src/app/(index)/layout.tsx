@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 // import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import Bar from './Bar';
 import { Box } from '@/mui/material';
 
 export const metadata = {
@@ -17,7 +18,7 @@ export default async function RootLayout({ children }:PropsWithChildren) {
     <Box sx={{ display: 'flex', height: '100%', flexDirection: 'column' }} component="main">
       {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
       {/* <AppBar /> */}
-      {/* <Bar /> */}
+      <Bar />
       <Box sx={{
         p: 3, flex: 'auto', display: 'flex', flexDirection: 'column',
       }}
