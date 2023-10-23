@@ -20,6 +20,37 @@
     "application/json"
   ],
   "paths": {
+    "/lottery.favorite.TemplateService/templates/lotterys/{lotteryId}": {
+      "get": {
+        "operationId": "TemplateService_GetByLotteryId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lotterytemplateGetByLotteryIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "lotteryId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "TemplateService"
+        ]
+      }
+    },
     "/lottery.template.TemplateService/templates": {
       "get": {
         "operationId": "TemplateService_List",
@@ -338,6 +369,14 @@
     },
     "lotterytemplateDeleteResponse": {
       "type": "object"
+    },
+    "lotterytemplateGetByLotteryIdResponse": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/templateTemplate"
+        }
+      }
     },
     "lotterytemplateGetResponse": {
       "type": "object",

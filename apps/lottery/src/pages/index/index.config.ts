@@ -1,4 +1,4 @@
 export default {
-  navigationBarTitleText: '抽签',
-  enableShareAppMessage: true,
+  navigationBarTitleText: '抽签模板',
+  enablePullDownRefresh: true,
 };

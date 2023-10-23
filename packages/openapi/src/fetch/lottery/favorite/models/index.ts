@@ -9,6 +9,7 @@ export * from './LotteryfavoriteCreateRequest';
 export * from './LotteryfavoriteCreateResponse';
 export * from './LotteryfavoriteFavorite';
 export * from './LotteryfavoriteFavoriteWithLottery';
+export * from './LotteryfavoriteGetByLotteryIdResponse';
 export * from './LotteryfavoriteGetResponse';
 export * from './LotteryfavoriteListResponse';
 export * from './LotteryfavoriteNewFavorite';

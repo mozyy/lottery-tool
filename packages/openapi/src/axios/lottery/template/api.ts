@@ -228,6 +228,19 @@ export interface LotterytemplateCreateResponse {
 /**
  * 
  * @export
+ * @interface LotterytemplateGetByLotteryIdResponse
+ */
+export interface LotterytemplateGetByLotteryIdResponse {
+    /**
+     * 
+     * @type {TemplateTemplate}
+     * @memberof LotterytemplateGetByLotteryIdResponse
+     */
+    'template'?: TemplateTemplate;
+}
+/**
+ * 
+ * @export
  * @interface LotterytemplateGetResponse
  */
 export interface LotterytemplateGetResponse {
@@ -546,6 +559,39 @@ export const TemplateServiceApiAxiosParamCreator = function (configuration?: Con
         },
         /**
          * 
+         * @param {number} lotteryId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        templateServiceGetByLotteryId: async (lotteryId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'lotteryId' is not null or undefined
+            assertParamExists('templateServiceGetByLotteryId', 'lotteryId', lotteryId)
+            const localVarPath = `/lottery.favorite.TemplateService/templates/lotterys/{lotteryId}`
+                .replace(`{${"lotteryId"}}`, encodeURIComponent(String(lotteryId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} [paginatePage] 
          * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
@@ -664,6 +710,16 @@ export const TemplateServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} lotteryId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async templateServiceGetByLotteryId(lotteryId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LotterytemplateGetByLotteryIdResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.templateServiceGetByLotteryId(lotteryId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {number} [paginatePage] 
          * @param {number} [paginatePerPage] 
          * @param {*} [options] Override http request option.
@@ -720,6 +776,15 @@ export const TemplateServiceApiFactory = function (configuration?: Configuration
          */
         templateServiceGet(id: number, options?: any): AxiosPromise<LotterytemplateGetResponse> {
             return localVarFp.templateServiceGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} lotteryId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        templateServiceGetByLotteryId(lotteryId: number, options?: any): AxiosPromise<LotterytemplateGetByLotteryIdResponse> {
+            return localVarFp.templateServiceGetByLotteryId(lotteryId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -782,6 +847,17 @@ export class TemplateServiceApi extends BaseAPI {
      */
     public templateServiceGet(id: number, options?: AxiosRequestConfig) {
         return TemplateServiceApiFp(this.configuration).templateServiceGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} lotteryId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TemplateServiceApi
+     */
+    public templateServiceGetByLotteryId(lotteryId: number, options?: AxiosRequestConfig) {
+        return TemplateServiceApiFp(this.configuration).templateServiceGetByLotteryId(lotteryId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

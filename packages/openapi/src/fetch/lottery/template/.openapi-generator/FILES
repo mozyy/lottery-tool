@@ -8,6 +8,7 @@ models/LotteryRemark.ts
 models/LotterylotteryType.ts
 models/LotterytemplateCreateRequest.ts
 models/LotterytemplateCreateResponse.ts
+models/LotterytemplateGetByLotteryIdResponse.ts
 models/LotterytemplateGetResponse.ts
 models/LotterytemplateListResponse.ts
 models/LotterytemplateUpdateResponse.ts

@@ -16,7 +16,7 @@ export default forwardRef<TurntableRef, TurntableProps >(({ value = [] }, ref) =
 
   return (
     <div className="w-[368px] h-[294px] mx-auto">
-      <TurntableCanvas turns={turns} ref={ref} />
+      <TurntableCanvas key={JSON.stringify(turns)} turns={turns} ref={ref} />
     </div>
   );
 });

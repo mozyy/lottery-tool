@@ -94,6 +94,37 @@
         ]
       }
     },
+    "/lottery.favorite.FavoriteService/favorites/lotterys/{lotteryId}": {
+      "get": {
+        "operationId": "FavoriteService_GetByLotteryId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lotteryfavoriteGetByLotteryIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "lotteryId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "FavoriteService"
+        ]
+      }
+    },
     "/lottery.favorite.FavoriteService/favorites/{id}": {
       "get": {
         "operationId": "FavoriteService_Get",
@@ -367,6 +398,14 @@
         },
         "lottery": {
           "$ref": "#/definitions/lotteryLottery"
+        }
+      }
+    },
+    "lotteryfavoriteGetByLotteryIdResponse": {
+      "type": "object",
+      "properties": {
+        "favorite": {
+          "$ref": "#/definitions/lotteryfavoriteFavorite"
         }
       }
     },

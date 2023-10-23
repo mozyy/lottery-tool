@@ -18,6 +18,7 @@ import type {
   FavoriteServiceUpdateRequest,
   LotteryfavoriteCreateRequest,
   LotteryfavoriteCreateResponse,
+  LotteryfavoriteGetByLotteryIdResponse,
   LotteryfavoriteGetResponse,
   LotteryfavoriteListResponse,
   LotteryfavoriteUpdateResponse,
@@ -30,6 +31,8 @@ import {
     LotteryfavoriteCreateRequestToJSON,
     LotteryfavoriteCreateResponseFromJSON,
     LotteryfavoriteCreateResponseToJSON,
+    LotteryfavoriteGetByLotteryIdResponseFromJSON,
+    LotteryfavoriteGetByLotteryIdResponseToJSON,
     LotteryfavoriteGetResponseFromJSON,
     LotteryfavoriteGetResponseToJSON,
     LotteryfavoriteListResponseFromJSON,
@@ -50,6 +53,10 @@ export interface FavoriteServiceDeleteRequest {
 
 export interface FavoriteServiceGetRequest {
     id: number;
+}
+
+export interface FavoriteServiceGetByLotteryIdRequest {
+    lotteryId: number;
 }
 
 export interface FavoriteServiceListRequest {
@@ -152,6 +159,34 @@ export class FavoriteServiceApi extends runtime.BaseAPI {
      */
     async favoriteServiceGet(requestParameters: FavoriteServiceGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LotteryfavoriteGetResponse> {
         const response = await this.favoriteServiceGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async favoriteServiceGetByLotteryIdRaw(requestParameters: FavoriteServiceGetByLotteryIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LotteryfavoriteGetByLotteryIdResponse>> {
+        if (requestParameters.lotteryId === null || requestParameters.lotteryId === undefined) {
+            throw new runtime.RequiredError('lotteryId','Required parameter requestParameters.lotteryId was null or undefined when calling favoriteServiceGetByLotteryId.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/lottery.favorite.FavoriteService/favorites/lotterys/{lotteryId}`.replace(`{${"lotteryId"}}`, encodeURIComponent(String(requestParameters.lotteryId))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => LotteryfavoriteGetByLotteryIdResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async favoriteServiceGetByLotteryId(requestParameters: FavoriteServiceGetByLotteryIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LotteryfavoriteGetByLotteryIdResponse> {
+        const response = await this.favoriteServiceGetByLotteryIdRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

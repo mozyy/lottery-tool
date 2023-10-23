@@ -1,6 +1,5 @@
 import { Right } from '@nutui/icons-react-taro';
 import { Cell, CellGroup } from '@nutui/nutui-react-taro';
-import { Navigator } from '@tarojs/components';
 import { navigateTo } from '@tarojs/taro';
 import { userServiceApi } from '@zyy/weapp/src/api/wx';
 import Avatar from '@zyy/weapp/src/components/Avatar';
@@ -40,18 +39,16 @@ function Mine() {
       />
       <div className="p-2">
         <CellGroup>
-          <Navigator url="/pages/lotteryList/index">
-            <Cell
-              title="我的抽签"
-              extra={<Right />}
-            />
-          </Navigator>
-          <Navigator url="/pages/recordList/index">
-            <Cell
-              title="我的记录"
-              extra={<Right />}
-            />
-          </Navigator>
+          <Cell
+            onClick={() => navigateTo({ url: '/pages/lotteryList/index' })}
+            title="我的抽签"
+            extra={<Right />}
+          />
+          <Cell
+            onClick={() => navigateTo({ url: '/pages/recordList/index' })}
+            title="我的记录"
+            extra={<Right />}
+          />
         </CellGroup>
       </div>
     </div>

@@ -10,6 +10,7 @@ models/LotteryfavoriteCreateRequest.ts
 models/LotteryfavoriteCreateResponse.ts
 models/LotteryfavoriteFavorite.ts
 models/LotteryfavoriteFavoriteWithLottery.ts
+models/LotteryfavoriteGetByLotteryIdResponse.ts
 models/LotteryfavoriteGetResponse.ts
 models/LotteryfavoriteListResponse.ts
 models/LotteryfavoriteNewFavorite.ts

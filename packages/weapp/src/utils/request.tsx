@@ -3,7 +3,7 @@ import { ConfigurationParameters } from '@zyy/openapi/src/axios/lottery/lottery'
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { Middleware, SWRHook } from 'swr';
-import { getAccessToken, oauthTokenState } from '../store/atom';
+import { authTokenState, getAccessToken } from '../store/atom';
 
 export const swrFetcher = async (key, extraArg = { arg: [] }) => {
   // eslint-disable-next-line prefer-const
@@ -14,7 +14,7 @@ export const swrFetcher = async (key, extraArg = { arg: [] }) => {
 
 export const swrMiddleware: Middleware = (useSWRNext:
 SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
-  const [oauthToken, setOauthToken] = useRecoilState(oauthTokenState);
+  const [oauthToken, setOauthToken] = useRecoilState(authTokenState);
   let key;
   if (typeof swrKey === 'function') {
     key = () => {

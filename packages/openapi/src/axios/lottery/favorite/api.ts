@@ -283,6 +283,19 @@ export interface LotteryfavoriteFavoriteWithLottery {
 /**
  * 
  * @export
+ * @interface LotteryfavoriteGetByLotteryIdResponse
+ */
+export interface LotteryfavoriteGetByLotteryIdResponse {
+    /**
+     * 
+     * @type {LotteryfavoriteFavorite}
+     * @memberof LotteryfavoriteGetByLotteryIdResponse
+     */
+    'favorite'?: LotteryfavoriteFavorite;
+}
+/**
+ * 
+ * @export
  * @interface LotteryfavoriteGetResponse
  */
 export interface LotteryfavoriteGetResponse {
@@ -558,6 +571,39 @@ export const FavoriteServiceApiAxiosParamCreator = function (configuration?: Con
         },
         /**
          * 
+         * @param {number} lotteryId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        favoriteServiceGetByLotteryId: async (lotteryId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'lotteryId' is not null or undefined
+            assertParamExists('favoriteServiceGetByLotteryId', 'lotteryId', lotteryId)
+            const localVarPath = `/lottery.favorite.FavoriteService/favorites/lotterys/{lotteryId}`
+                .replace(`{${"lotteryId"}}`, encodeURIComponent(String(lotteryId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} [userId] 
          * @param {number} [paginatePage] 
          * @param {number} [paginatePerPage] 
@@ -681,6 +727,16 @@ export const FavoriteServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} lotteryId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async favoriteServiceGetByLotteryId(lotteryId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LotteryfavoriteGetByLotteryIdResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.favoriteServiceGetByLotteryId(lotteryId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} [userId] 
          * @param {number} [paginatePage] 
          * @param {number} [paginatePerPage] 
@@ -738,6 +794,15 @@ export const FavoriteServiceApiFactory = function (configuration?: Configuration
          */
         favoriteServiceGet(id: number, options?: any): AxiosPromise<LotteryfavoriteGetResponse> {
             return localVarFp.favoriteServiceGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} lotteryId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        favoriteServiceGetByLotteryId(lotteryId: number, options?: any): AxiosPromise<LotteryfavoriteGetByLotteryIdResponse> {
+            return localVarFp.favoriteServiceGetByLotteryId(lotteryId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -801,6 +866,17 @@ export class FavoriteServiceApi extends BaseAPI {
      */
     public favoriteServiceGet(id: number, options?: AxiosRequestConfig) {
         return FavoriteServiceApiFp(this.configuration).favoriteServiceGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} lotteryId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FavoriteServiceApi
+     */
+    public favoriteServiceGetByLotteryId(lotteryId: number, options?: AxiosRequestConfig) {
+        return FavoriteServiceApiFp(this.configuration).favoriteServiceGetByLotteryId(lotteryId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

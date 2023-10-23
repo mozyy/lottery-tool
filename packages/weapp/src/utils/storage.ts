@@ -5,7 +5,7 @@ import { decryptAES, encryptAES } from './crypto';
 
 const storagePrefix = 'LOTTERY_';
 const storageKeys = {
-  OAUTH_INFO: 'OAUTH_INFO',
+  AUTH_INFO: 'AUTH_INFO',
 };
 
 type Key = keyof typeof storageKeys;

@@ -1,20 +1,20 @@
-import { OauthToken as OauthTokenModel, OauthoauthUser } from '@zyy/openapi/src/axios/wx/user';
-import { AtomEffect, DefaultValue, atom } from 'recoil';
+import { AuthauthUser, AuthToken as AuthTokenModel } from '@zyy/openapi/src/axios/wx/user';
+import { atom, AtomEffect, DefaultValue } from 'recoil';
 import { getStorage, removeStorage, setStorage } from '../utils/storage';
 
-export class OauthToken {
+export class AuthToken {
   private expires: number;
 
-  constructor(public model: OauthTokenModel, private user: OauthoauthUser) {
+  constructor(public model: AuthTokenModel, private user: AuthauthUser) {
     this.expires = Date.now() + this.model.expiresIn! * 1000;
   }
 
-  static expired(token: OauthToken) {
+  static expired(token: AuthToken) {
     return Date.now() > token.expires;
   }
 
-  static restore(token: OauthToken) {
-    const newToken = new OauthToken(token.model, token.user);
+  static restore(token: AuthToken) {
+    const newToken = new AuthToken(token.model, token.user);
     newToken.expires = token.expires;
     return newToken;
   }
@@ -24,39 +24,39 @@ export class OauthToken {
   }
 }
 
-let auth:OauthToken | null = null;
+let auth:AuthToken | null = null;
 
-export const setOauthToken = (value:OauthToken | null) => {
+export const setOauthToken = (value:AuthToken | null) => {
   auth = value;
 };
 export const getAccessToken = () => {
-  if (!auth || OauthToken.expired(auth)) {
+  if (!auth || AuthToken.expired(auth)) {
     return '';
   }
   return auth.model.accessToken || '';
 };
 
-const localStorageEffect:AtomEffect<OauthToken | null> = ({ setSelf, onSet }) => {
-  const oauthInfo = getStorage<OauthToken>('OAUTH_INFO');
-  if (oauthInfo) {
-    const oauth = OauthToken.restore(oauthInfo);
-    setOauthToken(oauth);
-    setSelf(oauth);
+const localStorageEffect:AtomEffect<AuthToken | null> = ({ setSelf, onSet }) => {
+  const authInfo = getStorage<AuthToken>('AUTH_INFO');
+  if (authInfo) {
+    const token = AuthToken.restore(authInfo);
+    setOauthToken(token);
+    setSelf(token);
   }
 
   onSet((newValue) => {
     if (newValue instanceof DefaultValue || !newValue) {
       setOauthToken(null);
-      removeStorage('OAUTH_INFO');
+      removeStorage('AUTH_INFO');
     } else {
       setOauthToken(newValue);
-      setStorage('OAUTH_INFO', newValue);
+      setStorage('AUTH_INFO', newValue);
     }
   });
 };
 
-export const oauthTokenState = atom<OauthToken | null>({
-  key: 'oauthTokenState',
+export const authTokenState = atom<AuthToken | null>({
+  key: 'authTokenState',
   default: null,
   effects: [
     localStorageEffect,

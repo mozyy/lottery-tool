@@ -1,6 +1,6 @@
 import { Right } from '@nutui/icons-react-taro';
 import { Cell } from '@nutui/nutui-react-taro';
-import { Navigator } from '@tarojs/components';
+import { navigateTo } from '@tarojs/taro';
 import { RecordRecord } from '@zyy/openapi/src/axios/lottery/record';
 import { userServiceApi } from '@zyy/weapp/src/api/wx';
 import Avatar from '@zyy/weapp/src/components/Avatar';
@@ -18,32 +18,31 @@ export default function RecordItem(props:RecordItemProps) {
   const { data: dataUser } = useSWR([userServiceApi.userServiceGetByUserId, record?.userId!]);
   const item = dataLottery?.lottery?.items?.find((i) => i.id === record?.itemId);
 
-  const remarkValue = (() => {
+  const getRemarkDesc = () => {
     if (!recordRemarks?.length) {
       return undefined;
     }
     const remark = recordRemarks[0];
-    const value = `${dataLottery?.lottery?.remarks?.find((i) => i.id === remark.remarkId)}: ${remark.value}`;
+    const value = `${dataLottery?.lottery?.remarks?.find((i) => i.id === remark.remarkId)?.name}: ${remark.value}`;
     return recordRemarks.length > 1 ? `${value} ...` : value;
-  })();
+  };
 
   return (
-    <Navigator url={`/pages/recordDetail/index?id=${record?.id}`}>
-      <Cell
-        title={item?.name}
-        description={(
-          <div>
-            {remarkValue}
-            <div>{formatDate(record?.createdAt, 'YYYY-MM-DD HH:mm 创建')}</div>
-          </div>
+    <Cell
+      title={item?.name}
+      onClick={() => navigateTo({ url: `/pages/recordDetail/index?id=${record?.id}` })}
+      description={(
+        <div>
+          {getRemarkDesc()}
+          <div>{formatDate(record?.createdAt, 'YYYY-MM-DD HH:mm 创建')}</div>
+        </div>
         )}
-        extra={(
-          <div>
-            <Avatar ossId={dataUser?.wxUser?.avatar} />
-            <Right />
-          </div>
+      extra={(
+        <div className="flex items-center">
+          <Avatar ossId={dataUser?.wxUser?.avatar} />
+          <Right />
+        </div>
         )}
-      />
-    </Navigator>
+    />
   );
 }

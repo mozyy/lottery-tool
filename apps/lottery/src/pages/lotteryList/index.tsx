@@ -1,6 +1,6 @@
 import { Right } from '@nutui/icons-react-taro';
 import { Cell, CellGroup, Empty } from '@nutui/nutui-react-taro';
-import { Navigator } from '@tarojs/components';
+import { navigateTo } from '@tarojs/taro';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
 import { useSWR } from '@zyy/weapp/src/hooks/swr';
 import { useUserId } from '@zyy/weapp/src/hooks/userId';
@@ -25,13 +25,13 @@ function LotteryList() {
     <div>
       <CellGroup>
         {data.lotterys.map((lottery) => (
-          <Navigator key={lottery.lottery?.id} url={`/pages/lotteryDetail/index?id=${lottery.lottery?.id}`}>
-            <Cell
-              title={lottery.lottery?.title}
-              description={formatDate(lottery.lottery?.createdAt, 'YYYY-MM-DD HH:mm 创建')}
-              extra={<Right />}
-            />
-          </Navigator>
+          <Cell
+            key={lottery.lottery?.id}
+            title={lottery.lottery?.title}
+            onClick={() => navigateTo({ url: `/pages/lotteryDetail/index?id=${lottery.lottery?.id}` })}
+            description={formatDate(lottery.lottery?.createdAt, 'YYYY-MM-DD HH:mm 创建')}
+            extra={<Right />}
+          />
         ))}
       </CellGroup>
     </div>

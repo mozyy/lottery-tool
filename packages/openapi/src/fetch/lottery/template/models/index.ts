@@ -7,6 +7,7 @@ export * from './LotteryRemark';
 export * from './LotterylotteryType';
 export * from './LotterytemplateCreateRequest';
 export * from './LotterytemplateCreateResponse';
+export * from './LotterytemplateGetByLotteryIdResponse';
 export * from './LotterytemplateGetResponse';
 export * from './LotterytemplateListResponse';
 export * from './LotterytemplateUpdateResponse';

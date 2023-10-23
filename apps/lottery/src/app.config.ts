@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/account/index',
     'pages/accountName/index',
     'pages/lottery/index',
+    'pages/lotteryCreate/index',
     'pages/lotteryDetail/index', // ?id=
     'pages/lotteryList/index',
     'pages/recordList/index',

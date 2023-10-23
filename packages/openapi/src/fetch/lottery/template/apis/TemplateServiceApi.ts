@@ -17,6 +17,7 @@ import * as runtime from '../runtime';
 import type {
   LotterytemplateCreateRequest,
   LotterytemplateCreateResponse,
+  LotterytemplateGetByLotteryIdResponse,
   LotterytemplateGetResponse,
   LotterytemplateListResponse,
   LotterytemplateUpdateResponse,
@@ -28,6 +29,8 @@ import {
     LotterytemplateCreateRequestToJSON,
     LotterytemplateCreateResponseFromJSON,
     LotterytemplateCreateResponseToJSON,
+    LotterytemplateGetByLotteryIdResponseFromJSON,
+    LotterytemplateGetByLotteryIdResponseToJSON,
     LotterytemplateGetResponseFromJSON,
     LotterytemplateGetResponseToJSON,
     LotterytemplateListResponseFromJSON,
@@ -50,6 +53,10 @@ export interface TemplateServiceDeleteRequest {
 
 export interface TemplateServiceGetRequest {
     id: number;
+}
+
+export interface TemplateServiceGetByLotteryIdRequest {
+    lotteryId: number;
 }
 
 export interface TemplateServiceListRequest {
@@ -151,6 +158,34 @@ export class TemplateServiceApi extends runtime.BaseAPI {
      */
     async templateServiceGet(requestParameters: TemplateServiceGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LotterytemplateGetResponse> {
         const response = await this.templateServiceGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async templateServiceGetByLotteryIdRaw(requestParameters: TemplateServiceGetByLotteryIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LotterytemplateGetByLotteryIdResponse>> {
+        if (requestParameters.lotteryId === null || requestParameters.lotteryId === undefined) {
+            throw new runtime.RequiredError('lotteryId','Required parameter requestParameters.lotteryId was null or undefined when calling templateServiceGetByLotteryId.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/lottery.favorite.TemplateService/templates/lotterys/{lotteryId}`.replace(`{${"lotteryId"}}`, encodeURIComponent(String(requestParameters.lotteryId))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => LotterytemplateGetByLotteryIdResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async templateServiceGetByLotteryId(requestParameters: TemplateServiceGetByLotteryIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LotterytemplateGetByLotteryIdResponse> {
+        const response = await this.templateServiceGetByLotteryIdRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
