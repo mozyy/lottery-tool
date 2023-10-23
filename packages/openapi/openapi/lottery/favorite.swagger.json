@@ -39,6 +39,12 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "paginate.page",
             "in": "query",
             "required": false,

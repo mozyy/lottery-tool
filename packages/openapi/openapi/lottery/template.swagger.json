@@ -332,7 +332,7 @@
       "type": "object",
       "properties": {
         "template": {
-          "$ref": "#/definitions/templateTemplate"
+          "$ref": "#/definitions/templateTemplateWithLottery"
         }
       }
     },
@@ -343,7 +343,7 @@
       "type": "object",
       "properties": {
         "template": {
-          "$ref": "#/definitions/templateTemplate"
+          "$ref": "#/definitions/templateTemplateWithLottery"
         }
       }
     },
@@ -366,7 +366,7 @@
       "type": "object",
       "properties": {
         "template": {
-          "$ref": "#/definitions/templateTemplate"
+          "$ref": "#/definitions/templateTemplateWithLottery"
         }
       }
     },

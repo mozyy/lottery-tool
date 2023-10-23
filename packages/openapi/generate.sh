@@ -6,17 +6,19 @@ types=(
 )
 
 docs=(
-  blog/blog
-  health/department
-  health/hospital
-  health/nurse
-  health/patient
-  lottery/lottery
-  lottery/record
-  auth/auth
-  oss/oss
-  wx/wx
-  wx/user
+  # blog/blog
+  # health/department
+  # health/hospital
+  # health/nurse
+  # health/patient
+  # lottery/lottery
+  lottery/favorite
+  # lottery/record
+  lottery/template
+  # auth/auth
+  # oss/oss
+  # wx/wx
+  # wx/user
 )
 for type in "${types[@]}"; do
   for doc in "${docs[@]}"; do
