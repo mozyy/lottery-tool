@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@tarojs/taro": "3.6.17"
+    "@tarojs/taro": "3.6.18"
   },
   "license": "ISC"
 }

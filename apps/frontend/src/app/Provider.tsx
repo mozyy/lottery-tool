@@ -1,19 +1,19 @@
 'use client';
 
 import { PropsWithChildren } from 'react';
-import { SWRConfig } from 'swr';
 import { RecoilRoot } from 'recoil';
-import { ThemeProvider, createTheme } from '@/mui/material';
+import { SWRConfig } from 'swr';
 import { AdapterDayjs, LocalizationProvider } from '@/mui/x-date-pickers';
+import { ThemeProvider, createTheme } from '@/mui/material';
 
 export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#9145b1',
+      main: '#0064d2',
     },
     secondary: {
-      main: '#ff4081',
+      main: '#1cb0f6',
     },
   },
 });
