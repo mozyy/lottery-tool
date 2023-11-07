@@ -8,5 +8,6 @@ interface AppProps {
 
 export default async function App({ params: { module, name } }: AppProps) {
   const spec = await getOpenapi(module, name);
+  console.log(111, spec);
   return <SwaggerUI spec={spec} />;
 }

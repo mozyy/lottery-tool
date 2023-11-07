@@ -1,6 +1,7 @@
-import { Box, CssBaseline } from '@mui/material';
+import { Box } from '@mui/material';
 import { PropsWithChildren } from 'react';
 import Provider from './Provider';
+import ThemeRegistry from './ThemeRegistry';
 import Snackbar from '@/component/Snackbar';
 import './globals.css';
 
@@ -15,16 +16,17 @@ export default function RootLayout({ children }:PropsWithChildren) {
   return (
     <html lang="en">
       <body>
-        <Provider>
-          <CssBaseline enableColorScheme />
-          <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <Box sx={{ flex: 'auto' }}>
-              {children}
+        <ThemeRegistry options={{ key: 'mui' }}>
+          <Provider>
+            <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <Box sx={{ flex: 'auto' }}>
+                {children}
+              </Box>
+              {/* <Footer /> */}
             </Box>
-            {/* <Footer /> */}
-          </Box>
-          <Snackbar />
-        </Provider>
+            <Snackbar />
+          </Provider>
+        </ThemeRegistry>
       </body>
     </html>
   );
