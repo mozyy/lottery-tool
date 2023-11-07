@@ -1,10 +1,11 @@
 'use client';
 
+import { ThemeProvider, createTheme } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { PropsWithChildren } from 'react';
 import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
-import { AdapterDayjs, LocalizationProvider } from '@/mui/x-date-pickers';
-import { ThemeProvider, createTheme } from '@/mui/material';
 
 export const theme = createTheme({
   palette: {

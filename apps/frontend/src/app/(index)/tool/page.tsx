@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import {
   Box, Card, CardHeader, Unstable_Grid2 as Grid,
-} from '@/mui/material';
+} from '@mui/material';
+import Link from 'next/link';
 
 export default function Tool() {
   return (

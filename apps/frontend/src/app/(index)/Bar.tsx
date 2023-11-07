@@ -1,14 +1,18 @@
 'use client';
 
+import {
+  AccountCircle, Menu as MenuIcon, MoreVert, Notifications,
+} from '@mui/icons-material';
+import {
+  AppBar,
+  Badge,
+  Box, IconButton,
+  Tab,
+  Tabs, Toolbar, Typography,
+} from '@mui/material';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import {
-  AccountCircle, Menu as MenuIcon, MoreVert, Notifications,
-} from '@/mui/icons-material';
-import {
-  AppBar, Box, IconButton, Tabs, Toolbar, Typography, Tab, Badge,
-} from '@/mui/material';
 
 export default function Bar() {
   const [tab, setTab] = useState(0);

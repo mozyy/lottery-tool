@@ -1,5 +1,5 @@
+import { Unstable_Grid2 as Grid } from '@mui/material';
 import Link from 'next/link';
-import { Unstable_Grid2 as Grid } from '@/mui/material';
 
 export default function Docs() {
   return (

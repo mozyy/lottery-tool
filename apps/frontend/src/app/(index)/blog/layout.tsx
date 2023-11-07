@@ -1,6 +1,5 @@
-import { getServerSession } from 'next-auth/next';
+import { Unstable_Grid2 as Grid } from '@mui/material';
 import { PropsWithChildren } from 'react';
-import { Box, Unstable_Grid2 as Grid, Typography } from '@/mui/material';
 
 export const metadata = {
   title: 'blog',

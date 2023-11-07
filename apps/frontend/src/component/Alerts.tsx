@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, DialogProps,
-} from '@/mui/material';
+} from '@mui/material';
 
 export interface AlertProps {
   open: DialogProps['open']

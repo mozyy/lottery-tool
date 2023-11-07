@@ -7,14 +7,14 @@
     "compile": "rollup -c rollup.config.js"
   },
   "dependencies": {
-    "@nutui/nutui-react-taro": "^2.0.21",
+    "@nutui/nutui-react-taro": "^2.0.23",
     "@tarojs/taro": "3.6.18",
     "@zyy/config": "workspace:*",
     "@zyy/openapi": "workspace:*",
     "@zyy/utils": "workspace:*",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "classnames": "^2.3.2",
-    "crypto-js": "^4.1.1",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "eslint-config-taro": "3.6.18",
     "react": "^18.2.0",
@@ -27,6 +27,6 @@
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.5",
     "glob": "^10.3.10",
-    "rollup": "^4.1.4"
+    "rollup": "^4.3.0"
   }
 }

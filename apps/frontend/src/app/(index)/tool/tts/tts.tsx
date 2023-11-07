@@ -2,7 +2,7 @@
 
 import {
   Box, Button, FormControl, InputLabel, MenuItem, Select, TextField,
-} from '@/mui/material';
+} from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 
 const getBlob = (

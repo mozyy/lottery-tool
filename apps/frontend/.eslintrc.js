@@ -37,12 +37,6 @@ module.exports = {
         ],
       },
     ],
-    "no-restricted-imports": [
-      "error",
-      {
-        "patterns": ["@mui/*"]
-      }
-    ],
     "react-hooks/exhaustive-deps": 'error',
     "react/require-default-props": 'off',
   },

@@ -1,8 +1,9 @@
-import FeauterCard from '@/component/FeauterCard';
 import {
+  Box,
   Unstable_Grid2 as Grid,
-  Box, Typography,
-} from '@/mui/material';
+  Typography,
+} from '@mui/material';
+import FeauterCard from '@/component/FeauterCard';
 
 export default async function Index() {
   return (

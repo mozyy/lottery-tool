@@ -1,9 +1,11 @@
 'use client';
 
-import { useRecoilState } from 'recoil';
 import {
-  Snackbar as SnackbarMUI, Alert, SnackbarProps,
-} from '@/mui/material';
+  Alert,
+  Snackbar as SnackbarMUI,
+  SnackbarProps,
+} from '@mui/material';
+import { useRecoilState } from 'recoil';
 import { snackbarState } from '@/store/snackbar';
 
 export default function Snackbar() {

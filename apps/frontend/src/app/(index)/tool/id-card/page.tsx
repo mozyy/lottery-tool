@@ -1,5 +1,5 @@
+import { Box } from '@mui/material';
 import IdCardComponent from './IdCard';
-import { Box } from '@/mui/material';
 
 export const metadata = {
   title: '身份证号码生成器',

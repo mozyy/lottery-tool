@@ -1,5 +1,5 @@
+import { Box } from '@mui/material';
 import Video from './video';
-import { Box } from '@/mui/material';
 
 export const metadata = {
   title: '文字转语音',

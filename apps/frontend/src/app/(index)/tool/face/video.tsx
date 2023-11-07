@@ -1,7 +1,7 @@
 'use client';
 
+import { Box, Unstable_Grid2 as Grid } from '@mui/material';
 import { useEffect, useRef } from 'react';
-import { Box, Unstable_Grid2 as Grid } from '@/mui/material';
 
 export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);

@@ -1,6 +1,6 @@
 'use client';
 
-import { Box } from '@/mui/material';
+import { Box } from '@mui/material';
 import cv from '@techstark/opencv-js';
 import Script from 'next/script';
 import { InferenceSessionFactory, TensorConstructor } from 'onnxruntime-web';
@@ -42,7 +42,7 @@ const preprocessing = (source, modelWidth, modelHeight) => {
   matC3.delete();
   matPad.delete();
 
-  return [input, xRatio, yRatio];
+  return [input, xRatio, yRatio] as const;
 };
 
 const start = Date.now();

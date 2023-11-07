@@ -1,17 +1,24 @@
 'use client';
 
-// @ts-ignore
-import { register, GB2260 } from 'gb2260';
-// @ts-ignore
+// eslint-disable-next-line no-restricted-imports
+import { TabContext, TabList, TabPanel } from '@mui/lab';
+import {
+  Autocomplete, Box,
+  Button,
+  FormControl,
+  Unstable_Grid2 as Grid,
+  Grid2Props,
+  InputLabel,
+  MenuItem,
+  Select,
+  Tab,
+  TextField,
+} from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
+import { GB2260, register } from 'gb2260';
 import GBdata from 'gb2260/lib/201607';
 import { useCallback, useReducer, useState } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
-import {
-  Autocomplete, Box, Stack, Tab, Tabs, TextField, Unstable_Grid2 as Grid, Select, MenuItem,
-  Grid2Props, FormControl, InputLabel, Button,
-} from '@/mui/material';
-import { TabList, TabContext, TabPanel } from '@/mui/lab';
-import { DatePicker } from '@/mui/x-date-pickers';
 import { SexEnum, sexEnumDesc } from '@/utils/state';
 
 register('201607', GBdata);

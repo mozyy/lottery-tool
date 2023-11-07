@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 // import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { Box } from '@mui/material';
 import Bar from './Bar';
-import { Box } from '@/mui/material';
 
 export const metadata = {
   title: {

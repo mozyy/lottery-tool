@@ -13,3 +13,8 @@ declare module gb2260 {
   export function register(revision: string, data:any[]);
   export const revisions:string[];
 }
+
+declare module 'gb2260/lib/201607' {
+  const GBdata: any[];
+  export default GBdata;
+}

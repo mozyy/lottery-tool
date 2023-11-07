@@ -1,5 +1,5 @@
+import { AlertProps, SnackbarProps } from '@mui/material';
 import { atom } from 'recoil';
-import { AlertProps, SnackbarProps } from '@/mui/material';
 
 export interface Snackbar {
   open?: SnackbarProps['open']

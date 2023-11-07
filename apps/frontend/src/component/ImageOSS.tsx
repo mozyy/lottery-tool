@@ -1,7 +1,5 @@
 import { envBrowser } from '@/env.browser';
-import { envServer } from '@/env.server';
 import uck from '../assets/images/uck.png';
-import { Box, Button, ButtonBase } from '@/mui/material';
 
 const prefix = `https://${envBrowser.ossBucket}.oss-${envBrowser.ossLocaltion}.aliyuncs.com/`;
 

@@ -1,9 +1,9 @@
-import { blogApi } from '@/api/blog';
 import {
   Button, Unstable_Grid2 as Grid, Typography,
-} from '@/mui/material';
+} from '@mui/material';
 import Link from 'next/link';
 import BlogCard from './BlogCard';
+import { blogApi } from '@/api/blog';
 
 export default async function Blog() {
   const res = await blogApi.blogServiceList({ cache: 'no-store' } as any);

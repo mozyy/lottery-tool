@@ -1,11 +1,10 @@
 'use client';
 
-import Link from 'next/link';
+import { Box, Button, TextField } from '@mui/material';
+import { signIn } from 'next-auth/react';
 import {
-  FormEvent, FormEventHandler, useEffect, useState,
+  FormEvent,
 } from 'react';
-import { signIn, useSession } from 'next-auth/react';
-import { Box, Button, TextField } from '@/mui/material';
 
 export default function Register() {
   const onSubmit = async (e:FormEvent) => {

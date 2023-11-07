@@ -1,4 +1,4 @@
-import { Box, Button, ButtonBase } from '@/mui/material';
+import { ButtonBase } from '@mui/material';
 
 export default function Upload() {
   return (

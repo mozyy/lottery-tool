@@ -1,7 +1,7 @@
+import { Box, CssBaseline } from '@mui/material';
 import { PropsWithChildren } from 'react';
 import Provider from './Provider';
 import Snackbar from '@/component/Snackbar';
-import { Box, CssBaseline } from '@/mui/material';
 import './globals.css';
 
 // export const runtime = 'edge';

@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import {
   ArrowForwardIos, Favorite, Share,
-} from '@/mui/icons-material';
+} from '@mui/icons-material';
 import {
   Box, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography,
-} from '@/mui/material';
+} from '@mui/material';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface FeauterCardProps {
   title: string,
