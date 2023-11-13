@@ -4,7 +4,7 @@ import {
   canvasToTempFilePath,
   createSelectorQuery, getSystemInfoSync, showToast,
 } from '@tarojs/taro';
-import { getRandomString } from '@zyy/utils/src/random';
+import { getRandomString } from '@zyy/common/src/utils/random';
 import {
   ForwardedRef, forwardRef, useEffect,
   useImperativeHandle,

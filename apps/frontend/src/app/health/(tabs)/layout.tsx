@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 // import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Box } from '@mui/material';
-import Bar from './Bar';
+import Tabs from './Tabs';
 
 export const metadata = {
   title: {
@@ -12,19 +12,15 @@ export const metadata = {
 };
 
 export default async function Layout({ children }:PropsWithChildren) {
-  // console.log(11111111, 'server');
-  // const session = await getServerSession(authOptions);
   return (
     <Box sx={{ display: 'flex', height: '100%', flexDirection: 'column' }} component="main">
-      {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
-      {/* <AppBar /> */}
-      <Bar />
       <Box sx={{
-        p: 3, flex: 'auto', display: 'flex', flexDirection: 'column',
+        p: 2, flex: 'auto',
       }}
       >
         {children}
       </Box>
+      <Tabs />
     </Box>
   );
 }

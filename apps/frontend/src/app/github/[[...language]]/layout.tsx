@@ -19,7 +19,7 @@ const labels = [
   '', 'JavaScript', 'Rust', 'TypeScript', 'Go', 'Vue', 'Python', 'Java', 'C++', 'C', 'PHP', 'C#', 'Swift',
 ];
 
-export default async function Index(props: any) {
+export default async function Layout(props: any) {
   const value = labels.indexOf('');
   console.log(222, props);
   return (

@@ -1,6 +1,6 @@
 import { getFileSystemManager, uploadFile } from '@tarojs/taro';
-import { OssBucketName } from '@zyy/openapi/dist/axios/oss/oss';
-import { getBaseUrl } from '@zyy/utils/oss';
+import { getBaseUrl } from '@zyy/common/src/utils/oss';
+import { OssBucketName } from '@zyy/openapi/src/axios/oss/oss';
 import axios from 'axios';
 import crypto from 'crypto-js';
 import { useCallback } from 'react';

@@ -1,5 +1,5 @@
 import { OssBucketName, OssOss } from '@zyy/openapi/src/fetch/oss/oss';
-import { ossLocation } from './env';
+import { ossLocation } from '../env';
 
 const bucketNameMap = {
   [OssBucketName.Image]: 'uck-image',

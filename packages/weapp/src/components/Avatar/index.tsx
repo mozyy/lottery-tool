@@ -1,6 +1,6 @@
 import { Avatar as NutAvatar, AvatarProps as NutAvatarProps } from '@nutui/nutui-react-taro';
 import { previewImage } from '@tarojs/taro';
-import { getImage, getUrl } from '@zyy/utils/src/oss';
+import { getImage, getUrl } from '@zyy/common/src/utils/oss';
 import { ossServiceApi } from '../../api/oss';
 import { useSWR } from '../../hooks/swr';
 
