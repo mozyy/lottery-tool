@@ -7,7 +7,9 @@
     "compile": "tsc"
   },
   "dependencies": {
-    "@zyy/openapi": "workspace:*"
+    "@zyy/openapi": "workspace:*",
+    "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.10"
   },
   "keywords": [],
   "author": "",

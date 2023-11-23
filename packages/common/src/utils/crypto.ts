@@ -1,8 +1,9 @@
 import CryptoJs from 'crypto-js';
-import { iv as ivStr, key as keyStr } from '../env';
+import { iv as ivStr, key as keyStr, salt as saltStr } from '../env';
 
 const key = CryptoJs.enc.Utf8.parse(keyStr);
 const iv = CryptoJs.enc.Utf8.parse(ivStr);
+const salt = CryptoJs.enc.Utf8.parse(saltStr);
 
 /**
  * AES加密
@@ -49,3 +50,13 @@ export function decryptBase64(message: string) {
   const str = CryptoJs.enc.Base64.parse(message);
   return str.toString(CryptoJs.enc.Utf8);
 }
+
+/**
+ * PBKDF2加密密码
+ * @param password 密码
+ * @returns 加密后字符串
+ */
+export const encryptPassword = (password: string) => {
+  const val = CryptoJs.PBKDF2(password, salt, { keySize: 16, iterations: 520 });
+  return CryptoJs.enc.Base64.stringify(val);
+};

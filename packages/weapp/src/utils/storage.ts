@@ -1,7 +1,7 @@
 import {
   clearStorageSync, getStorageSync, removeStorageSync, setStorageSync,
 } from '@tarojs/taro';
-import { decryptAES, encryptAES } from './crypto';
+import { decryptAES, encryptAES } from '@zyy/common/src/utils/crypto';
 
 const storagePrefix = 'LOTTERY_';
 const storageKeys = {

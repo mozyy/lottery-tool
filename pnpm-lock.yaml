@@ -243,6 +243,9 @@ importers:
       '@techstark/opencv-js':
         specifier: 4.8.0-release.10
         version: 4.8.0-release.10
+      '@zyy/common':
+        specifier: workspace:*
+        version: link:../../packages/common
       '@zyy/openapi':
         specifier: workspace:*
         version: link:../../packages/openapi
@@ -282,6 +285,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      react-hook-form:
+        specifier: ^7.48.2
+        version: 7.48.2(react@18.2.0)
       react-swipeable-views:
         specifier: ^0.14.0
         version: 0.14.0(react@18.2.0)
@@ -756,6 +762,12 @@ importers:
       '@zyy/openapi':
         specifier: workspace:*
         version: link:../openapi
+      crypto-js:
+        specifier: ^4.2.0
+        version: 4.2.0
+      dayjs:
+        specifier: ^1.11.10
+        version: 1.11.10
 
   packages/config:
     dependencies:
@@ -17035,6 +17047,15 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       warning: 4.0.3
+    dev: false
+
+  /react-hook-form@7.48.2(react@18.2.0):
+    resolution: {integrity: sha512-H0T2InFQb1hX7qKtDIZmvpU1Xfn/bdahWBN1fH19gSe4bBEqTfmlr7H3XWTaVtiK4/tpPaI1F3355GPMZYge+A==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-immutable-proptypes@2.2.0(immutable@3.8.2):

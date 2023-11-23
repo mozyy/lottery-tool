@@ -53,9 +53,11 @@ export default function Bar() {
                 <Notifications />
               </Badge>
             </IconButton>
-            <IconButton color="inherit" size="large" edge="end" aria-label="我的">
-              <AccountCircle />
-            </IconButton>
+            <Link href="/login">
+              <IconButton color="inherit" size="large" edge="end" aria-label="我的">
+                <AccountCircle />
+              </IconButton>
+            </Link>
           </Box>
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton color="inherit" size="large" aria-label="更多">

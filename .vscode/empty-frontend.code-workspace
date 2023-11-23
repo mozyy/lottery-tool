@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../empty-backend/proto/proto"
+		}
+	],
+	"settings": {
+		"files.autoSave": "off"
+	}
+}

@@ -1,0 +1,437 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user/auth.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AuthService"
+    }
+  ],
+  "host": "api.zuoyinyun.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user.auth.AuthService/authorize": {
+      "get": {
+        "operationId": "AuthService_Authorize",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/authAuthorizeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "responseType",
+            "description": "表示授权类型，必选项，此处的值固定为\"code\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "clientId",
+            "description": "表示客户端的ID，必选项",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "redirectUri",
+            "description": "表示重定向URI，可选项",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "scope",
+            "description": "表示申请的权限范围，可选项",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "description": "表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
+    "/user.auth.AuthService/refresh": {
+      "post": {
+        "operationId": "AuthService_Refresh",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/authToken"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authRefreshRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
+    "/user.auth.AuthService/token": {
+      "post": {
+        "operationId": "AuthService_GetToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/authToken"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "authAuthorizeResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "表示授权码，必选项。该码的有效期应该很短，通常设为10分钟，客户端只能使用该码一次，否则会被授权服务器拒绝。该码与客户端ID和重定向URI，是一一对应关系。"
+        },
+        "redirectUri": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "title": "如果客户端的请求中包含这个参数，认证服务器的回应也必须一模一样包含这个参数。"
+        }
+      },
+      "title": "302 https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA\u0026state=xyz"
+    },
+    "authClient": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "redirectUri": {
+          "type": "string"
+        },
+        "defaultScope": {
+          "type": "string"
+        },
+        "defaultExpiresIn": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "passdata": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "client"
+    },
+    "authClientCreateResponse": {
+      "type": "object",
+      "properties": {
+        "client": {
+          "$ref": "#/definitions/authClient"
+        }
+      }
+    },
+    "authClientListResponse": {
+      "type": "object",
+      "properties": {
+        "clients": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/authClient"
+          }
+        },
+        "paginated": {
+          "$ref": "#/definitions/paginatePaginated"
+        }
+      }
+    },
+    "authConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pattern": {
+          "$ref": "#/definitions/authPattern"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "url scope config"
+    },
+    "authConfigCreateResponse": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/authConfig"
+        }
+      }
+    },
+    "authConfigListResponse": {
+      "type": "object",
+      "properties": {
+        "configs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/authConfig"
+          }
+        }
+      }
+    },
+    "authNewClient": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "redirectUri": {
+          "type": "string"
+        },
+        "defaultScope": {
+          "type": "string"
+        },
+        "defaultExpiresIn": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "passdata": {
+          "type": "string",
+          "title": "oneof client_type {\n   bool public = 3;\n   string passdata = 4;\n }"
+        }
+      }
+    },
+    "authNewConfig": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "$ref": "#/definitions/authPattern"
+        },
+        "scope": {
+          "type": "string"
+        }
+      }
+    },
+    "authPattern": {
+      "type": "object",
+      "properties": {
+        "equal": {
+          "type": "string"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "regex": {
+          "type": "string"
+        }
+      }
+    },
+    "authRefreshRequest": {
+      "type": "object",
+      "properties": {
+        "grantType": {
+          "type": "string",
+          "title": "表示使用的授权模式，此处的值固定为\"refreshtoken\"，必选项。"
+        },
+        "refreshToken": {
+          "type": "string",
+          "title": "示早前收到的更新令牌，必选项。"
+        }
+      },
+      "title": "POST /refresh\nAuthorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW client_screct\nBody: grant_type=refreshtoken\u0026refresh_token=tGzv3JOkF0XG5Qx2TlKWIA"
+    },
+    "authToken": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "title": "表示访问令牌，必选项。 JWTPayload"
+        },
+        "tokenType": {
+          "type": "string",
+          "title": "表示令牌类型，该值大小写不敏感，必选项，可以是bearer类型或mac类型。"
+        },
+        "expiresIn": {
+          "type": "string",
+          "title": "表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。"
+        },
+        "refreshToken": {
+          "type": "string",
+          "title": "表示更新令牌，用来获取下一次的访问令牌，可选项。"
+        },
+        "scope": {
+          "type": "string",
+          "title": "表示权限范围，如果与客户端申请的范围一致，此项可省略。"
+        }
+      }
+    },
+    "authTokenRequest": {
+      "type": "object",
+      "properties": {
+        "grantType": {
+          "type": "string",
+          "title": "表示使用的授权模式，必选项，此处的值固定为\"authorization_code\"。"
+        },
+        "code": {
+          "type": "string",
+          "title": "表示上一步获得的授权码，必选项。"
+        },
+        "redirectUri": {
+          "type": "string",
+          "title": "表示重定向URI，必选项，且必须与A步骤中的该参数值保持一致。"
+        },
+        "clientId": {
+          "type": "string",
+          "title": "表示客户端ID，必选项。"
+        }
+      },
+      "title": "POST /token\nAuthorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW client_screct\nBody: grant_type=authorization_code\u0026code=SplxlOBeZQQYbYS6WxSbIA\u0026redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb"
+    },
+    "paginatePaginate": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Paginate item"
+    },
+    "paginatePaginated": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

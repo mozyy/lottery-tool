@@ -3,7 +3,6 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "eamodio.gitlens",
-    "octref.vetur"
+    "eamodio.gitlens"
   ]
 }
