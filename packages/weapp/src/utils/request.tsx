@@ -1,9 +1,9 @@
 import { Empty } from '@nutui/nutui-react-taro';
 import { ConfigurationParameters } from '@zyy/openapi/src/axios/lottery/lottery';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
 import { Middleware, SWRHook } from 'swr';
-import { authTokenState, getAccessToken } from '../store/atom';
+import { useAuthToken } from '../hooks/authToken';
+import { getAccessToken } from '../store/atom';
 
 export const swrFetcher = async (key, extraArg = { arg: [] }) => {
   // eslint-disable-next-line prefer-const
@@ -14,7 +14,8 @@ export const swrFetcher = async (key, extraArg = { arg: [] }) => {
 
 export const swrMiddleware: Middleware = (useSWRNext:
 SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
-  const [oauthToken, setOauthToken] = useRecoilState(authTokenState);
+  const oauthToken = useAuthToken((s) => s.authToken);
+  const logout = useAuthToken((s) => s.logout);
   let key;
   if (typeof swrKey === 'function') {
     key = () => {
@@ -35,7 +36,7 @@ SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
     //
     switch (res.error.response?.status) {
       case 401:
-        setOauthToken(null);
+        logout();
         break;
       default:
     }

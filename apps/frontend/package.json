@@ -27,12 +27,13 @@
     "@mui/material": "^5.14.17",
     "@mui/x-date-pickers": "^6.18.0",
     "@techstark/opencv-js": "4.8.0-release.10",
-    "@zyy/openapi": "workspace:*",
     "@zyy/common": "workspace:*",
+    "@zyy/openapi": "workspace:*",
     "ali-oss": "^6.18.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "gb2260": "^0.6.0",
+    "immer": "^10.0.3",
     "marked": "^9.1.5",
     "mockjs": "^1.1.0",
     "next": "^14.0.1",
@@ -43,11 +44,11 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "react-swipeable-views": "^0.14.0",
-    "recoil": "^0.7.7",
     "server-only": "^0.0.1",
     "swagger-ui-react": "^5.9.1",
     "swr": "^2.2.4",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.0.1",

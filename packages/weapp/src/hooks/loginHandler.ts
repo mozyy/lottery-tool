@@ -1,12 +1,13 @@
 import { login } from '@tarojs/taro';
+import { AuthToken } from '@zyy/common/src/model/authToken';
 import { useCallback } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { userServiceApi } from '../api/wx';
-import { AuthToken, authTokenState, setOauthToken } from '../store/atom';
+import { setOauthToken } from '../store/atom';
+import { useAuthToken } from './authToken';
 import { useSWRMutation } from './swrMutation';
 
 export const useLoginHandler = () => {
-  const setOauthTokenHandler = useSetRecoilState(authTokenState);
+  const setOauthTokenHandler = useAuthToken((s) => s.login);
   const { trigger } = useSWRMutation([userServiceApi.userServiceLogin]);
 
   const loginHandler = useCallback(async () => {

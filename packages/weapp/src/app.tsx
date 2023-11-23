@@ -7,7 +7,6 @@ import {
   useUnhandledRejection,
 } from '@tarojs/taro';
 import { PropsWithChildren, useRef } from 'react';
-import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
 import { useLogin } from './hooks/login';
 import { swrFetcher, swrMiddleware } from './utils/request';
@@ -73,10 +72,8 @@ function App(props:PropsWithChildren) {
       },
     }}
     >
-      <RecoilRoot>
-        <Login />
-        {children}
-      </RecoilRoot>
+      <Login />
+      {children}
     </SWRConfig>
   );
 }

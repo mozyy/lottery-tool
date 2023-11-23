@@ -10,7 +10,7 @@ const storageKeys = {
 
 type Key = keyof typeof storageKeys;
 
-export function getStorage<T>(key: Key) {
+export function getStorage<T=any>(key: Key) {
   const keyValue = encryptAES(`${storagePrefix}${key}`);
   const value = getStorageSync(keyValue);
   if (!value) {

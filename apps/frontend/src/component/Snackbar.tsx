@@ -5,13 +5,13 @@ import {
   Snackbar as SnackbarMUI,
   SnackbarProps,
 } from '@mui/material';
-import { useRecoilState } from 'recoil';
-import { snackbarState } from '@/store/snackbar';
+import { useSnackbar } from '@/hooks/snackbar';
 
 export default function Snackbar() {
-  const [state, setState] = useRecoilState(snackbarState);
+  const state = useSnackbar((s) => s.snackbar);
+  const setState = useSnackbar((s) => s.open);
   const {
-    open, message, severity = 'info', snackbar, alert,
+    isOpened, message, severity = 'info', snackbar, alert,
   } = state;
   const onClose:SnackbarProps['onClose'] = (event, reason) => {
     if (reason === 'clickaway') {
@@ -21,10 +21,10 @@ export default function Snackbar() {
       snackbar.onClose(event, reason);
       return;
     }
-    setState((v) => ({ ...v, open: false }));
+    setState({ isOpened: false });
   };
   const snackbarProps = {
-    open,
+    open: isOpened,
     onClose,
     autoHideDuration: 5000,
     ...snackbar,
@@ -32,7 +32,7 @@ export default function Snackbar() {
   const alertProps = {
     children: message,
     severity,
-    onClose: (event: React.SyntheticEvent) => onClose(event, 'clickaway'),
+    onClose: (event: React.SyntheticEvent) => onClose(event, 'escapeKeyDown'),
     ...alert,
   };
   return (

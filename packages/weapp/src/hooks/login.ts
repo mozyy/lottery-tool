@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
-import { useRecoilValue } from 'recoil';
-import { authTokenState } from '../store/atom';
+import { useAuthToken } from './authToken';
 import { useLoginHandler } from './loginHandler';
 
 export const useLogin = () => {
-  const oauthToken = useRecoilValue(authTokenState);
+  const oauthToken = useAuthToken((s) => s.authToken);
   const loginHandler = useLoginHandler();
   const login = useCallback(async () => {
     if (oauthToken) {

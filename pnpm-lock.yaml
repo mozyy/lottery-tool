@@ -83,9 +83,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      recoil:
-        specifier: ^0.7.7
-        version: 0.7.7(react-dom@18.2.0)(react@18.2.0)
       swr:
         specifier: ^2.2.4
         version: 2.2.4(react@18.2.0)
@@ -261,6 +258,9 @@ importers:
       gb2260:
         specifier: ^0.6.0
         version: 0.6.0
+      immer:
+        specifier: ^10.0.3
+        version: 10.0.3
       marked:
         specifier: ^9.1.5
         version: 9.1.5
@@ -291,9 +291,6 @@ importers:
       react-swipeable-views:
         specifier: ^0.14.0
         version: 0.14.0(react@18.2.0)
-      recoil:
-        specifier: ^0.7.7
-        version: 0.7.7(react-dom@18.2.0)(react@18.2.0)
       server-only:
         specifier: ^0.0.1
         version: 0.0.1
@@ -306,6 +303,9 @@ importers:
       xml-js:
         specifier: ^1.6.11
         version: 1.6.11
+      zustand:
+        specifier: ^4.4.6
+        version: 4.4.6(@types/react@18.2.36)(immer@10.0.3)(react@18.2.0)
     devDependencies:
       '@next/bundle-analyzer':
         specifier: ^14.0.1
@@ -638,6 +638,9 @@ importers:
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
+      immer:
+        specifier: ^10.0.3
+        version: 10.0.3
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -647,12 +650,12 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      recoil:
-        specifier: ^0.7.7
-        version: 0.7.7(react-dom@18.2.0)(react@18.2.0)
       swr:
         specifier: ^2.2.4
         version: 2.2.4(react@18.2.0)
+      zustand:
+        specifier: ^4.4.6
+        version: 4.4.6(@types/react@18.2.36)(immer@10.0.3)(react@18.2.0)
     devDependencies:
       '@babel/core':
         specifier: ^7.23.2
@@ -775,13 +778,7 @@ importers:
         specifier: 3.6.18
         version: 3.6.18(@types/react@18.2.36)(postcss@8.4.31)
 
-  packages/openapi:
-    devDependencies:
-      typescript:
-        specifier: ^5.2.2
-        version: 5.2.2
-
-  packages/weapp:
+  packages/nextjs:
     dependencies:
       '@nutui/nutui-react-taro':
         specifier: ^2.0.23
@@ -822,6 +819,67 @@ importers:
       swr:
         specifier: ^2.2.4
         version: 2.2.4(react@18.2.0)
+    devDependencies:
+      '@rollup/plugin-typescript':
+        specifier: ^11.1.5
+        version: 11.1.5(rollup@4.3.0)(typescript@5.2.2)
+      glob:
+        specifier: ^10.3.10
+        version: 10.3.10
+      rollup:
+        specifier: ^4.3.0
+        version: 4.3.0
+
+  packages/openapi:
+    devDependencies:
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  packages/weapp:
+    dependencies:
+      '@nutui/nutui-react-taro':
+        specifier: ^2.0.23
+        version: 2.0.23(react-dom@18.2.0)(react@18.2.0)
+      '@tarojs/taro':
+        specifier: 3.6.18
+        version: 3.6.18(@types/react@18.2.36)(postcss@8.4.31)
+      '@zyy/common':
+        specifier: workspace:*
+        version: link:../common
+      '@zyy/config':
+        specifier: workspace:*
+        version: link:../config
+      '@zyy/openapi':
+        specifier: workspace:*
+        version: link:../openapi
+      axios:
+        specifier: ^1.6.0
+        version: 1.6.0
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+      crypto-js:
+        specifier: ^4.2.0
+        version: 4.2.0
+      dayjs:
+        specifier: ^1.11.10
+        version: 1.11.10
+      eslint-config-taro:
+        specifier: 3.6.18
+        version: 3.6.18(@babel/core@7.23.2)(eslint@8.53.0)(typescript@5.2.2)
+      immer:
+        specifier: ^10.0.3
+        version: 10.0.3
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      swr:
+        specifier: ^2.2.4
+        version: 2.2.4(react@18.2.0)
+      zustand:
+        specifier: ^4.4.6
+        version: 4.4.6(@types/react@18.2.36)(immer@10.0.3)(react@18.2.0)
     devDependencies:
       '@rollup/plugin-typescript':
         specifier: ^11.1.5
@@ -8297,7 +8355,7 @@ packages:
       debug: 2.6.9
       json5: 0.5.1
       lodash: 4.17.21
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       path-is-absolute: 1.0.1
       private: 0.1.8
       slash: 1.0.0
@@ -12740,7 +12798,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
@@ -13379,6 +13437,10 @@ packages:
   /immediate@3.0.6:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
     dev: true
+
+  /immer@10.0.3:
+    resolution: {integrity: sha512-pwupu3eWfouuaowscykeckFmVTpqbzW+rXFCX8rQLkZzM9ftBmU/++Ra+o+L27mz03zJTlyV4UUr+fdKNffo4A==}
+    dev: false
 
   /immutable@3.8.2:
     resolution: {integrity: sha512-15gZoQ38eYjEjxkorfbcgBKBL6R7T459OuK+CpcWt7O3KF4uPCx2tD0uFETlUDIyo+1789crbMhTvQBSR5yBMg==}
@@ -17235,7 +17297,7 @@ packages:
   /read-package-json@2.1.2:
     resolution: {integrity: sha512-D1KmuLQr6ZSJS0tW8hf3WGpRlwszJOXZ3E8Yd/DNRaM5d+1wVRZdHlpGBLAuovjr28LbWvjpWkBHMxpRGGjzNA==}
     dependencies:
-      glob: 7.1.2
+      glob: 7.2.3
       json-parse-even-better-errors: 2.3.1
       normalize-package-data: 2.5.0
       npm-normalize-package-bin: 1.0.1
@@ -20511,4 +20573,25 @@ packages:
 
   /zenscroll@4.0.2:
     resolution: {integrity: sha512-jEA1znR7b4C/NnaycInCU6h/d15ZzCd1jmsruqOKnZP6WXQSMH3W2GL+OXbkruslU4h+Tzuos0HdswzRUk/Vgg==}
+    dev: false
+
+  /zustand@4.4.6(@types/react@18.2.36)(immer@10.0.3)(react@18.2.0):
+    resolution: {integrity: sha512-Rb16eW55gqL4W2XZpJh0fnrATxYEG3Apl2gfHTyDSE965x/zxslTikpNch0JgNjJA9zK6gEFW8Fl6d1rTZaqgg==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@types/react': '>=16.8'
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.36
+      immer: 10.0.3
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false

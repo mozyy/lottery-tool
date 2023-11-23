@@ -1,7 +1,6 @@
-import { useRecoilValue } from 'recoil';
-import { authTokenState } from '../store/atom';
+import { useAuthToken } from './authToken';
 
 export const useUserId = () => {
-  const oauthToken = useRecoilValue(authTokenState);
+  const oauthToken = useAuthToken((s) => s.authToken);
   return oauthToken?.userId!;
 };

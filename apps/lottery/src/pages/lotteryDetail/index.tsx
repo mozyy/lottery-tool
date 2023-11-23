@@ -1,14 +1,13 @@
 import { Addfollow, HeartFill, Right } from '@nutui/icons-react-taro';
 import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { navigateTo, useRouter, useShareAppMessage } from '@tarojs/taro';
+import { formatDate } from '@zyy/common/src/utils/date';
 import BottomButton from '@zyy/weapp/src/components/BottomButton';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useAuthToken } from '@zyy/weapp/src/hooks/authToken';
 import { useSWR } from '@zyy/weapp/src/hooks/swr';
 import { useSWRMutation } from '@zyy/weapp/src/hooks/swrMutation';
 import { useUserId } from '@zyy/weapp/src/hooks/userId';
-import { authTokenState } from '@zyy/weapp/src/store/atom';
-import { formatDate } from '@zyy/weapp/src/utils/date';
-import { useRecoilValue } from 'recoil';
 import { useSWRConfig } from 'swr';
 import { favoriteServiceApi, lotteryServiceApi, recordServiceApi } from '../../api/lottery';
 import RecordItem from '../../components/RecordItem';
@@ -24,7 +23,7 @@ function LotteryDetail() {
     mutate: mutateFavorite,
   } = useSWR([favoriteServiceApi.favoriteServiceGetByLotteryId, lotteryId]);
   // const { mutate: mutateList } = useSWR(() => [favoriteServiceApi.favoriteServiceList, userId]);
-  const oauthToken = useRecoilValue(authTokenState);
+  const oauthToken = useAuthToken((s) => s.authToken);
   const { mutate } = useSWRConfig();
   const { trigger: triggerCreate } = useSWRMutation([favoriteServiceApi.favoriteServiceCreate]);
   const { trigger: triggerDelete } = useSWRMutation([favoriteServiceApi.favoriteServiceDelete]);

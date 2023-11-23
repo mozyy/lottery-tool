@@ -1,6 +1,6 @@
 import { ConfigurationParameters } from '@zyy/openapi/src/fetch/user/user';
-import { useRecoilState } from 'recoil';
 import { Middleware, SWRHook } from 'swr';
+import { useAuthToken } from '../hooks/authToken';
 
 export const swrFetcher = async (key, extraArg = { arg: [] }) => {
   // eslint-disable-next-line prefer-const
@@ -11,7 +11,8 @@ export const swrFetcher = async (key, extraArg = { arg: [] }) => {
 
 export const swrMiddleware: Middleware = (useSWRNext:
 SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
-  const [oauthToken, setOauthToken] = useRecoilState(authTokenState);
+  const oauthToken = useAuthToken((s) => s.authToken);
+  const setOauthToken = useAuthToken((s) => s.logout);
   let key;
   if (typeof swrKey === 'function') {
     key = () => {
@@ -32,7 +33,7 @@ SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
     //
     switch (res.error.response?.status) {
       case 401:
-        setOauthToken(null);
+        setOauthToken();
         break;
       default:
     }
@@ -52,5 +53,5 @@ SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
 };
 
 export const configurationParameters:ConfigurationParameters = {
-  accessToken: getAccessToken,
+  accessToken: () => useAuthToken.getState().authToken?.userId || '',
 };

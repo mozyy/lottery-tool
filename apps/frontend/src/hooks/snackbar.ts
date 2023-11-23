@@ -1,11 +1,20 @@
-import { useCallback } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { Snackbar, snackbarState } from '@/store/snackbar';
+import { AlertProps, SnackbarProps } from '@mui/material';
+import { create } from 'zustand';
 
-export const useSnackbar = () => {
-  const snackbar = useSetRecoilState(snackbarState);
-  const open = useCallback((props: Snackbar) => {
-    snackbar({ open: true, ...props });
-  }, [snackbar]);
-  return open;
-};
+export interface Snackbar {
+  isOpened?: SnackbarProps['open']
+  message?: AlertProps['children']
+  severity?: AlertProps['severity']
+  snackbar?: Omit<SnackbarProps, 'message'>
+  alert?: Omit<AlertProps, 'onClose'>
+}
+
+export const useSnackbar = create<{
+  snackbar: Snackbar,
+  open:(props: Snackbar)=>void
+}>((set) => ({
+      snackbar: {} as Snackbar,
+      open: (props: Snackbar) => set((state) => ({
+        snackbar: { ...state.snackbar, isOpened: true, ...props },
+      })),
+    }));
