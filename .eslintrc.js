@@ -5,6 +5,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
   ],
   rules: {
+    'linebreak-style': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'react-hooks/exhaustive-deps': 'error',

@@ -6,15 +6,18 @@ import { UserServiceLoginMobileRequest } from '@zyy/openapi/src/fetch/user/user'
 import {
   useForm,
 } from 'react-hook-form';
-import useSWR from 'swr';
 import { blogApi } from '../../api/blog';
 import { userApi } from '../../api/user';
 import ControllerText from '../../component/ControllerText';
+import { useSWR } from '../../hooks/swr';
 
 export default function Form() {
   const { control, handleSubmit } = useForm<UserServiceLoginMobileRequest>();
-  const { data } = useSWR('blogServiceList', () => blogApi.blogServiceList());
-  console.log(123, data);
+  const { data, error } = useSWR([blogApi, 'blogServiceList']);
+
+  if (error) {
+    return '1231111111111';
+  }
   const onSubmit = async ({ password, ...rest }: UserServiceLoginMobileRequest) => {
     const passwordNew = encryptPassword(password!);
     console.log(111, rest, password);

@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 export default function Footer() {
   return (
     <Box sx={{ flex: 'none', p: 2, textAlign: 'center' }}>
-      <Typography variant="body2"> © 2021-2023 yyuck.com 版权所有</Typography>
+      <Typography variant="body2"> © 2021-2024 zuoyinyun.com 版权所有</Typography>
       <Typography
         component="a"
         variant="body2"
@@ -11,7 +11,7 @@ export default function Footer() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        蜀ICP备2021007564号-2
+        蜀ICP备2023017132号-1
       </Typography>
     </Box>
   );
