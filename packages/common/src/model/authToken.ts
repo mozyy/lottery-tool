@@ -1,30 +1,28 @@
-import { AuthauthUser, AuthToken as AuthTokenModel } from '@zyy/openapi/src/axios/wx/user';
+import { AuthJWTPayload, AuthToken as AuthTokenModel } from '@zyy/openapi/src/fetch/user/auth';
+import { decryptBase64url } from '../utils/crypto';
 
 export class AuthToken {
-  private expires: number;
+  private jwt: AuthJWTPayload;
 
-  private refreshDate: number;
-
-  constructor(public model: AuthTokenModel, public user: AuthauthUser) {
-    this.expires = Date.now() + this.model.expiresIn! * 1000;
-    this.refreshDate = Date.now() + (this.model.expiresIn! * 1000) / 2;
+  constructor(public model: AuthTokenModel) {
+    const [payloadStr] = model.accessToken!.split('.');
+    this.jwt = JSON.parse(decryptBase64url(payloadStr));
   }
 
-  expired() {
-    return Date.now() > this.expires;
+  get expired() {
+    return Date.now() > this.model.expiresIn!;
   }
 
-  shouldRefresh() {
-    return Date.now() > this.refreshDate;
+  get shouldRefresh() {
+    return Date.now() > this.jwt.exp! && !this.expired;
   }
 
   static restore(token: AuthToken) {
-    const newToken = new AuthToken(token.model, token.user);
-    newToken.expires = token.expires;
+    const newToken = new AuthToken(token.model);
     return newToken;
   }
 
   get userId() {
-    return this.user?.id;
+    return this.jwt.sub;
   }
 }

@@ -1,6 +1,7 @@
 apis/AuthServiceApi.ts
 apis/index.ts
 index.ts
+models/AuthAuthorizationCode.ts
 models/AuthAuthorizeResponse.ts
 models/AuthClient.ts
 models/AuthClientCreateResponse.ts
@@ -8,6 +9,7 @@ models/AuthClientListResponse.ts
 models/AuthConfig.ts
 models/AuthConfigCreateResponse.ts
 models/AuthConfigListResponse.ts
+models/AuthJWTPayload.ts
 models/AuthNewClient.ts
 models/AuthNewConfig.ts
 models/AuthPattern.ts

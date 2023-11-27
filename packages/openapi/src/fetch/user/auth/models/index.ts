@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+export * from './AuthAuthorizationCode';
 export * from './AuthAuthorizeResponse';
 export * from './AuthClient';
 export * from './AuthClientCreateResponse';
@@ -7,6 +8,7 @@ export * from './AuthClientListResponse';
 export * from './AuthConfig';
 export * from './AuthConfigCreateResponse';
 export * from './AuthConfigListResponse';
+export * from './AuthJWTPayload';
 export * from './AuthNewClient';
 export * from './AuthNewConfig';
 export * from './AuthPattern';

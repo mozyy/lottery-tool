@@ -33,10 +33,10 @@ export interface AuthToken {
     tokenType?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof AuthToken
      */
-    expiresIn?: string;
+    expiresIn?: number;
     /**
      * 
      * @type {string}

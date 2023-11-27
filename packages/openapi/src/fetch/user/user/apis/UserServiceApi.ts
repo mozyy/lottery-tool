@@ -15,28 +15,35 @@
 
 import * as runtime from '../runtime';
 import type {
+  AuthToken,
   RpcStatus,
-  UserLoginResponse,
+  UserLoginMobileRequest,
+  UserLoginWeixinRequest,
+  UserRegisterMobileRequest,
 } from '../models';
 import {
+    AuthTokenFromJSON,
+    AuthTokenToJSON,
     RpcStatusFromJSON,
     RpcStatusToJSON,
-    UserLoginResponseFromJSON,
-    UserLoginResponseToJSON,
+    UserLoginMobileRequestFromJSON,
+    UserLoginMobileRequestToJSON,
+    UserLoginWeixinRequestFromJSON,
+    UserLoginWeixinRequestToJSON,
+    UserRegisterMobileRequestFromJSON,
+    UserRegisterMobileRequestToJSON,
 } from '../models';
 
 export interface UserServiceLoginMobileRequest {
-    mobile?: string;
-    password?: string;
+    body: UserLoginMobileRequest;
 }
 
 export interface UserServiceLoginWeixinRequest {
-    code?: string;
+    body: UserLoginWeixinRequest;
 }
 
 export interface UserServiceRegisterMobileRequest {
-    mobile?: string;
-    password?: string;
+    body: UserRegisterMobileRequest;
 }
 
 /**
@@ -46,92 +53,93 @@ export class UserServiceApi extends runtime.BaseAPI {
 
     /**
      */
-    async userServiceLoginMobileRaw(requestParameters: UserServiceLoginMobileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserLoginResponse>> {
+    async userServiceLoginMobileRaw(requestParameters: UserServiceLoginMobileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthToken>> {
+        if (requestParameters.body === null || requestParameters.body === undefined) {
+            throw new runtime.RequiredError('body','Required parameter requestParameters.body was null or undefined when calling userServiceLoginMobile.');
+        }
+
         const queryParameters: any = {};
 
-        if (requestParameters.mobile !== undefined) {
-            queryParameters['mobile'] = requestParameters.mobile;
-        }
-
-        if (requestParameters.password !== undefined) {
-            queryParameters['password'] = requestParameters.password;
-        }
-
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
             path: `/user.user.UserService/loginMobile`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: UserLoginMobileRequestToJSON(requestParameters.body),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserLoginResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthTokenFromJSON(jsonValue));
     }
 
     /**
      */
-    async userServiceLoginMobile(requestParameters: UserServiceLoginMobileRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserLoginResponse> {
+    async userServiceLoginMobile(requestParameters: UserServiceLoginMobileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthToken> {
         const response = await this.userServiceLoginMobileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      */
-    async userServiceLoginWeixinRaw(requestParameters: UserServiceLoginWeixinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserLoginResponse>> {
-        const queryParameters: any = {};
-
-        if (requestParameters.code !== undefined) {
-            queryParameters['code'] = requestParameters.code;
+    async userServiceLoginWeixinRaw(requestParameters: UserServiceLoginWeixinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthToken>> {
+        if (requestParameters.body === null || requestParameters.body === undefined) {
+            throw new runtime.RequiredError('body','Required parameter requestParameters.body was null or undefined when calling userServiceLoginWeixin.');
         }
 
+        const queryParameters: any = {};
+
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
             path: `/user.user.UserService/loginWeixin`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: UserLoginWeixinRequestToJSON(requestParameters.body),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserLoginResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthTokenFromJSON(jsonValue));
     }
 
     /**
      */
-    async userServiceLoginWeixin(requestParameters: UserServiceLoginWeixinRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserLoginResponse> {
+    async userServiceLoginWeixin(requestParameters: UserServiceLoginWeixinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthToken> {
         const response = await this.userServiceLoginWeixinRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      */
-    async userServiceRegisterMobileRaw(requestParameters: UserServiceRegisterMobileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserLoginResponse>> {
+    async userServiceRegisterMobileRaw(requestParameters: UserServiceRegisterMobileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthToken>> {
+        if (requestParameters.body === null || requestParameters.body === undefined) {
+            throw new runtime.RequiredError('body','Required parameter requestParameters.body was null or undefined when calling userServiceRegisterMobile.');
+        }
+
         const queryParameters: any = {};
 
-        if (requestParameters.mobile !== undefined) {
-            queryParameters['mobile'] = requestParameters.mobile;
-        }
-
-        if (requestParameters.password !== undefined) {
-            queryParameters['password'] = requestParameters.password;
-        }
-
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
             path: `/user.user.UserService/registerMobile`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: UserRegisterMobileRequestToJSON(requestParameters.body),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserLoginResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthTokenFromJSON(jsonValue));
     }
 
     /**
      */
-    async userServiceRegisterMobile(requestParameters: UserServiceRegisterMobileRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserLoginResponse> {
+    async userServiceRegisterMobile(requestParameters: UserServiceRegisterMobileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthToken> {
         const response = await this.userServiceRegisterMobileRaw(requestParameters, initOverrides);
         return await response.value();
     }

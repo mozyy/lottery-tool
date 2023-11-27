@@ -8,11 +8,7 @@ import { SWRConfig } from 'swr';
 export default function Provider({ children }: PropsWithChildren) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <SWRConfig
-        value={{
-          suspense: true,
-        }}
-      >
+      <SWRConfig>
         {children}
       </SWRConfig>
     </LocalizationProvider>

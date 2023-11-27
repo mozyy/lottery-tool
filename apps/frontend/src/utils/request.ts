@@ -5,7 +5,7 @@ import { useAuthToken } from '../hooks/authToken';
 export const swrFetcher = async (key, extraArg = { arg: [] }) => {
   const [, obj, method, ...params] = key;
   const res = await obj[method](...params, ...extraArg.arg);
-  return res.data;
+  return res;
 };
 
 export const swrMiddleware: Middleware = (useSWRNext:
@@ -33,9 +33,18 @@ SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
         logout();
         break;
       default:
+        // eslint-disable-next-line no-case-declarations
+        let message = res.error.response?.headers['grpc-message'];
+        if (message) {
+          message = decodeURIComponent(message);
+        } else {
+          message = res.error.message;
+        }
+        console.error('error: ', message, res);
     }
+  }
 
-  return { ...res };
+  return res;
 };
 
 export const configurationParameters:ConfigurationParameters = {

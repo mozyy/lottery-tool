@@ -27,7 +27,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/userLoginResponse"
+              "$ref": "#/definitions/authToken"
             }
           },
           "default": {
@@ -39,16 +39,12 @@
         },
         "parameters": [
           {
-            "name": "mobile",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userLoginMobileRequest"
+            }
           }
         ],
         "tags": [
@@ -63,7 +59,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/userLoginResponse"
+              "$ref": "#/definitions/authToken"
             }
           },
           "default": {
@@ -75,10 +71,12 @@
         },
         "parameters": [
           {
-            "name": "code",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userLoginWeixinRequest"
+            }
           }
         ],
         "tags": [
@@ -93,7 +91,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/userLoginResponse"
+              "$ref": "#/definitions/authToken"
             }
           },
           "default": {
@@ -105,16 +103,12 @@
         },
         "parameters": [
           {
-            "name": "mobile",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userRegisterMobileRequest"
+            }
           }
         ],
         "tags": [
@@ -136,7 +130,8 @@
           "title": "表示令牌类型，该值大小写不敏感，必选项，可以是bearer类型或mac类型。"
         },
         "expiresIn": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "title": "表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。"
         },
         "refreshToken": {
@@ -177,46 +172,35 @@
         }
       }
     },
-    "userLoginResponse": {
+    "userLoginMobileRequest": {
       "type": "object",
       "properties": {
-        "user": {
-          "$ref": "#/definitions/userUser"
+        "mobile": {
+          "type": "string"
         },
-        "token": {
-          "$ref": "#/definitions/authToken"
+        "password": {
+          "type": "string"
         }
       }
     },
-    "userUser": {
+    "userLoginWeixinRequest": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "title": "user_id"
-        },
-        "infoId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "mobileId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "weixinId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time"
+        "code": {
+          "type": "string"
         }
-      },
-      "title": "用户"
+      }
+    },
+    "userRegisterMobileRequest": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
     }
   }
 }

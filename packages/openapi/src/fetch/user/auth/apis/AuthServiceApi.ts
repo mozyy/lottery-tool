@@ -40,6 +40,15 @@ export interface AuthServiceAuthorizeRequest {
     redirectUri?: string;
     scope?: string;
     state?: string;
+    state2Id?: number;
+    state2Code?: string;
+    state2UserId?: string;
+    state2ClientId?: string;
+    state2Scope?: string;
+    state2RedirectUri?: string;
+    state2Until?: Date;
+    state2CreatedAt?: Date;
+    state2UpdatedAt?: Date;
 }
 
 export interface AuthServiceGetTokenRequest {
@@ -78,6 +87,42 @@ export class AuthServiceApi extends runtime.BaseAPI {
 
         if (requestParameters.state !== undefined) {
             queryParameters['state'] = requestParameters.state;
+        }
+
+        if (requestParameters.state2Id !== undefined) {
+            queryParameters['state2.id'] = requestParameters.state2Id;
+        }
+
+        if (requestParameters.state2Code !== undefined) {
+            queryParameters['state2.code'] = requestParameters.state2Code;
+        }
+
+        if (requestParameters.state2UserId !== undefined) {
+            queryParameters['state2.userId'] = requestParameters.state2UserId;
+        }
+
+        if (requestParameters.state2ClientId !== undefined) {
+            queryParameters['state2.clientId'] = requestParameters.state2ClientId;
+        }
+
+        if (requestParameters.state2Scope !== undefined) {
+            queryParameters['state2.scope'] = requestParameters.state2Scope;
+        }
+
+        if (requestParameters.state2RedirectUri !== undefined) {
+            queryParameters['state2.redirectUri'] = requestParameters.state2RedirectUri;
+        }
+
+        if (requestParameters.state2Until !== undefined) {
+            queryParameters['state2.until'] = (requestParameters.state2Until as any).toISOString();
+        }
+
+        if (requestParameters.state2CreatedAt !== undefined) {
+            queryParameters['state2.createdAt'] = (requestParameters.state2CreatedAt as any).toISOString();
+        }
+
+        if (requestParameters.state2UpdatedAt !== undefined) {
+            queryParameters['state2.updatedAt'] = (requestParameters.state2UpdatedAt as any).toISOString();
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

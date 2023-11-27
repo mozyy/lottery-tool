@@ -72,6 +72,64 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "state2.id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "state2.code",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state2.userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state2.clientId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state2.scope",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state2.redirectUri",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state2.until",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "state2.createdAt",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "state2.updatedAt",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "tags": [
@@ -145,6 +203,43 @@
     }
   },
   "definitions": {
+    "authAuthorizationCode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "code": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "redirectUri": {
+          "type": "string"
+        },
+        "until": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "AuthorizationCode"
+    },
     "authAuthorizeResponse": {
       "type": "object",
       "properties": {
@@ -262,6 +357,42 @@
         }
       }
     },
+    "authJWTPayload": {
+      "type": "object",
+      "properties": {
+        "iss": {
+          "type": "string",
+          "title": "(issuer)：签发人 JWT 发出者的有效 URI 值固定为\"zuoyinyun.com\""
+        },
+        "aud": {
+          "type": "string",
+          "title": "(audience)：受众 'frontend' client_name"
+        },
+        "sub": {
+          "type": "string",
+          "title": "(subject)：主题 用户的唯一标识。 user_id"
+        },
+        "sco": {
+          "type": "string",
+          "title": "(scope)：scope。 scope"
+        },
+        "exp": {
+          "type": "integer",
+          "format": "int32",
+          "title": "(expiration time)：过期时间 时间戳"
+        },
+        "nbf": {
+          "type": "integer",
+          "format": "int32",
+          "title": "(Not Before)：生效时间 时间戳"
+        },
+        "iat": {
+          "type": "integer",
+          "format": "int32",
+          "title": "(Issued At)：签发时间 时间戳"
+        }
+      }
+    },
     "authNewClient": {
       "type": "object",
       "properties": {
@@ -335,7 +466,8 @@
           "title": "表示令牌类型，该值大小写不敏感，必选项，可以是bearer类型或mac类型。"
         },
         "expiresIn": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "title": "表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。"
         },
         "refreshToken": {

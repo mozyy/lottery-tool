@@ -43,10 +43,10 @@ export interface AuthToken {
     'tokenType'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof AuthToken
      */
-    'expiresIn'?: string;
+    'expiresIn'?: number;
     /**
      * 
      * @type {string}
@@ -103,64 +103,53 @@ export interface RpcStatus {
 /**
  * 
  * @export
- * @interface UserLoginResponse
+ * @interface UserLoginMobileRequest
  */
-export interface UserLoginResponse {
+export interface UserLoginMobileRequest {
     /**
      * 
-     * @type {UserUser}
-     * @memberof UserLoginResponse
+     * @type {string}
+     * @memberof UserLoginMobileRequest
      */
-    'user'?: UserUser;
+    'mobile'?: string;
     /**
      * 
-     * @type {AuthToken}
-     * @memberof UserLoginResponse
+     * @type {string}
+     * @memberof UserLoginMobileRequest
      */
-    'token'?: AuthToken;
+    'password'?: string;
 }
 /**
  * 
  * @export
- * @interface UserUser
+ * @interface UserLoginWeixinRequest
  */
-export interface UserUser {
+export interface UserLoginWeixinRequest {
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserLoginWeixinRequest
      */
-    'id'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UserUser
-     */
-    'infoId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UserUser
-     */
-    'mobileId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UserUser
-     */
-    'weixinId'?: number;
+    'code'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UserRegisterMobileRequest
+ */
+export interface UserRegisterMobileRequest {
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserRegisterMobileRequest
      */
-    'createdAt'?: string;
+    'mobile'?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserUser
+     * @memberof UserRegisterMobileRequest
      */
-    'updatedAt'?: string;
+    'password'?: string;
 }
 
 /**
@@ -171,12 +160,13 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
-         * @param {string} [mobile] 
-         * @param {string} [password] 
+         * @param {UserLoginMobileRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceLoginMobile: async (mobile?: string, password?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        userServiceLoginMobile: async (body: UserLoginMobileRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('userServiceLoginMobile', 'body', body)
             const localVarPath = `/user.user.UserService/loginMobile`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -189,19 +179,14 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (mobile !== undefined) {
-                localVarQueryParameter['mobile'] = mobile;
-            }
-
-            if (password !== undefined) {
-                localVarQueryParameter['password'] = password;
-            }
-
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -210,11 +195,13 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @param {string} [code] 
+         * @param {UserLoginWeixinRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceLoginWeixin: async (code?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        userServiceLoginWeixin: async (body: UserLoginWeixinRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('userServiceLoginWeixin', 'body', body)
             const localVarPath = `/user.user.UserService/loginWeixin`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -227,15 +214,14 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (code !== undefined) {
-                localVarQueryParameter['code'] = code;
-            }
-
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -244,12 +230,13 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @param {string} [mobile] 
-         * @param {string} [password] 
+         * @param {UserRegisterMobileRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceRegisterMobile: async (mobile?: string, password?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        userServiceRegisterMobile: async (body: UserRegisterMobileRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('userServiceRegisterMobile', 'body', body)
             const localVarPath = `/user.user.UserService/registerMobile`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -262,19 +249,14 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (mobile !== undefined) {
-                localVarQueryParameter['mobile'] = mobile;
-            }
-
-            if (password !== undefined) {
-                localVarQueryParameter['password'] = password;
-            }
-
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -293,34 +275,32 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} [mobile] 
-         * @param {string} [password] 
+         * @param {UserLoginMobileRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userServiceLoginMobile(mobile?: string, password?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserLoginResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceLoginMobile(mobile, password, options);
+        async userServiceLoginMobile(body: UserLoginMobileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceLoginMobile(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {string} [code] 
+         * @param {UserLoginWeixinRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userServiceLoginWeixin(code?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserLoginResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceLoginWeixin(code, options);
+        async userServiceLoginWeixin(body: UserLoginWeixinRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceLoginWeixin(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {string} [mobile] 
-         * @param {string} [password] 
+         * @param {UserRegisterMobileRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userServiceRegisterMobile(mobile?: string, password?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserLoginResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceRegisterMobile(mobile, password, options);
+        async userServiceRegisterMobile(body: UserRegisterMobileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceRegisterMobile(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -335,32 +315,30 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
-         * @param {string} [mobile] 
-         * @param {string} [password] 
+         * @param {UserLoginMobileRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceLoginMobile(mobile?: string, password?: string, options?: any): AxiosPromise<UserLoginResponse> {
-            return localVarFp.userServiceLoginMobile(mobile, password, options).then((request) => request(axios, basePath));
+        userServiceLoginMobile(body: UserLoginMobileRequest, options?: any): AxiosPromise<AuthToken> {
+            return localVarFp.userServiceLoginMobile(body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [code] 
+         * @param {UserLoginWeixinRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceLoginWeixin(code?: string, options?: any): AxiosPromise<UserLoginResponse> {
-            return localVarFp.userServiceLoginWeixin(code, options).then((request) => request(axios, basePath));
+        userServiceLoginWeixin(body: UserLoginWeixinRequest, options?: any): AxiosPromise<AuthToken> {
+            return localVarFp.userServiceLoginWeixin(body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [mobile] 
-         * @param {string} [password] 
+         * @param {UserRegisterMobileRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceRegisterMobile(mobile?: string, password?: string, options?: any): AxiosPromise<UserLoginResponse> {
-            return localVarFp.userServiceRegisterMobile(mobile, password, options).then((request) => request(axios, basePath));
+        userServiceRegisterMobile(body: UserRegisterMobileRequest, options?: any): AxiosPromise<AuthToken> {
+            return localVarFp.userServiceRegisterMobile(body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -374,37 +352,35 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
 export class UserServiceApi extends BaseAPI {
     /**
      * 
-     * @param {string} [mobile] 
-     * @param {string} [password] 
+     * @param {UserLoginMobileRequest} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserServiceApi
      */
-    public userServiceLoginMobile(mobile?: string, password?: string, options?: AxiosRequestConfig) {
-        return UserServiceApiFp(this.configuration).userServiceLoginMobile(mobile, password, options).then((request) => request(this.axios, this.basePath));
+    public userServiceLoginMobile(body: UserLoginMobileRequest, options?: AxiosRequestConfig) {
+        return UserServiceApiFp(this.configuration).userServiceLoginMobile(body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {string} [code] 
+     * @param {UserLoginWeixinRequest} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserServiceApi
      */
-    public userServiceLoginWeixin(code?: string, options?: AxiosRequestConfig) {
-        return UserServiceApiFp(this.configuration).userServiceLoginWeixin(code, options).then((request) => request(this.axios, this.basePath));
+    public userServiceLoginWeixin(body: UserLoginWeixinRequest, options?: AxiosRequestConfig) {
+        return UserServiceApiFp(this.configuration).userServiceLoginWeixin(body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {string} [mobile] 
-     * @param {string} [password] 
+     * @param {UserRegisterMobileRequest} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserServiceApi
      */
-    public userServiceRegisterMobile(mobile?: string, password?: string, options?: AxiosRequestConfig) {
-        return UserServiceApiFp(this.configuration).userServiceRegisterMobile(mobile, password, options).then((request) => request(this.axios, this.basePath));
+    public userServiceRegisterMobile(body: UserRegisterMobileRequest, options?: AxiosRequestConfig) {
+        return UserServiceApiFp(this.configuration).userServiceRegisterMobile(body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

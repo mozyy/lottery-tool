@@ -1,16 +1,9 @@
-import React from 'react';
 import useSWRHook, { SWRResponse } from 'swr';
 import { swrFetcher, swrMiddleware } from '../utils/request';
 
-interface ResponseResult<R> extends SWRResponse<R> {
-  result: React.ReactElement
-}
-interface ResponseData<R> extends SWRResponse<R> {
+interface Response<R> extends SWRResponse<R> {
   data: R
-  result: false
 }
-
-type Response<R> = ResponseResult<R> | ResponseData<R>;
 
 export function useSWR<
   C extends Object,

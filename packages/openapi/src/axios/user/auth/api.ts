@@ -26,6 +26,67 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  * 
  * @export
+ * @interface AuthAuthorizationCode
+ */
+export interface AuthAuthorizationCode {
+    /**
+     * 
+     * @type {number}
+     * @memberof AuthAuthorizationCode
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthAuthorizationCode
+     */
+    'code'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthAuthorizationCode
+     */
+    'userId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthAuthorizationCode
+     */
+    'clientId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthAuthorizationCode
+     */
+    'scope'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthAuthorizationCode
+     */
+    'redirectUri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthAuthorizationCode
+     */
+    'until'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthAuthorizationCode
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthAuthorizationCode
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
  * @interface AuthAuthorizeResponse
  */
 export interface AuthAuthorizeResponse {
@@ -201,6 +262,55 @@ export interface AuthConfigListResponse {
 /**
  * 
  * @export
+ * @interface AuthJWTPayload
+ */
+export interface AuthJWTPayload {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthJWTPayload
+     */
+    'iss'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthJWTPayload
+     */
+    'aud'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthJWTPayload
+     */
+    'sub'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthJWTPayload
+     */
+    'sco'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AuthJWTPayload
+     */
+    'exp'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AuthJWTPayload
+     */
+    'nbf'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AuthJWTPayload
+     */
+    'iat'?: number;
+}
+/**
+ * 
+ * @export
  * @interface AuthNewClient
  */
 export interface AuthNewClient {
@@ -318,10 +428,10 @@ export interface AuthToken {
     'tokenType'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof AuthToken
      */
-    'expiresIn'?: string;
+    'expiresIn'?: number;
     /**
      * 
      * @type {string}
@@ -470,10 +580,19 @@ export const AuthServiceApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} [redirectUri] 表示重定向URI，可选项
          * @param {string} [scope] 表示申请的权限范围，可选项
          * @param {string} [state] 表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。
+         * @param {number} [state2Id] 
+         * @param {string} [state2Code] 
+         * @param {string} [state2UserId] 
+         * @param {string} [state2ClientId] 
+         * @param {string} [state2Scope] 
+         * @param {string} [state2RedirectUri] 
+         * @param {string} [state2Until] 
+         * @param {string} [state2CreatedAt] 
+         * @param {string} [state2UpdatedAt] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authServiceAuthorize: async (responseType?: string, clientId?: string, redirectUri?: string, scope?: string, state?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        authServiceAuthorize: async (responseType?: string, clientId?: string, redirectUri?: string, scope?: string, state?: string, state2Id?: number, state2Code?: string, state2UserId?: string, state2ClientId?: string, state2Scope?: string, state2RedirectUri?: string, state2Until?: string, state2CreatedAt?: string, state2UpdatedAt?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/user.auth.AuthService/authorize`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -504,6 +623,48 @@ export const AuthServiceApiAxiosParamCreator = function (configuration?: Configu
 
             if (state !== undefined) {
                 localVarQueryParameter['state'] = state;
+            }
+
+            if (state2Id !== undefined) {
+                localVarQueryParameter['state2.id'] = state2Id;
+            }
+
+            if (state2Code !== undefined) {
+                localVarQueryParameter['state2.code'] = state2Code;
+            }
+
+            if (state2UserId !== undefined) {
+                localVarQueryParameter['state2.userId'] = state2UserId;
+            }
+
+            if (state2ClientId !== undefined) {
+                localVarQueryParameter['state2.clientId'] = state2ClientId;
+            }
+
+            if (state2Scope !== undefined) {
+                localVarQueryParameter['state2.scope'] = state2Scope;
+            }
+
+            if (state2RedirectUri !== undefined) {
+                localVarQueryParameter['state2.redirectUri'] = state2RedirectUri;
+            }
+
+            if (state2Until !== undefined) {
+                localVarQueryParameter['state2.until'] = (state2Until as any instanceof Date) ?
+                    (state2Until as any).toISOString() :
+                    state2Until;
+            }
+
+            if (state2CreatedAt !== undefined) {
+                localVarQueryParameter['state2.createdAt'] = (state2CreatedAt as any instanceof Date) ?
+                    (state2CreatedAt as any).toISOString() :
+                    state2CreatedAt;
+            }
+
+            if (state2UpdatedAt !== undefined) {
+                localVarQueryParameter['state2.updatedAt'] = (state2UpdatedAt as any instanceof Date) ?
+                    (state2UpdatedAt as any).toISOString() :
+                    state2UpdatedAt;
             }
 
 
@@ -604,11 +765,20 @@ export const AuthServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [redirectUri] 表示重定向URI，可选项
          * @param {string} [scope] 表示申请的权限范围，可选项
          * @param {string} [state] 表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。
+         * @param {number} [state2Id] 
+         * @param {string} [state2Code] 
+         * @param {string} [state2UserId] 
+         * @param {string} [state2ClientId] 
+         * @param {string} [state2Scope] 
+         * @param {string} [state2RedirectUri] 
+         * @param {string} [state2Until] 
+         * @param {string} [state2CreatedAt] 
+         * @param {string} [state2UpdatedAt] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authServiceAuthorize(responseType?: string, clientId?: string, redirectUri?: string, scope?: string, state?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthAuthorizeResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authServiceAuthorize(responseType, clientId, redirectUri, scope, state, options);
+        async authServiceAuthorize(responseType?: string, clientId?: string, redirectUri?: string, scope?: string, state?: string, state2Id?: number, state2Code?: string, state2UserId?: string, state2ClientId?: string, state2Scope?: string, state2RedirectUri?: string, state2Until?: string, state2CreatedAt?: string, state2UpdatedAt?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthAuthorizeResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authServiceAuthorize(responseType, clientId, redirectUri, scope, state, state2Id, state2Code, state2UserId, state2ClientId, state2Scope, state2RedirectUri, state2Until, state2CreatedAt, state2UpdatedAt, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -648,11 +818,20 @@ export const AuthServiceApiFactory = function (configuration?: Configuration, ba
          * @param {string} [redirectUri] 表示重定向URI，可选项
          * @param {string} [scope] 表示申请的权限范围，可选项
          * @param {string} [state] 表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。
+         * @param {number} [state2Id] 
+         * @param {string} [state2Code] 
+         * @param {string} [state2UserId] 
+         * @param {string} [state2ClientId] 
+         * @param {string} [state2Scope] 
+         * @param {string} [state2RedirectUri] 
+         * @param {string} [state2Until] 
+         * @param {string} [state2CreatedAt] 
+         * @param {string} [state2UpdatedAt] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authServiceAuthorize(responseType?: string, clientId?: string, redirectUri?: string, scope?: string, state?: string, options?: any): AxiosPromise<AuthAuthorizeResponse> {
-            return localVarFp.authServiceAuthorize(responseType, clientId, redirectUri, scope, state, options).then((request) => request(axios, basePath));
+        authServiceAuthorize(responseType?: string, clientId?: string, redirectUri?: string, scope?: string, state?: string, state2Id?: number, state2Code?: string, state2UserId?: string, state2ClientId?: string, state2Scope?: string, state2RedirectUri?: string, state2Until?: string, state2CreatedAt?: string, state2UpdatedAt?: string, options?: any): AxiosPromise<AuthAuthorizeResponse> {
+            return localVarFp.authServiceAuthorize(responseType, clientId, redirectUri, scope, state, state2Id, state2Code, state2UserId, state2ClientId, state2Scope, state2RedirectUri, state2Until, state2CreatedAt, state2UpdatedAt, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -689,12 +868,21 @@ export class AuthServiceApi extends BaseAPI {
      * @param {string} [redirectUri] 表示重定向URI，可选项
      * @param {string} [scope] 表示申请的权限范围，可选项
      * @param {string} [state] 表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。
+     * @param {number} [state2Id] 
+     * @param {string} [state2Code] 
+     * @param {string} [state2UserId] 
+     * @param {string} [state2ClientId] 
+     * @param {string} [state2Scope] 
+     * @param {string} [state2RedirectUri] 
+     * @param {string} [state2Until] 
+     * @param {string} [state2CreatedAt] 
+     * @param {string} [state2UpdatedAt] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthServiceApi
      */
-    public authServiceAuthorize(responseType?: string, clientId?: string, redirectUri?: string, scope?: string, state?: string, options?: AxiosRequestConfig) {
-        return AuthServiceApiFp(this.configuration).authServiceAuthorize(responseType, clientId, redirectUri, scope, state, options).then((request) => request(this.axios, this.basePath));
+    public authServiceAuthorize(responseType?: string, clientId?: string, redirectUri?: string, scope?: string, state?: string, state2Id?: number, state2Code?: string, state2UserId?: string, state2ClientId?: string, state2Scope?: string, state2RedirectUri?: string, state2Until?: string, state2CreatedAt?: string, state2UpdatedAt?: string, options?: AxiosRequestConfig) {
+        return AuthServiceApiFp(this.configuration).authServiceAuthorize(responseType, clientId, redirectUri, scope, state, state2Id, state2Code, state2UserId, state2ClientId, state2Scope, state2RedirectUri, state2Until, state2CreatedAt, state2UpdatedAt, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

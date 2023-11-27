@@ -52,6 +52,22 @@ export function decryptBase64(message: string) {
 }
 
 /**
+ * Base64url转码
+ */
+export function encryptBase64url(message: string) {
+  const str = CryptoJs.enc.Utf8.parse(message);
+  return CryptoJs.enc.Base64url.stringify(str);
+}
+
+/**
+ * Base64url解码
+ */
+export function decryptBase64url(message: string) {
+  const str = CryptoJs.enc.Base64url.parse(message);
+  return str.toString(CryptoJs.enc.Utf8);
+}
+
+/**
  * PBKDF2加密密码
  * @param password 密码
  * @returns 加密后字符串

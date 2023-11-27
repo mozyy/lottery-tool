@@ -1,27 +1,27 @@
 'use client';
 
 import { Button, Stack } from '@mui/material';
+import { AuthToken } from '@zyy/common/src/model/authToken';
 import { encryptPassword } from '@zyy/common/src/utils/crypto';
-import { UserServiceLoginMobileRequest } from '@zyy/openapi/src/fetch/user/user';
+import { UserLoginMobileRequest } from '@zyy/openapi/src/fetch/user/user';
 import {
   useForm,
 } from 'react-hook-form';
-import { blogApi } from '../../api/blog';
 import { userApi } from '../../api/user';
 import ControllerText from '../../component/ControllerText';
-import { useSWR } from '../../hooks/swr';
+import { useAuthToken } from '../../hooks/authToken';
+import { useSWRMutation } from '../../hooks/swrMutation';
 
 export default function Form() {
-  const { control, handleSubmit } = useForm<UserServiceLoginMobileRequest>();
-  const { data, error } = useSWR([blogApi, 'blogServiceList']);
+  const { control, handleSubmit } = useForm<UserLoginMobileRequest>();
+  const { trigger } = useSWRMutation([userApi, 'userServiceLoginMobile']);
+  const login = useAuthToken((s) => s.login);
 
-  if (error) {
-    return '1231111111111';
-  }
-  const onSubmit = async ({ password, ...rest }: UserServiceLoginMobileRequest) => {
+  const onSubmit = async ({ password, ...rest }: UserLoginMobileRequest) => {
     const passwordNew = encryptPassword(password!);
-    console.log(111, rest, password);
-    userApi.userServiceLoginMobile({ ...rest, password: passwordNew });
+    const res = await trigger([{ body: { ...rest, password: passwordNew } }]);
+    const authToken = new AuthToken(res.token, res.user);
+    login();
   };
   return (
     <Stack component="form" useFlexGap onSubmit={handleSubmit(onSubmit)} spacing={2} noValidate sx={{ mt: 3, width: '100%' }}>
