@@ -9,7 +9,8 @@
   "dependencies": {
     "@zyy/openapi": "workspace:*",
     "crypto-js": "^4.2.0",
-    "dayjs": "^1.11.10"
+    "dayjs": "^1.11.10",
+    "zustand": "^4.4.6"
   },
   "keywords": [],
   "author": "",

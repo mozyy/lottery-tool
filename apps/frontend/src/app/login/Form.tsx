@@ -1,28 +1,39 @@
 'use client';
 
 import { Button, Stack } from '@mui/material';
-import { AuthToken } from '@zyy/common/src/model/authToken';
 import { encryptPassword } from '@zyy/common/src/utils/crypto';
 import { UserLoginMobileRequest } from '@zyy/openapi/src/fetch/user/user';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   useForm,
 } from 'react-hook-form';
 import { userApi } from '../../api/user';
 import ControllerText from '../../component/ControllerText';
+import Loading from '../../component/Loading';
 import { useAuthToken } from '../../hooks/authToken';
 import { useSWRMutation } from '../../hooks/swrMutation';
 
 export default function Form() {
   const { control, handleSubmit } = useForm<UserLoginMobileRequest>();
-  const { trigger } = useSWRMutation([userApi, 'userServiceLoginMobile']);
+  const { trigger, isMutating } = useSWRMutation([userApi, 'userServiceLoginMobile']);
   const login = useAuthToken((s) => s.login);
+  const logined = useAuthToken((s) => s.logined());
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const redirectUri: any = searchParams.get('redirect_uri') || '/';
+
+  if (logined) {
+    router.push(redirectUri);
+    return <Loading />;
+  }
 
   const onSubmit = async ({ password, ...rest }: UserLoginMobileRequest) => {
     const passwordNew = encryptPassword(password!);
     const res = await trigger([{ body: { ...rest, password: passwordNew } }]);
-    const authToken = new AuthToken(res.token, res.user);
-    login();
+    login(res);
+    router.push(redirectUri);
   };
+
   return (
     <Stack component="form" useFlexGap onSubmit={handleSubmit(onSubmit)} spacing={2} noValidate sx={{ mt: 3, width: '100%' }}>
       <ControllerText
@@ -39,7 +50,7 @@ export default function Form() {
         rules={{ required: '密码不能为空' }}
         fieldProps={{ fullWidth: true, type: 'password' }}
       />
-      <Button type="submit" variant="contained" sx={{ mt: 2 }}>LOGIN</Button>
+      <Button type="submit" variant="contained" disabled={isMutating} sx={{ mt: 2 }}>LOGIN</Button>
     </Stack>
   );
 }

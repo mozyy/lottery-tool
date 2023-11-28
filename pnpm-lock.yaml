@@ -771,6 +771,9 @@ importers:
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
+      zustand:
+        specifier: ^4.4.6
+        version: 4.4.6(@types/react@18.2.36)(immer@10.0.3)(react@18.2.0)
 
   packages/config:
     dependencies:

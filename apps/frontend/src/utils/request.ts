@@ -1,5 +1,6 @@
 import { ConfigurationParameters } from '@zyy/openapi/src/fetch/user/user';
 import { Middleware, SWRHook } from 'swr';
+import { envBrowser } from '../env.browser';
 import { useAuthToken } from '../hooks/authToken';
 
 export const swrFetcher = async (key, extraArg = { arg: [] }) => {
@@ -48,5 +49,22 @@ SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
 };
 
 export const configurationParameters:ConfigurationParameters = {
-  accessToken: () => useAuthToken.getState().authToken?.userId || '',
+  basePath: envBrowser.basePath,
+  middleware: [{
+    pre: ({ url, init }) => {
+      const controller = new AbortController();
+      setTimeout(() => controller.abort('timeout'), 5000);
+      return Promise.resolve({
+        url,
+        init: {
+          ...init,
+          signal: controller.signal,
+          headers: {
+            Authorization: useAuthToken.getState().authToken?.accessToken || '',
+            ...init.headers,
+          },
+        },
+      });
+    },
+  }],
 };
