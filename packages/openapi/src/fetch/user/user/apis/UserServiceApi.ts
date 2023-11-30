@@ -17,22 +17,42 @@ import * as runtime from '../runtime';
 import type {
   AuthToken,
   RpcStatus,
+  UserGetInfoResponse,
+  UserGetResponse,
   UserLoginMobileRequest,
   UserLoginWeixinRequest,
   UserRegisterMobileRequest,
+  UserServiceUpdateInfoRequest,
+  UserUpdateInfoResponse,
 } from '../models';
 import {
     AuthTokenFromJSON,
     AuthTokenToJSON,
     RpcStatusFromJSON,
     RpcStatusToJSON,
+    UserGetInfoResponseFromJSON,
+    UserGetInfoResponseToJSON,
+    UserGetResponseFromJSON,
+    UserGetResponseToJSON,
     UserLoginMobileRequestFromJSON,
     UserLoginMobileRequestToJSON,
     UserLoginWeixinRequestFromJSON,
     UserLoginWeixinRequestToJSON,
     UserRegisterMobileRequestFromJSON,
     UserRegisterMobileRequestToJSON,
+    UserServiceUpdateInfoRequestFromJSON,
+    UserServiceUpdateInfoRequestToJSON,
+    UserUpdateInfoResponseFromJSON,
+    UserUpdateInfoResponseToJSON,
 } from '../models';
+
+export interface UserServiceGetRequest {
+    id: string;
+}
+
+export interface UserServiceGetInfoRequest {
+    id: number;
+}
 
 export interface UserServiceLoginMobileRequest {
     body: UserLoginMobileRequest;
@@ -46,10 +66,71 @@ export interface UserServiceRegisterMobileRequest {
     body: UserRegisterMobileRequest;
 }
 
+export interface UserServiceUpdateInfoOperationRequest {
+    id: number;
+    body: UserServiceUpdateInfoRequest;
+}
+
 /**
  * 
  */
 export class UserServiceApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async userServiceGetRaw(requestParameters: UserServiceGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserGetResponse>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling userServiceGet.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/wx.user.UserService/users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserGetResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async userServiceGet(requestParameters: UserServiceGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserGetResponse> {
+        const response = await this.userServiceGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async userServiceGetInfoRaw(requestParameters: UserServiceGetInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserGetInfoResponse>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling userServiceGetInfo.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/wx.user.UserService/info/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserGetInfoResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async userServiceGetInfo(requestParameters: UserServiceGetInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserGetInfoResponse> {
+        const response = await this.userServiceGetInfoRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      */
@@ -141,6 +222,41 @@ export class UserServiceApi extends runtime.BaseAPI {
      */
     async userServiceRegisterMobile(requestParameters: UserServiceRegisterMobileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthToken> {
         const response = await this.userServiceRegisterMobileRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async userServiceUpdateInfoRaw(requestParameters: UserServiceUpdateInfoOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserUpdateInfoResponse>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling userServiceUpdateInfo.');
+        }
+
+        if (requestParameters.body === null || requestParameters.body === undefined) {
+            throw new runtime.RequiredError('body','Required parameter requestParameters.body was null or undefined when calling userServiceUpdateInfo.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/wx.user.UserService/info/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UserServiceUpdateInfoRequestToJSON(requestParameters.body),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserUpdateInfoResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async userServiceUpdateInfo(requestParameters: UserServiceUpdateInfoOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserUpdateInfoResponse> {
+        const response = await this.userServiceUpdateInfoRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

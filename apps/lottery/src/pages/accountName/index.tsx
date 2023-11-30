@@ -4,30 +4,23 @@ import {
 } from '@nutui/nutui-react-taro';
 import { FormInstance } from '@nutui/nutui-react-taro/dist/types/packages/form/types';
 import { navigateBack } from '@tarojs/taro';
-import { UserNewUser } from '@zyy/openapi/src/axios/wx/user';
-import { userServiceApi } from '@zyy/weapp/src/api/wx';
+import { userServiceApi } from '@zyy/weapp/src/api/user';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
-import { useSWR } from '@zyy/weapp/src/hooks/swr';
+import { useGetUserInfoByUserId } from '@zyy/weapp/src/hooks/getUserInfoByUserId';
 import { useSWRMutation } from '@zyy/weapp/src/hooks/swrMutation';
 import { useUserId } from '@zyy/weapp/src/hooks/userId';
 
 function AccountName() {
   const userId = useUserId();
   const [form]: FormInstance[] = Form.useForm();
-  const { data, mutate } = useSWR([userServiceApi.userServiceGetByUserId, userId]);
-  const { trigger } = useSWRMutation([userServiceApi.userServiceUpdate]);
+  const { data: dataInfo, mutate } = useGetUserInfoByUserId(userId);
+  const { trigger } = useSWRMutation([userServiceApi.userServiceUpdateInfo]);
   const onSubmit = async (value: { name: string }) => {
-    const wxUser = data?.wxUser;
-    const user:UserNewUser = {
-      userId: wxUser?.userId,
-      openid: wxUser?.openid,
-      unionid: wxUser?.unionid,
-      sessionKey: wxUser?.sessionKey,
+    const info = {
+      ...dataInfo?.info,
       name: value.name,
-      avatar: wxUser?.avatar,
-      mobile: wxUser?.mobile,
     };
-    await trigger([data?.wxUser?.id!, { wxUser: user }]);
+    await trigger([dataInfo?.info?.id!, { info }]);
     mutate();
     navigateBack();
   };
@@ -37,7 +30,7 @@ function AccountName() {
       <Form
         form={form}
         onFinish={onSubmit}
-        initialValues={{ name: data?.wxUser?.name }}
+        initialValues={{ name: dataInfo?.info?.name }}
         footer={<Button formType="submit">提交</Button>}
       >
         <Form.Item label="昵称" name="name" rules={[{ required: true }]}>

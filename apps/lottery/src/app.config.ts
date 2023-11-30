@@ -35,6 +35,6 @@ export default defineAppConfig({
     ],
   },
   // entryPagePath: 'pages/account/index',
-  // entryPagePath: 'pages/lottery/index',
+  entryPagePath: 'pages/lottery/index',
   // entryPagePath: 'pages/mine/index',
 });

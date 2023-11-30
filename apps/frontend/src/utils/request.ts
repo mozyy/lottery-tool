@@ -60,7 +60,6 @@ export const configurationParameters:ConfigurationParameters = {
           ...init,
           signal: controller.signal,
           headers: {
-            Authorization: useAuthToken.getState().authToken?.accessToken || '',
             ...init.headers,
           },
         },

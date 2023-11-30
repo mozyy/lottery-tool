@@ -45,22 +45,28 @@ export interface AuthJWTPayload {
     sco?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AuthJWTPayload
      */
-    exp?: number;
+    exp?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AuthJWTPayload
      */
-    nbf?: number;
+    nbf?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AuthJWTPayload
      */
-    iat?: number;
+    iat?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthJWTPayload
+     */
+    jti?: string;
 }
 
 /**
@@ -89,6 +95,7 @@ export function AuthJWTPayloadFromJSONTyped(json: any, ignoreDiscriminator: bool
         'exp': !exists(json, 'exp') ? undefined : json['exp'],
         'nbf': !exists(json, 'nbf') ? undefined : json['nbf'],
         'iat': !exists(json, 'iat') ? undefined : json['iat'],
+        'jti': !exists(json, 'jti') ? undefined : json['jti'],
     };
 }
 
@@ -108,6 +115,7 @@ export function AuthJWTPayloadToJSON(value?: AuthJWTPayload | null): any {
         'exp': value.exp,
         'nbf': value.nbf,
         'iat': value.iat,
+        'jti': value.jti,
     };
 }
 

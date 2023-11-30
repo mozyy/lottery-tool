@@ -4,8 +4,15 @@ index.ts
 models/AuthToken.ts
 models/ProtobufAny.ts
 models/RpcStatus.ts
+models/UserGetInfoResponse.ts
+models/UserGetResponse.ts
 models/UserLoginMobileRequest.ts
 models/UserLoginWeixinRequest.ts
+models/UserNewInfo.ts
 models/UserRegisterMobileRequest.ts
+models/UserServiceUpdateInfoRequest.ts
+models/UserUpdateInfoResponse.ts
+models/UserUser.ts
+models/UseruserInfo.ts
 models/index.ts
 runtime.ts

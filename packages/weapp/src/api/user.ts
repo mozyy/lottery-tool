@@ -1,4 +1,4 @@
-import { Configuration, UserServiceApiFactory } from '@zyy/openapi/src/axios/wx/user';
+import { Configuration, UserServiceApiFactory } from '@zyy/openapi/src/axios/user/user';
 import { basePath } from '../env';
 import { axiosInstance, configurationParameters } from '../utils/request';
 

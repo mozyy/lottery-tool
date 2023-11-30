@@ -1,10 +1,10 @@
 import { Cell, CellGroup } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
-import { userServiceApi } from '@zyy/weapp/src/api/wx';
+import { formatDate } from '@zyy/common/src/utils/date';
 import Avatar from '@zyy/weapp/src/components/Avatar';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useGetUserInfoByUserId } from '@zyy/weapp/src/hooks/getUserInfoByUserId';
 import { useSWR } from '@zyy/weapp/src/hooks/swr';
-import { formatDate } from '@zyy/weapp/src/utils/date';
 import { lotteryServiceApi, recordServiceApi } from '../../api/lottery';
 import { getLotteryTypeDesc } from '../../status/lottery';
 
@@ -18,12 +18,7 @@ function RecordDetail() {
     }
     return [lotteryServiceApi.lotteryServiceGet, dataReocrd.record.record.lotteryId];
   });
-  const { data: dataUser } = useSWR(() => {
-    if (!dataReocrd?.record?.record?.userId) {
-      return false;
-    }
-    return [userServiceApi.userServiceGetByUserId, dataReocrd.record.record.userId];
-  });
+  const { data: dataUserInfo } = useGetUserInfoByUserId(dataReocrd?.record?.record?.userId);
   if (result) {
     return result;
   }
@@ -44,8 +39,8 @@ function RecordDetail() {
       <Cell title="标题" extra={lottery?.title} />
       <Cell title="类型" extra={getLotteryTypeDesc(lottery?.type)} />
       <Cell title="结果" extra={item?.name} />
-      <Cell title="用户名" extra={dataUser?.wxUser?.name} />
-      <Cell title="用户头像" extra={<Avatar ossId={dataUser?.wxUser?.avatar} />} />
+      <Cell title="用户名" extra={dataUserInfo?.info?.name} />
+      <Cell title="用户头像" extra={<Avatar ossId={dataUserInfo?.info?.avatar} />} />
       {!!remarkInfos?.length && (
       <CellGroup title="备注">
         {remarkInfos?.map((remarkInfo) => (

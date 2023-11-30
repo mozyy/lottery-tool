@@ -31,7 +31,7 @@ export default function Gallery(props: GalleryProps) {
   const [list, setList] = useState<string[]>([]);
   const [deleteAlert, setDeleteAlert] = useState('');
   const [uploading, setUploading] = useState(false);
-  const snackbar = useSnackbar();
+  const snackbar = useSnackbar((s) => s.open);
   const theme = useTheme();
   const matcheUpSm = useMediaQuery(theme.breakpoints.up('sm'));
   const matcheUpMd = useMediaQuery(theme.breakpoints.up('md'));

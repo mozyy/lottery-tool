@@ -3,7 +3,6 @@ import { ConfigurationParameters } from '@zyy/openapi/src/axios/lottery/lottery'
 import axios from 'axios';
 import { Middleware, SWRHook } from 'swr';
 import { useAuthToken } from '../hooks/authToken';
-import { getAccessToken } from '../store/atom';
 
 export const swrFetcher = async (key, extraArg = { arg: [] }) => {
   // eslint-disable-next-line prefer-const
@@ -56,13 +55,12 @@ SWRHook) => (swrKey, swrFetcherd, swrConfig) => {
 };
 
 export const configurationParameters:ConfigurationParameters = {
-  accessToken: getAccessToken,
 };
 
 export const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use((config) => {
-  const accessToken = getAccessToken();
+  const accessToken = useAuthToken.getState().authToken?.accessToken;
   if (!config.headers.Authorization && accessToken) {
     // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${accessToken}`;

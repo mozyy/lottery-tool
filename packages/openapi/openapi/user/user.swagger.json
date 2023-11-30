@@ -115,6 +115,109 @@
           "UserService"
         ]
       }
+    },
+    "/wx.user.UserService/info/{id}": {
+      "get": {
+        "operationId": "UserService_GetInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userGetInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      },
+      "put": {
+        "operationId": "UserService_UpdateInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userUpdateInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "info": {
+                  "$ref": "#/definitions/userNewInfo"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/wx.user.UserService/users/{id}": {
+      "get": {
+        "operationId": "UserService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -130,9 +233,9 @@
           "title": "表示令牌类型，该值大小写不敏感，必选项，可以是bearer类型或mac类型。"
         },
         "expiresIn": {
-          "type": "integer",
-          "format": "int32",
-          "title": "表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。"
+          "type": "string",
+          "format": "int64",
+          "title": "表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。 --时间戳"
         },
         "refreshToken": {
           "type": "string",
@@ -172,9 +275,28 @@
         }
       }
     },
+    "userGetInfoResponse": {
+      "type": "object",
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/useruserInfo"
+        }
+      }
+    },
+    "userGetResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/userUser"
+        }
+      }
+    },
     "userLoginMobileRequest": {
       "type": "object",
       "properties": {
+        "clientId": {
+          "type": "string"
+        },
         "mobile": {
           "type": "string"
         },
@@ -186,14 +308,32 @@
     "userLoginWeixinRequest": {
       "type": "object",
       "properties": {
+        "clientId": {
+          "type": "string"
+        },
         "code": {
           "type": "string"
+        }
+      }
+    },
+    "userNewInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
     "userRegisterMobileRequest": {
       "type": "object",
       "properties": {
+        "clientId": {
+          "type": "string"
+        },
         "mobile": {
           "type": "string"
         },
@@ -201,6 +341,69 @@
           "type": "string"
         }
       }
+    },
+    "userUpdateInfoResponse": {
+      "type": "object",
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/useruserInfo"
+        }
+      }
+    },
+    "userUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "user_id"
+        },
+        "infoId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mobileId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "weixinId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "用户"
+    },
+    "useruserInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "用户信息"
     }
   }
 }

@@ -291,22 +291,28 @@ export interface AuthJWTPayload {
     'sco'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AuthJWTPayload
      */
-    'exp'?: number;
+    'exp'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AuthJWTPayload
      */
-    'nbf'?: number;
+    'nbf'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AuthJWTPayload
      */
-    'iat'?: number;
+    'iat'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthJWTPayload
+     */
+    'jti'?: string;
 }
 /**
  * 
@@ -428,10 +434,10 @@ export interface AuthToken {
     'tokenType'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AuthToken
      */
-    'expiresIn'?: number;
+    'expiresIn'?: string;
     /**
      * 
      * @type {string}

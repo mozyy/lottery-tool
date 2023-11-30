@@ -24,6 +24,12 @@ export interface UserLoginWeixinRequest {
      * @type {string}
      * @memberof UserLoginWeixinRequest
      */
+    clientId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserLoginWeixinRequest
+     */
     code?: string;
 }
 
@@ -46,6 +52,7 @@ export function UserLoginWeixinRequestFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
+        'clientId': !exists(json, 'clientId') ? undefined : json['clientId'],
         'code': !exists(json, 'code') ? undefined : json['code'],
     };
 }
@@ -59,6 +66,7 @@ export function UserLoginWeixinRequestToJSON(value?: UserLoginWeixinRequest | nu
     }
     return {
         
+        'clientId': value.clientId,
         'code': value.code,
     };
 }

@@ -24,6 +24,12 @@ export interface UserLoginMobileRequest {
      * @type {string}
      * @memberof UserLoginMobileRequest
      */
+    clientId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserLoginMobileRequest
+     */
     mobile?: string;
     /**
      * 
@@ -52,6 +58,7 @@ export function UserLoginMobileRequestFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
+        'clientId': !exists(json, 'clientId') ? undefined : json['clientId'],
         'mobile': !exists(json, 'mobile') ? undefined : json['mobile'],
         'password': !exists(json, 'password') ? undefined : json['password'],
     };
@@ -66,6 +73,7 @@ export function UserLoginMobileRequestToJSON(value?: UserLoginMobileRequest | nu
     }
     return {
         
+        'clientId': value.clientId,
         'mobile': value.mobile,
         'password': value.password,
     };

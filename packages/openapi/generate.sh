@@ -15,10 +15,10 @@ docs=(
   lottery/record
   lottery/favorite
   lottery/template
-  auth/auth
   oss/oss
   wx/wx
-  wx/user
+  user/user
+  user/auth
 )
 for type in "${types[@]}"; do
   for doc in "${docs[@]}"; do

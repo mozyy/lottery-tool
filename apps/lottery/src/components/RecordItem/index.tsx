@@ -1,11 +1,11 @@
 import { Right } from '@nutui/icons-react-taro';
 import { Cell } from '@nutui/nutui-react-taro';
 import { navigateTo } from '@tarojs/taro';
+import { formatDate } from '@zyy/common/src/utils/date';
 import { RecordRecord } from '@zyy/openapi/src/axios/lottery/record';
-import { userServiceApi } from '@zyy/weapp/src/api/wx';
+import { userServiceApi } from '@zyy/weapp/src/api/user';
 import Avatar from '@zyy/weapp/src/components/Avatar';
 import { useSWR } from '@zyy/weapp/src/hooks/swr';
-import { formatDate } from '@zyy/weapp/src/utils/date';
 import { lotteryServiceApi } from '../../api/lottery';
 
 export interface RecordItemProps {
@@ -15,7 +15,18 @@ export interface RecordItemProps {
 export default function RecordItem(props:RecordItemProps) {
   const { record: { record, recordRemarks } } = props;
   const { data: dataLottery } = useSWR([lotteryServiceApi.lotteryServiceGet, record?.lotteryId!]);
-  const { data: dataUser } = useSWR([userServiceApi.userServiceGetByUserId, record?.userId!]);
+  const { data: dataUser } = useSWR(() => {
+    if (!record?.userId) {
+      return false;
+    }
+    return [userServiceApi.userServiceGet, record.userId];
+  });
+  const { data: dataUserInfo } = useSWR(() => {
+    if (!dataUser?.user?.infoId) {
+      return false;
+    }
+    return [userServiceApi.userServiceGetInfo, dataUser.user.infoId];
+  });
   const item = dataLottery?.lottery?.items?.find((i) => i.id === record?.itemId);
 
   const getRemarkDesc = () => {
@@ -39,7 +50,7 @@ export default function RecordItem(props:RecordItemProps) {
         )}
       extra={(
         <div className="flex items-center">
-          <Avatar ossId={dataUser?.wxUser?.avatar} />
+          <Avatar ossId={dataUserInfo?.info?.avatar} />
           <Right />
         </div>
         )}

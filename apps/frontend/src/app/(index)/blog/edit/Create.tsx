@@ -7,7 +7,7 @@ import { useSnackbar } from '@/hooks/snackbar';
 
 export default function Create() {
   const [blog, setBlog] = useSetState(BlogNewBlogFromJSON({}));
-  const snackbar = useSnackbar();
+  const snackbar = useSnackbar((s) => s.open);
 
   const onSubmit = () => {
     console.log(111, blog);

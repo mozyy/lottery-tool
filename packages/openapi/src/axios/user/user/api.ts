@@ -43,10 +43,10 @@ export interface AuthToken {
     'tokenType'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AuthToken
      */
-    'expiresIn'?: number;
+    'expiresIn'?: string;
     /**
      * 
      * @type {string}
@@ -103,9 +103,41 @@ export interface RpcStatus {
 /**
  * 
  * @export
+ * @interface UserGetInfoResponse
+ */
+export interface UserGetInfoResponse {
+    /**
+     * 
+     * @type {UseruserInfo}
+     * @memberof UserGetInfoResponse
+     */
+    'info'?: UseruserInfo;
+}
+/**
+ * 
+ * @export
+ * @interface UserGetResponse
+ */
+export interface UserGetResponse {
+    /**
+     * 
+     * @type {UserUser}
+     * @memberof UserGetResponse
+     */
+    'user'?: UserUser;
+}
+/**
+ * 
+ * @export
  * @interface UserLoginMobileRequest
  */
 export interface UserLoginMobileRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserLoginMobileRequest
+     */
+    'clientId'?: string;
     /**
      * 
      * @type {string}
@@ -130,7 +162,32 @@ export interface UserLoginWeixinRequest {
      * @type {string}
      * @memberof UserLoginWeixinRequest
      */
+    'clientId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserLoginWeixinRequest
+     */
     'code'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UserNewInfo
+ */
+export interface UserNewInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserNewInfo
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserNewInfo
+     */
+    'avatar'?: number;
 }
 /**
  * 
@@ -138,6 +195,12 @@ export interface UserLoginWeixinRequest {
  * @interface UserRegisterMobileRequest
  */
 export interface UserRegisterMobileRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserRegisterMobileRequest
+     */
+    'clientId'?: string;
     /**
      * 
      * @type {string}
@@ -151,6 +214,112 @@ export interface UserRegisterMobileRequest {
      */
     'password'?: string;
 }
+/**
+ * 
+ * @export
+ * @interface UserServiceUpdateInfoRequest
+ */
+export interface UserServiceUpdateInfoRequest {
+    /**
+     * 
+     * @type {UserNewInfo}
+     * @memberof UserServiceUpdateInfoRequest
+     */
+    'info'?: UserNewInfo;
+}
+/**
+ * 
+ * @export
+ * @interface UserUpdateInfoResponse
+ */
+export interface UserUpdateInfoResponse {
+    /**
+     * 
+     * @type {UseruserInfo}
+     * @memberof UserUpdateInfoResponse
+     */
+    'info'?: UseruserInfo;
+}
+/**
+ * 
+ * @export
+ * @interface UserUser
+ */
+export interface UserUser {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserUser
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserUser
+     */
+    'infoId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserUser
+     */
+    'mobileId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserUser
+     */
+    'weixinId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserUser
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserUser
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UseruserInfo
+ */
+export interface UseruserInfo {
+    /**
+     * 
+     * @type {number}
+     * @memberof UseruserInfo
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UseruserInfo
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UseruserInfo
+     */
+    'avatar'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UseruserInfo
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UseruserInfo
+     */
+    'updatedAt'?: string;
+}
 
 /**
  * UserServiceApi - axios parameter creator
@@ -158,6 +327,72 @@ export interface UserRegisterMobileRequest {
  */
 export const UserServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('userServiceGet', 'id', id)
+            const localVarPath = `/wx.user.UserService/users/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceGetInfo: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('userServiceGetInfo', 'id', id)
+            const localVarPath = `/wx.user.UserService/info/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {UserLoginMobileRequest} body 
@@ -263,6 +498,45 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UserServiceUpdateInfoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceUpdateInfo: async (id: number, body: UserServiceUpdateInfoRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('userServiceUpdateInfo', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('userServiceUpdateInfo', 'body', body)
+            const localVarPath = `/wx.user.UserService/info/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -273,6 +547,26 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
 export const UserServiceApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = UserServiceApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userServiceGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserGetResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userServiceGetInfo(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserGetInfoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceGetInfo(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
         /**
          * 
          * @param {UserLoginMobileRequest} body 
@@ -303,6 +597,17 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceRegisterMobile(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UserServiceUpdateInfoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userServiceUpdateInfo(id: number, body: UserServiceUpdateInfoRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserUpdateInfoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceUpdateInfo(id, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -313,6 +618,24 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
 export const UserServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = UserServiceApiFp(configuration)
     return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceGet(id: string, options?: any): AxiosPromise<UserGetResponse> {
+            return localVarFp.userServiceGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceGetInfo(id: number, options?: any): AxiosPromise<UserGetInfoResponse> {
+            return localVarFp.userServiceGetInfo(id, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @param {UserLoginMobileRequest} body 
@@ -340,6 +663,16 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         userServiceRegisterMobile(body: UserRegisterMobileRequest, options?: any): AxiosPromise<AuthToken> {
             return localVarFp.userServiceRegisterMobile(body, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UserServiceUpdateInfoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceUpdateInfo(id: number, body: UserServiceUpdateInfoRequest, options?: any): AxiosPromise<UserUpdateInfoResponse> {
+            return localVarFp.userServiceUpdateInfo(id, body, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -350,6 +683,28 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
  * @extends {BaseAPI}
  */
 export class UserServiceApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserServiceApi
+     */
+    public userServiceGet(id: string, options?: AxiosRequestConfig) {
+        return UserServiceApiFp(this.configuration).userServiceGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserServiceApi
+     */
+    public userServiceGetInfo(id: number, options?: AxiosRequestConfig) {
+        return UserServiceApiFp(this.configuration).userServiceGetInfo(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {UserLoginMobileRequest} body 
@@ -381,6 +736,18 @@ export class UserServiceApi extends BaseAPI {
      */
     public userServiceRegisterMobile(body: UserRegisterMobileRequest, options?: AxiosRequestConfig) {
         return UserServiceApiFp(this.configuration).userServiceRegisterMobile(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {UserServiceUpdateInfoRequest} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserServiceApi
+     */
+    public userServiceUpdateInfo(id: number, body: UserServiceUpdateInfoRequest, options?: AxiosRequestConfig) {
+        return UserServiceApiFp(this.configuration).userServiceUpdateInfo(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

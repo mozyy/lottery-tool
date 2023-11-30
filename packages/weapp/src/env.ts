@@ -1,5 +1,7 @@
 export const basePath = process.env.TARO_APP_BASE_PATH;
 
+export const clientId = process.env.TARO_APP_CLIENT_ID;
+
 export const key = process.env.TARO_APP_KEY!;
 export const iv = process.env.TARO_APP_IV!;
 

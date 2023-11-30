@@ -2,15 +2,15 @@ import { AxiosPromise } from 'axios';
 import React from 'react';
 import useSWRHook, { SWRResponse } from 'swr';
 
-interface ResponseResult<R> extends SWRResponse<R> {
+export interface ResponseResult<R> extends SWRResponse<R> {
   result: React.ReactElement
 }
-interface ResponseData<R> extends SWRResponse<R> {
+export interface ResponseData<R> extends SWRResponse<R> {
   data: R
   result: false
 }
 
-type Response<R> = ResponseResult<R> | ResponseData<R>;
+export type Response<R> = ResponseResult<R> | ResponseData<R>;
 
 export function useSWR<
   H extends (...body: any)=> AxiosPromise<any>,

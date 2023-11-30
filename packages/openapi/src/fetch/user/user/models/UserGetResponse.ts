@@ -13,12 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { AuthToken } from './AuthToken';
-import {
-    AuthTokenFromJSON,
-    AuthTokenFromJSONTyped,
-    AuthTokenToJSON,
-} from './AuthToken';
 import type { UserUser } from './UserUser';
 import {
     UserUserFromJSON,
@@ -29,48 +23,41 @@ import {
 /**
  * 
  * @export
- * @interface UserLoginResponse
+ * @interface UserGetResponse
  */
-export interface UserLoginResponse {
+export interface UserGetResponse {
     /**
      * 
      * @type {UserUser}
-     * @memberof UserLoginResponse
+     * @memberof UserGetResponse
      */
     user?: UserUser;
-    /**
-     * 
-     * @type {AuthToken}
-     * @memberof UserLoginResponse
-     */
-    token?: AuthToken;
 }
 
 /**
- * Check if a given object implements the UserLoginResponse interface.
+ * Check if a given object implements the UserGetResponse interface.
  */
-export function instanceOfUserLoginResponse(value: object): boolean {
+export function instanceOfUserGetResponse(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function UserLoginResponseFromJSON(json: any): UserLoginResponse {
-    return UserLoginResponseFromJSONTyped(json, false);
+export function UserGetResponseFromJSON(json: any): UserGetResponse {
+    return UserGetResponseFromJSONTyped(json, false);
 }
 
-export function UserLoginResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserLoginResponse {
+export function UserGetResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserGetResponse {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'user': !exists(json, 'user') ? undefined : UserUserFromJSON(json['user']),
-        'token': !exists(json, 'token') ? undefined : AuthTokenFromJSON(json['token']),
     };
 }
 
-export function UserLoginResponseToJSON(value?: UserLoginResponse | null): any {
+export function UserGetResponseToJSON(value?: UserGetResponse | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -80,7 +67,6 @@ export function UserLoginResponseToJSON(value?: UserLoginResponse | null): any {
     return {
         
         'user': UserUserToJSON(value.user),
-        'token': AuthTokenToJSON(value.token),
     };
 }
 

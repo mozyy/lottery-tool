@@ -7,14 +7,22 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import {
   useForm,
 } from 'react-hook-form';
+import { blogApi } from '../../api/blog';
 import { userApi } from '../../api/user';
 import ControllerText from '../../component/ControllerText';
 import Loading from '../../component/Loading';
+import { envBrowser } from '../../env.browser';
 import { useAuthToken } from '../../hooks/authToken';
+import { useSWR } from '../../hooks/swr';
 import { useSWRMutation } from '../../hooks/swrMutation';
 
 export default function Form() {
-  const { control, handleSubmit } = useForm<UserLoginMobileRequest>();
+  const { control, handleSubmit } = useForm<UserLoginMobileRequest>({
+    defaultValues: {
+      clientId: envBrowser.userClient,
+    },
+  });
+  const { data } = useSWR([blogApi, 'blogServiceList']);
   const { trigger, isMutating } = useSWRMutation([userApi, 'userServiceLoginMobile']);
   const login = useAuthToken((s) => s.login);
   const logined = useAuthToken((s) => s.logined());

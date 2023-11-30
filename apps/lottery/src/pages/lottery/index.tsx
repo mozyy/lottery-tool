@@ -2,6 +2,7 @@ import { Button, Form } from '@nutui/nutui-react-taro';
 import { showToast, useRouter } from '@tarojs/taro';
 import { LotteryrecordCreateRequest, RecordNewRecordRemark } from '@zyy/openapi/src/axios/lottery/record';
 import createErrorBoundary from '@zyy/weapp/src/components/common/createErrorBoundary';
+import { useAuthToken } from '@zyy/weapp/src/hooks/authToken';
 import { useLogin } from '@zyy/weapp/src/hooks/login';
 import { useSWR } from '@zyy/weapp/src/hooks/swr';
 import { useSWRMutation } from '@zyy/weapp/src/hooks/swrMutation';
@@ -17,7 +18,7 @@ import Remark from './components/Remark';
  */
 function Lottery() {
   const router = useRouter();
-  const id = Number(router.params.id || 3);
+  const id = Number(router.params.id || 1);
   const login = useLogin();
   const { data, result } = useSWR([lotteryServiceApi.lotteryServiceGet, id]);
   const { trigger } = useSWRMutation([recordServiceApi.recordServiceCreate]);
@@ -38,10 +39,10 @@ function Lottery() {
       return;
     }
     const recordRemarks:RecordNewRecordRemark[] = Object.values(value || {});
-    const token = await login();
+    await login();
     const record: LotteryrecordCreateRequest = {
       record: {
-        record: { lotteryId: id, userId: token.userId },
+        record: { lotteryId: id, userId: useAuthToken.getState().jwt?.sub },
         recordRemarks,
       },
     };

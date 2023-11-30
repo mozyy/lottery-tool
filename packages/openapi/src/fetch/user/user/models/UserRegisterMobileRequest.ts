@@ -24,6 +24,12 @@ export interface UserRegisterMobileRequest {
      * @type {string}
      * @memberof UserRegisterMobileRequest
      */
+    clientId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserRegisterMobileRequest
+     */
     mobile?: string;
     /**
      * 
@@ -52,6 +58,7 @@ export function UserRegisterMobileRequestFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
+        'clientId': !exists(json, 'clientId') ? undefined : json['clientId'],
         'mobile': !exists(json, 'mobile') ? undefined : json['mobile'],
         'password': !exists(json, 'password') ? undefined : json['password'],
     };
@@ -66,6 +73,7 @@ export function UserRegisterMobileRequestToJSON(value?: UserRegisterMobileReques
     }
     return {
         
+        'clientId': value.clientId,
         'mobile': value.mobile,
         'password': value.password,
     };

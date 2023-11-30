@@ -1,5 +1,4 @@
 import { getOpenapi } from '@zyy/openapi/src/docs';
-import 'swagger-ui-react/swagger-ui.css';
 import { SwaggerUI } from './SwaggerUI';
 
 interface AppProps {
